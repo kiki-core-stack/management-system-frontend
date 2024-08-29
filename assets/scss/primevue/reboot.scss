@@ -1,0 +1,13 @@
+.p-datatable-column-title {
+	font-weight: 400 !important;
+}
+
+.p-datatable-header-cell {
+	&.center,
+	&.text-center,
+	&.text-center\! {
+		.p-datatable-column-header-content {
+			justify-content: center;
+		}
+	}
+}
