@@ -2,6 +2,43 @@ export * from '@kikiutils/el-plus-admin-pack/utils/api-requests';
 export { getEnumNumberValues, getEnumStringValues } from '@kikiutils/node/enum';
 export { calculateToPercentageString } from '@kikiutils/node/math';
 
+import type { BaseCrudApi } from '@/apis/base';
+
+export function askChangeStatusMessageBox<RD extends TableRowData, F extends string, M extends Dict<string>>(
+	apiClass: BaseCrudApi,
+	entityLabel: string,
+	toTextMap: M,
+	entityName: string,
+	pTablePageRef: Ref<ComponentRef<'PTablePage'>>,
+	rowData: RD,
+	field: F
+) {
+	const actionText = !lodashGet(rowData, field) ? '開啟' : '關閉';
+	const fieldText = toTextMap[field as keyof M];
+	const message = `是否${actionText}${entityLabel} ${entityName} 的${fieldText}狀態?`;
+	ElMessageBox.confirm(message, {
+		async beforeClose(action, instance, done) {
+			if (instance.confirmButtonLoading) return;
+			else if (action !== 'confirm') return done();
+			instance.showCancelButton = !(instance.confirmButtonLoading = true);
+			instance.confirmButtonText = `${actionText}中...`;
+			const response = await apiClass.changeStatus(rowData.id, field, !lodashGet(rowData, field));
+			if (response.data.success) {
+				done();
+				ElNotification.success(`已${actionText}${entityLabel} ${entityName} 的${fieldText}狀態！`);
+				await pTablePageRef.value?.loadData();
+			} else {
+				instance.showCancelButton = !(instance.confirmButtonLoading = false);
+				instance.confirmButtonText = '確定';
+			}
+		},
+		confirmButtonClass: 'ml-1!',
+		draggable: true
+	});
+
+	return false;
+}
+
 export const clearAndAssignObject = (target: object, ...sources: any[]) => {
 	Object.keys(target).forEach((key) => delete target[key as keyof typeof target]);
 	Object.assign(target, ...sources);
