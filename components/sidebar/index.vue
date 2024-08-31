@@ -51,7 +51,8 @@ const menuItemGroups: readonly MenuItemGroup[] = [
 			['/admin', '管理員管理'],
 			['/admin/log', '日誌']
 		]
-	]
+	],
+	['/profile', '個人設置', [['/profile/security', '安全設置']]]
 ] as const;
 
 const route = useRoute();
