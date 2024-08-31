@@ -16,8 +16,8 @@ importers:
         specifier: ^1.0.10
         version: 1.0.10(@element-plus/icons-vue@2.3.1(vue@3.4.38(typescript@5.5.4)))(element-plus@2.8.1(vue@3.4.38(typescript@5.5.4)))(magicast@0.3.5)(rollup@4.21.2)
       '@kikiutils/el-plus-admin-pack':
-        specifier: ^0.7.0
-        version: 0.7.0
+        specifier: ^0.8.0
+        version: 0.8.0
       '@kikiutils/nuxt':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(@parcel/watcher@2.4.1)(@types/node@22.5.1)(ioredis@5.4.1)(magicast@0.3.5)(postcss@8.4.41)(rollup@4.21.2)(terser@5.31.6)(typescript@5.5.4)(vite@5.4.2(@types/node@22.5.1)(sass@1.77.8)(terser@5.31.6))(vue@3.4.38(typescript@5.5.4))(webpack@5.94.0(esbuild@0.23.1))
@@ -723,8 +723,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@kikiutils/el-plus-admin-pack@0.7.0':
-    resolution: {integrity: sha512-YvDA86j60voH4GTNg9bOyrVSTfZJVGsxIyKCL0r+S+YCVoyda+Qa2yy7U+cOUcHlmY56iSrTQfKCKid6KGKYtg==}
+  '@kikiutils/el-plus-admin-pack@0.8.0':
+    resolution: {integrity: sha512-V5qNniF22oKllRdIHAeFkyni4auRU68YHCPlOrMjjioTTmtS56mkcTuP4g8YDPoUYR3f/ipOWioSKNp7Jg6+TQ==}
 
   '@kikiutils/mongoose@1.2.1':
     resolution: {integrity: sha512-2pABpW2QNtdymrFTLJOfwlzQOgt5WSmWc3bAoODlVRB6kWaW3oEG1CU83KruBFtR1/FqZrT+VN0Pdym9IMwiJA==}
@@ -4772,7 +4772,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@kikiutils/el-plus-admin-pack@0.7.0':
+  '@kikiutils/el-plus-admin-pack@0.8.0':
     dependencies:
       '@kikiutils/mongoose': 1.2.1
       '@kikiutils/node': 4.2.3
