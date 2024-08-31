@@ -44,6 +44,16 @@ export const createLoadingState = () => {
 	};
 };
 
+export const createPageBaseVariables = <T extends TableRowData = TableRowData>() => ({
+	autoReloadDataCountdownSeconds: ref(60),
+	autoReloadDataInterval: ref<Nullable<NodeJS.Timeout>>(null),
+	autoReloadDataIntervalSeconds: ref(60),
+	isLoadingData: ref(true),
+	paginationParams: reactive({ limit: 10, page: 1 }),
+	tableData: shallowReactive<T[]>([]),
+	totalTableDataCount: ref(0)
+});
+
 export const objectToFormData = (object: object) => {
 	const formData = new FormData();
 	for (const kV of Object.entries(object)) formData.append(...kV);
