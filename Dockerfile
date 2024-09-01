@@ -21,7 +21,7 @@ RUN pnpm run generate
 FROM busybox:latest
 
 ## Set args, envs and workdir
-ENV DIST_DIR_PATH=/frontend-dist
+ENV DIST_DIR_PATH=/admin-frontend-dist
 WORKDIR /app
 
 ## Copy files
