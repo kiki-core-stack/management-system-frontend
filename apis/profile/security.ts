@@ -1,4 +1,4 @@
-import type { ProfileSecurityChangePasswordFormData, ProfileSecurityTotpSecretData } from '@kikiutils/el-plus-admin-pack/types/data/profile';
+import type { ProfileSecurityChangePasswordFormData, ProfileSecurityTotpSecretData } from '@kikiutils/kiki-core-stack-pack/types/data/profile';
 import { kebabCase } from 'lodash-es';
 
 export const ProfileSecurityApi = new (class {

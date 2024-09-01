@@ -1,4 +1,4 @@
-export type {} from '@kikiutils/el-plus-admin-pack/types/data';
+export type {} from '@kikiutils/kiki-core-stack-pack/types/data';
 
 declare global {
 	interface BaseFilterQueryFormData {

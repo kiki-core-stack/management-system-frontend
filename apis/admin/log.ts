@@ -1,4 +1,4 @@
-import type { AdminLogData } from '@kikiutils/el-plus-admin-pack/types/data/admin';
+import type { AdminLogData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
 
 import BaseCrudApi from '../base';
 

@@ -15,9 +15,9 @@ importers:
       '@element-plus/nuxt':
         specifier: ^1.0.10
         version: 1.0.10(@element-plus/icons-vue@2.3.1(vue@3.4.38(typescript@5.5.4)))(element-plus@2.8.1(vue@3.4.38(typescript@5.5.4)))(magicast@0.3.5)(rollup@4.21.2)
-      '@kikiutils/el-plus-admin-pack':
-        specifier: ^0.12.0
-        version: 0.12.0
+      '@kikiutils/kiki-core-stack-pack':
+        specifier: ^0.12.1
+        version: 0.12.1
       '@kikiutils/nuxt':
         specifier: 2.0.0-rc.20
         version: 2.0.0-rc.20(@parcel/watcher@2.4.1)(@types/node@22.5.1)(ioredis@5.4.1)(magicast@0.3.5)(postcss@8.4.42)(rollup@4.21.2)(terser@5.31.6)(typescript@5.5.4)(vite@5.4.2(@types/node@22.5.1)(sass@1.77.8)(terser@5.31.6))(vue@3.4.38(typescript@5.5.4))(webpack@5.94.0(esbuild@0.23.1))
@@ -723,8 +723,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@kikiutils/el-plus-admin-pack@0.12.0':
-    resolution: {integrity: sha512-0AQBYcNVrXuh4Ra4IPEQD4YL3Td1+XfHaxFeNkugvHcIUwYIGCh5X8/jNdVtvEWTr9ROeJs7gYmLglQ+bLig9Q==}
+  '@kikiutils/kiki-core-stack-pack@0.12.1':
+    resolution: {integrity: sha512-Ja+tJAV4tFdiJ/AxIZNVz007zkovFaJP3IFmgSkfVH0nAWzWdh+N9GuV9405dHic22keGs1UGantxTg0YV8/9A==}
 
   '@kikiutils/mongoose@1.2.1':
     resolution: {integrity: sha512-2pABpW2QNtdymrFTLJOfwlzQOgt5WSmWc3bAoODlVRB6kWaW3oEG1CU83KruBFtR1/FqZrT+VN0Pdym9IMwiJA==}
@@ -4772,7 +4772,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@kikiutils/el-plus-admin-pack@0.12.0':
+  '@kikiutils/kiki-core-stack-pack@0.12.1':
     dependencies:
       '@kikiutils/mongoose': 1.2.1
       '@kikiutils/node': 4.2.3

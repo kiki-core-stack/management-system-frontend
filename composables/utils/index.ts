@@ -1,4 +1,4 @@
-export * from '@kikiutils/el-plus-admin-pack/utils/api-requests';
+export * from '@kikiutils/kiki-core-stack-pack/utils/api-requests';
 export { getEnumNumberValues, getEnumStringValues } from '@kikiutils/node/enum';
 export { calculateToPercentageString } from '@kikiutils/node/math';
 

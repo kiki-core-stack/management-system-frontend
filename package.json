@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@element-plus/nuxt": "^1.0.10",
-    "@kikiutils/el-plus-admin-pack": "^0.12.0",
+    "@kikiutils/kiki-core-stack-pack": "^0.12.1",
     "@kikiutils/nuxt": "2.0.0-rc.20",
     "@primevue/themes": "^4.0.5",
     "nuxt": "^3.13.0",
