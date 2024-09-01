@@ -8,6 +8,7 @@
 			active-class="active"
 			:to="tab.url"
 			@auxclick.middle.prevent="tabsController.closeTab(index)"
+			@click.right.prevent="showContextMenu($event, index)"
 			@click.middle.prevent
 			v-for="(tab, index) in tabsController.tabs"
 		>
@@ -17,11 +18,29 @@
 			</div>
 		</NuxtLink>
 	</div>
+	<ContextMenu ref="contextMenuRef" class="fs-14px" :model="contextMenuItems" />
 </template>
 
 <script lang="ts" setup>
+import ContextMenu from 'primevue/contextmenu';
+import type { MenuItem } from 'primevue/menuitem';
+
 // Variables
+const contextMenuAtTabIndex = ref(0);
+const contextMenuItems = Object.freeze(<MenuItem[]>[
+	{ command: () => tabsController.closeAll(), label: '關閉全部' },
+	{ command: () => tabsController.closeFromIndexTo(contextMenuAtTabIndex.value - 1, 0), label: '關閉左邊所有' },
+	{ command: () => tabsController.closeFromIndexTo(contextMenuAtTabIndex.value + 1, 1024), label: '關閉右邊所有' }
+]);
+
+const contextMenuRef = ref<Nullable<InstanceType<typeof ContextMenu>>>(null);
 const route = useRoute();
+
+// Functions
+function showContextMenu(event: Event, index: number) {
+	contextMenuAtTabIndex.value = index;
+	contextMenuRef.value?.show(event);
+}
 
 // Watches
 watch(

@@ -1,3 +1,5 @@
+import { map } from 'lodash-es';
+
 interface TabData {
 	title: string;
 	url: string;
@@ -6,11 +8,26 @@ interface TabData {
 export const tabsController = new (class TabsController {
 	readonly tabs: TabData[] = reactive([]);
 
-	closeTab(index: number) {
-		const urlIsToCloseTab = this.tabs[index]?.url === window.location.pathname;
-		this.tabs.splice(index, 1);
-		if (urlIsToCloseTab) navigateTo(this.tabs.at(-1)?.url || '/');
+	#afterClose() {
+		if (!map(this.tabs, 'url').includes(window.location.pathname)) navigateTo(this.tabs.at(-1)?.url || '/');
 		this.save();
+	}
+
+	closeAll() {
+		this.tabs.length = 0;
+		this.#afterClose();
+	}
+
+	closeFromIndexTo(fromIndex: number, toIndex: number) {
+		if (fromIndex > toIndex) [fromIndex, toIndex] = [toIndex, fromIndex];
+		if (fromIndex < 0) return;
+		this.tabs.splice(fromIndex, toIndex - fromIndex + 1);
+		this.#afterClose();
+	}
+
+	closeTab(index: number) {
+		this.tabs.splice(index, 1);
+		this.#afterClose();
 	}
 
 	ensureTab(title: string, url: string, insertIndex?: number) {
