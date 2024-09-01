@@ -13,6 +13,11 @@ export const tabsController = new (class TabsController {
 		this.save();
 	}
 
+	close(index: number) {
+		this.tabs.splice(index, 1);
+		this.#afterClose();
+	}
+
 	closeAll() {
 		this.tabs.length = 0;
 		this.#afterClose();
@@ -25,12 +30,7 @@ export const tabsController = new (class TabsController {
 		this.#afterClose();
 	}
 
-	closeTab(index: number) {
-		this.tabs.splice(index, 1);
-		this.#afterClose();
-	}
-
-	ensureTab(title: string, url: string, insertIndex?: number) {
+	ensure(title: string, url: string, insertIndex?: number) {
 		for (const tabData of this.tabs) if (tabData.url === url) return (tabData.title = title) && navigateTo(url);
 		this.tabs.splice(insertIndex || this.tabs.length, 0, { title, url });
 		this.save();

@@ -14,5 +14,5 @@
 
 <script lang="ts" setup>
 // Hooks
-onActivated(async () => tabsController.ensureTab('安全設置', window.location.pathname));
+onActivated(async () => tabsController.ensure('安全設置', window.location.pathname));
 </script>

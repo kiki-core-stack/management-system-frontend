@@ -277,7 +277,7 @@ function showAskDeleteRowMessageBox(data: TableRowData) {
 }
 
 // Hooks
-onActivated(() => tabsController.ensureTab(props.title, window.location.pathname));
+onActivated(() => tabsController.ensure(props.title, window.location.pathname));
 onMounted(setupAutoReloadData);
 
 // Exposes

@@ -7,13 +7,13 @@
 			class="relative flex items-center whitespace-nowrap"
 			active-class="active"
 			:to="tab.url"
-			@auxclick.middle.prevent="tabsController.closeTab(index)"
+			@auxclick.middle.prevent="tabsController.close(index)"
 			@click.right.prevent="showContextMenu($event, index)"
 			@click.middle.prevent
 			v-for="(tab, index) in tabsController.tabs"
 		>
 			{{ tab.title }}
-			<div class="ml-2 flex-middle close-xmark" @click.prevent="tabsController.closeTab(index)">
+			<div class="ml-2 flex-middle close-xmark" @click.prevent="tabsController.close(index)">
 				<icon-xmark />
 			</div>
 		</NuxtLink>
