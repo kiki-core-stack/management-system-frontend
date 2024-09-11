@@ -92,7 +92,7 @@ const changeStatusFieldToTextMap: Readonly<Record<ChangeAdminStatusField, string
 	enabled: '啟用'
 };
 
-const formData = reactive<Required<OmitMongooseTimestampAndOtherFields<AdminData, 'totpSecret'>>>({
+const formData = reactive<TablePageFormData<AdminData, 'totpSecret'>>({
 	account: '',
 	email: '',
 	enabled: false,
