@@ -14,7 +14,7 @@
 			<PColumn field="account" header="帳號" />
 			<PColumn field="name" header="名稱" />
 			<PColumn field="email" header="Email" />
-			<PColumn header="啟用" header-class="minww-65px center">
+			<PColumn class="minww-65px center" header="啟用">
 				<template #body="{ data }">
 					<div class="flex-middle">
 						<el-switch
@@ -25,7 +25,7 @@
 					</div>
 				</template>
 			</PColumn>
-			<PColumn header="Email OTP驗證" header-class="minww-139px center">
+			<PColumn class="minww-139px center" header="Email OTP驗證">
 				<template #body="{ data }">
 					<div class="flex-middle">
 						<el-switch
@@ -35,7 +35,7 @@
 					</div>
 				</template>
 			</PColumn>
-			<PColumn header="TOTP驗證" header-class="minww-95px center">
+			<PColumn class="minww-95px center" header="TOTP驗證">
 				<template #body="{ data }">
 					<div class="flex-middle">
 						<el-switch

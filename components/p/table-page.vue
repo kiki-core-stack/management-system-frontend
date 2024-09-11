@@ -46,23 +46,13 @@
 				<slot name="table-header-end"></slot>
 			</template>
 			<slot name="table"></slot>
-			<PColumn
-				class="text-center!"
-				header="建立時間"
-				header-class="minww-155px"
-				v-if="!hideTimestampColumns && !hideCreatedAtColumn"
-			>
+			<PColumn class="minww-155px text-center!" header="建立時間" v-if="!hideTimestampColumns && !hideCreatedAtColumn">
 				<template #body="{ data }">{{ formatDateOrTimestamp(data.createdAt) }}</template>
 			</PColumn>
-			<PColumn
-				class="text-center!"
-				header="更新時間"
-				header-class="minww-155px"
-				v-if="!hideTimestampColumns && !hideUpdatedAtColumn"
-			>
+			<PColumn class="minww-155px text-center!" header="更新時間" v-if="!hideTimestampColumns && !hideUpdatedAtColumn">
 				<template #body="{ data }">{{ formatDateOrTimestamp(data.updatedAt) }}</template>
 			</PColumn>
-			<PColumn header="操作" header-class="center" v-if="!hideActionsColumn">
+			<PColumn class="center" header="操作" v-if="!hideActionsColumn">
 				<template #body="scope">
 					<div class="flex-middle gap-btns">
 						<slot name="before-action-btns" :="scope"></slot>
