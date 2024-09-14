@@ -2,8 +2,9 @@ export default defineNuxtPlugin(() => {
 	apiInstance.interceptors.response.use(
 		(response) => response,
 		(error) => {
-			if (!(error instanceof AxiosError) || !error.response) throw error;
-			if (error.response.status === 401) return assignToUrlOrNavigateTo('/login', true);
+			if (!(error instanceof AxiosError)) throw error;
+			if (!error.response) return ElNotification.error('請檢查網路連線！'), undefined;
+			if (error.response.status === 401) return assignToUrlOrNavigateTo('/login', true), undefined;
 			error.response.error = error.response.data;
 			error.response.data = { message: '系統錯誤！', success: false };
 			try {
