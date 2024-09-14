@@ -182,7 +182,7 @@ async function loadData() {
 	clearIntervalRef(autoReloadDataInterval);
 	autoReloadDataCountdownSeconds.value = autoReloadDataIntervalSeconds.value;
 	const response = await props.crudApiClass.getList({ ...paginationParams, filterQuery: props.filterQuery });
-	if (response.data.data) {
+	if (response?.data.data) {
 		clearAndAssignObject(columnTotals, response.data.data.totals);
 		tableData.length = 0;
 		tableData.push(...(response.data.data.data || []));
@@ -207,7 +207,7 @@ async function saveData() {
 		saveDataState.loading = true;
 		const response = await props.crudApiClass.save(props.formData);
 		saveDataState.loading = false;
-		if (!response.data.success) return;
+		if (!response?.data.success) return;
 		formRef.value!.resetFields();
 		isDialogOpen.value = false;
 		ElNotification.success(props.formData.id ? '儲存成功！' : '新增成功！');
@@ -251,7 +251,7 @@ function showAskDeleteRowMessageBox(data: TableRowData) {
 			instance.showCancelButton = !(instance.confirmButtonLoading = true);
 			instance.confirmButtonText = '刪除中...';
 			const response = await props.crudApiClass.delete(data.id);
-			if (response.data.success) {
+			if (response?.data.success) {
 				done();
 				ElNotification.success('刪除成功！');
 				await loadData();

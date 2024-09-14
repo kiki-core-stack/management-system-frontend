@@ -55,7 +55,7 @@ const isLoadingData = ref(true);
 async function loadData() {
 	isLoadingData.value = true;
 	const response = await HomeApi.getDashboardData(filterQueryFormData);
-	Object.assign(dashboardData, defaultHomeDashboardData, response.data.data);
+	Object.assign(dashboardData, defaultHomeDashboardData, response?.data.data);
 	isLoadingData.value = false;
 }
 

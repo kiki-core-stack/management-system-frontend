@@ -82,7 +82,7 @@ async function loadData() {
 	isLoadingData.value = true;
 	const response = await ProfileSecurityApi.getTotpSecret();
 	isLoadingData.value = false;
-	if (response.data.success) clearAndAssignObject(totpSecretData, response.data.data);
+	if (response?.data.success) clearAndAssignObject(totpSecretData, response.data.data);
 }
 
 async function toggleStatus() {
@@ -92,7 +92,7 @@ async function toggleStatus() {
 		accountState.autoUpdateTwoFactorAuthenticationStatus = !(toggleState.loading = true);
 		const response = await ProfileSecurityApi.toggleTwoFactorAuthenticationStatus(toToggleMethod.value, formData);
 		accountState.autoUpdateTwoFactorAuthenticationStatus = !(toggleState.loading = false);
-		if (!response.data.success) return;
+		if (!response?.data.success) return;
 		ElNotification.success('切換成功！');
 		isDialogOpen.value = false;
 		setTimeout(loadData, 500);

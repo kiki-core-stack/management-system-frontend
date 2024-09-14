@@ -69,12 +69,12 @@ async function login() {
 		if (!valid) return;
 		loginState.loading = true;
 		const response = await AdminAuthApi.login(formData);
-		if (response.status === 404) {
+		if (response?.status === 404) {
 			accountInputRef.value?.focus();
 			mapValues(accountState.twoFactorAuthenticationStatus, () => false);
-		} else if (response.data.data?.isVerCodeIncorrect) verCodeInputRef.value?.focus();
-		else if (response.data.data?.requiredTwoFactorAuthentications) twoFactorAuthenticationCodeInputsRef.value?.focus();
-		else if (response.data.success) {
+		} else if (response?.data.data?.isVerCodeIncorrect) verCodeInputRef.value?.focus();
+		else if (response?.data.data?.requiredTwoFactorAuthentications) twoFactorAuthenticationCodeInputsRef.value?.focus();
+		else if (response?.data.success) {
 			formRef.value?.resetFields();
 			loginState.success = true;
 			await updateAdminInfoState();

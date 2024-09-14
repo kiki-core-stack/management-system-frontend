@@ -23,7 +23,7 @@ export function askChangeStatusMessageBox<RD extends TableRowData, F extends str
 			instance.showCancelButton = !(instance.confirmButtonLoading = true);
 			instance.confirmButtonText = `${actionText}中...`;
 			const response = await apiClass.changeStatus(rowData.id, field, !lodashGet(rowData, field));
-			if (response.data.success) {
+			if (response?.data.success) {
 				done();
 				ElNotification.success(`已${actionText}${entityLabel} ${entityName} 的${fieldText}狀態！`);
 				await pTablePageRef.value?.loadData();

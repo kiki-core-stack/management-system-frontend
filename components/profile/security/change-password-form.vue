@@ -70,7 +70,7 @@ async function changePassword() {
 		if (!valid) return;
 		changePasswordState.loading = true;
 		const response = await ProfileSecurityApi.changePassword(formData);
-		if (!response.data.success) return (changePasswordState.loading = false), undefined;
+		if (!response?.data.success) return (changePasswordState.loading = false), undefined;
 		changePasswordState.success = true;
 		setTimeout(() => assignToUrlOrNavigateTo('/login', true), 1000);
 	});

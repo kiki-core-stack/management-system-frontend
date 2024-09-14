@@ -89,7 +89,7 @@ async function sendEmailOtpCode() {
 	const response = await postApi('/api/admin/auth/otp/email/send');
 	sendEmailOtpCodeState.reset();
 	sendEmailOtpCodeState.state.loading = false;
-	if (!response.data.success) return (sendEmailOtpCodeState.state.error = true);
+	if (!response?.data.success) return (sendEmailOtpCodeState.state.error = true);
 	sendEmailOtpCodeState.state.success = true;
 	sendEmailOtpCodeCoolingSecondsRef.value = sendEmailOtpCodeCoolingSeconds + 1;
 	sendEmailOtpCodeCoolingInterval.value = setInterval(() => {
