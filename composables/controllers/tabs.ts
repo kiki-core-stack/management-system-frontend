@@ -9,7 +9,7 @@ export const tabsController = new (class TabsController {
 	readonly tabs: TabData[] = reactive([]);
 
 	#afterClose() {
-		if (!map(this.tabs, 'url').includes(window.location.pathname)) navigateTo(this.tabs.at(-1)?.url || '/');
+		if (window.location.pathname !== '/' && !map(this.tabs, 'url').includes(window.location.pathname)) navigateTo(this.tabs.at(-1)?.url || '/');
 		this.save();
 	}
 
