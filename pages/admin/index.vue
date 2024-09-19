@@ -56,7 +56,7 @@
 				prop="password"
 				type="password"
 				:label="`${formData.id ? '修改' : ''}密碼`"
-				:required="!formData.id"
+				:rules="[{ message: '請輸入密碼', required: !formData.id }]"
 				v-model="formData.password"
 			/>
 			<el-form-switch
@@ -105,8 +105,7 @@ const formData = reactive<TablePageFormData<AdminData, 'totpSecret'>>({
 const formRules: ElFormRules<Omit<AdminData, 'totpSecret'>> = {
 	account: commonFormRules.account,
 	email: commonFormRules.email.nonRequired,
-	name: commonFormRules.name,
-	password: [{ validator: validatePassword }]
+	name: commonFormRules.name
 };
 
 const pTablePageRef = ref<ComponentRef<'PTablePage'>>(null);
@@ -114,8 +113,4 @@ const pTablePageRef = ref<ComponentRef<'PTablePage'>>(null);
 // Functions
 // prettier-ignore
 const showAskChangeStatusMessageBox = (rowData: AdminData, field: ChangeAdminStatusField) => askChangeStatusMessageBox(AdminApi, '管理員', changeStatusFieldToTextMap, rowData.account, pTablePageRef, rowData, field);
-function validatePassword(_: any, value: string, callback: any) {
-	if (!formData.id && !value) return callback(new Error('請輸入密碼'));
-	callback();
-}
 </script>
