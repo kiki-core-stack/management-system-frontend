@@ -63,6 +63,7 @@
 						>
 							編輯
 						</el-action-btn>
+						<slot name="after-edit-btn" :="scope"></slot>
 						<el-action-btn
 							type="danger"
 							:disabled="disableRowDeleteBtnRule?.(scope.data)"
