@@ -1,9 +1,8 @@
 import type { AdminData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
 
-import type { ChangeAdminStatusField } from '@/types/admin';
 import BaseCrudApi from '../base';
 
-export const AdminApi = new (class extends BaseCrudApi<AdminData, ChangeAdminStatusField> {
+export const AdminApi = new (class extends BaseCrudApi<AdminData> {
 	protected readonly baseUrl = '/api/admin';
 
 	async getInfo() {

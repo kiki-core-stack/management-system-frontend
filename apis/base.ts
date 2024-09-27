@@ -1,11 +1,7 @@
 import type { AxiosRequestConfig } from 'axios';
 
-export abstract class BaseCrudApi<T extends TableRowData = TableRowData, CF extends string = string> {
+export abstract class BaseCrudApi<T extends TableRowData = TableRowData> {
 	protected abstract readonly baseUrl: string;
-
-	async changeStatus(id: string, field: CF, value: boolean) {
-		return await patchApi(`${this.baseUrl}/${id}/status`, { field, value });
-	}
 
 	async delete(id: string) {
 		return await deleteApi(`${this.baseUrl}/${id}`);
@@ -23,6 +19,10 @@ export abstract class BaseCrudApi<T extends TableRowData = TableRowData, CF exte
 
 	async save(data: OmitMongooseTimestampAndOtherFields<T>, config?: AxiosRequestConfig) {
 		return await putApi(data.id ? `${this.baseUrl}/${data.id}` : this.baseUrl, data, config);
+	}
+
+	async updateBooleanField(id: string, field: FilteredKeyPath<TableRowData, boolean>, value: boolean) {
+		return await patchApi(`${this.baseUrl}/${id}/boolean-field`, { field, value });
 	}
 }
 

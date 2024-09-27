@@ -4,7 +4,7 @@ export { calculateToPercentageString } from '@kikiutils/node/math';
 
 import type { BaseCrudApi } from '@/apis/base';
 
-export function askChangeStatusMessageBox<RD extends TableRowData, F extends string, M extends Dict<string>>(
+export function askToggleBooleanFieldMessageBox<RD extends TableRowData, F extends string, M extends Dict<string>>(
 	apiClass: BaseCrudApi,
 	entityLabel: string,
 	toTextMap: M,
@@ -22,7 +22,8 @@ export function askChangeStatusMessageBox<RD extends TableRowData, F extends str
 			else if (action !== 'confirm') return done();
 			instance.showCancelButton = !(instance.confirmButtonLoading = true);
 			instance.confirmButtonText = `${actionText}中...`;
-			const response = await apiClass.changeStatus(rowData.id, field, !lodashGet(rowData, field));
+			// @ts-expect-error
+			const response = await apiClass.updateBooleanField(rowData.id, field, !lodashGet(rowData, field));
 			if (response?.data.success) {
 				done();
 				ElNotification.success(`已${actionText}${entityLabel} ${entityName} 的${fieldText}狀態！`);
@@ -35,8 +36,6 @@ export function askChangeStatusMessageBox<RD extends TableRowData, F extends str
 		confirmButtonClass: 'ml-1!',
 		draggable: true
 	});
-
-	return false;
 }
 
 export const clearAndAssignObject = (target: object, ...sources: any[]) => {

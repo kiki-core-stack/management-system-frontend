@@ -18,7 +18,7 @@
 				<template #body="{ data }">
 					<div class="flex-middle">
 						<el-switch
-							:before-change="() => showAskChangeStatusMessageBox(data, 'enabled')"
+							:before-change="() => showAskToggleBooleanFieldMessageBox(data, 'enabled')"
 							:disabled="data.id === adminInfoState.id"
 							v-model="data.enabled"
 						/>
@@ -29,7 +29,9 @@
 				<template #body="{ data }">
 					<div class="flex-middle">
 						<el-switch
-							:before-change="() => showAskChangeStatusMessageBox(data, 'twoFactorAuthenticationStatus.emailOtp')"
+							:before-change="
+								() => showAskToggleBooleanFieldMessageBox(data, 'twoFactorAuthenticationStatus.emailOtp')
+							"
 							v-model="data.twoFactorAuthenticationStatus.emailOtp"
 						/>
 					</div>
@@ -39,7 +41,9 @@
 				<template #body="{ data }">
 					<div class="flex-middle">
 						<el-switch
-							:before-change="() => showAskChangeStatusMessageBox(data, 'twoFactorAuthenticationStatus.totp')"
+							:before-change="
+								() => showAskToggleBooleanFieldMessageBox(data, 'twoFactorAuthenticationStatus.totp')
+							"
 							v-model="data.twoFactorAuthenticationStatus.totp"
 						/>
 					</div>
@@ -83,14 +87,13 @@
 import type { AdminData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
 
 import AdminApi from '@/apis/admin';
-import type { ChangeAdminStatusField } from '@/types/admin';
 
 // Variables
-const changeStatusFieldToTextMap: Readonly<Record<ChangeAdminStatusField, string>> = {
+const booleanFieldToTextMap: ReadonlyRecord<FilteredKeyPath<AdminData, boolean>, string> = Object.freeze({
 	'twoFactorAuthenticationStatus.emailOtp': 'Email OTP驗證',
 	'twoFactorAuthenticationStatus.totp': 'TOTP驗證',
 	enabled: '啟用'
-};
+});
 
 const formData = reactive<TablePageFormData<AdminData, 'totpSecret'>>({
 	account: '',
@@ -111,6 +114,8 @@ const formRules: ElFormRules<Omit<AdminData, 'totpSecret'>> = {
 const pTablePageRef = ref<ComponentRef<'PTablePage'>>(null);
 
 // Functions
-// prettier-ignore
-const showAskChangeStatusMessageBox = (rowData: AdminData, field: ChangeAdminStatusField) => askChangeStatusMessageBox(AdminApi, '管理員', changeStatusFieldToTextMap, rowData.account, pTablePageRef, rowData, field);
+function showAskToggleBooleanFieldMessageBox(rowData: AdminData, field: FilteredKeyPath<AdminData, boolean>) {
+	askToggleBooleanFieldMessageBox(AdminApi, '管理員', booleanFieldToTextMap, rowData.account, pTablePageRef, rowData, field);
+	return false;
+}
 </script>
