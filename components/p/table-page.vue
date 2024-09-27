@@ -55,7 +55,7 @@
 			<PColumn class="center" header="操作" v-if="!hideActionsColumn">
 				<template #body="scope">
 					<div class="flex-middle gap-btns">
-						<slot name="before-action-btns" :="scope"></slot>
+						<slot name="before-edit-btn" :="scope"></slot>
 						<el-action-btn
 							:disabled="disableRowEditBtnRule?.(scope.data)"
 							@click="openDialog(scope.data)"
@@ -71,7 +71,7 @@
 						>
 							刪除
 						</el-action-btn>
-						<slot name="after-action-btns" :="scope"></slot>
+						<slot name="after-delete-btn" :="scope"></slot>
 					</div>
 				</template>
 			</PColumn>
