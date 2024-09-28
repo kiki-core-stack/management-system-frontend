@@ -32,7 +32,7 @@ import { mapValues } from 'lodash-es';
 import AdminAuthApi from '@/apis/admin/auth';
 import { init } from '@/plugins/12.init.client';
 
-definePageMeta({ layout: 'middle-block' });
+definePageMeta({ keepalive: false, layout: 'middle-block' });
 
 // Variables
 const { state: loginState } = createLoadingState();
@@ -76,11 +76,11 @@ async function login() {
 		} else if (response?.data.data?.isVerCodeIncorrect) verCodeInputRef.value?.focus();
 		else if (response?.data.data?.requiredTwoFactorAuthentications) twoFactorAuthenticationCodeInputsRef.value?.focus();
 		else if (response?.data.success) {
-			formRef.value?.resetFields();
-			loginState.success = true;
 			await updateAdminInfoState();
+			ElNotification.success('登入成功！');
+			formRef.value?.resetFields();
 			init();
-			setTimeout(() => navigateTo(flattenToSingleValue(useRoute().query.redirect, '/'), { replace: true }), 1000);
+			navigateTo(flattenToSingleValue(useRoute().query.redirect, '/'), { replace: true });
 			return;
 		}
 
