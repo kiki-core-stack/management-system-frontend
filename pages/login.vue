@@ -30,6 +30,7 @@ import type { AdminLoginFormData } from '@kikiutils/kiki-core-stack-pack/types/d
 import { mapValues } from 'lodash-es';
 
 import AdminAuthApi from '@/apis/admin/auth';
+import { init } from '@/plugins/12.init.client';
 
 definePageMeta({ layout: 'middle-block' });
 
@@ -78,6 +79,7 @@ async function login() {
 			formRef.value?.resetFields();
 			loginState.success = true;
 			await updateAdminInfoState();
+			init();
 			setTimeout(() => navigateTo(flattenToSingleValue(useRoute().query.redirect, '/'), { replace: true }), 1000);
 			return;
 		}
