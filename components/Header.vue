@@ -1,6 +1,6 @@
 <template>
 	<div class="relative py-2 px-4 flex flex-wrap items-center justify-between bg-white dark:bg-dark color-mode-transition">
-		<i class="md:hidden mr-4 pt-1 fa-solid fa-bars" @click="mainState.isSidebarShow = true"></i>
+		<i class="md:hidden mr-4 pt-1 fa-solid fa-bars" @click="mainState.sidebar.isShow = true"></i>
 		<span class="fs-20px">後台管理系統</span>
 		<div class="grow"></div>
 		<i class="mr-2 fa-solid fa-sun"></i>
