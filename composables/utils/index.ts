@@ -1,4 +1,5 @@
 export * from '@kikiutils/kiki-core-stack-pack/utils/api-requests';
+export { flattenToSingleValue } from '@kikiutils/node';
 export { getEnumNumberValues, getEnumStringValues } from '@kikiutils/node/enum';
 export { calculateToPercentageString } from '@kikiutils/node/math';
 
@@ -95,9 +96,3 @@ export const objectToFormData = (object: object) => {
 	for (const kV of Object.entries(object)) formData.append(...kV);
 	return formData;
 };
-
-export function flattenToSingleValue<T>(value: T | T[]): T | undefined;
-export function flattenToSingleValue<T, D>(value: T | T[], defaultValue: D): NonNullable<T> | D;
-export function flattenToSingleValue<T, D>(value: T | T[], defaultValue?: D) {
-	return (Array.isArray(value) ? value[0] : value) ?? defaultValue;
-}
