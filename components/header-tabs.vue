@@ -18,7 +18,7 @@
 			</div>
 		</NuxtLink>
 	</div>
-	<ContextMenu ref="contextMenuRef" class="fs-14px" :model="contextMenuItems" />
+	<ContextMenu ref="contextMenuRef" class="fs-14px" :model="contextMenuItems as MenuItem[]" />
 </template>
 
 <script lang="ts" setup>
