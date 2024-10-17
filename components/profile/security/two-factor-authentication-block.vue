@@ -58,7 +58,7 @@
 import type { ProfileSecurityTotpSecretData } from '@kikiutils/kiki-core-stack-pack/types/data/profile';
 import QRCodeVue from 'qrcode.vue';
 
-import ProfileSecurityApi from '@/apis/profile/security';
+import { ProfileSecurityApi } from '@/apis/profile/security';
 
 // Variables
 const { state: toggleState } = createLoadingState();

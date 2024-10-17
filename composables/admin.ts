@@ -1,5 +1,5 @@
-import AdminApi from '@/apis/admin';
-import AdminAuthApi from '@/apis/admin/auth';
+import { AdminApi } from '@/apis/admin';
+import { AdminAuthApi } from '@/apis/admin/auth';
 
 export const logout = async (noAlert: boolean = false) => {
 	if (!noAlert) showLoadingAlert('登出中...');

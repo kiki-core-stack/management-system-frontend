@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts" setup>
-import HomeApi from '@/apis/home';
+import { HomeApi } from '@/apis/home';
 
 // Variables
 const defaultHomeDashboardData = Object.freeze({});

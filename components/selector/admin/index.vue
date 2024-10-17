@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import type { AdminData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
 
-import AdminApi from '@/apis/admin';
+import { AdminApi } from '@/apis/admin';
 
 // Variables
 const admins = reactive<AdminData[]>([]);

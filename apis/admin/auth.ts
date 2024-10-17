@@ -11,5 +11,3 @@ export const AdminAuthApi = new (class {
 		return await postApi(`${this.#baseUrl}/logout`);
 	}
 })();
-
-export default AdminAuthApi;

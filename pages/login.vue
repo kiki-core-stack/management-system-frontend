@@ -29,7 +29,7 @@
 import type { AdminLoginFormData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
 import { mapValues } from 'lodash-es';
 
-import AdminAuthApi from '@/apis/admin/auth';
+import { AdminAuthApi } from '@/apis/admin/auth';
 import { init } from '@/plugins/12.init.client';
 
 definePageMeta({ keepalive: false, layout: 'middle-block' });

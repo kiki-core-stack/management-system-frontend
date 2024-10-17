@@ -40,7 +40,7 @@
 import { adminLogTypeToTextMap } from '@kikiutils/kiki-core-stack-pack/constants/admin';
 import type { AdminLogType } from '@kikiutils/kiki-core-stack-pack/constants/admin';
 
-import AdminLogApi from '@/apis/admin/log';
+import { AdminLogApi } from '@/apis/admin/log';
 import type { GetAdminLogsFilterQueryFormData } from '@/types/data/admin';
 
 // Variables

@@ -21,5 +21,3 @@ export const ProfileSecurityApi = new (class {
 		return await patchApi(`${this.#baseUrl}/two-factor-status/${kebabCase(method)}`, data);
 	}
 })();
-
-export default ProfileSecurityApi;

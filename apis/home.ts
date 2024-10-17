@@ -5,5 +5,3 @@ export const HomeApi = new (class HomeApi {
 		return await getApi<{}>(`${this.#baseUrl}/dashboard`, { filterQuery: JSON.stringify(filterQueryData) });
 	}
 })();
-
-export default HomeApi;
