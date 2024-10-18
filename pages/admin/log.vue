@@ -2,7 +2,7 @@
 	<p-table-page
 		ref="pTablePageRef"
 		title="管理員日誌"
-		:crud-api-class="AdminLogApi"
+		:crud-api-class="AdminLogAPI"
 		:filter-query="filterQueryFormData"
 		enable-filter-date-range-btn-group
 		hide-actions-column
@@ -40,7 +40,7 @@
 import { adminLogTypeToTextMap } from '@kikiutils/kiki-core-stack-pack/constants/admin';
 import type { AdminLogType } from '@kikiutils/kiki-core-stack-pack/constants/admin';
 
-import { AdminLogApi } from '@/apis/admin/log';
+import { AdminLogAPI } from '@/apis/admin/log';
 import type { GetAdminLogsFilterQueryFormData } from '@/types/data/admin';
 
 // Variables

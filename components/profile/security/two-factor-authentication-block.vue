@@ -6,8 +6,8 @@
 		<p class="mb-4 fs-20px text-center">二階段驗證</p>
 		<el-form-switch
 			label="Email OTP驗證碼"
-			:before-change="() => beforeSwitchChange('emailOtp')"
-			v-model="accountState.twoFactorAuthenticationStatus.emailOtp"
+			:before-change="() => beforeSwitchChange('emailOTP')"
+			v-model="accountState.twoFactorAuthenticationStatus.emailOTP"
 		/>
 		<el-form-switch
 			class="mb-0!"
@@ -55,20 +55,20 @@
 </template>
 
 <script lang="ts" setup>
-import type { ProfileSecurityTotpSecretData } from '@kikiutils/kiki-core-stack-pack/types/data/profile';
+import type { ProfileSecurityTOTPSecretData } from '@kikiutils/kiki-core-stack-pack/types/data/profile';
 import QRCodeVue from 'qrcode.vue';
 
-import { ProfileSecurityApi } from '@/apis/profile/security';
+import { ProfileSecurityAPI } from '@/apis/profile/security';
 
 // Variables
 const { state: toggleState } = createLoadingState();
-const formData = reactive<TwoFactorAuthenticationCodesData>({ emailOtpCode: '', totpCode: '' });
+const formData = reactive<TwoFactorAuthenticationCodesData>({ emailOTPCode: '', totpCode: '' });
 const formRef = ref<ElFormRef>(null);
 const isDialogOpen = ref(false);
 const isLoadingData = ref(true);
-const methodToTextMap: Record<TwoFactorAuthenticationMethod, string> = { emailOtp: 'Email OTP驗證碼', totp: 'TOTP驗證碼' };
-const toToggleMethod = ref<TwoFactorAuthenticationMethod>('emailOtp');
-const totpSecretData = reactive<ProfileSecurityTotpSecretData>({ secret: '', url: '' });
+const methodToTextMap: Record<TwoFactorAuthenticationMethod, string> = { emailOTP: 'Email OTP驗證碼', totp: 'TOTP驗證碼' };
+const toToggleMethod = ref<TwoFactorAuthenticationMethod>('emailOTP');
+const totpSecretData = reactive<ProfileSecurityTOTPSecretData>({ secret: '', url: '' });
 
 // Functions
 function beforeSwitchChange(method: TwoFactorAuthenticationMethod) {
@@ -80,7 +80,7 @@ function beforeSwitchChange(method: TwoFactorAuthenticationMethod) {
 
 async function loadData() {
 	isLoadingData.value = true;
-	const response = await ProfileSecurityApi.getTotpSecret();
+	const response = await ProfileSecurityAPI.getTOTPSecret();
 	isLoadingData.value = false;
 	if (response?.data.success) clearAndAssignObject(totpSecretData, response.data.data);
 }
@@ -90,7 +90,7 @@ async function toggleStatus() {
 	await formRef.value?.validate(async (valid) => {
 		if (!valid) return;
 		accountState.autoUpdateTwoFactorAuthenticationStatus = !(toggleState.loading = true);
-		const response = await ProfileSecurityApi.toggleTwoFactorAuthenticationStatus(toToggleMethod.value, formData);
+		const response = await ProfileSecurityAPI.toggleTwoFactorAuthenticationStatus(toToggleMethod.value, formData);
 		accountState.autoUpdateTwoFactorAuthenticationStatus = !(toggleState.loading = false);
 		if (!response?.data.success) return;
 		ElNotification.success('切換成功！');

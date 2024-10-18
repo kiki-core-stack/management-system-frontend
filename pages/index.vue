@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts" setup>
-import { HomeApi } from '@/apis/home';
+import { HomeAPI } from '@/apis/home';
 
 // Variables
 const defaultHomeDashboardData = Object.freeze({});
@@ -54,7 +54,7 @@ const isLoadingData = ref(true);
 // Functions
 async function loadData() {
 	isLoadingData.value = true;
-	const response = await HomeApi.getDashboardData(filterQueryFormData);
+	const response = await HomeAPI.getDashboardData(filterQueryFormData);
 	Object.assign(dashboardData, defaultHomeDashboardData, response?.data.data);
 	isLoadingData.value = false;
 }

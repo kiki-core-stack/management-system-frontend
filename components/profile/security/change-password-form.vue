@@ -43,13 +43,13 @@
 <script lang="ts" setup>
 import type { ProfileSecurityChangePasswordFormData } from '@kikiutils/kiki-core-stack-pack/types/data/profile';
 
-import { ProfileSecurityApi } from '@/apis/profile/security';
+import { ProfileSecurityAPI } from '@/apis/profile/security';
 
 // Variables
 const { state: changePasswordState } = createLoadingState();
 const formData = reactive<ProfileSecurityChangePasswordFormData & TwoFactorAuthenticationCodesData>({
 	conformPassword: '',
-	emailOtpCode: '',
+	emailOTPCode: '',
 	oldPassword: '',
 	newPassword: '',
 	totpCode: ''
@@ -69,7 +69,7 @@ async function changePassword() {
 	await formRef.value?.validate(async (valid) => {
 		if (!valid) return;
 		changePasswordState.loading = true;
-		const response = await ProfileSecurityApi.changePassword(formData);
+		const response = await ProfileSecurityAPI.changePassword(formData);
 		if (!response?.data.success) return (changePasswordState.loading = false), undefined;
 		changePasswordState.success = true;
 		setTimeout(() => assignToUrlOrNavigateTo('/login', true), 1000);

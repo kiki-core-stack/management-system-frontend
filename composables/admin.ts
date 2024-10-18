@@ -1,9 +1,9 @@
-import { AdminApi } from '@/apis/admin';
-import { AdminAuthApi } from '@/apis/admin/auth';
+import { AdminAPI } from '@/apis/admin';
+import { AdminAuthAPI } from '@/apis/admin/auth';
 
 export const logout = async (noAlert: boolean = false) => {
 	if (!noAlert) showLoadingAlert('登出中...');
-	const response = await AdminAuthApi.logout();
+	const response = await AdminAuthAPI.logout();
 	if (!response?.data.success) return !noAlert && showErrorAlert('登出失敗！');
 	setTimeout(() => assignToUrlOrNavigateTo('/login', true), 1000);
 	if (noAlert) return;
@@ -15,7 +15,7 @@ export const logout = async (noAlert: boolean = false) => {
 };
 
 export const updateAdminInfoState = async () => {
-	const response = await AdminApi.getInfo();
+	const response = await AdminAPI.getInfo();
 	Object.assign(adminInfoState, response?.data.data);
 	Object.assign(accountState.twoFactorAuthenticationStatus, response?.data.data?.twoFactorAuthenticationStatus);
 	return adminInfoState;

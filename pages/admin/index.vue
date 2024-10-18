@@ -5,7 +5,7 @@
 		dialog-title-suffix="管理員"
 		title="管理員管理"
 		:ask-delete-row-message-render="(rowData: AdminData) => `確定要刪除 ${rowData.account} 嗎？`"
-		:crud-api-class="AdminApi"
+		:crud-api-class="AdminAPI"
 		:disable-row-delete-btn-rule="(rowData: AdminData) => rowData.id === adminInfoState.id"
 		:form-data="formData"
 		:form-rules="formRules"
@@ -30,9 +30,9 @@
 					<div class="flex-middle">
 						<el-switch
 							:before-change="
-								() => showAskToggleBooleanFieldMessageBox(data, 'twoFactorAuthenticationStatus.emailOtp')
+								() => showAskToggleBooleanFieldMessageBox(data, 'twoFactorAuthenticationStatus.emailOTP')
 							"
-							v-model="data.twoFactorAuthenticationStatus.emailOtp"
+							v-model="data.twoFactorAuthenticationStatus.emailOTP"
 						/>
 					</div>
 				</template>
@@ -71,8 +71,8 @@
 			/>
 			<el-form-switch
 				label="Email OTP驗證"
-				prop="twoFactorAuthenticationStatus.emailOtp"
-				v-model="formData.twoFactorAuthenticationStatus.emailOtp"
+				prop="twoFactorAuthenticationStatus.emailOTP"
+				v-model="formData.twoFactorAuthenticationStatus.emailOTP"
 			/>
 			<el-form-switch
 				label="TOTP驗證"
@@ -86,11 +86,11 @@
 <script lang="ts" setup>
 import type { AdminData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
 
-import { AdminApi } from '@/apis/admin';
+import { AdminAPI } from '@/apis/admin';
 
 // Variables
 const booleanFieldToTextMap: ReadonlyRecord<FilteredKeyPath<AdminData, boolean>, string> = Object.freeze({
-	'twoFactorAuthenticationStatus.emailOtp': 'Email OTP驗證',
+	'twoFactorAuthenticationStatus.emailOTP': 'Email OTP驗證',
 	'twoFactorAuthenticationStatus.totp': 'TOTP驗證',
 	enabled: '啟用'
 });
@@ -102,7 +102,7 @@ const formData = reactive<TablePageFormData<AdminData, 'totpSecret'>>({
 	id: '',
 	name: '',
 	password: '',
-	twoFactorAuthenticationStatus: { emailOtp: false, totp: false }
+	twoFactorAuthenticationStatus: { emailOTP: false, totp: false }
 });
 
 const formRules: ElFormRules<Omit<AdminData, 'totpSecret'>> = {
@@ -115,7 +115,7 @@ const pTablePageRef = ref<ComponentRef<'PTablePage'>>(null);
 
 // Functions
 function showAskToggleBooleanFieldMessageBox(rowData: AdminData, field: FilteredKeyPath<AdminData, boolean>) {
-	askToggleBooleanFieldMessageBox(AdminApi, '管理員', booleanFieldToTextMap, rowData.account, pTablePageRef, rowData, field);
+	askToggleBooleanFieldMessageBox(AdminAPI, '管理員', booleanFieldToTextMap, rowData.account, pTablePageRef, rowData, field);
 	return false;
 }
 </script>

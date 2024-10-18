@@ -3,10 +3,10 @@ export { flattenToSingleValue } from '@kikiutils/node';
 export { getEnumNumberValues, getEnumStringValues } from '@kikiutils/node/enum';
 export { calculateToPercentageString } from '@kikiutils/node/math';
 
-import type { BaseCrudApi } from '@/apis/base';
+import type { BaseCrudAPI } from '@/apis/base';
 
 export function askToggleBooleanFieldMessageBox<RD extends TableRowData, F extends string, M extends Dict<string>>(
-	apiClass: BaseCrudApi,
+	apiClass: BaseCrudAPI,
 	entityLabel: string,
 	toTextMap: M,
 	entityName: string,
