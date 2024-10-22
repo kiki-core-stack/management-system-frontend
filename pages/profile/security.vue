@@ -1,6 +1,6 @@
 <template>
 	<Head>
-		<Title>安全設置</Title>
+		<Title>安全性</Title>
 	</Head>
 	<div class="absolute top-0 wh-full">
 		<div class="relative top-0 wh-full p-4 overflow-auto">
@@ -14,5 +14,5 @@
 
 <script lang="ts" setup>
 // Hooks
-onActivated(async () => tabsController.ensure('安全設置', window.location.pathname));
+onActivated(async () => tabsController.ensure('安全性', window.location.pathname));
 </script>

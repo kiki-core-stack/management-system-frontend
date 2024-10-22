@@ -15,14 +15,14 @@ export const mainState = reactive<MainState>({
 		menuItemGroups: [
 			['/', '首頁'],
 			[
-				'/admin',
-				'管理員',
+				'/system',
+				'系統',
 				[
-					['/admin', '管理員管理'],
-					['/admin/log', '日誌']
+					['/system/admin', '管理員管理'],
+					['/system/admin/log', '管理員日誌']
 				]
 			],
-			['/profile', '個人設置', [['/profile/security', '安全設置']]]
+			['/profile', '個人', [['/profile/security', '安全性']]]
 		],
 		isShow: false
 	}
