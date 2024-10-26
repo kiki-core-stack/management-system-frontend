@@ -28,5 +28,10 @@ WORKDIR /app
 COPY --from=build-stage /app/.output ./
 
 ## Make entrypoint and set cmd
-RUN echo "rm -rf ${DIST_DIR_PATH}/* && cp -pr /app/public/* ${DIST_DIR_PATH} && chmod 755 ${DIST_DIR_PATH} -R" > /entrypoint.sh
+RUN echo " \
+	rm -rf ${DIST_DIR_PATH}/* && \
+	cp -pr /app/public/* ${DIST_DIR_PATH}/ && \
+	chmod 755 ${DIST_DIR_PATH} -R \
+	" > /entrypoint.sh
+
 CMD ["sh", "/entrypoint.sh"]
