@@ -28,5 +28,5 @@ export default defineNuxtConfig({
 	purgecss: { enabled: false },
 	security: { headers: { contentSecurityPolicy: false } },
 	ssr: false,
-	vite: { server: { hmr: { protocol: 'wss' } } }
+	vite: { server: { hmr: { protocol: process.env.DEV_VITE_SERVER_HMR_PROTOCOL } } }
 });
