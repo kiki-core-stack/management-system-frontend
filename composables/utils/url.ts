@@ -1,13 +1,13 @@
 export const assignToUrlOrNavigateTo = (url: string, addRedirectToNowPathQuery?: boolean) => {
 	if (addRedirectToNowPathQuery) {
-		const urlParts = url.split('?');
-		const urlSearchParams = new URLSearchParams(urlParts[1] || '');
+		const [path = '', ...parts] = url.split('?');
+		const urlSearchParams = new URLSearchParams(parts.join('?'));
 		urlSearchParams.set('redirect', useRoute().fullPath);
-		url = `${urlParts[0] || ''}?${urlSearchParams.toString()}`;
+		url = `${path}?${urlSearchParams.toString()}`;
 	}
 
-	if (typeof window === 'undefined') navigateTo(url, { replace: true });
-	else window.location.assign(url);
+	if (import.meta.server) return navigateTo(url, { replace: true });
+	window.location.assign(url);
 };
 
 export const createObjectURLFromInputElement = (inputElement: HTMLInputElement) => {
