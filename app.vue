@@ -1,7 +1,7 @@
 <template>
+	<NuxtLoadingIndicator />
 	<el-config-provider :locale="zhTw">
 		<NuxtLayout>
-			<NuxtLoadingIndicator />
 			<NuxtPage></NuxtPage>
 		</NuxtLayout>
 	</el-config-provider>
