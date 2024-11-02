@@ -105,7 +105,7 @@ const formData = reactive<TablePageFormData<AdminData, 'totpSecret'>>({
 	twoFactorAuthenticationStatus: { emailOTP: false, totp: false }
 });
 
-const formRules: ElFormRules<Omit<AdminData, 'totpSecret'>> = {
+const formRules: ElFormRules<AdminData> = {
 	account: commonFormRules.account,
 	email: commonFormRules.email.nonRequired,
 	name: commonFormRules.name
