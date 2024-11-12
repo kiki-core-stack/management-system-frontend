@@ -1,6 +1,6 @@
 import type { AdminData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
 
-import BaseCrudAPI from '../base';
+import { BaseCrudAPI } from '../base';
 
 export const AdminAPI = new (class extends BaseCrudAPI<AdminData> {
 	protected readonly baseUrl = '/api/admin';

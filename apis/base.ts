@@ -25,5 +25,3 @@ export abstract class BaseCrudAPI<T extends TableRowData = TableRowData> {
 		return await patchAPI(`${this.baseUrl}/${id}/boolean-field`, { field, value });
 	}
 }
-
-export default BaseCrudAPI;
