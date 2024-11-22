@@ -28,5 +28,19 @@ export default defineNuxtConfig({
 	purgecss: { enabled: false },
 	security: { headers: { contentSecurityPolicy: false } },
 	ssr: false,
-	vite: { server: { hmr: { protocol: process.env.DEV_VITE_SERVER_HMR_PROTOCOL } } }
+	vite: {
+		build: {
+			assetsInlineLimit: 0,
+			rollupOptions: {
+				output: {
+					manualChunks(id) {
+						if (id.endsWith('.css')) return;
+						const moduleName = id.match(/\.pnpm\/@?([^@]+)@/)?.[1];
+						return ['nuxt', 'nuxt-site-config'].includes(moduleName!) ? 'nuxt' : moduleName;
+					}
+				}
+			}
+		},
+		server: { hmr: { protocol: process.env.DEV_VITE_SERVER_HMR_PROTOCOL } }
+	}
 });
