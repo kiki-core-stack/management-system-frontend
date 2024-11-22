@@ -36,7 +36,7 @@ export default defineNuxtConfig({
 					manualChunks(id) {
 						if (id.endsWith('.css')) return;
 						const moduleName = id.match(/\.pnpm\/@?([^@]+)@/)?.[1];
-						return ['nuxt', 'nuxt-site-config'].includes(moduleName!) ? 'nuxt' : moduleName;
+						return moduleName?.includes('nuxt') ? 'nuxt' : moduleName;
 					}
 				}
 			}
