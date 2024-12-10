@@ -37,8 +37,8 @@
 </template>
 
 <script lang="ts" setup>
-import { adminLogTypeToTextMap } from '@kikiutils/kiki-core-stack-pack/constants/admin';
-import type { AdminLogType } from '@kikiutils/kiki-core-stack-pack/constants/admin';
+import { adminLogTypeToTextMap } from '@kiki-core-stack/pack/constants/admin';
+import type { AdminLogType } from '@kiki-core-stack/pack/constants/admin';
 
 import { AdminLogAPI } from '@/apis/admin/log';
 import type { GetAdminLogsFilterQueryFormData } from '@/types/data/admin';

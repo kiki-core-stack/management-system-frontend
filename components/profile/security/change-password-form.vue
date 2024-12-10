@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { ProfileSecurityChangePasswordFormData } from '@kikiutils/kiki-core-stack-pack/types/data/profile';
+import type { ProfileSecurityChangePasswordFormData } from '@kiki-core-stack/pack/types/data/profile';
 
 import { ProfileSecurityAPI } from '@/apis/profile/security';
 

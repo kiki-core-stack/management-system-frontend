@@ -10,5 +10,5 @@
 </template>
 
 <script lang="ts" setup>
-import { AdminLogType, adminLogTypeToTextMap } from '@kikiutils/kiki-core-stack-pack/constants/admin';
+import { AdminLogType, adminLogTypeToTextMap } from '@kiki-core-stack/pack/constants/admin';
 </script>

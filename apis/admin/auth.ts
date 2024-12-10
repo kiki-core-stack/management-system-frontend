@@ -1,4 +1,4 @@
-import type { AdminLoginFormData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
+import type { AdminLoginFormData } from '@kiki-core-stack/pack/types/data/admin';
 
 export const AdminAuthAPI = new (class {
 	readonly #baseURL = '/api/admin/auth';

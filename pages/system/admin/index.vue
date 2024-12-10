@@ -84,7 +84,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { AdminData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
+import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
 
 import { AdminAPI } from '@/apis/admin';
 

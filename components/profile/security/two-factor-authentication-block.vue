@@ -55,7 +55,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { ProfileSecurityTOTPSecretData } from '@kikiutils/kiki-core-stack-pack/types/data/profile';
+import type { ProfileSecurityTOTPSecretData } from '@kiki-core-stack/pack/types/data/profile';
 import QRCodeVue from 'qrcode.vue';
 
 import { ProfileSecurityAPI } from '@/apis/profile/security';

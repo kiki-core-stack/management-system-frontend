@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-import { sendEmailOTPCodeCoolingSeconds } from '@kikiutils/kiki-core-stack-pack/constants/two-factor-authentication';
+import { sendEmailOTPCodeCoolingSeconds } from '@kiki-core-stack/pack/constants/two-factor-authentication';
 
 interface Props {
 	forceEnabledFields?: TwoFactorAuthenticationMethod[];

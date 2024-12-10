@@ -1,4 +1,4 @@
-export * from '@kikiutils/kiki-core-stack-pack/utils/api-requests';
+export * from '@kiki-core-stack/pack/utils/api-requests';
 export { flattenToSingleValue } from '@kikiutils/node';
 export { getEnumNumberValues, getEnumStringValues } from '@kikiutils/node/enum';
 export { calculateToPercentageString } from '@kikiutils/node/math';

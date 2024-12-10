@@ -1,4 +1,4 @@
-import type { AdminData } from '@kikiutils/kiki-core-stack-pack/types/data/admin';
+import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
 
 export interface AccountState extends Pick<AdminData, 'twoFactorAuthenticationStatus'> {
 	autoUpdateTwoFactorAuthenticationStatus: boolean;
