@@ -2,10 +2,10 @@ import type { ProfileSecurityChangePasswordFormData, ProfileSecurityTOTPSecretDa
 import { kebabCase } from 'lodash-es';
 
 export const ProfileSecurityAPI = new (class {
-	readonly #baseUrl = '/api/profile/security';
+	readonly #baseURL = '/api/profile/security';
 
 	async changePassword(data: ProfileSecurityChangePasswordFormData) {
-		return await patchAPI(`${this.#baseUrl}/password`, {
+		return await patchAPI(`${this.#baseURL}/password`, {
 			...data,
 			conformPassword: sha3512(data.conformPassword),
 			oldPassword: sha3512(data.oldPassword),
@@ -14,10 +14,10 @@ export const ProfileSecurityAPI = new (class {
 	}
 
 	async getTOTPSecret() {
-		return await getAPI<ProfileSecurityTOTPSecretData>(`${this.#baseUrl}/two-factor-status/totp/secret`);
+		return await getAPI<ProfileSecurityTOTPSecretData>(`${this.#baseURL}/two-factor-status/totp/secret`);
 	}
 
 	async toggleTwoFactorAuthenticationStatus(method: TwoFactorAuthenticationMethod, data: TwoFactorAuthenticationCodesData) {
-		return await patchAPI(`${this.#baseUrl}/two-factor-status/${kebabCase(method)}`, data);
+		return await patchAPI(`${this.#baseURL}/two-factor-status/${kebabCase(method)}`, data);
 	}
 })();

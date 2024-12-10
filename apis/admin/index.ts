@@ -3,10 +3,10 @@ import type { AdminData } from '@kikiutils/kiki-core-stack-pack/types/data/admin
 import { BaseCrudAPI } from '../base';
 
 export const AdminAPI = new (class extends BaseCrudAPI<AdminData> {
-	protected readonly baseUrl = '/api/admin';
+	protected readonly baseURL = '/api/admin';
 
 	async getInfo() {
-		return await getAPI<{ id: string; twoFactorAuthenticationStatus: TwoFactorAuthenticationStatus }>(`${this.baseUrl}/info`);
+		return await getAPI<{ id: string; twoFactorAuthenticationStatus: TwoFactorAuthenticationStatus }>(`${this.baseURL}/info`);
 	}
 
 	override async save(data: AdminData) {

@@ -1,4 +1,4 @@
-export const assignToUrlOrNavigateTo = (url: string, addRedirectToNowPathQuery?: boolean) => {
+export const assignToURLOrNavigateTo = (url: string, addRedirectToNowPathQuery?: boolean) => {
 	if (addRedirectToNowPathQuery) {
 		const [path = '', ...parts] = url.split('?');
 		const urlSearchParams = new URLSearchParams(parts.join('?'));

@@ -72,7 +72,7 @@ async function changePassword() {
 		const response = await ProfileSecurityAPI.changePassword(formData);
 		if (!response?.data.success) return (changePasswordState.loading = false), undefined;
 		changePasswordState.success = true;
-		setTimeout(() => assignToUrlOrNavigateTo('/login', true), 1000);
+		setTimeout(() => assignToURLOrNavigateTo('/login', true), 1000);
 	});
 }
 </script>

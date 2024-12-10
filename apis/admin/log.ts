@@ -3,5 +3,5 @@ import type { AdminLogData } from '@kikiutils/kiki-core-stack-pack/types/data/ad
 import { BaseCrudAPI } from '../base';
 
 export const AdminLogAPI = new (class extends BaseCrudAPI<AdminLogData> {
-	protected readonly baseUrl = '/api/admin/log';
+	protected readonly baseURL = '/api/admin/log';
 })();
