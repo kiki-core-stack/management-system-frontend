@@ -186,7 +186,7 @@ async function loadData() {
 	if (response?.data.data) {
 		clearAndAssignObject(columnTotals, response.data.data.totals);
 		tableData.length = 0;
-		tableData.push(...(response.data.data.data || []));
+		tableData.push(...(response.data.data.list || []));
 		totalTableDataCount.value = response.data.data.count || 0;
 	}
 

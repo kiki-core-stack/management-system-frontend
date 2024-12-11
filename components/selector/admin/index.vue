@@ -23,7 +23,7 @@ async function loadData(queryAccount: string) {
 	});
 
 	admins.length = 0;
-	admins.push(...(response?.data.data?.data || []));
+	admins.push(...(response?.data.data?.list || []));
 	isLoadingData.value = false;
 }
 </script>

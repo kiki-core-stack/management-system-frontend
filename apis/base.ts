@@ -14,7 +14,7 @@ export abstract class BaseCrudAPI<T extends TableRowData = TableRowData> {
 	async getList(params?: GetListAPIParams) {
 		if (params?.filterQuery) params.filterQuery = JSON.stringify(params.filterQuery);
 		if (params?.selectFields) params.selectFields = JSON.stringify(params.selectFields);
-		return await getAPI<{ count: number; data: T[]; totals?: Dict<number | string> }>(`${this.baseURL}/list`, params);
+		return await getAPI<{ count: number; list: T[]; totals?: Dict<number | string> }>(`${this.baseURL}/list`, params);
 	}
 
 	async save(data: OmitMongooseTimestampAndOtherFields<T>, config?: AxiosRequestConfig) {
