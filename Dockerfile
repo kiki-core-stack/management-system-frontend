@@ -3,15 +3,13 @@ FROM kikikanri/node22:base-alpine AS build-stage
 
 ## Set args, envs and workdir
 ARG NPM_CONFIG_REGISTRY
+ENV NODE_ENV=production
 ENV NPM_CONFIG_REGISTRY=${NPM_CONFIG_REGISTRY}
 WORKDIR /app
 
 ## Install dependencies
 COPY ./.npmrc ./package.json ./pnpm-lock.yaml ./
-RUN --mount=id=pnpm-store,target=/pnpm/store,type=cache pnpm i --frozen-lockfile
-
-## Set production env
-ENV NODE_ENV=production
+RUN --mount=id=pnpm-store,target=/pnpm/store,type=cache pnpm i --frozen-lockfile --prod=false
 
 ## Copy files and build
 COPY ./ ./
