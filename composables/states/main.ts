@@ -1,5 +1,3 @@
-// prettier-multiline-arrays-set-threshold: 10
-
 type SidebarMenuItem = readonly [url: string, title: string];
 type SidebarMenuItemGroup = readonly [baseURL: string, title: string, items?: readonly SidebarMenuItem[]];
 

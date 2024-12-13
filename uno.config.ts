@@ -1,5 +1,3 @@
-// prettier-multiline-arrays-set-threshold: 4
-
 import { defineConfig } from 'unocss';
 
 export default defineConfig({
