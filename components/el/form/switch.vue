@@ -32,6 +32,7 @@ const switchAttrs = computed(() => {
         prop,
         ...otherAttrs
     } = attrs;
+
     return otherAttrs;
 });
 

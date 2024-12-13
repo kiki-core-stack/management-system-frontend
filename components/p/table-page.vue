@@ -44,7 +44,15 @@
                                     關閉
                                 </el-dropdown-item>
                                 <el-dropdown-item
-                                    v-for="sec in [5, 10, 20, 30, 40, 50, 60]"
+                                    v-for="sec in [
+                                        5,
+                                        10,
+                                        20,
+                                        30,
+                                        40,
+                                        50,
+                                        60,
+                                    ]"
                                     :key="sec"
                                     @click="setAutoReloadDataIntervalSeconds(sec)"
                                 >
@@ -139,7 +147,14 @@
                     v-model:page-size="paginationParams.limit"
                     layout="total, prev, pager, next, sizes"
                     :disabled="isLoadingData"
-                    :page-sizes="[10, 20, 50, 100, 500, 1000]"
+                    :page-sizes="[
+                        10,
+                        20,
+                        50,
+                        100,
+                        500,
+                        1000,
+                    ]"
                     :pager-count="5"
                     :total="totalTableDataCount"
                     @change="loadData"
@@ -239,6 +254,7 @@ const {
     tableData,
     totalTableDataCount,
 } = createPageBaseVariables();
+
 const { state: saveDataState } = createLoadingState();
 const columnTotals = reactive<Dict<number | string>>({});
 const defaultFormData = cloneDeep(props.formData);

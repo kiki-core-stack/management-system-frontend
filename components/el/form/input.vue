@@ -57,6 +57,7 @@ const inputAttrs = computed(() => {
         rules,
         ...otherAttrs
     } = attrs;
+
     return otherAttrs;
 });
 

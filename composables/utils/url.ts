@@ -4,6 +4,7 @@ export function assignToURLOrNavigateTo(url: string, addRedirectToNowPathQuery?:
             path = '',
             ...parts
         ] = url.split('?');
+
         const urlSearchParams = new URLSearchParams(parts.join('?'));
         urlSearchParams.set('redirect', useRoute().fullPath);
         url = `${path}?${urlSearchParams.toString()}`;

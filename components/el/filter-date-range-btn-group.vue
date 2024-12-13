@@ -38,6 +38,7 @@ function onSelect(type: DateRangeType) {
         endDate,
         startDate,
     } = getDateRangeFromDate(new Date(), type, { setEndDateToNextDayStart: true });
+
     // eslint-disable-next-line vue/no-mutating-props
     props.filterQuery.endAt = endDate;
     // eslint-disable-next-line vue/no-mutating-props
