@@ -1,3 +1,3 @@
 <template>
-	<i class="fa-solid fa-xmark"></i>
+    <i class="fa-solid fa-xmark" />
 </template>

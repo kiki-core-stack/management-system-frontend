@@ -1,3 +1,3 @@
 <template>
-	<i class="fa-solid fa-check"></i>
+    <i class="fa-solid fa-check" />
 </template>

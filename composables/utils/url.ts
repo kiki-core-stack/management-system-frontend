@@ -1,19 +1,22 @@
-export const assignToURLOrNavigateTo = (url: string, addRedirectToNowPathQuery?: boolean) => {
-	if (addRedirectToNowPathQuery) {
-		const [path = '', ...parts] = url.split('?');
-		const urlSearchParams = new URLSearchParams(parts.join('?'));
-		urlSearchParams.set('redirect', useRoute().fullPath);
-		url = `${path}?${urlSearchParams.toString()}`;
-	}
+export function assignToURLOrNavigateTo(url: string, addRedirectToNowPathQuery?: boolean) {
+    if (addRedirectToNowPathQuery) {
+        const [
+            path = '',
+            ...parts
+        ] = url.split('?');
+        const urlSearchParams = new URLSearchParams(parts.join('?'));
+        urlSearchParams.set('redirect', useRoute().fullPath);
+        url = `${path}?${urlSearchParams.toString()}`;
+    }
 
-	if (import.meta.server) return navigateTo(url, { replace: true });
-	window.location.assign(url);
-};
+    if (import.meta.server) return navigateTo(url, { replace: true });
+    window.location.assign(url);
+}
 
-export const createObjectURLFromInputElement = (inputElement: HTMLInputElement) => {
-	const files = inputElement.files;
-	if (!files?.[0]) return;
-	const url = URL.createObjectURL(files[0]);
-	inputElement.value = '';
-	return url;
-};
+export function createObjectURLFromInputElement(inputElement: HTMLInputElement) {
+    const files = inputElement.files;
+    if (!files?.[0]) return;
+    const url = URL.createObjectURL(files[0]);
+    inputElement.value = '';
+    return url;
+}

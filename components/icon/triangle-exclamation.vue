@@ -1,3 +1,3 @@
 <template>
-	<i class="fa-solid fa-triangle-exclamation"></i>
+    <i class="fa-solid fa-triangle-exclamation" />
 </template>

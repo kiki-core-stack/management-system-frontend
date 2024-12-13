@@ -1,38 +1,50 @@
 <template>
-	<el-form class="flex flex-wrap gap-1 el-filter-form">
-		<el-form-item label="開始時間" v-if="enableCreatedAtRangeFilter">
-			<el-date-picker
-				type="datetime"
-				:clearable="false"
-				:default-time="new Date(props.model.startAt)"
-				:popper-options="popperOptions"
-				:teleported="false"
-				v-model="props.model.startAt"
-			/>
-		</el-form-item>
-		<el-form-item label="結束時間" v-if="enableCreatedAtRangeFilter">
-			<el-date-picker
-				type="datetime"
-				:clearable="false"
-				:default-time="new Date(props.model.endAt)"
-				:popper-options="popperOptions"
-				:teleported="false"
-				v-model="props.model.endAt"
-			/>
-		</el-form-item>
-		<slot></slot>
-		<div class="flex flex-wrap gap-btns">
-			<slot name="before-submit-btn"></slot>
-			<el-button native-type="submit" type="primary">搜尋</el-button>
-			<slot name="after-submit-btn"></slot>
-		</div>
-	</el-form>
+    <!-- eslint-disable vue/no-mutating-props -->
+    <el-form class="el-filter-form flex flex-wrap gap-1">
+        <el-form-item
+            v-if="enableCreatedAtRangeFilter"
+            label="開始時間"
+        >
+            <el-date-picker
+                v-model="props.model.startAt"
+                type="datetime"
+                :clearable="false"
+                :default-time="new Date(props.model.startAt)"
+                :popper-options="popperOptions"
+                :teleported="false"
+            />
+        </el-form-item>
+        <el-form-item
+            v-if="enableCreatedAtRangeFilter"
+            label="結束時間"
+        >
+            <el-date-picker
+                v-model="props.model.endAt"
+                type="datetime"
+                :clearable="false"
+                :default-time="new Date(props.model.endAt)"
+                :popper-options="popperOptions"
+                :teleported="false"
+            />
+        </el-form-item>
+        <slot />
+        <div class="gap-btns flex flex-wrap">
+            <slot name="before-submit-btn" />
+            <el-button
+                native-type="submit"
+                type="primary"
+            >
+                搜尋
+            </el-button>
+            <slot name="after-submit-btn" />
+        </div>
+    </el-form>
 </template>
 
 <script lang="ts" setup>
 interface Props {
-	enableCreatedAtRangeFilter?: boolean;
-	model: Record<string, any>;
+    enableCreatedAtRangeFilter?: boolean;
+    model: Record<string, any>;
 }
 
 // Emits and props
@@ -42,22 +54,35 @@ const props = defineProps<Props>();
 const { width } = useWindowSize();
 
 // Computed properties
-const popperOptions = computed(() =>
-	width.value < 769 ? { modifiers: [{ name: 'offset', options: { offset: [-20, 12] } }] } : {}
-);
+const popperOptions = computed(() => {
+    if (width.value >= 769) return {};
+    return {
+        modifiers: [
+            {
+                name: 'offset',
+                options: {
+                    offset: [
+                        -20,
+                        12,
+                    ],
+                },
+            },
+        ],
+    };
+});
 </script>
 
 <style lang="scss" scoped>
 :deep(.el-form-item) {
-	align-items: center;
-	margin-bottom: 0;
+    align-items: center;
+    margin-bottom: 0;
 }
 
 :deep(.el-form-item__content > .el-input) {
-	--el-input-width: 203px;
+    --el-input-width: 203px;
 }
 
 :deep(.el-form-item__content > .el-select) {
-	--el-select-width: 203px;
+    --el-select-width: 203px;
 }
 </style>

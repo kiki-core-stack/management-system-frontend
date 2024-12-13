@@ -1,5 +1,5 @@
 export interface AdminInfoState {
-	id?: string;
+    id?: string;
 }
 
 export const adminInfoState = reactive<AdminInfoState>({});

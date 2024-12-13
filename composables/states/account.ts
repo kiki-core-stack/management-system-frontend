@@ -1,10 +1,13 @@
 import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
 
 export interface AccountState extends Pick<AdminData, 'twoFactorAuthenticationStatus'> {
-	autoUpdateTwoFactorAuthenticationStatus: boolean;
+    autoUpdateTwoFactorAuthenticationStatus: boolean;
 }
 
 export const accountState = reactive<AccountState>({
-	autoUpdateTwoFactorAuthenticationStatus: true,
-	twoFactorAuthenticationStatus: { emailOTP: false, totp: false }
+    autoUpdateTwoFactorAuthenticationStatus: true,
+    twoFactorAuthenticationStatus: {
+        emailOTP: false,
+        totp: false,
+    },
 });

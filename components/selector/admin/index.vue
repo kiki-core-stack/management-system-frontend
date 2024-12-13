@@ -1,7 +1,19 @@
 <template>
-	<el-select :loading="isLoadingData" :remote-method="loadData" :teleported="false" clearable filterable remote>
-		<el-option :key="admin.id" :label="admin.account" :value="admin.id" v-for="admin in admins" />
-	</el-select>
+    <el-select
+        :loading="isLoadingData"
+        :remote-method="loadData"
+        :teleported="false"
+        clearable
+        filterable
+        remote
+    >
+        <el-option
+            v-for="admin in admins"
+            :key="admin.id"
+            :label="admin.account"
+            :value="admin.id"
+        />
+    </el-select>
 </template>
 
 <script lang="ts" setup>
@@ -15,15 +27,15 @@ const isLoadingData = ref(true);
 
 // Functions
 async function loadData(queryAccount: string) {
-	isLoadingData.value = true;
-	const response = await AdminAPI.getList({
-		filterQuery: { account: { $regex: queryAccount } },
-		limit: 100,
-		selectFields: ['account']
-	});
+    isLoadingData.value = true;
+    const response = await AdminAPI.getList({
+        filterQuery: { account: { $regex: queryAccount } },
+        limit: 100,
+        selectFields: ['account'],
+    });
 
-	admins.length = 0;
-	admins.push(...(response?.data.data?.list || []));
-	isLoadingData.value = false;
+    admins.length = 0;
+    admins.push(...response?.data.data?.list || []);
+    isLoadingData.value = false;
 }
 </script>

@@ -1,24 +1,41 @@
 <template>
-	<div id="header-tabs" class="flex bg-color-e0e0e0 dark:bg-color-4a4a4a fs-14px overflow-auto">
-		<NuxtLink class="relative" active-class="active" to="/" @auxclick.middle.prevent @click.middle.prevent>
-			<i class="fa-solid fa-house"></i>
-		</NuxtLink>
-		<NuxtLink
-			class="relative flex items-center whitespace-nowrap"
-			active-class="active"
-			:to="tab.url"
-			@auxclick.middle.prevent="tabsController.close(index)"
-			@click.right.prevent="showContextMenu($event, index)"
-			@click.middle.prevent
-			v-for="(tab, index) in tabsController.tabs"
-		>
-			{{ tab.title }}
-			<div class="ml-2 flex-middle close-xmark" @click.prevent="tabsController.close(index)">
-				<icon-xmark />
-			</div>
-		</NuxtLink>
-	</div>
-	<ContextMenu ref="contextMenuRef" class="fs-14px" :model="contextMenuItems as MenuItem[]" />
+    <div
+        id="header-tabs"
+        class="bg-color-e0e0e0 dark:bg-color-4a4a4a fs-14px flex overflow-auto"
+    >
+        <NuxtLink
+            class="relative"
+            active-class="active"
+            to="/"
+            @auxclick.middle.prevent
+            @click.middle.prevent
+        >
+            <i class="fa-solid fa-house" />
+        </NuxtLink>
+        <NuxtLink
+            v-for="(tab, index) in tabsController.tabs"
+            :key="index"
+            class="relative flex items-center whitespace-nowrap"
+            active-class="active"
+            :to="tab.url"
+            @auxclick.middle.prevent="tabsController.close(index)"
+            @click.right.prevent="showContextMenu($event, index)"
+            @click.middle.prevent
+        >
+            {{ tab.title }}
+            <div
+                class="flex-middle close-xmark ml-2"
+                @click.prevent="tabsController.close(index)"
+            >
+                <icon-xmark />
+            </div>
+        </NuxtLink>
+    </div>
+    <ContextMenu
+        ref="contextMenuRef"
+        class="fs-14px"
+        :model="contextMenuItems as MenuItem[]"
+    />
 </template>
 
 <script lang="ts" setup>
@@ -27,10 +44,19 @@ import type { MenuItem } from 'primevue/menuitem';
 
 // Variables
 const contextMenuAtTabIndex = ref(0);
-const contextMenuItems = Object.freeze(<MenuItem[]>[
-	{ command: () => tabsController.closeAll(), label: '關閉全部' },
-	{ command: () => tabsController.closeFromIndexTo(contextMenuAtTabIndex.value - 1, 0), label: '關閉左邊所有' },
-	{ command: () => tabsController.closeFromIndexTo(contextMenuAtTabIndex.value + 1, 1024), label: '關閉右邊所有' }
+const contextMenuItems = Object.freeze<MenuItem>([
+    {
+        command: () => tabsController.closeAll(),
+        label: '關閉全部',
+    },
+    {
+        command: () => tabsController.closeFromIndexTo(contextMenuAtTabIndex.value - 1, 0),
+        label: '關閉左邊所有',
+    },
+    {
+        command: () => tabsController.closeFromIndexTo(contextMenuAtTabIndex.value + 1, 1024),
+        label: '關閉右邊所有',
+    },
 ]);
 
 const contextMenuRef = ref<Nullable<InstanceType<typeof ContextMenu>>>(null);
@@ -38,18 +64,23 @@ const route = useRoute();
 
 // Functions
 function showContextMenu(event: Event, index: number) {
-	contextMenuAtTabIndex.value = index;
-	contextMenuRef.value?.show(event);
+    contextMenuAtTabIndex.value = index;
+    contextMenuRef.value?.show(event);
 }
 
 // Watches
 watch(
-	() => route.fullPath,
-	() =>
-		setTimeout(
-			() => document.querySelector('#header-tabs .active')?.scrollIntoView({ behavior: 'smooth', inline: 'center' }),
-			50
-		)
+    () => route.fullPath,
+    () => {
+        setTimeout(
+            () => document.querySelector('#header-tabs .active')?.scrollIntoView({
+                behavior: 'smooth',
+                inline: 'center',
+            }),
+            50,
+        );
+    },
+
 );
 </script>
 
@@ -61,89 +92,89 @@ $light-hover-bg: #ededed;
 $box-shadow-size: 30px;
 
 #header-tabs {
-	padding: 5px 15px 0;
+    padding: 5px 15px 0;
 }
 
 a {
-	background-color: transparent;
-	border-radius: 12px 12px 0 0;
-	padding: 6px 15px;
-	transition: 0.1s ease;
+    background-color: transparent;
+    border-radius: 12px 12px 0 0;
+    padding: 6px 15px;
+    transition: 0.1s ease;
 
-	&:hover {
-		background-color: $light-hover-bg;
+    &:hover {
+        background-color: $light-hover-bg;
 
-		&::after,
-		&::before {
-			box-shadow: 0 0 0 $box-shadow-size $light-hover-bg;
-		}
-	}
+        &::after,
+        &::before {
+            box-shadow: 0 0 0 $box-shadow-size $light-hover-bg;
+        }
+    }
 
-	&::after,
-	&::before {
-		border-radius: 100%;
-		bottom: 0;
-		box-shadow: 0 0 0 40px transparent;
-		content: '';
-		height: 20px;
-		position: absolute;
-		transition: 0.1s ease;
-		width: 20px;
-	}
+    &::after,
+    &::before {
+        border-radius: 100%;
+        bottom: 0;
+        box-shadow: 0 0 0 40px transparent;
+        content: '';
+        height: 20px;
+        position: absolute;
+        transition: 0.1s ease;
+        width: 20px;
+    }
 
-	&::after {
-		clip-path: inset(50% 50% 0 -10px);
-		right: -20px;
-	}
+    &::after {
+        clip-path: inset(50% 50% 0 -10px);
+        right: -20px;
+    }
 
-	&::before {
-		clip-path: inset(50% -10px 0 50%);
-		left: -20px;
-	}
+    &::before {
+        clip-path: inset(50% -10px 0 50%);
+        left: -20px;
+    }
 
-	&.active {
-		background-color: $light-active-bg;
-		z-index: 1000;
+    &.active {
+        background-color: $light-active-bg;
+        z-index: 1000;
 
-		&::after,
-		&::before {
-			box-shadow: 0 0 0 $box-shadow-size $light-active-bg;
-		}
-	}
+        &::after,
+        &::before {
+            box-shadow: 0 0 0 $box-shadow-size $light-active-bg;
+        }
+    }
 
-	html.dark & {
-		&:hover {
-			background-color: $dark-hover-bg;
+    html.dark & {
+        &:hover {
+            background-color: $dark-hover-bg;
 
-			&::after,
-			&::before {
-				box-shadow: 0 0 0 $box-shadow-size $dark-hover-bg;
-			}
-		}
+            &::after,
+            &::before {
+                box-shadow: 0 0 0 $box-shadow-size $dark-hover-bg;
+            }
+        }
 
-		&.active {
-			background-color: $dark-active-bg;
+        &.active {
+            background-color: $dark-active-bg;
 
-			&::after,
-			&::before {
-				box-shadow: 0 0 0 $box-shadow-size $dark-active-bg;
-			}
-		}
+            &::after,
+            &::before {
+                box-shadow: 0 0 0 $box-shadow-size $dark-active-bg;
+            }
+        }
 
-		.close-xmark:hover {
-			background-color: #4a4a4a;
-		}
-	}
+        .close-xmark:hover {
+            background-color: #4a4a4a;
+        }
+    }
 
-	.close-xmark {
-		border-radius: 50%;
-		height: 16px;
-		transition: background-color 0.2s;
-		width: 16px;
+    .close-xmark {
+        border-radius: 50%;
+        height: 16px;
+        transition: background-color 0.2s;
+        width: 16px;
 
-		&:hover {
-			background-color: #e0e0e0;
-		}
-	}
+        &:hover {
+            background-color: #e0e0e0;
+        }
+    }
 }
 </style>

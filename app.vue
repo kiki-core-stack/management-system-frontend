@@ -1,10 +1,10 @@
 <template>
-	<NuxtLoadingIndicator />
-	<el-config-provider :locale="zhTw">
-		<NuxtLayout>
-			<NuxtPage></NuxtPage>
-		</NuxtLayout>
-	</el-config-provider>
+    <NuxtLoadingIndicator />
+    <el-config-provider :locale="zhTw">
+        <NuxtLayout>
+            <NuxtPage />
+        </NuxtLayout>
+    </el-config-provider>
 </template>
 
 <script setup>

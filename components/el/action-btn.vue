@@ -1,5 +1,8 @@
 <template>
-	<el-button size="small" type="primary">
-		<slot></slot>
-	</el-button>
+    <el-button
+        size="small"
+        type="primary"
+    >
+        <slot />
+    </el-button>
 </template>

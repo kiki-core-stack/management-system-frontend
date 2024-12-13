@@ -1,6 +1,6 @@
 {
-  "private": true,
   "type": "module",
+  "private": true,
   "scripts": {
     "build": "cross-env NODE_ENV=production nuxt build --dotenv ./.env.production.local",
     "dev": "cross-env NODE_ENV=development nuxt dev --dotenv ./.env.development.local",
@@ -25,5 +25,11 @@
     "@kikiutils/mongoose": "2.1.2",
     "@primevue/nuxt-module": "^4.2.5",
     "cross-env": "^7.0.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "typescript": "~5.6.0",
+      "vue-tsc": "~2.0.0"
+    }
   }
 }

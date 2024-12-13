@@ -1,6 +1,6 @@
-export const init = () => {
-	if (!adminInfoState.id) return;
-	tabsController.load();
-};
+export function init() {
+    if (!adminInfoState.id) return;
+    tabsController.load();
+}
 
 export default defineNuxtPlugin(() => init());

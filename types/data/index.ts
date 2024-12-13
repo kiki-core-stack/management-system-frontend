@@ -1,10 +1,10 @@
 export type {} from '@kiki-core-stack/pack/types/data';
 
 declare global {
-	type TablePageFormData<T extends {}, O extends keyof T = never> = Required<OmitMongooseTimestampAndOtherFields<T, O>>;
+    type TablePageFormData<T extends object, O extends keyof T = never> = Required<OmitMongooseTimestampAndOtherFields<T, O>>;
 
-	interface BaseFilterQueryFormData {
-		endAt: Date | number | string;
-		startAt: Date | number | string;
-	}
+    interface BaseFilterQueryFormData {
+        endAt: Date | number | string;
+        startAt: Date | number | string;
+    }
 }
