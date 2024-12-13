@@ -14,16 +14,16 @@
     "@element-plus/nuxt": "^1.1.0",
     "@kiki-core-stack/pack": "^0.42.2",
     "@kikiutils/nuxt": "2.0.0-rc.21",
-    "@primevue/themes": "^4.2.4",
+    "@primevue/themes": "^4.2.5",
     "nuxt": "^3.14.1592",
-    "primevue": "^4.2.4",
+    "primevue": "^4.2.5",
     "qrcode.vue": "^3.6.0",
     "sweetalert2": "^11.14.5"
   },
   "devDependencies": {
-    "@kikiutils/mongoose": "2.1.1",
-    "@kikiutils/eslint-config": "^0.7.0",
-    "@primevue/nuxt-module": "^4.2.4",
+    "@kikiutils/eslint-config": "^0.7.2",
+    "@kikiutils/mongoose": "2.1.2",
+    "@primevue/nuxt-module": "^4.2.5",
     "cross-env": "^7.0.3"
   }
 }
