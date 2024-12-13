@@ -21,10 +21,13 @@ export const commonFormRules = {
     account: [createElFormItemRule('請輸入帳號')],
     email: {
         nonRequired: [
-            createElFormItemRule('請輸入正確的Email', {
-                required: false,
-                type: 'email',
-            }),
+            createElFormItemRule(
+                '請輸入正確的Email',
+                {
+                    required: false,
+                    type: 'email',
+                },
+            ),
         ],
         required: [
             createElFormItemRule('請輸入Email'),
@@ -34,9 +37,12 @@ export const commonFormRules = {
     name: [createElFormItemRule('請輸入名稱')],
     otpCode: [
         createElFormItemRule('請輸入OTP驗證碼'),
-        createElFormItemRule('OTP驗證碼必須為六位數字', {
-            pattern: /^\d{6}$/,
-            type: 'regexp',
-        }),
+        createElFormItemRule(
+            'OTP驗證碼必須為六位數字',
+            {
+                pattern: /^\d{6}$/,
+                type: 'regexp',
+            },
+        ),
     ],
 };

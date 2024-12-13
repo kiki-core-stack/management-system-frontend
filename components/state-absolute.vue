@@ -38,11 +38,14 @@ interface Props {
 }
 
 // Emits and props
-const props = withDefaults(defineProps<Props>(), {
-    errorText: '載入失敗！',
-    loadingText: '載入中...',
-    successText: '載入成功！',
-});
+const props = withDefaults(
+    defineProps<Props>(),
+    {
+        errorText: '載入失敗！',
+        loadingText: '載入中...',
+        successText: '載入成功！',
+    },
+);
 
 // Computed properties
 const stateText = computed(() => {

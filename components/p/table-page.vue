@@ -218,11 +218,14 @@ interface Props<ControlRowBtnFunction extends (rowData: any) => boolean = (rowDa
 }
 
 // Emits and props
-const props = withDefaults(defineProps<Props>(), {
-    askDeleteRowMessageRender: (rowData: any) => `確定要刪除 ${rowData.name} 嗎？`,
-    formData: () => ({ id: '' }),
-    formRules: () => ({}),
-});
+const props = withDefaults(
+    defineProps<Props>(),
+    {
+        askDeleteRowMessageRender: (rowData: any) => `確定要刪除 ${rowData.name} 嗎？`,
+        formData: () => ({ id: '' }),
+        formRules: () => ({}),
+    },
+);
 
 defineEmits(['dialogOpen']);
 
@@ -314,27 +317,30 @@ function setupAutoReloadData() {
 }
 
 function showAskDeleteRowMessageBox(data: TableRowData) {
-    ElMessageBox.confirm(props.askDeleteRowMessageRender(data), {
-        autofocus: false,
-        async beforeClose(action, instance, done) {
-            if (instance.confirmButtonLoading) return;
-            else if (action !== 'confirm') return done();
-            instance.showCancelButton = !(instance.confirmButtonLoading = true);
-            instance.confirmButtonText = '刪除中...';
-            const response = await props.crudApiClass.delete(data.id);
-            if (response?.data.success) {
-                done();
-                ElNotification.success('刪除成功！');
-                await loadData();
-            } else {
-                instance.showCancelButton = !(instance.confirmButtonLoading = false);
-                instance.confirmButtonText = '確定';
-            }
+    ElMessageBox.confirm(
+        props.askDeleteRowMessageRender(data),
+        {
+            autofocus: false,
+            async beforeClose(action, instance, done) {
+                if (instance.confirmButtonLoading) return;
+                else if (action !== 'confirm') return done();
+                instance.showCancelButton = !(instance.confirmButtonLoading = true);
+                instance.confirmButtonText = '刪除中...';
+                const response = await props.crudApiClass.delete(data.id);
+                if (response?.data.success) {
+                    done();
+                    ElNotification.success('刪除成功！');
+                    await loadData();
+                } else {
+                    instance.showCancelButton = !(instance.confirmButtonLoading = false);
+                    instance.confirmButtonText = '確定';
+                }
+            },
+            confirmButtonClass: 'el-button--danger ml-1!',
+            draggable: true,
+            type: 'warning',
         },
-        confirmButtonClass: 'el-button--danger ml-1!',
-        draggable: true,
-        type: 'warning',
-    });
+    );
 }
 
 // Hooks

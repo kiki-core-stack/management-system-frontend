@@ -22,9 +22,12 @@ interface Props {
 }
 
 // Emits and props
-withDefaults(defineProps<Props>(), {
-    btnSize: 'small',
-    btnText: '操作',
-    btnType: 'primary',
-});
+withDefaults(
+    defineProps<Props>(),
+    {
+        btnSize: 'small',
+        btnText: '操作',
+        btnType: 'primary',
+    },
+);
 </script>

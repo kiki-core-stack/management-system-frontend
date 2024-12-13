@@ -4,10 +4,13 @@ export const AdminAuthAPI = new class {
     readonly #baseURL = '/api/admin/auth';
 
     async login(data: AdminLoginFormData) {
-        return await postAPI<{ isVerCodeIncorrect?: boolean }>(`${this.#baseURL}/login`, {
-            ...data,
-            password: sha3512(data.password),
-        });
+        return await postAPI<{ isVerCodeIncorrect?: boolean }>(
+            `${this.#baseURL}/login`,
+            {
+                ...data,
+                password: sha3512(data.password),
+            },
+        );
     }
 
     async logout() {

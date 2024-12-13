@@ -22,9 +22,12 @@ export abstract class BaseCrudAPI<T extends TableRowData = TableRowData> {
     }
 
     async updateBooleanField(id: string, field: FilteredKeyPath<TableRowData, boolean>, value: boolean) {
-        return await patchAPI(`${this.baseURL}/${id}/boolean-field`, {
-            field,
-            value,
-        });
+        return await patchAPI(
+            `${this.baseURL}/${id}/boolean-field`,
+            {
+                field,
+                value,
+            },
+        );
     }
 }

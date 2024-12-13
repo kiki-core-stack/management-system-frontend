@@ -7,11 +7,14 @@ export async function logout(noAlert: boolean = false) {
     if (!response?.data.success) return !noAlert && showErrorAlert('登出失敗！');
     setTimeout(() => assignToURLOrNavigateTo('/login', true), 1000);
     if (noAlert) return;
-    showSuccessAlert('登出成功！', {
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        showConfirmButton: false,
-    });
+    showSuccessAlert(
+        '登出成功！',
+        {
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            showConfirmButton: false,
+        },
+    );
 }
 
 export async function updateAdminInfoState() {

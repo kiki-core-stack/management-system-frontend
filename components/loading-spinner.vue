@@ -18,10 +18,13 @@ interface Props {
 }
 
 // Props and emits
-withDefaults(defineProps<Props>(), {
-    borderSize: '0.25rem',
-    color: 'red',
-});
+withDefaults(
+    defineProps<Props>(),
+    {
+        borderSize: '0.25rem',
+        color: 'red',
+    },
+);
 </script>
 
 <style lang="scss" scoped>

@@ -8,12 +8,15 @@ export const ProfileSecurityAPI = new class {
     readonly #baseURL = '/api/profile/security';
 
     async changePassword(data: ProfileSecurityChangePasswordFormData) {
-        return await patchAPI(`${this.#baseURL}/password`, {
-            ...data,
-            conformPassword: sha3512(data.conformPassword),
-            newPassword: sha3512(data.newPassword),
-            oldPassword: sha3512(data.oldPassword),
-        });
+        return await patchAPI(
+            `${this.#baseURL}/password`,
+            {
+                ...data,
+                conformPassword: sha3512(data.conformPassword),
+                newPassword: sha3512(data.newPassword),
+                oldPassword: sha3512(data.oldPassword),
+            },
+        );
     }
 
     async getTOTPSecret() {
