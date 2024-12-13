@@ -5,6 +5,8 @@
     "build": "cross-env NODE_ENV=production nuxt build --dotenv ./.env.production.local",
     "dev": "cross-env NODE_ENV=development nuxt dev --dotenv ./.env.development.local",
     "generate": "cross-env NODE_ENV=production nuxt generate --dotenv ./.env.production.local",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "postinstall": "nuxt prepare",
     "preview": "nuxt preview"
   },
