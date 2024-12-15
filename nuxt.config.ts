@@ -1,5 +1,4 @@
 import primevueAuraTheme from '@primevue/themes/aura';
-import { env } from 'node:process';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -20,8 +19,8 @@ export default defineNuxtConfig({
     compatibilityDate: '2100-01-01',
     css: ['@/assets/scss/index.scss'],
     devServer: {
-        host: env.DEV_SERVER_HOST,
-        port: Number(env.DEV_SERVER_PORT) || undefined,
+        host: process.env.DEV_SERVER_HOST,
+        port: Number(process.env.DEV_SERVER_PORT) || undefined,
     },
     kikiutilsNuxt: {
         enabledComposables: { axios: false },
