@@ -55,18 +55,17 @@ export const tabsController = new class TabsController {
 
     load() {
         try {
-            const tabs: TabData[] = JSON.parse(window.localStorage.getItem('tabs') || '[]');
+            const tabs = localStorageController.tabs.getJSONOrDefault<TabData[]>([]);
             tabs.forEach((tabData) => {
-                // eslint-disable-next-line unicorn/error-message
-                if (!tabData.title || !tabData.url) throw new Error();
-                this.tabs.push(tabData);
+                if (tabData.title && tabData.url) this.tabs.push(tabData);
             });
         } catch {
             this.tabs.length = 0;
+            this.save();
         }
     }
 
     save() {
-        window.localStorage.setItem('tabs', JSON.stringify(this.tabs));
+        localStorageController.tabs.setJSON(this.tabs);
     }
 }();
