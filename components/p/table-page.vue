@@ -209,6 +209,7 @@ import type { BaseCrudAPI } from '@/apis/base';
 interface Props<ControlRowBtnFunction extends (rowData: any) => boolean = (rowData: any) => boolean> {
     addDataBtnText?: string;
     askDeleteRowMessageRender?: (rowData: any) => string;
+    beforeDialogOpen?: (data?: any) => void;
     columnTotalsFooterColspan?: number;
     crudApiClass: BaseCrudAPI;
     dialogTitleSuffix?: string;
@@ -285,6 +286,7 @@ async function loadData() {
 
 function openDialog(rowData?: TableRowData) {
     formRef.value?.resetFields();
+    props.beforeDialogOpen?.(rowData);
     isDialogOpen.value = true;
     isEditing.value = rowData !== undefined;
     setTimeout(() => setFormDataValues(rowData || defaultFormData, props.formData));
