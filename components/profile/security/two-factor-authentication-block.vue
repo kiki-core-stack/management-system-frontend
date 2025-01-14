@@ -60,6 +60,7 @@
                 </div>
             </div>
             <two-factor-authentication-code-inputs
+                email-otp-code-type="adminToggleTwoFactorAuthenticationStatus"
                 :force-enabled-fields="[toToggleMethod]"
                 :form-data="formData"
             />

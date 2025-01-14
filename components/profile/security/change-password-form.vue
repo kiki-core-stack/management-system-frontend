@@ -33,7 +33,10 @@
             prop="conformPassword"
             type="password"
         />
-        <two-factor-authentication-code-inputs :form-data="formData" />
+        <two-factor-authentication-code-inputs
+            email-otp-code-type="adminChangePassword"
+            :form-data="formData"
+        />
         <div class="flex-middle gap-btns">
             <el-button @click="clearChangePasswordForm">
                 清空

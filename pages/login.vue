@@ -29,6 +29,7 @@
         />
         <two-factor-authentication-code-inputs
             ref="twoFactorAuthenticationCodeInputsRef"
+            email-otp-code-type="adminLogin"
             :form-data="formData"
         />
         <div class="flex items-center">

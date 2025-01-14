@@ -50,9 +50,11 @@
 </template>
 
 <script lang="ts" setup>
-import { sendEmailOTPCodeCoolingSeconds } from '@kiki-core-stack/pack/constants/two-factor-authentication';
+import { sendEmailOTPCodeCoolingSeconds } from '@kiki-core-stack/pack/constants/otp';
+import type { EmailOTPCodeType } from '@kiki-core-stack/pack/types/otp';
 
 interface Props {
+    emailOtpCodeType: EmailOTPCodeType;
     forceEnabledFields?: TwoFactorAuthenticationMethod[];
     formData: TwoFactorAuthenticationCodesData;
 }
@@ -94,7 +96,7 @@ async function sendEmailOTPCode() {
     if (sendEmailOTPCodeState.state.loading) return;
     clearIntervalRef(sendEmailOTPCodeCoolingInterval);
     sendEmailOTPCodeState.state.loading = true;
-    const response = await postAPI('/api/admin/auth/otp/email/send');
+    const response = await postAPI('/api/send-email-otp-code', { type: props.emailOtpCodeType });
     sendEmailOTPCodeState.reset();
     sendEmailOTPCodeState.state.loading = false;
     if (!response?.data.success) return sendEmailOTPCodeState.state.error = true;
