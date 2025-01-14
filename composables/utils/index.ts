@@ -1,6 +1,6 @@
 import type { BaseCrudAPI } from '@/apis/base';
 
-export * from '@kiki-core-stack/pack/utils/api-requests';
+export * from '@kiki-core-stack/pack/libs/api-requests';
 export { flattenToSingleValue } from '@kikiutils/node';
 export {
     getEnumNumberValues,
