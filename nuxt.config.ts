@@ -57,6 +57,9 @@ export default defineNuxtConfig({
                 },
             },
         },
-        server: { hmr: { protocol: process.env.DEV_VITE_SERVER_HMR_PROTOCOL } },
+        server: {
+            allowedHosts: (process.env.DEV_VITE_SERVER_ALLOWED_HOSTS || '').split(','),
+            hmr: { protocol: process.env.DEV_VITE_SERVER_HMR_PROTOCOL },
+        },
     },
 });
