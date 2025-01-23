@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:labs
+
 # Build stage
 FROM kikikanri/node22:base-alpine AS build-stage
 
@@ -13,7 +15,7 @@ COPY ./.npmrc ./package.json ./pnpm-lock.yaml ./
 RUN --mount=id=pnpm-store,target=/pnpm/store,type=cache pnpm i --frozen-lockfile --prod=false
 
 ## Copy files and generate
-COPY ./ ./
+COPY --exclude=./docker-entrypoint.sh ./ ./
 RUN pnpm run lint && pnpm run generate
 
 # Runtime stage
