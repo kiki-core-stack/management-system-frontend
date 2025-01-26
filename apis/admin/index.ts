@@ -12,7 +12,8 @@ export const AdminAPI = new class extends BaseCrudAPI<AdminData> {
     override async save(data: AdminData) {
         data = cloneDeep(data);
         if (!data.email?.trim()) delete data.email;
-        data.password ? data.password = sha3512(data.password) : delete data.password;
+        if (data.password) data.password = sha3512(data.password);
+        else delete data.password;
         return await super.save(data);
     }
 }();

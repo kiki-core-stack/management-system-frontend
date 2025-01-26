@@ -99,7 +99,11 @@ async function sendEmailOTPCode() {
     const response = await postAPI('/api/send-email-otp-code', { type: props.emailOtpCodeType });
     sendEmailOTPCodeState.reset();
     sendEmailOTPCodeState.state.loading = false;
-    if (!response?.data.success) return sendEmailOTPCodeState.state.error = true;
+    if (!response?.data.success) {
+        sendEmailOTPCodeState.state.error = true;
+        return;
+    }
+
     sendEmailOTPCodeState.state.success = true;
     sendEmailOTPCodeCoolingSecondsRef.value = sendEmailOTPCodeCoolingSeconds + 1;
     sendEmailOTPCodeCoolingInterval.value = setInterval(() => {

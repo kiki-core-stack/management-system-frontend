@@ -40,7 +40,14 @@ export const tabsController = new class TabsController {
     }
 
     ensure(title: string, url: string, insertIndex?: number) {
-        for (const tabData of this.tabs) if (tabData.url === url) return (tabData.title = title) && navigateTo(url);
+        for (const tabData of this.tabs) {
+            if (tabData.url === url) {
+                navigateTo(url);
+                tabData.title = title;
+                return;
+            }
+        }
+
         this.tabs.splice(
             insertIndex || this.tabs.length,
             0,

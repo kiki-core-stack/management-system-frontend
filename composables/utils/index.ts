@@ -28,8 +28,9 @@ export function askToggleBooleanFieldMessageBox<RD extends TableRowData, F exten
             async beforeClose(action, instance, done) {
                 if (instance.confirmButtonLoading) return;
                 else if (action !== 'confirm') return done();
-                instance.showCancelButton = !(instance.confirmButtonLoading = true);
+                instance.confirmButtonLoading = true;
                 instance.confirmButtonText = `${actionText}中...`;
+                instance.showCancelButton = false;
                 // @ts-expect-error Ignore this error.
                 const response = await apiClass.updateBooleanField(rowData.id, field, !lodashGet(rowData, field));
                 if (response?.data.success) {
@@ -37,8 +38,9 @@ export function askToggleBooleanFieldMessageBox<RD extends TableRowData, F exten
                     ElNotification.success(`已${actionText}${entityLabel} ${entityName} 的${fieldText}狀態！`);
                     await pTablePageRef.value?.loadData();
                 } else {
-                    instance.showCancelButton = !(instance.confirmButtonLoading = false);
+                    instance.confirmButtonLoading = false;
                     instance.confirmButtonText = '確定';
+                    instance.showCancelButton = true;
                 }
             },
             confirmButtonClass: 'ml-1!',

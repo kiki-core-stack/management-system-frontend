@@ -124,9 +124,11 @@ async function toggleStatus() {
     if (toggleState.loading) return;
     await formRef.value?.validate(async (valid) => {
         if (!valid) return;
-        accountState.autoUpdateTwoFactorAuthenticationStatus = !(toggleState.loading = true);
+        accountState.autoUpdateTwoFactorAuthenticationStatus = false;
+        toggleState.loading = true;
         const response = await ProfileSecurityAPI.toggleTwoFactorAuthenticationStatus(toToggleMethod.value, formData);
-        accountState.autoUpdateTwoFactorAuthenticationStatus = !(toggleState.loading = false);
+        accountState.autoUpdateTwoFactorAuthenticationStatus = true;
+        toggleState.loading = false;
         if (!response?.data.success) return;
         ElNotification.success('切換成功！');
         isDialogOpen.value = false;

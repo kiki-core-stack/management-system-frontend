@@ -45,6 +45,7 @@
             />
             <img
                 class="ml-2 cursor-pointer"
+                alt="刷新驗證碼"
                 height="50"
                 width="150"
                 :src="verCodeSrc"

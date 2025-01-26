@@ -342,16 +342,18 @@ function showAskDeleteRowMessageBox(data: TableRowData) {
             async beforeClose(action, instance, done) {
                 if (instance.confirmButtonLoading) return;
                 else if (action !== 'confirm') return done();
-                instance.showCancelButton = !(instance.confirmButtonLoading = true);
+                instance.confirmButtonLoading = true;
                 instance.confirmButtonText = '刪除中...';
+                instance.showCancelButton = false;
                 const response = await props.crudApiClass.delete(data.id);
                 if (response?.data.success) {
                     done();
                     ElNotification.success('刪除成功！');
                     await loadData();
                 } else {
-                    instance.showCancelButton = !(instance.confirmButtonLoading = false);
+                    instance.confirmButtonLoading = false;
                     instance.confirmButtonText = '確定';
+                    instance.showCancelButton = true;
                 }
             },
             confirmButtonClass: 'el-button--danger ml-1!',
