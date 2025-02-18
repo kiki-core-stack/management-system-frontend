@@ -28,5 +28,12 @@
     "@kikiutils/mongoose": "2.1.4",
     "@primevue/nuxt-module": "^4.2.5",
     "cross-env": "^7.0.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild",
+      "vue-demi"
+    ]
   }
 }
