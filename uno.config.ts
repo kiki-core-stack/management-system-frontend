@@ -4,33 +4,21 @@ export default defineConfig({
     rules: [
         [
             /^bg-color-([a-z\d]+)$/,
-            ([
-                _,
-                value,
-            ]) => ({ 'background-color': `#${value}` }),
+            (matches) => ({ 'background-color': `#${matches[1]}` }),
         ],
         [
             /^color-([a-z\d]+)$/,
-            ([
-                _,
-                value,
-            ]) => ({ color: `#${value}` }),
+            (matches) => ({ color: `#${matches[1]}` }),
         ],
         [
             /^fs-(\d+px)$/,
-            ([
-                _,
-                value,
-            ]) => ({ 'font-size': value }),
+            (matches) => ({ 'font-size': matches[1] }),
         ],
         [
             /^minww-(\d+px)$/,
-            ([
-                _,
-                value,
-            ]) => ({
-                'min-width': value,
-                'width': value,
+            (matches) => ({
+                'min-width': matches[1],
+                'width': matches[1],
             }),
         ],
     ],
