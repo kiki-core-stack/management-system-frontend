@@ -43,7 +43,7 @@ const props = defineProps<Props>();
 const emit = defineEmits(['update:modelValue']);
 
 // Variables
-const attrs = useAttrs();
+const attrs: Record<string, unknown> = useAttrs();
 const elInputRef = ref<ElInputRef>(null);
 const inputValue = ref(props.modelValue);
 
@@ -57,7 +57,6 @@ const inputAttrs = computed(() => {
         rules,
         ...otherAttrs
     } = attrs;
-
     return otherAttrs;
 });
 

@@ -20,7 +20,7 @@ const props = defineProps<Props>();
 const emit = defineEmits(['update:modelValue']);
 
 // Variables
-const attrs = useAttrs();
+const attrs: Record<string, unknown> = useAttrs();
 const switchValue = ref(props.modelValue);
 
 // Computed properties
@@ -32,7 +32,6 @@ const switchAttrs = computed(() => {
         prop,
         ...otherAttrs
     } = attrs;
-
     return otherAttrs;
 });
 
