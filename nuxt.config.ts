@@ -5,12 +5,6 @@ export default defineNuxtConfig({
     app: {
         head: {
             htmlAttrs: { lang: 'zh-Hant-TW' },
-            link: [
-                {
-                    href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css',
-                    rel: 'stylesheet',
-                },
-            ],
             title: '後台管理系統',
             titleTemplate: '%s｜後台管理系統',
         },
