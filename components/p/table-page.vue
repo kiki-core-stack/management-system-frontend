@@ -73,7 +73,7 @@
             <slot name="table" />
             <PColumn
                 v-if="!hideTimestampColumns && !hideCreatedAtColumn"
-                class="minww-155px text-center!"
+                class="w-minw-155px text-center!"
                 header="建立時間"
             >
                 <template #body="{ data }">
@@ -82,7 +82,7 @@
             </PColumn>
             <PColumn
                 v-if="!hideTimestampColumns && !hideUpdatedAtColumn"
-                class="minww-155px text-center!"
+                class="w-minw-155px text-center!"
                 header="更新時間"
             >
                 <template #body="{ data }">
