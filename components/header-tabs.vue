@@ -68,7 +68,7 @@ function showContextMenu(event: Event, index: number) {
     contextMenuRef.value?.show(event);
 }
 
-// Watches
+// Watchers
 watch(
     () => route.fullPath,
     () => {

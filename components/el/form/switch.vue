@@ -35,7 +35,7 @@ const switchAttrs = computed(() => {
     return otherAttrs;
 });
 
-// Watches
+// Watchers
 watch(() => switchValue.value, (nv) => emit('update:modelValue', nv));
 watch(() => props.modelValue, (nv) => switchValue.value = nv);
 </script>

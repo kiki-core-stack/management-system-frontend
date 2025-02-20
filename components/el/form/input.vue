@@ -60,7 +60,7 @@ const inputAttrs = computed(() => {
     return otherAttrs;
 });
 
-// Watches
+// Watchers
 watch(() => inputValue.value, (nv) => emit('update:modelValue', nv));
 watch(() => props.modelValue, (nv) => inputValue.value = nv);
 
