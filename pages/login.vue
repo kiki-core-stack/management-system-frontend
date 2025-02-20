@@ -8,6 +8,7 @@
     <el-form
         ref="formRef"
         class="mt-4"
+        label-width="auto"
         :model="formData"
         :rules="formRules"
         hide-required-asterisk

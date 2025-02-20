@@ -175,6 +175,7 @@
         >
             <el-form
                 ref="formRef"
+                label-width="auto"
                 :model="formData"
                 :rules="formRules"
                 status-icon

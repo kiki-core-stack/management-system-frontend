@@ -32,6 +32,7 @@
         <el-form
             ref="formRef"
             class="fs-16px text-center"
+            label-width="auto"
             :model="formData"
             @submit.prevent="toggleStatus"
         >
