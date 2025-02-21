@@ -17,8 +17,22 @@ export default defineNuxtConfig({
         port: Number(process.env.DEV_SERVER_PORT) || undefined,
     },
     kikiutilsNuxt: {
-        enabledComposables: { axios: false },
-        enabledModules: { elementPlus: true },
+        enabledComposables: {
+            clipboard: true,
+            datetime: true,
+            hash: true,
+        },
+        enabledModules: {
+            colorMode: true,
+            elementPlus: true,
+            googleFonts: true,
+            robots: true,
+            security: true,
+        },
+        enabledStyles: {
+            font: true,
+            scrollbar: true,
+        },
     },
     modules: [
         '@kikiutils/nuxt',
@@ -35,8 +49,6 @@ export default defineNuxtConfig({
             },
         },
     },
-    purgecss: { enabled: false },
-    security: { headers: { contentSecurityPolicy: false } },
     ssr: false,
     vite: {
         build: {
