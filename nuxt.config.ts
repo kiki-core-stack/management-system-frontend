@@ -51,18 +51,6 @@ export default defineNuxtConfig({
     },
     ssr: false,
     vite: {
-        build: {
-            assetsInlineLimit: 0,
-            rollupOptions: {
-                output: {
-                    manualChunks(id) {
-                        if (id.endsWith('.css')) return;
-                        const moduleName = id.match(/\.pnpm\/@?([^@]+)@/)?.[1];
-                        return moduleName?.includes('nuxt') ? 'nuxt' : moduleName;
-                    },
-                },
-            },
-        },
         server: {
             allowedHosts: (process.env.DEV_VITE_SERVER_ALLOWED_HOSTS || '').split(','),
             hmr: { protocol: process.env.DEV_VITE_SERVER_HMR_PROTOCOL },
