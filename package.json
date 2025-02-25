@@ -19,20 +19,20 @@
     "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/robots": "^5.2.4",
-    "@primevue/themes": "^4.2.5",
+    "@primeuix/themes": "^1.0.0",
     "axios": "^1.7.9",
     "copy-to-clipboard": "^3.3.3",
     "date-fns": "^4.1.0",
     "nuxt": "^3.15.4",
     "nuxt-security": "^2.1.5",
-    "primevue": "^4.2.5",
+    "primevue": "^4.3.0",
     "qrcode.vue": "^3.6.0",
     "sweetalert2": "^11.17.2"
   },
   "devDependencies": {
     "@kikiutils/eslint-config": "^0.7.4",
     "@kikiutils/mongoose": "2.1.6",
-    "@primevue/nuxt-module": "^4.2.5",
+    "@primevue/nuxt-module": "^4.3.0",
     "cross-env": "^7.0.3"
   },
   "pnpm": {

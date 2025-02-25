@@ -1,4 +1,4 @@
-import primevueAuraTheme from '@primevue/themes/aura';
+import primevueAuraTheme from '@primeuix/themes/aura';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
