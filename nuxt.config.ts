@@ -49,6 +49,20 @@ export default defineNuxtConfig({
             },
         },
     },
+    security: {
+        headers: {
+            contentSecurityPolicy: {
+                'img-src': [
+                    `'self'`,
+                    'blob:',
+                ],
+                'media-src': [
+                    `'self'`,
+                    'blob:',
+                ],
+            },
+        },
+    },
     ssr: false,
     vite: {
         server: {
