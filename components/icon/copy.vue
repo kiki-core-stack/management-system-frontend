@@ -1,3 +1,3 @@
 <template>
-    <i class="fa-solid fa-copy" />
+    <i class="fa-copy fa-solid" />
 </template>

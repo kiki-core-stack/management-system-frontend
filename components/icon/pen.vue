@@ -1,3 +1,3 @@
 <template>
-    <i class="fa-solid fa-pen" />
+    <i class="fa-pen fa-solid" />
 </template>

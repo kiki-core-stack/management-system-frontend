@@ -1,5 +1,5 @@
 <template>
-    <div class="wh-full bg-color-f5f5f5 dark:bg-color-2c2c2c fixed left-0 top-0 overflow-auto">
+    <div class="bg-color-f5f5f5 dark:bg-color-2c2c2c wh-full fixed left-0 top-0 overflow-auto">
         <div class="min-h-100svh flex flex-col items-center p-4">
             <div
                 id="middle-block"

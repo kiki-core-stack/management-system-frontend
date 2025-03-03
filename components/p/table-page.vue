@@ -4,7 +4,7 @@
     </Head>
     <div
         v-loading="isLoadingData"
-        class="dark:bg-dark rounded-10px  color-mode-transition relative m-4 bg-white p-4"
+        class="color-mode-transition dark:bg-dark  rounded-10px relative m-4 bg-white p-4"
     >
         <slot name="before-table" />
         <DataTable
@@ -73,7 +73,7 @@
             <slot name="table" />
             <PColumn
                 v-if="!hideTimestampColumns && !hideCreatedAtColumn"
-                class="w-minw-155px text-center!"
+                class="text-center! w-minw-155px"
                 header="建立時間"
             >
                 <template #body="{ data }">
@@ -82,7 +82,7 @@
             </PColumn>
             <PColumn
                 v-if="!hideTimestampColumns && !hideUpdatedAtColumn"
-                class="w-minw-155px text-center!"
+                class="text-center! w-minw-155px"
                 header="更新時間"
             >
                 <template #body="{ data }">

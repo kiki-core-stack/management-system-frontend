@@ -1,7 +1,7 @@
 <template>
     <div
         v-if="state?.loading || success || error"
-        class="wh-full flex-middle dark:bg-dark z-10000 absolute left-0 top-0 bg-white opacity-85"
+        class="dark:bg-dark flex-middle wh-full z-10000 absolute left-0 top-0 bg-white opacity-85"
     >
         <div class="text-center">
             <icon-xmark

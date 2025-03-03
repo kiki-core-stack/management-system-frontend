@@ -23,7 +23,7 @@
                     v-if="enableCopyBtn"
                     @click="copyTextToClipboardAndShowMessage(inputValue)"
                 >
-                    <i class="fa-solid fa-copy" />
+                    <i class="fa-copy fa-solid" />
                 </el-button>
             </template>
         </el-input>

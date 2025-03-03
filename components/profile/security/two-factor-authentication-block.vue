@@ -1,7 +1,7 @@
 <template>
     <div
         v-loading="isLoadingData"
-        class="dark:bg-dark rounded-10px color-mode-transition relative w-full overflow-auto bg-white p-4"
+        class="color-mode-transition dark:bg-dark rounded-10px relative w-full overflow-auto bg-white p-4"
     >
         <p class="fs-20px mb-4 text-center">
             二階段驗證
@@ -46,7 +46,7 @@
                 >
                     <p>請使用TOTP應用程式(例如Google Authenticator)掃描該QRCode或自行輸入設定金鑰獲取驗證碼</p>
                     <QRCodeVue
-                        class="max-w-250px! w-full! h-auto! rounded-3 mt-4 bg-white p-3"
+                        class="h-auto! max-w-250px! rounded-3 w-full! mt-4 bg-white p-3"
                         level="L"
                         render-as="svg"
                         :value="decodeURI(totpSecretData.url)"

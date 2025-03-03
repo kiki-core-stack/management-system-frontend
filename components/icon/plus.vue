@@ -1,3 +1,3 @@
 <template>
-    <i class="fa-solid fa-plus" />
+    <i class="fa-plus fa-solid" />
 </template>

@@ -1,5 +1,5 @@
 <template>
-    <div class="wh-full bg-color-f5f5f5 dark:bg-color-2c2c2c color-mode-transition fixed mt-0 flex p-0">
+    <div class="bg-color-f5f5f5 color-mode-transition dark:bg-color-2c2c2c wh-full fixed mt-0 flex p-0">
         <sidebar />
         <el-drawer
             v-model="mainState.sidebar.isShow"

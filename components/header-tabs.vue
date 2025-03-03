@@ -10,7 +10,7 @@
             @auxclick.middle.prevent
             @click.middle.prevent
         >
-            <i class="fa-solid fa-house" />
+            <i class="fa-house fa-solid" />
         </NuxtLink>
         <NuxtLink
             v-for="(tab, index) in tabsController.tabs"
@@ -24,7 +24,7 @@
         >
             {{ tab.title }}
             <div
-                class="flex-middle close-xmark ml-2"
+                class="close-xmark flex-middle ml-2"
                 @click.prevent="tabsController.close(index)"
             >
                 <icon-xmark />
