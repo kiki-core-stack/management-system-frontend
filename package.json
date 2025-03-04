@@ -1,0 +1,29 @@
+{
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "cross-env NODE_ENV=production nuxt build --dotenv ./.env.production.local",
+    "dev": "cross-env NODE_ENV=development nuxt dev --dotenv ./.env.development.local",
+    "generate": "cross-env NODE_ENV=production nuxt generate --dotenv ./.env.production.local",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "postinstall": "nuxt prepare",
+    "preview": "nuxt preview"
+  },
+  "dependencies": {
+    "@kikiutils/nuxt": "2.0.1",
+    "@nuxtjs/robots": "^5.2.4",
+    "nuxt": "^3.15.4",
+    "nuxt-security": "^2.1.5"
+  },
+  "devDependencies": {
+    "@kikiutils/eslint-config": "^0.8.2",
+    "cross-env": "^7.0.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild"
+    ]
+  }
+}
