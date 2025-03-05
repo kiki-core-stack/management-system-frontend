@@ -20,6 +20,7 @@ export default defineNuxtConfig({
         },
     },
     modules: ['@kikiutils/nuxt'],
+    postcss: { plugins: { 'postcss-pxtorem': {} } },
     ssr: true,
     vite: {
         server: {
