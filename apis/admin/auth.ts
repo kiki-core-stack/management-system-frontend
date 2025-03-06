@@ -1,11 +1,11 @@
 import type { AdminLoginFormData } from '@kiki-core-stack/pack/types/data/admin';
 
-export const AdminAuthAPI = new class {
-    readonly #baseURL = '/api/admin/auth';
+export const AdminAuthApi = new class {
+    readonly #baseUrl = '/api/admin/auth';
 
     async login(data: AdminLoginFormData) {
-        return await postAPI<{ isVerCodeIncorrect?: boolean }>(
-            `${this.#baseURL}/login`,
+        return await postApi<{ isVerCodeIncorrect?: boolean }>(
+            `${this.#baseUrl}/login`,
             {
                 ...data,
                 password: sha3512(data.password),
@@ -14,6 +14,6 @@ export const AdminAuthAPI = new class {
     }
 
     async logout() {
-        return await postAPI(`${this.#baseURL}/logout`);
+        return await postApi(`${this.#baseUrl}/logout`);
     }
 }();

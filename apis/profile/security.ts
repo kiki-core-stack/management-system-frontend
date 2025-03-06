@@ -1,15 +1,15 @@
 import type {
     ProfileSecurityChangePasswordFormData,
-    ProfileSecurityTOTPSecretData,
+    ProfileSecurityTotpSecretData,
 } from '@kiki-core-stack/pack/types/data/profile';
 import { kebabCase } from 'lodash-es';
 
-export const ProfileSecurityAPI = new class {
-    readonly #baseURL = '/api/profile/security';
+export const ProfileSecurityApi = new class {
+    readonly #baseUrl = '/api/profile/security';
 
     async changePassword(data: ProfileSecurityChangePasswordFormData) {
-        return await patchAPI(
-            `${this.#baseURL}/password`,
+        return await patchApi(
+            `${this.#baseUrl}/password`,
             {
                 ...data,
                 conformPassword: sha3512(data.conformPassword),
@@ -19,11 +19,11 @@ export const ProfileSecurityAPI = new class {
         );
     }
 
-    async getTOTPSecret() {
-        return await getAPI<ProfileSecurityTOTPSecretData>(`${this.#baseURL}/two-factor-status/totp/secret`);
+    async getTotpSecret() {
+        return await getApi<ProfileSecurityTotpSecretData>(`${this.#baseUrl}/two-factor-status/totp/secret`);
     }
 
     async toggleTwoFactorAuthenticationStatus(method: TwoFactorAuthenticationMethod, data: TwoFactorAuthenticationCodesData) {
-        return await patchAPI(`${this.#baseURL}/two-factor-status/${kebabCase(method)}`, data);
+        return await patchApi(`${this.#baseUrl}/two-factor-status/${kebabCase(method)}`, data);
     }
 }();

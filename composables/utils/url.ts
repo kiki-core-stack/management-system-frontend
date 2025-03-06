@@ -1,4 +1,4 @@
-export function assignToURLOrNavigateTo(url: string, addRedirectToNowPathQuery?: boolean) {
+export function assignToUrlOrNavigateTo(url: string, addRedirectToNowPathQuery?: boolean) {
     if (addRedirectToNowPathQuery) {
         const [
             path = '',
@@ -14,7 +14,7 @@ export function assignToURLOrNavigateTo(url: string, addRedirectToNowPathQuery?:
     window.location.assign(url);
 }
 
-export function createObjectURLFromInputElement(inputElement: HTMLInputElement) {
+export function createObjectUrlFromInputElement(inputElement: HTMLInputElement) {
     const files = inputElement.files;
     if (!files?.[0]) return;
     const url = URL.createObjectURL(files[0]);

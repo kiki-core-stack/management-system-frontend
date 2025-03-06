@@ -1,9 +1,9 @@
-import type { BaseCrudAPI } from '@/apis/base';
+import type { BaseCrudApi } from '@/apis/base';
 
 export * from '@kiki-core-stack/pack/libs/api-requests';
 
 export function askToggleBooleanFieldMessageBox<RD extends TableRowData, F extends string, M extends Dict<string>>(
-    apiClass: BaseCrudAPI,
+    apiClass: BaseCrudApi,
     entityLabel: string,
     toTextMap: M,
     entityName: string,

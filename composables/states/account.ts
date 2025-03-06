@@ -7,7 +7,7 @@ export interface AccountState extends Pick<AdminData, 'twoFactorAuthenticationSt
 export const accountState = reactive<AccountState>({
     autoUpdateTwoFactorAuthenticationStatus: true,
     twoFactorAuthenticationStatus: {
-        emailOTP: false,
+        emailOtp: false,
         totp: false,
     },
 });

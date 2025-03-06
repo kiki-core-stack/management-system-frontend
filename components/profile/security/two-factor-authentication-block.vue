@@ -7,9 +7,9 @@
             二階段驗證
         </p>
         <el-form-switch
-            v-model="accountState.twoFactorAuthenticationStatus.emailOTP"
+            v-model="accountState.twoFactorAuthenticationStatus.emailOtp"
             label="Email OTP驗證碼"
-            :before-change="() => beforeSwitchChange('emailOTP')"
+            :before-change="() => beforeSwitchChange('emailOtp')"
         />
         <el-form-switch
             v-model="accountState.twoFactorAuthenticationStatus.totp"
@@ -45,7 +45,7 @@
                     class="flex-middle w-full flex-col"
                 >
                     <p>請使用TOTP應用程式(例如Google Authenticator)掃描該QRCode或自行輸入設定金鑰獲取驗證碼</p>
-                    <QRCodeVue
+                    <QrCodeVue
                         class="h-auto! max-w-250px! rounded-3 w-full! mt-4 bg-white p-3"
                         level="L"
                         render-as="svg"
@@ -80,15 +80,15 @@
 </template>
 
 <script lang="ts" setup>
-import type { ProfileSecurityTOTPSecretData } from '@kiki-core-stack/pack/types/data/profile';
-import QRCodeVue from 'qrcode.vue';
+import type { ProfileSecurityTotpSecretData } from '@kiki-core-stack/pack/types/data/profile';
+import QrCodeVue from 'qrcode.vue';
 
-import { ProfileSecurityAPI } from '@/apis/profile/security';
+import { ProfileSecurityApi } from '@/apis/profile/security';
 
 // Variables
 const { state: toggleState } = createLoadingState();
 const formData = reactive<TwoFactorAuthenticationCodesData>({
-    emailOTPCode: '',
+    emailOtpCode: '',
     totpCode: '',
 });
 
@@ -96,12 +96,12 @@ const formRef = ref<ElFormRef>(null);
 const isDialogOpen = ref(false);
 const isLoadingData = ref(true);
 const methodToTextMap: Record<TwoFactorAuthenticationMethod, string> = {
-    emailOTP: 'Email OTP驗證碼',
+    emailOtp: 'Email OTP驗證碼',
     totp: 'TOTP驗證碼',
 };
 
-const toToggleMethod = ref<TwoFactorAuthenticationMethod>('emailOTP');
-const totpSecretData = reactive<ProfileSecurityTOTPSecretData>({
+const toToggleMethod = ref<TwoFactorAuthenticationMethod>('emailOtp');
+const totpSecretData = reactive<ProfileSecurityTotpSecretData>({
     secret: '',
     url: '',
 });
@@ -116,7 +116,7 @@ function beforeSwitchChange(method: TwoFactorAuthenticationMethod) {
 
 async function loadData() {
     isLoadingData.value = true;
-    const response = await ProfileSecurityAPI.getTOTPSecret();
+    const response = await ProfileSecurityApi.getTotpSecret();
     isLoadingData.value = false;
     if (response?.data.success) clearAndAssignObject(totpSecretData, response.data.data);
 }
@@ -127,7 +127,7 @@ async function toggleStatus() {
         if (!valid) return;
         accountState.autoUpdateTwoFactorAuthenticationStatus = false;
         toggleState.loading = true;
-        const response = await ProfileSecurityAPI.toggleTwoFactorAuthenticationStatus(toToggleMethod.value, formData);
+        const response = await ProfileSecurityApi.toggleTwoFactorAuthenticationStatus(toToggleMethod.value, formData);
         accountState.autoUpdateTwoFactorAuthenticationStatus = true;
         toggleState.loading = false;
         if (!response?.data.success) return;

@@ -205,14 +205,14 @@ import ColumnGroup from 'primevue/columngroup';
 import DataTable from 'primevue/datatable';
 import Row from 'primevue/row';
 
-import type { BaseCrudAPI } from '@/apis/base';
+import type { BaseCrudApi } from '@/apis/base';
 
 interface Props<ControlRowBtnFunction extends (rowData: any) => boolean = (rowData: any) => boolean> {
     addDataBtnText?: string;
     askDeleteRowMessageRender?: (rowData: any) => string;
     beforeDialogOpen?: (data?: any) => void;
     columnTotalsFooterColspan?: number;
-    crudApiClass: BaseCrudAPI;
+    crudApiClass: BaseCrudApi;
     dialogTitleSuffix?: string;
     disableRowDeleteBtnRule?: ControlRowBtnFunction;
     disableRowEditBtnRule?: ControlRowBtnFunction;

@@ -1,60 +1,60 @@
 <template>
     <el-form-input
-        v-show="isEmailOTPEnable"
-        ref="emailOTPCodeFormInputItemRef"
-        v-model="formData.emailOTPCode!"
+        v-show="isEmailOtpEnable"
+        ref="emailOtpCodeFormInputItemRef"
+        v-model="formData.emailOtpCode!"
         label="Email OTP驗證碼"
         maxlength="6"
-        prop="emailOTPCode"
-        :rules="isEmailOTPEnable ? formRules.emailOTPCode : []"
+        prop="emailOtpCode"
+        :rules="isEmailOtpEnable ? formRules.emailOtpCode : []"
         enable-append-slot
     >
         <template #append>
             <el-button
                 type="primary"
                 :disabled="false
-                    || !!sendEmailOTPCodeCoolingSecondsRef
-                    || sendEmailOTPCodeState.state.error
-                    || sendEmailOTPCodeState.state.loading
-                    || sendEmailOTPCodeState.state.success
+                    || !!sendEmailOtpCodeCoolingSecondsRef
+                    || sendEmailOtpCodeState.state.error
+                    || sendEmailOtpCodeState.state.loading
+                    || sendEmailOtpCodeState.state.success
                 "
-                @click="sendEmailOTPCode"
+                @click="sendEmailOtpCode"
             >
                 <icon-xmark
-                    v-if="sendEmailOTPCodeState.state.error"
+                    v-if="sendEmailOtpCodeState.state.error"
                     class="fs-18px text-#dc3545"
                 />
                 <loading-spinner
-                    v-else-if="sendEmailOTPCodeState.state.loading"
+                    v-else-if="sendEmailOtpCodeState.state.loading"
                     border-size="0.125rem"
                     size="1rem"
                 />
                 <icon-check
-                    v-else-if="sendEmailOTPCodeState.state.success"
+                    v-else-if="sendEmailOtpCodeState.state.success"
                     class="fs-18px text-#198754"
                 />
-                <span v-else>{{ sendEmailOTPCodeCoolingSecondsRef || '獲取' }}</span>
+                <span v-else>{{ sendEmailOtpCodeCoolingSecondsRef || '獲取' }}</span>
             </el-button>
         </template>
     </el-form-input>
     <el-form-input
-        v-show="isTOTPEnable"
+        v-show="isTotpEnable"
         ref="totpCodeFormInputItemRef"
         v-model="formData.totpCode!"
         inputmode="tel"
         label="TOTP驗證碼"
         maxlength="6"
         prop="totpCode"
-        :rules="isTOTPEnable ? formRules.totpCode : []"
+        :rules="isTotpEnable ? formRules.totpCode : []"
     />
 </template>
 
 <script lang="ts" setup>
-import { sendEmailOTPCodeCoolingSeconds } from '@kiki-core-stack/pack/constants/otp';
-import type { EmailOTPCodeType } from '@kiki-core-stack/pack/types/otp';
+import { sendEmailOtpCodeCoolingSeconds } from '@kiki-core-stack/pack/constants/otp';
+import type { EmailOtpCodeType } from '@kiki-core-stack/pack/types/otp';
 
 interface Props {
-    emailOtpCodeType: EmailOTPCodeType;
+    emailOtpCodeType: EmailOtpCodeType;
     forceEnabledFields?: TwoFactorAuthenticationMethod[];
     formData: TwoFactorAuthenticationCodesData;
 }
@@ -63,9 +63,9 @@ interface Props {
 const props = defineProps<Props>();
 
 // Variables
-const emailOTPCodeFormInputItemRef = ref<ComponentRef<'ElFormInput'>>(null);
+const emailOtpCodeFormInputItemRef = ref<ComponentRef<'ElFormInput'>>(null);
 const formRules: ElFormRules<TwoFactorAuthenticationCodesData> = {
-    emailOTPCode: [
+    emailOtpCode: [
         createElFormItemRule('請輸入驗證碼'),
         {
             max: 6,
@@ -82,41 +82,41 @@ const formRules: ElFormRules<TwoFactorAuthenticationCodesData> = {
     ],
 };
 
-const sendEmailOTPCodeCoolingInterval = ref<Nullable<NodeJS.Timeout>>(null);
-const sendEmailOTPCodeCoolingSecondsRef = ref(0);
-const sendEmailOTPCodeState = createLoadingState();
+const sendEmailOtpCodeCoolingInterval = ref<Nullable<NodeJS.Timeout>>(null);
+const sendEmailOtpCodeCoolingSecondsRef = ref(0);
+const sendEmailOtpCodeState = createLoadingState();
 const totpCodeFormInputItemRef = ref<ComponentRef<'ElFormInput'>>(null);
 
 // Computed properties
-const isEmailOTPEnable = computed(() => props.forceEnabledFields?.includes('emailOTP') || accountState.twoFactorAuthenticationStatus.emailOTP);
-const isTOTPEnable = computed(() => props.forceEnabledFields?.includes('totp') || accountState.twoFactorAuthenticationStatus.totp);
+const isEmailOtpEnable = computed(() => props.forceEnabledFields?.includes('emailOtp') || accountState.twoFactorAuthenticationStatus.emailOtp);
+const isTotpEnable = computed(() => props.forceEnabledFields?.includes('totp') || accountState.twoFactorAuthenticationStatus.totp);
 
 // Functions
-async function sendEmailOTPCode() {
-    if (sendEmailOTPCodeState.state.loading) return;
-    clearIntervalRef(sendEmailOTPCodeCoolingInterval);
-    sendEmailOTPCodeState.state.loading = true;
-    const response = await postAPI('/api/send-email-otp-code', { type: props.emailOtpCodeType });
-    sendEmailOTPCodeState.reset();
-    sendEmailOTPCodeState.state.loading = false;
+async function sendEmailOtpCode() {
+    if (sendEmailOtpCodeState.state.loading) return;
+    clearIntervalRef(sendEmailOtpCodeCoolingInterval);
+    sendEmailOtpCodeState.state.loading = true;
+    const response = await postApi('/api/send-email-otp-code', { type: props.emailOtpCodeType });
+    sendEmailOtpCodeState.reset();
+    sendEmailOtpCodeState.state.loading = false;
     if (!response?.data.success) {
-        sendEmailOTPCodeState.state.error = true;
+        sendEmailOtpCodeState.state.error = true;
         return;
     }
 
-    sendEmailOTPCodeState.state.success = true;
-    sendEmailOTPCodeCoolingSecondsRef.value = sendEmailOTPCodeCoolingSeconds + 1;
-    sendEmailOTPCodeCoolingInterval.value = setInterval(() => {
-        sendEmailOTPCodeCoolingSecondsRef.value--;
-        if (sendEmailOTPCodeCoolingSecondsRef.value <= 0) clearIntervalRef(sendEmailOTPCodeCoolingInterval);
+    sendEmailOtpCodeState.state.success = true;
+    sendEmailOtpCodeCoolingSecondsRef.value = sendEmailOtpCodeCoolingSeconds + 1;
+    sendEmailOtpCodeCoolingInterval.value = setInterval(() => {
+        sendEmailOtpCodeCoolingSecondsRef.value--;
+        if (sendEmailOtpCodeCoolingSecondsRef.value <= 0) clearIntervalRef(sendEmailOtpCodeCoolingInterval);
     }, 1000);
 }
 
 // Exposes
 defineExpose({
-    focus(field?: 'emailOTPCode' | 'totpCode') {
-        if (field === 'emailOTPCode' || (!field && isEmailOTPEnable.value && !props.formData.emailOTPCode)) emailOTPCodeFormInputItemRef.value?.focus();
-        if (field === 'totpCode' || (!field && isTOTPEnable.value && !props.formData.totpCode)) totpCodeFormInputItemRef.value?.focus();
+    focus(field?: 'emailOtpCode' | 'totpCode') {
+        if (field === 'emailOtpCode' || (!field && isEmailOtpEnable.value && !props.formData.emailOtpCode)) emailOtpCodeFormInputItemRef.value?.focus();
+        if (field === 'totpCode' || (!field && isTotpEnable.value && !props.formData.totpCode)) totpCodeFormInputItemRef.value?.focus();
     },
 });
 </script>

@@ -71,7 +71,7 @@
 import type { AdminLoginFormData } from '@kiki-core-stack/pack/types/data/admin';
 import { mapValues } from 'lodash-es';
 
-import { AdminAuthAPI } from '@/apis/admin/auth';
+import { AdminAuthApi } from '@/apis/admin/auth';
 import { init } from '@/plugins/12.init.client';
 
 definePageMeta({
@@ -84,7 +84,7 @@ const { state: loginState } = createLoadingState();
 const accountInputRef = ref<ElFormInputRef>(null);
 const formData = reactive<AdminLoginFormData>({
     account: '',
-    emailOTPCode: '',
+    emailOtpCode: '',
     password: '',
     totpCode: '',
     verCode: '',
@@ -114,7 +114,7 @@ async function login() {
     await formRef.value?.validate(async (valid) => {
         if (!valid) return;
         loginState.loading = true;
-        const response = await AdminAuthAPI.login(formData);
+        const response = await AdminAuthApi.login(formData);
         if (response?.status === 404) {
             accountInputRef.value?.focus();
             mapValues(accountState.twoFactorAuthenticationStatus, () => false);
@@ -132,7 +132,7 @@ async function login() {
         loginState.loading = false;
         reloadVerCode();
         formRef.value?.resetFields([
-            'emailOTPCode',
+            'emailOtpCode',
             'totpCode',
             'verCode',
         ]);

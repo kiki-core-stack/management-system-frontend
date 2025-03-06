@@ -19,7 +19,7 @@
 <script lang="ts" setup>
 import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
 
-import { AdminAPI } from '@/apis/admin';
+import { AdminApi } from '@/apis/admin';
 
 // Variables
 const admins = reactive<AdminData[]>([]);
@@ -28,7 +28,7 @@ const isLoadingData = ref(true);
 // Functions
 async function loadData(queryAccount: string) {
     isLoadingData.value = true;
-    const response = await AdminAPI.getList({
+    const response = await AdminApi.getList({
         filterQuery: { account: { $regex: queryAccount } },
         limit: 100,
         selectFields: ['account'],

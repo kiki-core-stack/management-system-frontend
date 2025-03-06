@@ -5,7 +5,7 @@
         dialog-title-suffix="管理員"
         title="管理員管理"
         :ask-delete-row-message-render="(rowData: AdminData) => `確定要刪除 ${rowData.account} 嗎？`"
-        :crud-api-class="AdminAPI"
+        :crud-api-class="AdminApi"
         :disable-row-delete-btn-rule="(rowData: AdminData) => rowData.id === adminInfoState.id"
         :form-data="formData"
         :form-rules="formRules"
@@ -44,8 +44,8 @@
                 <template #body="{ data }">
                     <div class="flex-middle">
                         <el-switch
-                            v-model="data.twoFactorAuthenticationStatus.emailOTP"
-                            :before-change="() => showAskToggleBooleanFieldMessageBox(data, 'twoFactorAuthenticationStatus.emailOTP')"
+                            v-model="data.twoFactorAuthenticationStatus.emailOtp"
+                            :before-change="() => showAskToggleBooleanFieldMessageBox(data, 'twoFactorAuthenticationStatus.emailOtp')"
                         />
                     </div>
                 </template>
@@ -102,9 +102,9 @@
                 :disabled="formData.id === adminInfoState.id"
             />
             <el-form-switch
-                v-model="formData.twoFactorAuthenticationStatus.emailOTP"
+                v-model="formData.twoFactorAuthenticationStatus.emailOtp"
                 label="Email OTP驗證"
-                prop="twoFactorAuthenticationStatus.emailOTP"
+                prop="twoFactorAuthenticationStatus.emailOtp"
             />
             <el-form-switch
                 v-model="formData.twoFactorAuthenticationStatus.totp"
@@ -118,12 +118,12 @@
 <script lang="ts" setup>
 import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
 
-import { AdminAPI } from '@/apis/admin';
+import { AdminApi } from '@/apis/admin';
 
 // Variables
 const booleanFieldToTextMap: ReadonlyRecord<FilteredKeyPath<AdminData, boolean>, string> = Object.freeze({
     'enabled': '啟用',
-    'twoFactorAuthenticationStatus.emailOTP': 'Email OTP驗證',
+    'twoFactorAuthenticationStatus.emailOtp': 'Email OTP驗證',
     'twoFactorAuthenticationStatus.totp': 'TOTP驗證',
 });
 
@@ -135,7 +135,7 @@ const formData = reactive<TablePageFormData<AdminData, 'totpSecret'>>({
     name: '',
     password: '',
     twoFactorAuthenticationStatus: {
-        emailOTP: false,
+        emailOtp: false,
         totp: false,
     },
 });
@@ -150,7 +150,7 @@ const pTablePageRef = ref<ComponentRef<'PTablePage'>>(null);
 
 // Functions
 function showAskToggleBooleanFieldMessageBox(rowData: AdminData, field: FilteredKeyPath<AdminData, boolean>) {
-    askToggleBooleanFieldMessageBox(AdminAPI, '管理員', booleanFieldToTextMap, rowData.account, pTablePageRef, rowData, field);
+    askToggleBooleanFieldMessageBox(AdminApi, '管理員', booleanFieldToTextMap, rowData.account, pTablePageRef, rowData, field);
     return false;
 }
 </script>

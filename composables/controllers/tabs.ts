@@ -62,7 +62,7 @@ export const tabsController = new class TabsController {
 
     load() {
         try {
-            const tabs = localStorageController.tabs.getJSONOrDefault<TabData[]>([]);
+            const tabs = localStorageController.tabs.getJsonOrDefault<TabData[]>([]);
             tabs.forEach((tabData) => {
                 if (tabData.title && tabData.url) this.tabs.push(tabData);
             });
@@ -73,6 +73,6 @@ export const tabsController = new class TabsController {
     }
 
     save() {
-        localStorageController.tabs.setJSON(this.tabs);
+        localStorageController.tabs.setJson(this.tabs);
     }
 }();
