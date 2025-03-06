@@ -1,6 +1,3 @@
-import type { BaseCrudAPI } from '@/apis/base';
-
-export * from '@kiki-core-stack/pack/libs/api-requests';
 export { flattenToSingleValue } from '@kikiutils/node';
 export {
     getEnumNumberValues,
@@ -9,45 +6,6 @@ export {
 export { calculateToPercentageString } from '@kikiutils/node/math';
 
 export const copyTextToClipboardAndShowMessage = (text: string) => !!(copyTextToClipboard(text) && ElMessage.success('已複製！'));
-
-export function askToggleBooleanFieldMessageBox<RD extends TableRowData, F extends string, M extends Dict<string>>(
-    apiClass: BaseCrudAPI,
-    entityLabel: string,
-    toTextMap: M,
-    entityName: string,
-    pTablePageRef: Ref<ComponentRef<'PTablePage'>>,
-    rowData: RD,
-    field: F,
-) {
-    const actionText = !lodashGet(rowData, field) ? '開啟' : '關閉';
-    const fieldText = toTextMap[field as keyof M];
-    const message = `是否${actionText}${entityLabel} ${entityName} 的${fieldText}狀態?`;
-    ElMessageBox.confirm(
-        message,
-        {
-            async beforeClose(action, instance, done) {
-                if (instance.confirmButtonLoading) return;
-                else if (action !== 'confirm') return done();
-                instance.confirmButtonLoading = true;
-                instance.confirmButtonText = `${actionText}中...`;
-                instance.showCancelButton = false;
-                // @ts-expect-error Ignore this error.
-                const response = await apiClass.updateBooleanField(rowData.id, field, !lodashGet(rowData, field));
-                if (response?.data.success) {
-                    done();
-                    ElNotification.success(`已${actionText}${entityLabel} ${entityName} 的${fieldText}狀態！`);
-                    await pTablePageRef.value?.loadData();
-                } else {
-                    instance.confirmButtonLoading = false;
-                    instance.confirmButtonText = '確定';
-                    instance.showCancelButton = true;
-                }
-            },
-            confirmButtonClass: 'ml-1!',
-            draggable: true,
-        },
-    );
-}
 
 export function clearAndAssignObject(target: object, ...sources: any[]) {
     Object.keys(target).forEach((key) => delete target[key as keyof typeof target]);
@@ -87,21 +45,6 @@ export function createLoadingState() {
             loading: false,
             success: false,
         }),
-    };
-}
-
-export function createPageBaseVariables<T extends TableRowData = TableRowData>() {
-    return {
-        autoReloadDataCountdownSeconds: ref(60),
-        autoReloadDataInterval: ref<Nullable<NodeJS.Timeout>>(null),
-        autoReloadDataIntervalSeconds: ref(60),
-        isLoadingData: ref(true),
-        paginationParams: reactive({
-            limit: 10,
-            page: 1,
-        }),
-        tableData: shallowReactive<T[]>([]),
-        totalTableDataCount: ref(0),
     };
 }
 
