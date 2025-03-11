@@ -15,7 +15,7 @@ export default defineConfig({
             (matches) => ({ 'font-size': matches[1] }),
         ],
         [
-            /^w-minw-(\d+px)$/,
+            /^min-width-and-width-(\d+px)$/,
             (matches) => ({
                 'min-width': matches[1],
                 'width': matches[1],
