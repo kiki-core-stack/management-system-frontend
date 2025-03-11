@@ -4,24 +4,18 @@
             <slot name="label" />
         </template>
         <el-switch
-            v-model="switchValue"
+            v-model="modelValue"
             :="switchAttrs"
         />
     </el-form-item>
 </template>
 
 <script lang="ts" setup>
-interface Props {
-    modelValue: boolean;
-}
-
-// Emits and props
-const props = defineProps<Props>();
-const emit = defineEmits(['update:modelValue']);
+// Define props, models and emits
+const modelValue = defineModel<boolean>({ required: true });
 
 // Variables
 const attrs: Record<string, unknown> = useAttrs();
-const switchValue = ref(props.modelValue);
 
 // Computed properties
 // eslint-disable-next-line unused-imports/no-unused-vars
@@ -34,8 +28,4 @@ const switchAttrs = computed(() => {
     } = attrs;
     return otherAttrs;
 });
-
-// Watchers
-watch(() => switchValue.value, (nv) => emit('update:modelValue', nv));
-watch(() => props.modelValue, (nv) => switchValue.value = nv);
 </script>

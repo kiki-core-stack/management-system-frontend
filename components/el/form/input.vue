@@ -5,7 +5,7 @@
         </template>
         <el-input
             ref="elInputRef"
-            v-model="inputValue"
+            v-model="modelValue"
             :="inputAttrs"
         >
             <template
@@ -21,7 +21,7 @@
                 <slot name="append" />
                 <el-button
                     v-if="enableCopyBtn"
-                    @click="copyTextToClipboardAndShowMessage(inputValue)"
+                    @click="copyTextToClipboardAndShowMessage(modelValue)"
                 >
                     <i class="fa-copy fa-solid" />
                 </el-button>
@@ -35,17 +35,15 @@ interface Props {
     enableAppendSlot?: boolean;
     enableCopyBtn?: boolean;
     enablePrependSlot?: boolean;
-    modelValue: string;
 }
 
-// Emits and props
-const props = defineProps<Props>();
-const emit = defineEmits(['update:modelValue']);
+// Define props, models and emits
+defineProps<Props>();
+const modelValue = defineModel<string>({ required: true });
 
 // Variables
 const attrs: Record<string, unknown> = useAttrs();
 const elInputRef = ref<ElInputRef>(null);
-const inputValue = ref(props.modelValue);
 
 // Computed properties
 // eslint-disable-next-line unused-imports/no-unused-vars
@@ -59,10 +57,6 @@ const inputAttrs = computed(() => {
     } = attrs;
     return otherAttrs;
 });
-
-// Watchers
-watch(() => inputValue.value, (nv) => emit('update:modelValue', nv));
-watch(() => props.modelValue, (nv) => inputValue.value = nv);
 
 // Exposes
 defineExpose({ focus: () => elInputRef.value?.focus() });
