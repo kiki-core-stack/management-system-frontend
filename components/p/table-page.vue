@@ -256,7 +256,6 @@ const {
     tableData,
     totalTableDataCount,
 } = createPageBaseVariables();
-
 const { state: saveDataState } = createLoadingState();
 const columnTotals = reactive<Dict<number | string>>({});
 const defaultFormData = cloneDeep(props.formData);
