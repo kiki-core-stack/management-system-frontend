@@ -234,7 +234,7 @@ interface Props<ControlRowBtnFunction extends (rowData: any) => boolean = (rowDa
     title: string;
 }
 
-// Emits and props
+// Define props, models and emits
 const props = withDefaults(
     defineProps<Props>(),
     {

@@ -37,7 +37,7 @@ interface Props {
     successText?: string;
 }
 
-// Emits and props
+// Define props, models and emits
 const props = withDefaults(
     defineProps<Props>(),
     {

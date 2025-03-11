@@ -38,7 +38,7 @@ import {
     ElSubMenu,
 } from 'element-plus';
 
-// Props and emits
+// Define props, models and emits
 defineProps<{ isDrawer?: boolean }>();
 
 const route = useRoute();

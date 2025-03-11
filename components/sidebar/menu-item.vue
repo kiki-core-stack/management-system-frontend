@@ -10,6 +10,6 @@ interface Props {
     text: string;
 }
 
-// Emits and props
+// Define props, models and emits
 defineProps<Props>();
 </script>

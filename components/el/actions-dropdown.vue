@@ -21,7 +21,7 @@ interface Props {
     btnType?: string;
 }
 
-// Emits and props
+// Define props, models and emits
 withDefaults(
     defineProps<Props>(),
     {

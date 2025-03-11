@@ -59,7 +59,7 @@ interface Props {
     formData: TwoFactorAuthenticationCodesData;
 }
 
-// Props and emits
+// Define props, models and emits
 const props = defineProps<Props>();
 
 // Variables

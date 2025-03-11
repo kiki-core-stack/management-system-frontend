@@ -27,7 +27,7 @@ interface Props {
     filterQuery?: Dict<any>;
 }
 
-// Props and emits
+// Define props, models and emits
 const props = defineProps<Props>();
 const emit = defineEmits(['select']);
 

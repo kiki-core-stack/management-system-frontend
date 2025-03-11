@@ -17,7 +17,7 @@ interface Props {
     size: string;
 }
 
-// Props and emits
+// Define props, models and emits
 withDefaults(
     defineProps<Props>(),
     {

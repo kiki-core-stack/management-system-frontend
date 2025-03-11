@@ -47,7 +47,7 @@ interface Props {
     model: Record<string, any>;
 }
 
-// Emits and props
+// Define props, models and emits
 const props = defineProps<Props>();
 
 // Variables
