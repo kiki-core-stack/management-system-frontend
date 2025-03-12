@@ -24,7 +24,7 @@
                 header="Email"
             />
             <PColumn
-                class="center"
+                class="header-center"
                 header="啟用"
             >
                 <template #body="{ data }">
@@ -38,7 +38,7 @@
                 </template>
             </PColumn>
             <PColumn
-                class="center"
+                class="header-center"
                 header="Email OTP驗證"
             >
                 <template #body="{ data }">
@@ -51,7 +51,7 @@
                 </template>
             </PColumn>
             <PColumn
-                class="center"
+                class="header-center"
                 header="TOTP驗證"
             >
                 <template #body="{ data }">

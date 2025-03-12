@@ -91,7 +91,7 @@
             </PColumn>
             <PColumn
                 v-if="!hideActionsColumn"
-                class="center"
+                class="header-center"
                 header="操作"
             >
                 <template #body="scope">
