@@ -207,6 +207,10 @@ import Row from 'primevue/row';
 
 import type { BaseCrudApi } from '@/apis/base';
 
+interface Emits {
+    (e: 'dialogOpen'): void;
+}
+
 interface Props<ControlRowBtnFunction extends (rowData: any) => boolean = (rowData: any) => boolean> {
     addDataBtnText?: string;
     askDeleteRowMessageRender?: (rowData: any) => string;
@@ -244,7 +248,7 @@ const props = withDefaults(
     },
 );
 
-defineEmits(['dialogOpen']);
+defineEmits<Emits>();
 
 // Variables
 const {

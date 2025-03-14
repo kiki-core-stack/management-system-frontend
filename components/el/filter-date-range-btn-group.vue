@@ -23,13 +23,17 @@
 import { getDateRangeFromDate } from '@kikiutils/node/datetime';
 import type { DateRangeType } from '@kikiutils/node/datetime';
 
+interface Emits {
+    (e: 'select'): void;
+}
+
 interface Props {
     filterQuery?: Dict<any>;
 }
 
 // Define props, models and emits
 const props = defineProps<Props>();
-const emit = defineEmits(['select']);
+const emit = defineEmits<Emits>();
 
 // Functions
 function onSelect(type: DateRangeType) {
@@ -38,7 +42,6 @@ function onSelect(type: DateRangeType) {
         endDate,
         startDate,
     } = getDateRangeFromDate(new Date(), type, { setEndDateToNextDayStart: true });
-
     // eslint-disable-next-line vue/no-mutating-props
     props.filterQuery.endAt = endDate;
     // eslint-disable-next-line vue/no-mutating-props
