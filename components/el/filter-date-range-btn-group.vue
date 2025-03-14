@@ -23,17 +23,9 @@
 import { getDateRangeFromDate } from '@kikiutils/node/datetime';
 import type { DateRangeType } from '@kikiutils/node/datetime';
 
-interface Emits {
-    (e: 'select'): void;
-}
-
-interface Props {
-    filterQuery?: Dict<any>;
-}
-
 // Define props, models and emits
-const props = defineProps<Props>();
-const emit = defineEmits<Emits>();
+const props = defineProps<{ filterQuery?: Dict<any> }>();
+const emit = defineEmits<{ (e: 'select'): void }>();
 
 // Functions
 function onSelect(type: DateRangeType) {
