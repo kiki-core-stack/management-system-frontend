@@ -1,1 +1,9 @@
-export { node as default } from '@kikiutils/eslint-config';
+import { createConfig } from '@kikiutils/eslint-config';
+
+export default createConfig(
+    'node',
+    {
+        formatters: { css: true },
+        vue: true,
+    },
+);
