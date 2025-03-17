@@ -119,8 +119,9 @@ async function login() {
             accountInputRef.value?.focus();
             mapValues(accountState.twoFactorAuthenticationStatus, () => false);
         } else if (response?.data.data?.isVerCodeIncorrect) verCodeInputRef.value?.focus();
-        else if (response?.data.data?.requiredTwoFactorAuthentications) twoFactorAuthenticationCodeInputsRef.value?.focus();
-        else if (response?.data.success) {
+        else if (response?.data.data?.requiredTwoFactorAuthentications) {
+            twoFactorAuthenticationCodeInputsRef.value?.focus();
+        } else if (response?.data.success) {
             await updateAdminInfoState();
             ElNotification.success('登入成功！');
             formRef.value?.resetFields();

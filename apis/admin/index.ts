@@ -6,7 +6,9 @@ export const AdminApi = new class extends BaseCrudApi<AdminData> {
     protected readonly baseUrl = '/api/admin';
 
     async getInfo() {
-        return await getApi<{ id: string; twoFactorAuthenticationStatus: TwoFactorAuthenticationStatus }>(`${this.baseUrl}/info`);
+        return await getApi<{ id: string; twoFactorAuthenticationStatus: TwoFactorAuthenticationStatus }>(
+            `${this.baseUrl}/info`,
+        );
     }
 
     override async save(data: AdminData) {

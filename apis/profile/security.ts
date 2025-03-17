@@ -23,7 +23,10 @@ export const ProfileSecurityApi = new class {
         return await getApi<ProfileSecurityTotpSecretData>(`${this.#baseUrl}/two-factor-status/totp/secret`);
     }
 
-    async toggleTwoFactorAuthenticationStatus(method: TwoFactorAuthenticationMethod, data: TwoFactorAuthenticationCodesData) {
+    async toggleTwoFactorAuthenticationStatus(
+        method: TwoFactorAuthenticationMethod,
+        data: TwoFactorAuthenticationCodesData,
+    ) {
         return await patchApi(`${this.#baseUrl}/two-factor-status/${kebabCase(method)}`, data);
     }
 }();

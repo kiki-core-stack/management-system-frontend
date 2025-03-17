@@ -1,5 +1,18 @@
 <template>
-    <div class="color-mode-transition dark:bg-dark relative flex flex-wrap items-center justify-between bg-white px-4 py-2">
+    <div
+        class="
+            color-mode-transition
+            dark:bg-dark
+            relative
+            flex
+            flex-wrap
+            items-center
+            justify-between
+            bg-white
+            px-4
+            py-2
+        "
+    >
         <i
             class="fa-bars fa-solid mr-4 pt-1 md:hidden"
             @click="mainState.sidebar.isShow = true"

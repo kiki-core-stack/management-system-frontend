@@ -88,8 +88,13 @@ const sendEmailOtpCodeState = createLoadingState();
 const totpCodeFormInputItemRef = ref<ComponentRef<'ElFormInput'>>(null);
 
 // Computed properties
-const isEmailOtpEnable = computed(() => props.forceEnabledFields?.includes('emailOtp') || accountState.twoFactorAuthenticationStatus.emailOtp);
-const isTotpEnable = computed(() => props.forceEnabledFields?.includes('totp') || accountState.twoFactorAuthenticationStatus.totp);
+const isEmailOtpEnable = computed(() => {
+    return props.forceEnabledFields?.includes('emailOtp') || accountState.twoFactorAuthenticationStatus.emailOtp;
+});
+
+const isTotpEnable = computed(() => {
+    return props.forceEnabledFields?.includes('totp') || accountState.twoFactorAuthenticationStatus.totp;
+});
 
 // Functions
 async function sendEmailOtpCode() {
@@ -115,8 +120,13 @@ async function sendEmailOtpCode() {
 // Exposes
 defineExpose({
     focus(field?: 'emailOtpCode' | 'totpCode') {
-        if (field === 'emailOtpCode' || (!field && isEmailOtpEnable.value && !props.formData.emailOtpCode)) emailOtpCodeFormInputItemRef.value?.focus();
-        if (field === 'totpCode' || (!field && isTotpEnable.value && !props.formData.totpCode)) totpCodeFormInputItemRef.value?.focus();
+        if (field === 'emailOtpCode' || (!field && isEmailOtpEnable.value && !props.formData.emailOtpCode)) {
+            emailOtpCodeFormInputItemRef.value?.focus();
+        }
+
+        if (field === 'totpCode' || (!field && isTotpEnable.value && !props.formData.totpCode)) {
+            totpCodeFormInputItemRef.value?.focus();
+        }
     },
 });
 </script>

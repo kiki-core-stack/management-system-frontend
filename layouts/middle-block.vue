@@ -3,7 +3,19 @@
         <div class="min-h-100svh flex flex-col items-center p-4">
             <div
                 id="middle-block"
-                class="dark:bg-dark rounded-10px relative my-auto flex flex-col items-center overflow-auto bg-white p-4 text-center"
+                class="
+                    dark:bg-dark
+                    rounded-10px
+                    relative
+                    my-auto
+                    flex
+                    flex-col
+                    items-center
+                    overflow-auto
+                    bg-white
+                    p-4
+                    text-center
+                "
             >
                 <slot />
             </div>

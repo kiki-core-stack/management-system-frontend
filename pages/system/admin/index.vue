@@ -150,7 +150,16 @@ const pTablePageRef = ref<ComponentRef<'PTablePage'>>(null);
 
 // Functions
 function showAskToggleBooleanFieldMessageBox(rowData: AdminData, field: FilteredKeyPath<AdminData, boolean>) {
-    askToggleBooleanFieldMessageBox(AdminApi, '管理員', booleanFieldToTextMap, rowData.account, pTablePageRef, rowData, field);
+    askToggleBooleanFieldMessageBox(
+        AdminApi,
+        '管理員',
+        booleanFieldToTextMap,
+        rowData.account,
+        pTablePageRef,
+        rowData,
+        field,
+    );
+
     return false;
 }
 </script>
