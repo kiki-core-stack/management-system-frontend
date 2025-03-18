@@ -45,7 +45,12 @@
                     <div class="flex-middle">
                         <el-switch
                             v-model="data.twoFactorAuthenticationStatus.emailOtp"
-                            :before-change="() => showAskToggleBooleanFieldMessageBox(data, 'twoFactorAuthenticationStatus.emailOtp')"
+                            :before-change="() => {
+                                return showAskToggleBooleanFieldMessageBox(
+                                    data,
+                                    'twoFactorAuthenticationStatus.emailOtp',
+                                );
+                            }"
                         />
                     </div>
                 </template>
@@ -58,7 +63,9 @@
                     <div class="flex-middle">
                         <el-switch
                             v-model="data.twoFactorAuthenticationStatus.totp"
-                            :before-change="() => showAskToggleBooleanFieldMessageBox(data, 'twoFactorAuthenticationStatus.totp')"
+                            :before-change="() => {
+                                return showAskToggleBooleanFieldMessageBox(data, 'twoFactorAuthenticationStatus.totp');
+                            }"
                         />
                     </div>
                 </template>
