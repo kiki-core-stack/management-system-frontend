@@ -24,8 +24,8 @@
         :close-on-click-modal="!toggleState.loading"
         :close-on-press-escape="!toggleState.loading"
         :title="`切換${methodToTextMap[toToggleMethod]}狀態`"
-        append-to-body
         align-center
+        append-to-body
         center
         draggable
     >
@@ -55,8 +55,8 @@
                         v-model="totpSecretData.secret"
                         class="mt-4 w-full"
                         label="設定金鑰"
-                        enable-copy-btn
                         disabled
+                        enable-copy-btn
                     />
                 </div>
             </div>

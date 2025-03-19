@@ -97,8 +97,8 @@
                 <template #body="scope">
                     <div class="flex-middle gap-btns">
                         <slot
-                            name="before-edit-btn"
                             :="scope"
+                            name="before-edit-btn"
                         />
                         <el-action-btn
                             v-if="!hideEditBtn && !hideRowEditBtnRule?.(scope.data)"
@@ -108,8 +108,8 @@
                             編輯
                         </el-action-btn>
                         <slot
-                            name="after-edit-btn"
                             :="scope"
+                            name="after-edit-btn"
                         />
                         <el-action-btn
                             v-if="!hideDeleteBtn && !hideRowDeleteBtnRule?.(scope.data)"
@@ -120,8 +120,8 @@
                             刪除
                         </el-action-btn>
                         <slot
-                            name="after-delete-btn"
                             :="scope"
+                            name="after-delete-btn"
                         />
                     </div>
                 </template>
@@ -132,8 +132,8 @@
             >
                 <Row>
                     <PColumn
-                        :colspan="columnTotalsFooterColspan || 1"
                         footer="合計："
+                        :colspan="columnTotalsFooterColspan || 1"
                     />
                     <slot
                         name="column-totals-footer"
@@ -167,8 +167,8 @@
             :close-on-click-modal="!saveDataState.loading"
             :close-on-press-escape="!saveDataState.loading"
             :title="`${isEditing ? '編輯' : '新增'}${dialogTitleSuffix}`"
-            append-to-body
             align-center
+            append-to-body
             center
             draggable
             @open="$emit('dialogOpen')"
