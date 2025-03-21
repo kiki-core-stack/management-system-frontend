@@ -1,3 +1,4 @@
+import transformerDirectives from '@unocss/transformer-directives';
 import { defineConfig } from 'unocss';
 
 export default defineConfig({
@@ -30,4 +31,5 @@ export default defineConfig({
         'wh-full': 'h-full w-full',
         'wh-s-screen': 'h-s-screen w-s-screen',
     },
+    transformers: [transformerDirectives()],
 });
