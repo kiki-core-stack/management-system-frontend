@@ -1,19 +1,9 @@
 import swal from 'sweetalert2';
-import type {
-    SweetAlertCustomClass,
-    SweetAlertOptions,
-} from 'sweetalert2';
-
-const customSweetAlertClass: SweetAlertCustomClass = {
-    actions: 'mt-1',
-    icon: 'mt-0 mx-auto',
-    title: 'p-0',
-};
+import type { SweetAlertOptions } from 'sweetalert2';
 
 const customSweetAlert = swal.mixin({
     buttonsStyling: false,
     confirmButtonText: '確認',
-    customClass: customSweetAlertClass,
     padding: '1rem',
 });
 
@@ -22,10 +12,7 @@ export const closeAlert = customSweetAlert.close;
 export function showErrorAlert(title: string = '發生錯誤！請稍候再試。', options?: SweetAlertOptions) {
     customSweetAlert.fire({
         ...options,
-        customClass: {
-            ...customSweetAlertClass,
-            confirmButton: 'el-button el-button--danger',
-        },
+        customClass: { confirmButton: 'el-button el-button--danger' },
         icon: 'error',
         title,
     });
@@ -36,10 +23,7 @@ export function showLoadingAlert(title: string = '載入中...', options?: Sweet
         ...options,
         allowEscapeKey: false,
         allowOutsideClick: false,
-        customClass: {
-            ...customSweetAlertClass,
-            actions: 'mt-4',
-        },
+        customClass: { actions: 'mt-4' },
         didOpen: () => customSweetAlert.showLoading(),
         title,
     });
@@ -48,10 +32,7 @@ export function showLoadingAlert(title: string = '載入中...', options?: Sweet
 export function showSuccessAlert(title: string, options?: SweetAlertOptions) {
     customSweetAlert.fire({
         ...options,
-        customClass: {
-            ...customSweetAlertClass,
-            confirmButton: 'el-button el-button--success',
-        },
+        customClass: { confirmButton: 'el-button el-button--success' },
         icon: 'success',
         title,
     });

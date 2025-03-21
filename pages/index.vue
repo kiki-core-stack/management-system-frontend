@@ -1,12 +1,6 @@
 <template>
-    <Head>
-        <Title>首頁</Title>
-    </Head>
-    <div
-        v-loading="isLoadingData"
-        class="wh-full absolute top-0"
-    >
-        <div class="wh-full relative top-0 overflow-auto p-4">
+    <div class="h-full overflow-auto">
+        <div class="p-4">
             <el-filter-form
                 class="color-mode-transition dark:bg-dark rounded-10px bg-white p-4"
                 :model="filterQueryFormData"
@@ -63,6 +57,8 @@
 <script lang="ts" setup>
 import { homeApi } from '@/apis/home';
 
+useHead({ title: '首頁' });
+
 // Variables
 const defaultHomeDashboardData = Object.freeze({});
 const dashboardData = reactive<typeof defaultHomeDashboardData>({ ...defaultHomeDashboardData });
@@ -71,18 +67,16 @@ const filterQueryFormData = reactive<BaseFilterQueryFormData>({
     startAt: getMidnightDateFromToday(),
 });
 
-const isLoadingData = ref(true);
-
 // Functions
 async function loadData() {
-    isLoadingData.value = true;
+    mainState.isPageLoading = true;
     const response = await homeApi.getDashboardData(filterQueryFormData);
     Object.assign(dashboardData, defaultHomeDashboardData, response?.data.data);
-    isLoadingData.value = false;
+    mainState.isPageLoading = false;
 }
 
 // Load data
-await loadData();
+onMounted(loadData);
 </script>
 
 <style lang="scss" scoped>

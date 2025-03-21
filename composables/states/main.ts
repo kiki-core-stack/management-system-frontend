@@ -2,6 +2,7 @@ type SidebarMenuItem = readonly [url: string, title: string];
 type SidebarMenuItemGroup = readonly [baseUrl: string, title: string, items?: readonly SidebarMenuItem[]];
 
 export interface MainState {
+    isPageLoading: boolean;
     sidebar: {
         isShow: boolean;
         menuItemGroups: readonly SidebarMenuItemGroup[];
@@ -9,6 +10,7 @@ export interface MainState {
 }
 
 export const mainState = reactive<MainState>({
+    isPageLoading: false,
     sidebar: {
         isShow: false,
         menuItemGroups: [

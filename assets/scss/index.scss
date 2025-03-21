@@ -1,6 +1,7 @@
 @use '@fortawesome/fontawesome-free/css/all.min.css';
 
-@use './primevue/reboot.scss';
+@use './primevue';
+@use './sweetalert2';
 
 .color-mode-transition {
     transition: background-color 0.1s ease;

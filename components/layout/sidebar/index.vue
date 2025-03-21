@@ -1,7 +1,6 @@
 <template>
     <el-menu
-        class="sidebar h-full md:block"
-        :class="{ hidden: !isDrawer }"
+        class="sidebar h-full"
         background-color="#252828"
         text-color="#ffffff"
         :default-active="route.path"
@@ -19,7 +18,7 @@
                     <span>{{ menuItemGroup[1] }}</span>
                 </template>
                 <div v-if="menuItemGroup[2]">
-                    <sidebar-menu-item
+                    <layout-sidebar-menu-item
                         v-for="item, itemIndex in menuItemGroup[2]"
                         :key="itemIndex"
                         :index="item[0]"
@@ -38,9 +37,7 @@ import {
     ElSubMenu,
 } from 'element-plus';
 
-// Define props, models and emits
-defineProps<{ isDrawer?: boolean }>();
-
+// Variables
 const route = useRoute();
 </script>
 

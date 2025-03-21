@@ -1,40 +1,35 @@
 <template>
-    <div
-        id="header-tabs"
-        class="bg-color-e0e0e0 dark:bg-color-4a4a4a fs-14px flex overflow-auto"
+    <NuxtLink
+        class="relative"
+        active-class="active"
+        to="/"
+        @auxclick.middle.prevent
+        @click.middle.prevent
     >
-        <NuxtLink
-            class="relative"
-            active-class="active"
-            to="/"
-            @auxclick.middle.prevent
-            @click.middle.prevent
+        <i class="fa-house fa-solid" />
+    </NuxtLink>
+    <NuxtLink
+        v-for="(tab, index) in tabsController.tabs"
+        :key="index"
+        class="relative flex items-center whitespace-nowrap"
+        active-class="active"
+        :to="tab.url"
+        @auxclick.middle.prevent="tabsController.close(index)"
+        @click.right.prevent="showContextMenu($event, index)"
+        @click.middle.prevent
+    >
+        {{ tab.title }}
+        <div
+            class="close-xmark flex-middle ml-2"
+            @click.prevent="tabsController.close(index)"
         >
-            <i class="fa-house fa-solid" />
-        </NuxtLink>
-        <NuxtLink
-            v-for="(tab, index) in tabsController.tabs"
-            :key="index"
-            class="relative flex items-center whitespace-nowrap"
-            active-class="active"
-            :to="tab.url"
-            @auxclick.middle.prevent="tabsController.close(index)"
-            @click.right.prevent="showContextMenu($event, index)"
-            @click.middle.prevent
-        >
-            {{ tab.title }}
-            <div
-                class="close-xmark flex-middle ml-2"
-                @click.prevent="tabsController.close(index)"
-            >
-                <icon-xmark />
-            </div>
-        </NuxtLink>
-    </div>
+            <icon-xmark />
+        </div>
+    </NuxtLink>
     <ContextMenu
         ref="contextMenuRef"
         class="fs-14px"
-        :model="contextMenuItems as MenuItem[]"
+        :model="contextMenuItems"
     />
 </template>
 
@@ -44,7 +39,7 @@ import type { MenuItem } from 'primevue/menuitem';
 
 // Variables
 const contextMenuAtTabIndex = ref(0);
-const contextMenuItems = Object.freeze<MenuItem>([
+const contextMenuItems: MenuItem[] = [
     {
         command: () => tabsController.closeAll(),
         label: '關閉全部',
@@ -57,7 +52,7 @@ const contextMenuItems = Object.freeze<MenuItem>([
         command: () => tabsController.closeFromIndexTo(contextMenuAtTabIndex.value + 1, 1024),
         label: '關閉右邊所有',
     },
-]);
+];
 
 const contextMenuRef = ref<Nullable<InstanceType<typeof ContextMenu>>>(null);
 const route = useRoute();
@@ -90,10 +85,6 @@ $dark-hover-bg: #2b2b2b;
 $light-active-bg: #f5f5f5;
 $light-hover-bg: #ededed;
 $box-shadow-size: 30px;
-
-#header-tabs {
-    padding: 5px 15px 0;
-}
 
 a {
     background-color: transparent;
