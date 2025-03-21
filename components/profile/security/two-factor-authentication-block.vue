@@ -83,7 +83,7 @@
 import type { ProfileSecurityTotpSecretData } from '@kiki-core-stack/pack/types/data/profile';
 import QrCodeVue from 'qrcode.vue';
 
-import { ProfileSecurityApi } from '@/apis/profile/security';
+import { profileSecurityApi } from '@/apis/profile/security';
 
 // Variables
 const { state: toggleState } = createLoadingState();
@@ -116,7 +116,7 @@ function beforeSwitchChange(method: TwoFactorAuthenticationMethod) {
 
 async function loadData() {
     isLoadingData.value = true;
-    const response = await ProfileSecurityApi.getTotpSecret();
+    const response = await profileSecurityApi.getTotpSecret();
     isLoadingData.value = false;
     if (response?.data.success) clearAndAssignObject(totpSecretData, response.data.data);
 }
@@ -127,7 +127,7 @@ async function toggleStatus() {
         if (!valid) return;
         accountState.autoUpdateTwoFactorAuthenticationStatus = false;
         toggleState.loading = true;
-        const response = await ProfileSecurityApi.toggleTwoFactorAuthenticationStatus(toToggleMethod.value, formData);
+        const response = await profileSecurityApi.toggleTwoFactorAuthenticationStatus(toToggleMethod.value, formData);
         accountState.autoUpdateTwoFactorAuthenticationStatus = true;
         toggleState.loading = false;
         if (!response?.data.success) return;

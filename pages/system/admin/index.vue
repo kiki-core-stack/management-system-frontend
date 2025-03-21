@@ -5,7 +5,7 @@
         dialog-title-suffix="管理員"
         title="管理員管理"
         :ask-delete-row-message-render="(rowData: AdminData) => `確定要刪除 ${rowData.account} 嗎？`"
-        :crud-api-class="AdminApi"
+        :crud-api-class="adminApi"
         :disable-row-delete-btn-rule="(rowData: AdminData) => rowData.id === adminInfoState.id"
         :form-data="formData"
         :form-rules="formRules"
@@ -125,7 +125,7 @@
 <script lang="ts" setup>
 import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
 
-import { AdminApi } from '@/apis/admin';
+import { adminApi } from '@/apis/admin';
 
 // Variables
 const booleanFieldToTextMap: ReadonlyRecord<FilteredKeyPath<AdminData, boolean>, string> = Object.freeze({
@@ -158,7 +158,7 @@ const pTablePageRef = ref<ComponentRef<'PTablePage'>>(null);
 // Functions
 function showAskToggleBooleanFieldMessageBox(rowData: AdminData, field: FilteredKeyPath<AdminData, boolean>) {
     askToggleBooleanFieldMessageBox(
-        AdminApi,
+        adminApi,
         '管理員',
         booleanFieldToTextMap,
         rowData.account,

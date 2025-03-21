@@ -1,7 +1,7 @@
-export const HomeApi = new class HomeApi {
+export const homeApi = new class {
     readonly #baseUrl = '/api/home';
 
-    async getDashboardData(filterQueryData: BaseFilterQueryFormData) {
-        return await getApi<object>(`${this.#baseUrl}/dashboard`, { filterQuery: JSON.stringify(filterQueryData) });
+    getDashboardData(filterQueryData: BaseFilterQueryFormData) {
+        return getApi<object>(`${this.#baseUrl}/dashboard`, { filterQuery: JSON.stringify(filterQueryData) });
     }
 }();

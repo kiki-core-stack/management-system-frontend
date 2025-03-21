@@ -4,11 +4,11 @@ import type {
 } from '@kiki-core-stack/pack/types/data/profile';
 import { kebabCase } from 'lodash-es';
 
-export const ProfileSecurityApi = new class {
+export const profileSecurityApi = new class {
     readonly #baseUrl = '/api/profile/security';
 
-    async changePassword(data: ProfileSecurityChangePasswordFormData) {
-        return await patchApi(
+    changePassword(data: ProfileSecurityChangePasswordFormData) {
+        return patchApi(
             `${this.#baseUrl}/password`,
             {
                 ...data,
@@ -19,14 +19,11 @@ export const ProfileSecurityApi = new class {
         );
     }
 
-    async getTotpSecret() {
-        return await getApi<ProfileSecurityTotpSecretData>(`${this.#baseUrl}/two-factor-status/totp/secret`);
+    getTotpSecret() {
+        return getApi<ProfileSecurityTotpSecretData>(`${this.#baseUrl}/two-factor-status/totp/secret`);
     }
 
-    async toggleTwoFactorAuthenticationStatus(
-        method: TwoFactorAuthenticationMethod,
-        data: TwoFactorAuthenticationCodesData,
-    ) {
-        return await patchApi(`${this.#baseUrl}/two-factor-status/${kebabCase(method)}`, data);
+    toggleTwoFactorAuthenticationStatus(method: TwoFactorAuthenticationMethod, data: TwoFactorAuthenticationCodesData) {
+        return patchApi(`${this.#baseUrl}/two-factor-status/${kebabCase(method)}`, data);
     }
 }();

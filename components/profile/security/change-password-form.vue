@@ -57,7 +57,7 @@
 <script lang="ts" setup>
 import type { ProfileSecurityChangePasswordFormData } from '@kiki-core-stack/pack/types/data/profile';
 
-import { ProfileSecurityApi } from '@/apis/profile/security';
+import { profileSecurityApi } from '@/apis/profile/security';
 
 // Variables
 const { state: changePasswordState } = createLoadingState();
@@ -84,7 +84,7 @@ async function changePassword() {
     await formRef.value?.validate(async (valid) => {
         if (!valid) return;
         changePasswordState.loading = true;
-        const response = await ProfileSecurityApi.changePassword(formData);
+        const response = await profileSecurityApi.changePassword(formData);
         if (!response?.data.success) {
             changePasswordState.loading = false;
             return;
