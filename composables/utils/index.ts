@@ -15,12 +15,16 @@ export function clearIntervalRef(intervalRef: Ref<Nullable<NodeJS.Timeout>>) {
     intervalRef.value = null;
 }
 
-export function compareEventKey(event: KeyboardEvent, key: string, options: {
-    alt?: boolean;
-    ctrl?: boolean;
-    ignoreCase?: boolean;
-    shift?: boolean;
-} = {}) {
+export function compareEventKey(
+    event: KeyboardEvent,
+    key: string,
+    options: {
+        alt?: boolean;
+        ctrl?: boolean;
+        ignoreCase?: boolean;
+        shift?: boolean;
+    } = {},
+) {
     if (event.key === key || (options.ignoreCase && event.key.toLowerCase() === key.toLowerCase())) {
         if (options.ctrl && !(event.ctrlKey || event.metaKey)) return false;
         if (options.shift && !event.shiftKey) return false;
@@ -32,7 +36,9 @@ export function compareEventKey(event: KeyboardEvent, key: string, options: {
 }
 
 export function copyTextToClipboardAndShowMessage(text: string) {
-    return !!(copyTextToClipboard(text) && ElMessage.success('已複製！'));
+    if (!copyTextToClipboard(text)) return false;
+    ElMessage.success('已複製！');
+    return true;
 }
 
 export function createLoadingState() {
