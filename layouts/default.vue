@@ -39,9 +39,11 @@
             </el-header>
             <el-main
                 v-loading="mainState.isPageLoading"
-                class="overflow-hidden! p-0!"
+                class="p-0!"
             >
-                <slot />
+                <div class="p-4!">
+                    <slot />
+                </div>
             </el-main>
         </el-container>
     </el-container>

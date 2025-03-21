@@ -4,7 +4,7 @@
     </Head>
     <div
         v-loading="isLoadingData"
-        class="color-mode-transition dark:bg-dark  rounded-10px relative m-4 bg-white p-4"
+        class="color-mode-transition dark:bg-dark  rounded-10px relative bg-white p-4"
     >
         <slot name="before-table" />
         <div class="p-1">
