@@ -7,103 +7,100 @@
         class="color-mode-transition dark:bg-dark  rounded-10px relative m-4 bg-white p-4"
     >
         <slot name="before-table" />
-        <DataTable
-            class="border-1 fs-15px dark:border-[#27272a]"
-            column-resize-mode="expand"
-            size="small"
-            :value="tableData"
-            resizable-columns
-            show-gridlines
-            striped-rows
+        <div class="p-1">
+            <slot name="table-header-start" />
+            <div class="gap-btns flex flex-wrap">
+                <slot name="before-table-header-btns" />
+                <el-button
+                    v-if="!hideAddDataBtn"
+                    @click="openDialog()"
+                >
+                    {{ addDataBtnText }}
+                </el-button>
+                <el-dropdown
+                    trigger="click"
+                    :disabled="isLoadingData"
+                    split-button
+                    @click="loadData"
+                >
+                    刷新{{ autoReloadDataIntervalSeconds === 0 ? '' : `(${autoReloadDataCountdownSeconds})` }}
+                    <template #dropdown>
+                        <el-dropdown-menu>
+                            <el-dropdown-item @click="setAutoReloadDataIntervalSeconds(0)">
+                                關閉
+                            </el-dropdown-item>
+                            <el-dropdown-item
+                                v-for="sec in [
+                                    5,
+                                    10,
+                                    20,
+                                    30,
+                                    40,
+                                    50,
+                                    60,
+                                ]"
+                                :key="sec"
+                                @click="setAutoReloadDataIntervalSeconds(sec)"
+                            >
+                                {{ sec }}s
+                            </el-dropdown-item>
+                        </el-dropdown-menu>
+                    </template>
+                </el-dropdown>
+                <el-filter-date-range-btn-group
+                    v-if="enableFilterDateRangeBtnGroup"
+                    :filter-query="filterQuery"
+                    @select="loadData"
+                />
+                <slot name="after-table-header-btns" />
+            </div>
+            <slot name="table-header-end" />
+        </div>
+        <el-table
+            row-key="id"
+            table-layout="auto"
+            :data="tableData"
+            border
+            flexible
+            highlight-current-row
+            stripe
         >
-            <template #empty>
-                <div class="flex-middle p-4">
-                    暫無資料
-                </div>
-            </template>
-            <template #header>
-                <slot name="table-header-start" />
-                <div class="gap-btns flex flex-wrap">
-                    <slot name="before-table-header-btns" />
-                    <el-button
-                        v-if="!hideAddDataBtn"
-                        @click="openDialog()"
-                    >
-                        {{ addDataBtnText }}
-                    </el-button>
-                    <el-dropdown
-                        trigger="click"
-                        :disabled="isLoadingData"
-                        split-button
-                        @click="loadData"
-                    >
-                        刷新{{ autoReloadDataIntervalSeconds === 0 ? '' : `(${autoReloadDataCountdownSeconds})` }}
-                        <template #dropdown>
-                            <el-dropdown-menu>
-                                <el-dropdown-item @click="setAutoReloadDataIntervalSeconds(0)">
-                                    關閉
-                                </el-dropdown-item>
-                                <el-dropdown-item
-                                    v-for="sec in [
-                                        5,
-                                        10,
-                                        20,
-                                        30,
-                                        40,
-                                        50,
-                                        60,
-                                    ]"
-                                    :key="sec"
-                                    @click="setAutoReloadDataIntervalSeconds(sec)"
-                                >
-                                    {{ sec }}s
-                                </el-dropdown-item>
-                            </el-dropdown-menu>
-                        </template>
-                    </el-dropdown>
-                    <el-filter-date-range-btn-group
-                        v-if="enableFilterDateRangeBtnGroup"
-                        :filter-query="filterQuery"
-                        @select="loadData"
-                    />
-                    <slot name="after-table-header-btns" />
-                </div>
-                <slot name="table-header-end" />
-            </template>
             <slot name="table" />
-            <PColumn
+            <el-table-column
                 v-if="!hideTimestampColumns && !hideCreatedAtColumn"
-                class="min-width-and-width-156px text-center!"
-                header="建立時間"
+                align="center"
+                label="建立時間"
+                :width="156"
             >
-                <template #body="{ data }">
-                    {{ formatDateOrTimestamp(data.createdAt) }}
+                <template #default="{ row }">
+                    {{ formatDateOrTimestamp(row.createdAt) }}
                 </template>
-            </PColumn>
-            <PColumn
+            </el-table-column>
+            <el-table-column
                 v-if="!hideTimestampColumns && !hideUpdatedAtColumn"
-                class="min-width-and-width-156px text-center!"
-                header="更新時間"
+                align="center"
+                label="更新時間"
+                :width="156"
             >
-                <template #body="{ data }">
-                    {{ formatDateOrTimestamp(data.updatedAt) }}
+                <template #default="{ row }">
+                    {{ formatDateOrTimestamp(row.updatedAt) }}
                 </template>
-            </PColumn>
-            <PColumn
+            </el-table-column>
+            <el-table-column
                 v-if="!hideActionsColumn"
-                class="header-center"
-                header="操作"
+                align="center"
+                label="操作"
             >
-                <template #body="scope">
+                <template #default="scope">
                     <div class="flex-middle gap-btns">
                         <slot
                             :="scope"
                             name="before-edit-btn"
                         />
                         <el-action-btn
-                            v-if="!hideEditBtn && !hideRowEditBtnRule?.(scope.data)"
-                            :disabled="disableRowEditBtnRule?.(scope.data)"
-                            @click="openDialog(scope.data)"
+                            v-if="!hideEditBtn && !hideRowEditBtnRule?.(scope.row)"
+                            :disabled="disableRowEditBtnRule?.(scope.row)"
+                            @click="openDialog(scope.row)"
                         >
                             編輯
                         </el-action-btn>
@@ -112,10 +109,10 @@
                             name="after-edit-btn"
                         />
                         <el-action-btn
-                            v-if="!hideDeleteBtn && !hideRowDeleteBtnRule?.(scope.data)"
+                            v-if="!hideDeleteBtn && !hideRowDeleteBtnRule?.(scope.row)"
                             type="danger"
-                            :disabled="disableRowDeleteBtnRule?.(scope.data)"
-                            @click="showAskDeleteRowMessageBox(scope.data)"
+                            :disabled="disableRowDeleteBtnRule?.(scope.row)"
+                            @click="showAskDeleteRowMessageBox(scope.row)"
                         >
                             刪除
                         </el-action-btn>
@@ -125,42 +122,27 @@
                         />
                     </div>
                 </template>
-            </PColumn>
-            <ColumnGroup
-                v-if="enableColumnTotalsFooter && tableData.length"
-                type="footer"
-            >
-                <Row>
-                    <PColumn
-                        footer="合計："
-                        :colspan="columnTotalsFooterColspan || 1"
-                    />
-                    <slot
-                        name="column-totals-footer"
-                        :data="columnTotals"
-                    />
-                </Row>
-            </ColumnGroup>
-            <template #footer>
-                <el-pagination
-                    v-model:current-page="paginationParams.page"
-                    v-model:page-size="paginationParams.limit"
-                    layout="total, prev, pager, next, sizes"
-                    :disabled="isLoadingData"
-                    :page-sizes="[
-                        10,
-                        20,
-                        50,
-                        100,
-                        500,
-                        1000,
-                    ]"
-                    :pager-count="5"
-                    :total="totalTableDataCount"
-                    @change="loadData"
-                />
-            </template>
-        </DataTable>
+            </el-table-column>
+        </el-table>
+        <div class="p-1">
+            <el-pagination
+                v-model:current-page="paginationParams.page"
+                v-model:page-size="paginationParams.limit"
+                layout="total, prev, pager, next, sizes"
+                :disabled="isLoadingData"
+                :page-sizes="[
+                    10,
+                    20,
+                    50,
+                    100,
+                    500,
+                    1000,
+                ]"
+                :pager-count="5"
+                :total="totalTableDataCount"
+                @change="loadData"
+            />
+        </div>
         <el-dialog
             v-model="isDialogOpen"
             width="96vmin"
@@ -201,9 +183,6 @@
 
 <script lang="ts" setup>
 import { isObjectLike } from 'lodash-es';
-import ColumnGroup from 'primevue/columngroup';
-import DataTable from 'primevue/datatable';
-import Row from 'primevue/row';
 
 import type { BaseCrudApi } from '@/apis/base';
 

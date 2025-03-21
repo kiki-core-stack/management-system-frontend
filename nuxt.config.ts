@@ -1,5 +1,3 @@
-import primevueAuraTheme from '@primeuix/themes/aura';
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     app: {
@@ -34,21 +32,7 @@ export default defineNuxtConfig({
             scrollbar: true,
         },
     },
-    modules: [
-        '@kikiutils/nuxt',
-        '@primevue/nuxt-module',
-    ],
-    primevue: {
-        autoImport: false,
-        components: { exclude: '*' },
-        composables: { exclude: '*' },
-        options: {
-            theme: {
-                options: { darkModeSelector: '.dark' },
-                preset: primevueAuraTheme,
-            },
-        },
-    },
+    modules: ['@kikiutils/nuxt'],
     security: {
         headers: {
             contentSecurityPolicy: {

@@ -1,6 +1,6 @@
 <template>
-    <p-table-page
-        ref="pTablePageRef"
+    <el-table-page
+        ref="elTablePageRef"
         title="管理員日誌"
         :crud-api-class="adminLogApi"
         :filter-query="filterQueryFormData"
@@ -14,7 +14,7 @@
                 class="pb-1 pl-1"
                 :model="filterQueryFormData"
                 enable-created-at-range-filter
-                @submit.prevent="pTablePageRef?.loadData()"
+                @submit.prevent="elTablePageRef?.loadData()"
             >
                 <el-form-item label="管理員">
                     <selector-admin
@@ -35,29 +35,28 @@
             </el-filter-form>
         </template>
         <template #table>
-            <PColumn
-                field="admin.account"
-                header="帳號"
+            <el-table-column
+                label="帳號"
+                prop="admin.account"
             />
-            <PColumn header="類型">
-                <template #body="{ data }">
-                    {{ adminLogTypeToTextMap[data.type as AdminLogType] }}
-                </template>
-            </PColumn>
-            <PColumn
-                field="content"
-                header="內容"
+            <el-table-column
+                label="類型"
+                :formatter="({ type }) => adminLogTypeToTextMap[type as AdminLogType]"
             />
-            <PColumn
-                field="ip"
-                header="IP"
+            <el-table-column
+                label="內容"
+                prop="content"
             />
-            <PColumn
-                field="fingerprint"
-                header="指紋"
+            <el-table-column
+                label="IP"
+                prop="ip"
+            />
+            <el-table-column
+                label="指紋"
+                prop="fingerprint"
             />
         </template>
-    </p-table-page>
+    </el-table-page>
 </template>
 
 <script lang="ts" setup>
@@ -68,12 +67,11 @@ import { adminLogApi } from '@/apis/admin/log';
 import type { GetAdminLogsFilterQueryFormData } from '@/types/data/admin';
 
 // Variables
+const elTablePageRef = ref<ComponentRef<'ElTablePage'>>(null);
 const filterQueryFormData = reactive<GetAdminLogsFilterQueryFormData>({
     adminIds: [],
     endAt: getMidnightDateFromToday(1),
     startAt: getMidnightDateFromToday(),
     types: [],
 });
-
-const pTablePageRef = ref<ComponentRef<'PTablePage'>>(null);
 </script>

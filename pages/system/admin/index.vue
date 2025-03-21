@@ -1,6 +1,6 @@
 <template>
-    <p-table-page
-        ref="pTablePageRef"
+    <el-table-page
+        ref="elTablePageRef"
         add-data-btn-text="新增管理員"
         dialog-title-suffix="管理員"
         title="管理員管理"
@@ -11,65 +11,56 @@
         :form-rules="formRules"
     >
         <template #table>
-            <PColumn
-                field="account"
-                header="帳號"
+            <el-table-column
+                label="帳號"
+                prop="account"
             />
-            <PColumn
-                field="name"
-                header="名稱"
+            <el-table-column
+                label="名稱"
+                prop="name"
             />
-            <PColumn
-                field="email"
-                header="Email"
+            <el-table-column
+                label="Email"
+                prop="email"
             />
-            <PColumn
-                class="header-center"
-                header="啟用"
+            <el-table-column
+                align="center"
+                label="啟用"
             >
-                <template #body="{ data }">
-                    <div class="flex-middle">
-                        <el-switch
-                            v-model="data.enabled"
-                            :before-change="() => showAskToggleBooleanFieldMessageBox(data, 'enabled')"
-                            :disabled="data.id === profileState.id"
-                        />
-                    </div>
+                <template #default="{ row }">
+                    <el-switch
+                        v-model="row.enabled"
+                        :before-change="() => showAskToggleBooleanFieldMessageBox(row, 'enabled')"
+                        :disabled="row.id === profileState.id"
+                    />
                 </template>
-            </PColumn>
-            <PColumn
-                class="header-center"
-                header="Email OTP驗證"
+            </el-table-column>
+            <el-table-column
+                align="center"
+                label="Email OTP驗證"
             >
-                <template #body="{ data }">
-                    <div class="flex-middle">
-                        <el-switch
-                            v-model="data.twoFactorAuthenticationStatus.emailOtp"
-                            :before-change="() => {
-                                return showAskToggleBooleanFieldMessageBox(
-                                    data,
-                                    'twoFactorAuthenticationStatus.emailOtp',
-                                );
-                            }"
-                        />
-                    </div>
+                <template #default="{ row }">
+                    <el-switch
+                        v-model="row.twoFactorAuthenticationStatus.emailOtp"
+                        :before-change="() => {
+                            return showAskToggleBooleanFieldMessageBox(row, 'twoFactorAuthenticationStatus.emailOtp');
+                        }"
+                    />
                 </template>
-            </PColumn>
-            <PColumn
-                class="header-center"
-                header="TOTP驗證"
+            </el-table-column>
+            <el-table-column
+                align="center"
+                label="TOTP驗證"
             >
-                <template #body="{ data }">
-                    <div class="flex-middle">
-                        <el-switch
-                            v-model="data.twoFactorAuthenticationStatus.totp"
-                            :before-change="() => {
-                                return showAskToggleBooleanFieldMessageBox(data, 'twoFactorAuthenticationStatus.totp');
-                            }"
-                        />
-                    </div>
+                <template #default="{ row }">
+                    <el-switch
+                        v-model="row.twoFactorAuthenticationStatus.totp"
+                        :before-change="() => {
+                            return showAskToggleBooleanFieldMessageBox(row, 'twoFactorAuthenticationStatus.totp');
+                        }"
+                    />
                 </template>
-            </PColumn>
+            </el-table-column>
         </template>
         <template #form>
             <el-form-input
@@ -119,7 +110,7 @@
                 prop="twoFactorAuthenticationStatus.totp"
             />
         </template>
-    </p-table-page>
+    </el-table-page>
 </template>
 
 <script lang="ts" setup>
@@ -134,6 +125,7 @@ const booleanFieldToTextMap: ReadonlyRecord<FilteredKeyPath<AdminData, boolean>,
     'twoFactorAuthenticationStatus.totp': 'TOTP驗證',
 });
 
+const elTablePageRef = ref<ComponentRef<'ElTablePage'>>(null);
 const formData = reactive<TablePageFormData<AdminData, 'totpSecret'>>({
     account: '',
     email: '',
@@ -153,8 +145,6 @@ const formRules: ElFormRules<AdminData> = {
     name: commonFormRules.name,
 };
 
-const pTablePageRef = ref<ComponentRef<'PTablePage'>>(null);
-
 // Functions
 function showAskToggleBooleanFieldMessageBox(rowData: AdminData, field: FilteredKeyPath<AdminData, boolean>) {
     askToggleBooleanFieldMessageBox(
@@ -162,7 +152,7 @@ function showAskToggleBooleanFieldMessageBox(rowData: AdminData, field: Filtered
         '管理員',
         booleanFieldToTextMap,
         rowData.account,
-        pTablePageRef,
+        elTablePageRef,
         rowData,
         field,
     );
