@@ -71,7 +71,7 @@
 import type { AdminLoginFormData } from '@kiki-core-stack/pack/types/data/admin';
 import { mapValues } from 'lodash-es';
 
-import { adminAuthApi } from '@/apis/admin/auth';
+import { authApi } from '@/apis/auth';
 import { init } from '@/plugins/12.init.client';
 
 definePageMeta({
@@ -114,15 +114,15 @@ async function login() {
     await formRef.value?.validate(async (valid) => {
         if (!valid) return;
         loginState.loading = true;
-        const response = await adminAuthApi.login(formData);
+        const response = await authApi.login(formData);
         if (response?.status === 404) {
             accountInputRef.value?.focus();
-            mapValues(accountState.twoFactorAuthenticationStatus, () => false);
+            mapValues(profileState.twoFactorAuthenticationStatus, () => false);
         } else if (response?.data.data?.isVerCodeIncorrect) verCodeInputRef.value?.focus();
         else if (response?.data.data?.requiredTwoFactorAuthentications) {
             twoFactorAuthenticationCodeInputsRef.value?.focus();
         } else if (response?.data.success) {
-            await updateAdminInfoState();
+            await updateProfileState();
             ElNotification.success('登入成功！');
             formRef.value?.resetFields();
             init();

@@ -301,7 +301,9 @@ async function saveData() {
     await formRef.value?.validate(async (valid) => {
         if (!valid) return;
         saveDataState.loading = true;
-        const response = await props.crudApiClass.save(props.formData);
+        let response;
+        if (props.formData.id) response = await props.crudApiClass.update(props.formData.id, props.formData);
+        else response = await props.crudApiClass.create(props.formData);
         saveDataState.loading = false;
         if (!response?.data.success) return;
         formRef.value!.resetFields();

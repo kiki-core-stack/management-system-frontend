@@ -1,7 +1,7 @@
 import type { AdminLoginFormData } from '@kiki-core-stack/pack/types/data/admin';
 
-export const adminAuthApi = new class {
-    readonly #baseUrl = '/api/admin/auth';
+export const authApi = new class {
+    readonly #baseUrl = '/api/auth';
 
     login(data: AdminLoginFormData) {
         return postApi<{ isVerCodeIncorrect?: boolean }>(

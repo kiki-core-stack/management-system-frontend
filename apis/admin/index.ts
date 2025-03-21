@@ -7,12 +7,6 @@ export const adminApi = new class extends BaseCrudApi<AdminData> {
         super('/api/admin');
     }
 
-    getInfo() {
-        return getApi<{ id: string; twoFactorAuthenticationStatus: TwoFactorAuthenticationStatus }>(
-            `${this.baseUrl}/info`,
-        );
-    }
-
     override update(id: string, data: AdminData) {
         if (!data.email?.trim()) delete data.email;
         if (data.password) data.password = sha3512(data.password);

@@ -89,11 +89,11 @@ const totpCodeFormInputItemRef = ref<ComponentRef<'ElFormInput'>>(null);
 
 // Computed properties
 const isEmailOtpEnable = computed(() => {
-    return props.forceEnabledFields?.includes('emailOtp') || accountState.twoFactorAuthenticationStatus.emailOtp;
+    return props.forceEnabledFields?.includes('emailOtp') || profileState.twoFactorAuthenticationStatus.emailOtp;
 });
 
 const isTotpEnable = computed(() => {
-    return props.forceEnabledFields?.includes('totp') || accountState.twoFactorAuthenticationStatus.totp;
+    return props.forceEnabledFields?.includes('totp') || profileState.twoFactorAuthenticationStatus.totp;
 });
 
 // Functions

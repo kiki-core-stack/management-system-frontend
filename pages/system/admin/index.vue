@@ -6,7 +6,7 @@
         title="管理員管理"
         :ask-delete-row-message-render="(rowData: AdminData) => `確定要刪除 ${rowData.account} 嗎？`"
         :crud-api-class="adminApi"
-        :disable-row-delete-btn-rule="(rowData: AdminData) => rowData.id === adminInfoState.id"
+        :disable-row-delete-btn-rule="(rowData: AdminData) => rowData.id === profileState.id"
         :form-data="formData"
         :form-rules="formRules"
     >
@@ -32,7 +32,7 @@
                         <el-switch
                             v-model="data.enabled"
                             :before-change="() => showAskToggleBooleanFieldMessageBox(data, 'enabled')"
-                            :disabled="data.id === adminInfoState.id"
+                            :disabled="data.id === profileState.id"
                         />
                     </div>
                 </template>
@@ -106,7 +106,7 @@
                 v-model="formData.enabled"
                 label="啟用"
                 prop="enabled"
-                :disabled="formData.id === adminInfoState.id"
+                :disabled="formData.id === profileState.id"
             />
             <el-form-switch
                 v-model="formData.twoFactorAuthenticationStatus.emailOtp"

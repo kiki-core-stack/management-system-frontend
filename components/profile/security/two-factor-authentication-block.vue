@@ -7,12 +7,12 @@
             二階段驗證
         </p>
         <el-form-switch
-            v-model="accountState.twoFactorAuthenticationStatus.emailOtp"
+            v-model="profileState.twoFactorAuthenticationStatus.emailOtp"
             label="Email OTP驗證碼"
             :before-change="() => beforeSwitchChange('emailOtp')"
         />
         <el-form-switch
-            v-model="accountState.twoFactorAuthenticationStatus.totp"
+            v-model="profileState.twoFactorAuthenticationStatus.totp"
             class="mb-0!"
             label="TOTP驗證碼"
             :before-change="() => beforeSwitchChange('totp')"
@@ -125,16 +125,16 @@ async function toggleStatus() {
     if (toggleState.loading) return;
     await formRef.value?.validate(async (valid) => {
         if (!valid) return;
-        accountState.autoUpdateTwoFactorAuthenticationStatus = false;
+        profileState.autoUpdateTwoFactorAuthenticationStatus = false;
         toggleState.loading = true;
         const response = await profileSecurityApi.toggleTwoFactorAuthenticationStatus(toToggleMethod.value, formData);
-        accountState.autoUpdateTwoFactorAuthenticationStatus = true;
+        profileState.autoUpdateTwoFactorAuthenticationStatus = true;
         toggleState.loading = false;
         if (!response?.data.success) return;
         ElNotification.success('切換成功！');
         isDialogOpen.value = false;
         setTimeout(loadData, 500);
-        await updateAdminInfoState();
+        await updateProfileState();
     });
 }
 
