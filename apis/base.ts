@@ -20,6 +20,7 @@ export abstract class BaseCrudApi<T extends TableRowData = TableRowData> {
     }
 
     getList(params?: GetListApiParams) {
+        if (params) params = cloneDeep(params);
         if (params?.filterQuery) params.filterQuery = JSON.stringify(params.filterQuery);
         if (params?.selectFields) params.selectFields = JSON.stringify(params.selectFields);
         return getApi<{ count: number; list: T[]; totals?: Dict<number | string> }>(
