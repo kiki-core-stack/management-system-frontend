@@ -9,7 +9,7 @@ export default defineNuxtPlugin(() => {
             }
 
             if (error.response.status === 401) {
-                assignToUrlOrNavigateTo('/login', true);
+                assignToUrlOrNavigateTo('/login/', true);
                 return;
             }
 

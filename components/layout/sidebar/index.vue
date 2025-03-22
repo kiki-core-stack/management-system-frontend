@@ -36,12 +36,12 @@
                         安全性
                     </template>
                     <layout-sidebar-menu-item
-                        index="/profile/security"
+                        index="/profile/security/"
                         text="一般"
                         @click="mainState.sidebar.isShow = false"
                     />
                     <layout-sidebar-menu-item
-                        index="/profile/security/session"
+                        index="/profile/security/session/"
                         text="登入裝置"
                         @click="mainState.sidebar.isShow = false"
                     />

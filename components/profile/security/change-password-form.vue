@@ -85,7 +85,7 @@ async function changePassword() {
         }
 
         changePasswordState.success = true;
-        setTimeout(() => assignToUrlOrNavigateTo('/login', true), 1000);
+        setTimeout(() => assignToUrlOrNavigateTo('/login/', true), 1000);
     });
 }
 </script>

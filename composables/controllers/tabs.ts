@@ -43,6 +43,7 @@ export const tabsController = new class TabsController {
     }
 
     ensure(title: string, url: string, insertIndex?: number) {
+        if (!url.endsWith('/')) url += '/';
         for (const tabData of this.tabs) {
             if (tabData.url === url) {
                 navigateTo(url);

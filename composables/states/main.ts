@@ -19,15 +19,15 @@ export const mainState = reactive<MainState>({
                 '首頁',
             ],
             [
-                '/system',
+                '/system/',
                 '系統',
                 [
                     [
-                        '/system/admin',
+                        '/system/admin/',
                         '管理員管理',
                     ],
                     [
-                        '/system/admin/log',
+                        '/system/admin/log/',
                         '管理員日誌',
                     ],
                 ],
