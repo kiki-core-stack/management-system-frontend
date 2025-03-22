@@ -2,10 +2,7 @@
     <Head>
         <Title>{{ title }}</Title>
     </Head>
-    <div
-        v-loading="isLoadingData"
-        class="color-mode-transition dark:bg-dark  rounded-10px relative bg-white p-4"
-    >
+    <div class="color-mode-transition dark:bg-dark  rounded-10px relative bg-white p-4">
         <slot name="before-table" />
         <div class="p-1">
             <slot name="table-header-start" />
@@ -19,7 +16,7 @@
                 </el-button>
                 <el-dropdown
                     trigger="click"
-                    :disabled="isLoadingData"
+                    :disabled="mainState.isPageLoading"
                     split-button
                     @click="loadData"
                 >
@@ -129,7 +126,7 @@
                 v-model:current-page="paginationParams.page"
                 v-model:page-size="paginationParams.limit"
                 layout="total, prev, pager, next, sizes"
-                :disabled="isLoadingData"
+                :disabled="mainState.isPageLoading"
                 :page-sizes="[
                     10,
                     20,
@@ -234,7 +231,6 @@ const {
     autoReloadDataCountdownSeconds,
     autoReloadDataInterval,
     autoReloadDataIntervalSeconds,
-    isLoadingData,
     paginationParams,
     tableData,
     totalTableDataCount,
@@ -248,7 +244,7 @@ const isDialogOpen = ref(false);
 
 // Functions
 async function loadData() {
-    isLoadingData.value = true;
+    mainState.isPageLoading = true;
     clearIntervalRef(autoReloadDataInterval);
     autoReloadDataCountdownSeconds.value = autoReloadDataIntervalSeconds.value;
     const response = await props.crudApiClass.getList({
@@ -263,7 +259,7 @@ async function loadData() {
         totalTableDataCount.value = response.data.data.count || 0;
     }
 
-    isLoadingData.value = false;
+    mainState.isPageLoading = false;
     setupAutoReloadData();
 }
 
@@ -350,13 +346,10 @@ function showAskDeleteRowMessageBox(data: TableRowData) {
 
 // Hooks
 onActivated(() => tabsController.ensure(props.title, window.location.pathname));
-onMounted(setupAutoReloadData);
+onMounted(loadData);
 
 // Exposes
 defineExpose({ loadData });
-
-// Load data
-await loadData();
 </script>
 
 <style lang="scss" scoped>
