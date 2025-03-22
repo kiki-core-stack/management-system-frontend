@@ -34,10 +34,6 @@
             prop="conformPassword"
             type="password"
         />
-        <two-factor-authentication-code-inputs
-            email-otp-code-type="adminChangePassword"
-            :form-data="formData"
-        />
         <div class="flex-middle gap-btns">
             <el-button @click="clearChangePasswordForm">
                 清空
@@ -61,12 +57,10 @@ import { profileSecurityApi } from '@/apis/profile/security';
 
 // Variables
 const { state: changePasswordState } = createLoadingState();
-const formData = reactive<ProfileSecurityChangePasswordFormData & TwoFactorAuthenticationCodesData>({
+const formData = reactive<ProfileSecurityChangePasswordFormData>({
     conformPassword: '',
-    emailOtpCode: '',
     newPassword: '',
     oldPassword: '',
-    totpCode: '',
 });
 
 const formRef = ref<ElFormRef>(null);

@@ -35,32 +35,6 @@
                     />
                 </template>
             </el-table-column>
-            <el-table-column
-                align="center"
-                label="Email OTP驗證"
-            >
-                <template #default="{ row }">
-                    <el-switch
-                        v-model="row.twoFactorAuthenticationStatus.emailOtp"
-                        :before-change="() => {
-                            return showAskToggleBooleanFieldMessageBox(row, 'twoFactorAuthenticationStatus.emailOtp');
-                        }"
-                    />
-                </template>
-            </el-table-column>
-            <el-table-column
-                align="center"
-                label="TOTP驗證"
-            >
-                <template #default="{ row }">
-                    <el-switch
-                        v-model="row.twoFactorAuthenticationStatus.totp"
-                        :before-change="() => {
-                            return showAskToggleBooleanFieldMessageBox(row, 'twoFactorAuthenticationStatus.totp');
-                        }"
-                    />
-                </template>
-            </el-table-column>
         </template>
         <template #form>
             <el-form-input
@@ -99,16 +73,6 @@
                 prop="enabled"
                 :disabled="formData.id === profileState.id"
             />
-            <el-form-switch
-                v-model="formData.twoFactorAuthenticationStatus.emailOtp"
-                label="Email OTP驗證"
-                prop="twoFactorAuthenticationStatus.emailOtp"
-            />
-            <el-form-switch
-                v-model="formData.twoFactorAuthenticationStatus.totp"
-                label="TOTP驗證"
-                prop="twoFactorAuthenticationStatus.totp"
-            />
         </template>
     </el-table-page>
 </template>
@@ -119,24 +83,16 @@ import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
 import { adminApi } from '@/apis/admin';
 
 // Variables
-const booleanFieldToTextMap: ReadonlyRecord<FilteredKeyPath<AdminData, boolean>, string> = Object.freeze({
-    'enabled': '啟用',
-    'twoFactorAuthenticationStatus.emailOtp': 'Email OTP驗證',
-    'twoFactorAuthenticationStatus.totp': 'TOTP驗證',
-});
-
+// eslint-disable-next-line vue/max-len
+const booleanFieldToTextMap: ReadonlyRecord<FilteredKeyPath<AdminData, boolean>, string> = Object.freeze({ enabled: '啟用' });
 const elTablePageRef = ref<ComponentRef<'ElTablePage'>>(null);
-const formData = reactive<TablePageFormData<AdminData, 'totpSecret'>>({
+const formData = reactive<TablePageFormData<AdminData>>({
     account: '',
     email: '',
     enabled: false,
     id: '',
     name: '',
     password: '',
-    twoFactorAuthenticationStatus: {
-        emailOtp: false,
-        totp: false,
-    },
 });
 
 const formRules: ElFormRules<AdminData> = {

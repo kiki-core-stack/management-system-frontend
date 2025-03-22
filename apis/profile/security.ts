@@ -1,8 +1,4 @@
-import type {
-    ProfileSecurityChangePasswordFormData,
-    ProfileSecurityTotpSecretData,
-} from '@kiki-core-stack/pack/types/data/profile';
-import { kebabCase } from 'lodash-es';
+import type { ProfileSecurityChangePasswordFormData } from '@kiki-core-stack/pack/types/data/profile';
 
 export const profileSecurityApi = new class {
     readonly #baseUrl = '/api/profile/security';
@@ -17,13 +13,5 @@ export const profileSecurityApi = new class {
                 oldPassword: sha3512(data.oldPassword),
             },
         );
-    }
-
-    getTotpSecret() {
-        return getApi<ProfileSecurityTotpSecretData>(`${this.#baseUrl}/two-factor-status/totp/secret`);
-    }
-
-    toggleTwoFactorAuthenticationStatus(method: TwoFactorAuthenticationMethod, data: TwoFactorAuthenticationCodesData) {
-        return patchApi(`${this.#baseUrl}/two-factor-status/${kebabCase(method)}`, data);
     }
 }();

@@ -35,14 +35,4 @@ export const commonFormRules = {
         ],
     },
     name: [createElFormItemRule('請輸入名稱')],
-    otpCode: [
-        createElFormItemRule('請輸入OTP驗證碼'),
-        createElFormItemRule(
-            'OTP驗證碼必須為六位數字',
-            {
-                pattern: /^\d{6}$/,
-                type: 'regexp',
-            },
-        ),
-    ],
 };

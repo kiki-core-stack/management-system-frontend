@@ -26,11 +26,6 @@
                 prop="password"
                 type="password"
             />
-            <two-factor-authentication-code-inputs
-                ref="twoFactorAuthenticationCodeInputsRef"
-                email-otp-code-type="adminLogin"
-                :form-data="formData"
-            />
             <div class="flex items-center">
                 <el-form-input
                     ref="verCodeInputRef"
@@ -68,7 +63,6 @@
 
 <script lang="ts" setup>
 import type { AdminLoginFormData } from '@kiki-core-stack/pack/types/data/admin';
-import { mapValues } from 'lodash-es';
 
 import { authApi } from '@/apis/auth';
 import { init } from '@/plugins/12.init.client';
@@ -84,9 +78,7 @@ const { state: loginState } = createLoadingState();
 const accountInputRef = ref<ElFormInputRef>(null);
 const formData = reactive<AdminLoginFormData>({
     account: '',
-    emailOtpCode: '',
     password: '',
-    totpCode: '',
     verCode: '',
 });
 
@@ -104,7 +96,6 @@ const formRules: ElFormRules<AdminLoginFormData> = {
     ],
 };
 
-const twoFactorAuthenticationCodeInputsRef = ref<ComponentRef<'TwoFactorAuthenticationCodeInputs'>>(null);
 const verCodeInputRef = ref<ElFormInputRef>(null);
 const verCodeSrc = ref('/api/ver-code');
 
@@ -115,13 +106,9 @@ async function login() {
         if (!valid) return;
         loginState.loading = true;
         const response = await authApi.login(formData);
-        if (response?.status === 404) {
-            accountInputRef.value?.focus();
-            mapValues(profileState.twoFactorAuthenticationStatus, () => false);
-        } else if (response?.data.data?.isVerCodeIncorrect) verCodeInputRef.value?.focus();
-        else if (response?.data.data?.requiredTwoFactorAuthentications) {
-            twoFactorAuthenticationCodeInputsRef.value?.focus();
-        } else if (response?.data.success) {
+        if (response?.status === 404) accountInputRef.value?.focus();
+        else if (response?.data.data?.isVerCodeIncorrect) verCodeInputRef.value?.focus();
+        else if (response?.data.success) {
             await updateProfileState();
             ElNotification.success('登入成功！');
             formRef.value?.resetFields();
@@ -132,11 +119,7 @@ async function login() {
 
         loginState.loading = false;
         reloadVerCode();
-        formRef.value?.resetFields([
-            'emailOtpCode',
-            'totpCode',
-            'verCode',
-        ]);
+        formRef.value?.resetFields(['verCode']);
     });
 }
 

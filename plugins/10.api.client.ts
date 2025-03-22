@@ -18,16 +18,6 @@ export default defineNuxtPlugin(() => {
                 return;
             }
 
-            if (
-                profileState.autoUpdateTwoFactorAuthenticationStatus
-                && error.response.data.data?.requiredTwoFactorAuthentications
-            ) {
-                Object.assign(
-                    profileState.twoFactorAuthenticationStatus,
-                    error.response.data.data.requiredTwoFactorAuthentications,
-                );
-            }
-
             ElNotification.error(error.response.data.message);
             return error.response;
         },
