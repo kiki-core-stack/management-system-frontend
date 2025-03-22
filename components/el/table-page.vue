@@ -121,8 +121,12 @@
                 </template>
             </el-table-column>
         </el-table>
-        <div class="p-1">
+        <div
+            v-if="!hideFooter"
+            class="p-1"
+        >
             <el-pagination
+                v-if="!hidePaginator"
                 v-model:current-page="paginationParams.page"
                 v-model:page-size="paginationParams.limit"
                 layout="total, prev, pager, next, sizes"
@@ -206,6 +210,7 @@ interface Props<ControlRowBtnFunction extends (rowData: any) => boolean = (rowDa
     hideCreatedAtColumn?: boolean;
     hideDeleteBtn?: boolean;
     hideEditBtn?: boolean;
+    hideFooter?: boolean;
     hidePaginator?: boolean;
     hideRowDeleteBtnRule?: ControlRowBtnFunction;
     hideRowEditBtnRule?: ControlRowBtnFunction;
