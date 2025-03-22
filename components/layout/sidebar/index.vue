@@ -12,7 +12,7 @@
                 v-for="menuItemGroup, groupIndex in mainState.sidebar.menuItemGroups"
                 :key="groupIndex"
                 :index="menuItemGroup[0]"
-                @click="() => !menuItemGroup[2] && (mainState.sidebar.isShow = false)"
+                @click="!menuItemGroup[2] && (mainState.sidebar.isShow = false)"
             >
                 <template #title>
                     <span>{{ menuItemGroup[1] }}</span>
@@ -27,6 +27,26 @@
                     />
                 </div>
             </component>
+            <ElSubMenu index="/profile">
+                <template #title>
+                    個人
+                </template>
+                <ElSubMenu index="/profile/security">
+                    <template #title>
+                        安全性
+                    </template>
+                    <layout-sidebar-menu-item
+                        index="/profile/security"
+                        text="一般"
+                        @click="mainState.sidebar.isShow = false"
+                    />
+                    <layout-sidebar-menu-item
+                        index="/profile/security/session"
+                        text="登入裝置"
+                        @click="mainState.sidebar.isShow = false"
+                    />
+                </ElSubMenu>
+            </ElSubMenu>
         </el-scrollbar>
     </el-menu>
 </template>

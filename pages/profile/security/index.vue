@@ -2,7 +2,6 @@
     <div>
         <div class="flex flex-col gap-1 lg:flex-row ">
             <profile-security-change-password-form />
-            <profile-security-two-factor-authentication-block />
         </div>
     </div>
 </template>

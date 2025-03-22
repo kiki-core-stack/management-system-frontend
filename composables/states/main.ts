@@ -32,16 +32,6 @@ export const mainState = reactive<MainState>({
                     ],
                 ],
             ],
-            [
-                '/profile',
-                '個人',
-                [
-                    [
-                        '/profile/security',
-                        '安全性',
-                    ],
-                ],
-            ],
         ],
     },
 });
