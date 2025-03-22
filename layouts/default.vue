@@ -2,6 +2,7 @@
     <el-container class="bg-color-f5f5f5 color-mode-transition dark:bg-color-2c2c2c wh-full fixed p-0">
         <el-drawer
             v-model="mainState.sidebar.isShow"
+            body-class="p-0!"
             direction="ltr"
             size="200"
             :with-header="false"
