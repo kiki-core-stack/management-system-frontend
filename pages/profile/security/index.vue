@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="p-4">
         <div class="flex flex-col gap-1 lg:flex-row ">
             <profile-security-change-password-form />
         </div>

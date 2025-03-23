@@ -38,13 +38,8 @@
             >
                 <layout-header-tabs />
             </el-header>
-            <el-main
-                v-loading="mainState.isPageLoading"
-                class="p-0!"
-            >
-                <div class="p-4!">
-                    <slot />
-                </div>
+            <el-main class="p-0!">
+                <slot />
             </el-main>
         </el-container>
     </el-container>

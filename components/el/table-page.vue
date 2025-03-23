@@ -2,7 +2,10 @@
     <Head>
         <Title>{{ title }}</Title>
     </Head>
-    <div class="color-mode-transition dark:bg-dark  rounded-10px relative bg-white p-4">
+    <div
+        v-loading="isLoadingData"
+        class="color-mode-transition dark:bg-dark rounded-10px relative m-4 overflow-auto bg-white p-4"
+    >
         <slot name="before-table" />
         <div class="p-1">
             <slot name="table-header-start" />
@@ -16,7 +19,7 @@
                 </el-button>
                 <el-dropdown
                     trigger="click"
-                    :disabled="mainState.isPageLoading"
+                    :disabled="isLoadingData"
                     split-button
                     @click="loadData"
                 >
@@ -130,7 +133,7 @@
                 v-model:current-page="paginationParams.page"
                 v-model:page-size="paginationParams.limit"
                 layout="total, prev, pager, next, sizes"
-                :disabled="mainState.isPageLoading"
+                :disabled="isLoadingData"
                 :page-sizes="[
                     10,
                     20,
@@ -236,6 +239,7 @@ const {
     autoReloadDataCountdownSeconds,
     autoReloadDataInterval,
     autoReloadDataIntervalSeconds,
+    isLoadingData,
     paginationParams,
     tableData,
     totalTableDataCount,
@@ -249,7 +253,7 @@ const isDialogOpen = ref(false);
 
 // Functions
 async function loadData() {
-    mainState.isPageLoading = true;
+    isLoadingData.value = true;
     clearIntervalRef(autoReloadDataInterval);
     autoReloadDataCountdownSeconds.value = autoReloadDataIntervalSeconds.value;
     const response = await props.crudApiClass.getList({
@@ -264,7 +268,7 @@ async function loadData() {
         totalTableDataCount.value = response.data.data.count || 0;
     }
 
-    mainState.isPageLoading = false;
+    isLoadingData.value = false;
     setupAutoReloadData();
 }
 

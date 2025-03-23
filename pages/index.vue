@@ -1,53 +1,58 @@
 <template>
-    <div>
-        <el-filter-form
-            class="color-mode-transition dark:bg-dark rounded-10px bg-white p-4"
-            :model="filterQueryFormData"
-            enable-created-at-range-filter
-            @submit.prevent="loadData"
-        >
-            <template #before-submit-btn>
-                <el-filter-date-range-btn-group
-                    :filter-query="filterQueryFormData"
-                    @select="loadData"
-                />
-            </template>
-        </el-filter-form>
-        <div class="cards-container mt-4 grid gap-1">
-            <el-card body-class="p-4!">
-                <p class="mb-3">
-                    數量
-                </p>
-                <p class="fs-24px">
-                    1
-                </p>
-            </el-card>
-            <el-card body-class="p-4!">
-                <p class="mb-3">
-                    數量2
-                </p>
-                <p class="fs-24px">
-                    2
-                </p>
-            </el-card>
-        </div>
-        <div class="cards-container mt-1 grid gap-1">
-            <el-card body-class="p-4!">
-                <p class="mb-3">
-                    數量3
-                </p>
-                <p class="fs-24px">
-                    3
-                </p>
-            </el-card>
-            <el-card body-class="p-4!">
-                <p class="mb-3">
-                    數量4
-                </p>
-                <p class="fs-24px">
-                    4
-                </p>
-            </el-card>
+    <div
+        v-loading="isLoadingData"
+        class="h-full overflow-hidden"
+    >
+        <div class="h-full overflow-auto p-4">
+            <el-filter-form
+                class="color-mode-transition dark:bg-dark rounded-10px bg-white p-4"
+                :model="filterQueryFormData"
+                enable-created-at-range-filter
+                @submit.prevent="loadData"
+            >
+                <template #before-submit-btn>
+                    <el-filter-date-range-btn-group
+                        :filter-query="filterQueryFormData"
+                        @select="loadData"
+                    />
+                </template>
+            </el-filter-form>
+            <div class="cards-container mt-4 grid gap-1">
+                <el-card body-class="p-4!">
+                    <p class="mb-3">
+                        數量
+                    </p>
+                    <p class="fs-24px">
+                        1
+                    </p>
+                </el-card>
+                <el-card body-class="p-4!">
+                    <p class="mb-3">
+                        數量2
+                    </p>
+                    <p class="fs-24px">
+                        2
+                    </p>
+                </el-card>
+            </div>
+            <div class="cards-container mt-1 grid gap-1">
+                <el-card body-class="p-4!">
+                    <p class="mb-3">
+                        數量3
+                    </p>
+                    <p class="fs-24px">
+                        3
+                    </p>
+                </el-card>
+                <el-card body-class="p-4!">
+                    <p class="mb-3">
+                        數量4
+                    </p>
+                    <p class="fs-24px">
+                        4
+                    </p>
+                </el-card>
+            </div>
         </div>
     </div>
 </template>
@@ -65,12 +70,14 @@ const filterQueryFormData = reactive<BaseFilterQueryFormData>({
     startAt: getMidnightDateFromToday(),
 });
 
+const isLoadingData = ref(true);
+
 // Functions
 async function loadData() {
-    mainState.isPageLoading = true;
+    isLoadingData.value = true;
     const response = await homeApi.getDashboardData(filterQueryFormData);
     Object.assign(dashboardData, defaultHomeDashboardData, response?.data.data);
-    mainState.isPageLoading = false;
+    isLoadingData.value = false;
 }
 
 // Load data
