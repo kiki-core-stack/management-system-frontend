@@ -4,9 +4,9 @@
         add-data-btn-text="新增管理員"
         dialog-title-suffix="管理員"
         title="管理員管理"
-        :ask-delete-row-message-render="(rowData: AdminData) => `確定要刪除 ${rowData.account} 嗎？`"
+        :ask-delete-row-message-render="(row: AdminData) => `確定要刪除 ${row.account} 嗎？`"
         :crud-api-class="adminApi"
-        :disable-row-delete-btn-rule="(rowData: AdminData) => rowData.id === profileState.id"
+        :disable-row-delete-btn-rule="(row: AdminData) => row.id === profileState.id"
         :form-data="formData"
         :form-rules="formRules"
     >
@@ -102,14 +102,14 @@ const formRules: ElFormRules<AdminData> = {
 };
 
 // Functions
-function showAskToggleBooleanFieldMessageBox(rowData: AdminData, field: FilteredKeyPath<AdminData, boolean>) {
+function showAskToggleBooleanFieldMessageBox(row: AdminData, field: FilteredKeyPath<AdminData, boolean>) {
     askToggleBooleanFieldMessageBox(
         adminApi,
         '管理員',
         booleanFieldToTextMap,
-        rowData.account,
+        row.account,
         elTablePageRef,
-        rowData,
+        row,
         field,
     );
 

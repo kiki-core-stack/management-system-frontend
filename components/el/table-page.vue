@@ -70,7 +70,7 @@
                 v-if="!hideTimestampColumns && !hideCreatedAtColumn"
                 align="center"
                 label="建立時間"
-                :width="156"
+                width="156"
             >
                 <template #default="{ row }">
                     {{ formatDateOrTimestamp(row.createdAt) }}
@@ -80,7 +80,7 @@
                 v-if="!hideTimestampColumns && !hideUpdatedAtColumn"
                 align="center"
                 label="更新時間"
-                :width="156"
+                width="156"
             >
                 <template #default="{ row }">
                     {{ formatDateOrTimestamp(row.updatedAt) }}
@@ -190,13 +190,15 @@ import { isObjectLike } from 'lodash-es';
 
 import type { BaseCrudApi } from '@/apis/base';
 
+type ControlRowBtnFunction = (row: any) => boolean;
+
 interface Emits {
     (e: 'dialogOpen'): void;
 }
 
-interface Props<ControlRowBtnFunction extends (rowData: any) => boolean = (rowData: any) => boolean> {
+interface Props {
     addDataBtnText?: string;
-    askDeleteRowMessageRender?: (rowData: any) => string;
+    askDeleteRowMessageRender?: (row: any) => string;
     beforeDialogOpen?: (data?: any) => void;
     columnTotalsFooterColspan?: number;
     crudApiClass: BaseCrudApi;
@@ -226,7 +228,7 @@ interface Props<ControlRowBtnFunction extends (rowData: any) => boolean = (rowDa
 const props = withDefaults(
     defineProps<Props>(),
     {
-        askDeleteRowMessageRender: (rowData: any) => `確定要刪除 ${rowData.name} 嗎？`,
+        askDeleteRowMessageRender: (row: any) => `確定要刪除 ${row.name} 嗎？`,
         formData: () => ({ id: '' }),
         formRules: () => ({}),
     },
@@ -272,12 +274,12 @@ async function loadData() {
     setupAutoReloadData();
 }
 
-function openDialog(rowData?: TableRowData) {
+function openDialog(row?: TableRowData) {
     formRef.value?.resetFields();
-    props.beforeDialogOpen?.(rowData);
+    props.beforeDialogOpen?.(row);
     isDialogOpen.value = true;
-    isEditing.value = rowData !== undefined;
-    setTimeout(() => setFormDataValues(rowData || defaultFormData, props.formData));
+    isEditing.value = row !== undefined;
+    setTimeout(() => setFormDataValues(row || defaultFormData, props.formData));
 }
 
 async function saveData() {

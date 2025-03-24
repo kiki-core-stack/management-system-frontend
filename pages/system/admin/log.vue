@@ -41,7 +41,7 @@
             />
             <el-table-column
                 label="類型"
-                :formatter="({ type }) => adminLogTypeToTextMap[type as AdminLogType]"
+                :formatter="(row: AdminLogData) => adminLogTypeToTextMap[row.type]"
             />
             <el-table-column
                 label="內容"
@@ -61,7 +61,7 @@
 
 <script lang="ts" setup>
 import { adminLogTypeToTextMap } from '@kiki-core-stack/pack/constants/admin';
-import type { AdminLogType } from '@kiki-core-stack/pack/constants/admin';
+import type { AdminLogData } from '@kiki-core-stack/pack/types/data/admin';
 
 import { adminLogApi } from '@/apis/admin/log';
 import type { GetAdminLogsFilterQueryFormData } from '@/types/data/admin';

@@ -1,7 +1,7 @@
 <template>
     <el-table-page
         title="目前登入的裝置"
-        :ask-delete-row-message-render="(rowData) => `確定要刪除裝置：${parseDataToDeviceColumnText(rowData)} 嗎？`"
+        :ask-delete-row-message-render="(row) => `確定要刪除裝置：${parseDataToDeviceColumnText(row)} 嗎？`"
         :crud-api-class="profileSecuritySessionApi"
         :disable-row-delete-btn-rule="({ isCurrent }) => isCurrent"
         hide-add-data-btn
@@ -12,7 +12,7 @@
         <template #table>
             <el-table-column
                 label="裝置"
-                :formatter="(rowData) => parseDataToDeviceColumnText(rowData)"
+                :formatter="(row) => parseDataToDeviceColumnText(row)"
             />
             <el-table-column
                 label="最後活動IP"
@@ -20,7 +20,7 @@
             />
             <el-table-column
                 label="最後活動時間"
-                :formatter="({ lastActiveAt }) => formatDateOrTimestamp(lastActiveAt)"
+                :formatter="(row) => formatDateOrTimestamp(row.lastActiveAt)"
             />
             <el-table-column
                 label="登入IP"
@@ -29,8 +29,8 @@
             <el-table-column
                 align="center"
                 label="登入時間"
-                :formatter="({ createdAt }) => formatDateOrTimestamp(createdAt)"
-                :width="156"
+                width="156"
+                :formatter="(row) => formatDateOrTimestamp(row.createdAt)"
             />
         </template>
     </el-table-page>
@@ -43,11 +43,11 @@ import { UAParser } from 'ua-parser-js';
 import { profileSecuritySessionApi } from '@/apis/profile/security/session';
 
 // Functions
-function parseDataToDeviceColumnText(rowData: AdminSessionData) {
+function parseDataToDeviceColumnText(row: AdminSessionData) {
     let columnText = '';
-    if (rowData.isCurrent) columnText += '[當前] ';
-    if (!rowData.userAgent) return columnText += '未知裝置';
-    const parseResult = UAParser(rowData.userAgent);
+    if (row.isCurrent) columnText += '[當前] ';
+    if (!row.userAgent) return columnText += '未知裝置';
+    const parseResult = UAParser(row.userAgent);
     const browserName = parseResult.browser.name || '未知瀏覽器';
     const browserVersion = parseResult.browser.version || '未知瀏覽器版本';
     const osName = parseResult.os.name || '未知系統';
