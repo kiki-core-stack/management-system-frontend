@@ -200,12 +200,10 @@ interface Props {
     addDataBtnText?: string;
     askDeleteRowMessageRender?: (row: any) => string;
     beforeDialogOpen?: (data?: any) => void;
-    columnTotalsFooterColspan?: number;
     crudApiClass: BaseCrudApi;
     dialogTitleSuffix?: string;
     disableRowDeleteBtnRule?: ControlRowBtnFunction;
     disableRowEditBtnRule?: ControlRowBtnFunction;
-    enableColumnTotalsFooter?: boolean;
     enableFilterDateRangeBtnGroup?: boolean;
     filterQuery?: Dict<any>;
     formData?: TableRowData;
@@ -247,7 +245,6 @@ const {
     totalTableDataCount,
 } = createPageBaseVariables();
 const { state: saveDataState } = createLoadingState();
-const columnTotals = reactive<Dict<number | string>>({});
 const defaultFormData = cloneDeep(props.formData);
 const formRef = ref<ElFormRef>(null);
 const isEditing = ref(false);
@@ -264,7 +261,6 @@ async function loadData() {
     });
 
     if (response?.data.data) {
-        clearAndAssignObject(columnTotals, response.data.data.totals);
         tableData.length = 0;
         tableData.push(...response.data.data.list || []);
         totalTableDataCount.value = response.data.data.count || 0;
