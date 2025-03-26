@@ -37,7 +37,7 @@
         <template #table>
             <el-table-column
                 label="帳號"
-                prop="admin.account"
+                prop="a.account"
             />
             <el-table-column
                 label="類型"
