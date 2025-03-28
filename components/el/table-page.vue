@@ -315,7 +315,7 @@ function setFormDataValues(source: any, target: any) {
 }
 
 function setupAutoReloadData() {
-    if (autoReloadDataInterval.value || !autoReloadDataIntervalSeconds.value || import.meta.server) return;
+    if (autoReloadDataInterval.value || !autoReloadDataIntervalSeconds.value) return;
     autoReloadDataInterval.value = setInterval(async () => {
         autoReloadDataCountdownSeconds.value--;
         if (autoReloadDataCountdownSeconds.value <= 0) await loadData();
