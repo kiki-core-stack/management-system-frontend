@@ -14,11 +14,11 @@ WORKDIR /app
 RUN apt-get update && \
     apt-get upgrade -y
 
-## Install dependencies
+## Copy package-related files and install dependencies
 COPY ./.npmrc ./package.json ./pnpm-lock.yaml ./
 RUN --mount=id=pnpm-store,target=/pnpm/store,type=cache pnpm i --frozen-lockfile --prod=false
 
-## Copy files and build
+## Copy source files and build-related files, then build the app
 COPY --exclude=./docker-entrypoint.sh ./ ./
 RUN pnpm run lint && \
     pnpm run build
@@ -28,7 +28,7 @@ FROM node:22-slim
 
 ## Set envs and workdir
 ENV NODE_ENV=production \
-    TZ=Asia/Taipei
+    TZ=UTC
 
 WORKDIR /app
 
