@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:labs
 
 # Build stage
-FROM kikikanri/node22:base-alpine AS build-stage
+FROM kikikanri/node:22-alpine AS build-stage
 
 ## Set args, envs and workdir
 ARG NPM_CONFIG_REGISTRY
@@ -14,11 +14,11 @@ WORKDIR /app
 RUN apk update && \
     apk upgrade
 
-## Install dependencies
+## Copy package-related files and install dependencies
 COPY ./.npmrc ./package.json ./pnpm-lock.yaml ./
 RUN --mount=id=pnpm-store,target=/pnpm/store,type=cache pnpm i --frozen-lockfile --prod=false
 
-## Copy files and generate
+## Copy source files and build-related files, then build the app
 COPY --exclude=./docker-entrypoint.sh ./ ./
 RUN pnpm run lint && \
     pnpm run generate
@@ -29,9 +29,9 @@ FROM busybox:latest
 ## Set workdir
 WORKDIR /app
 
-## Copy files
+## Copy files and libraries
 COPY --from=build-stage /app/.output ./
 
 ## Copy and set the entrypoint script
 COPY ./docker-entrypoint.sh ./
-ENTRYPOINT ["./docker-entrypoint.sh"]
+CMD ["./docker-entrypoint.sh"]

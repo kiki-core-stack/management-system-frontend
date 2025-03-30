@@ -8,7 +8,6 @@ Dockerfile
 ### Git ###
 .git/
 .github/
-.gitignore
 .gitkeep
 .gitlab-ci.yml
 

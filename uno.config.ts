@@ -15,13 +15,6 @@ export default defineConfig({
             /^fs-(\d+px)$/,
             (matches) => ({ 'font-size': matches[1] }),
         ],
-        [
-            /^min-width-and-width-(\d+px)$/,
-            (matches) => ({
-                'min-width': matches[1],
-                'width': matches[1],
-            }),
-        ],
     ],
     shortcuts: {
         'flex-middle': 'flex items-center justify-center',
