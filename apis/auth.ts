@@ -4,7 +4,7 @@ export const authApi = new class {
     readonly #baseUrl = '/api/auth';
 
     login(data: AdminLoginFormData) {
-        return postApi<{ isVerCodeIncorrect?: boolean }>(
+        return postApi<undefined, 'invalidVerificationCode'>(
             `${this.#baseUrl}/login`,
             {
                 ...data,

@@ -107,7 +107,7 @@ async function login() {
         loginState.loading = true;
         const response = await authApi.login(formData);
         if (response?.status === 404) accountInputRef.value?.focus();
-        else if (response?.data.data?.isVerCodeIncorrect) verCodeInputRef.value?.focus();
+        else if (response?.data.errorCode === 'invalidVerificationCode') verCodeInputRef.value?.focus();
         else if (response?.data.success) {
             await updateProfileState();
             ElNotification.success('登入成功！');

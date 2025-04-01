@@ -15,8 +15,8 @@ importers:
         specifier: ^6.7.2
         version: 6.7.2
       '@kiki-core-stack/pack':
-        specifier: ^0.53.1
-        version: 0.53.1
+        specifier: ^0.57.3
+        version: 0.57.3
       '@kikiutils/nuxt':
         specifier: ^4.0.0
         version: 4.0.0(magicast@0.3.5)(nuxt@3.15.4(@parcel/watcher@2.5.1)(@types/node@22.13.14)(db0@0.3.1)(eslint@9.23.0(jiti@2.4.2))(ioredis@5.6.0)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.38.0)(sass@1.86.0)(terser@5.39.0)(typescript@5.8.2)(vite@6.2.3(@types/node@22.13.14)(jiti@2.4.2)(sass@1.86.0)(terser@5.39.0)(yaml@2.7.1))(yaml@2.7.1))(postcss@8.5.3)(typescript@5.8.2)(vite@6.2.3(@types/node@22.13.14)(jiti@2.4.2)(sass@1.86.0)(terser@5.39.0)(yaml@2.7.1))(vue@3.5.13(typescript@5.8.2))(webpack@5.98.0)
@@ -761,8 +761,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@kiki-core-stack/pack@0.53.1':
-    resolution: {integrity: sha512-78SpPVgoxj+OIkDRb3pAOTOKsxumf6qLzU+pTRdCao1ITJHI6cM9PuxYdKDW7JYFrmXr7l18J/xg/E6PFTqXpQ==}
+  '@kiki-core-stack/pack@0.57.3':
+    resolution: {integrity: sha512-ToxvYM+AqdtDSoM9359JMJErzmHYOBGUy9OgnTMeigspbd0QT1BnHBhhc3EZJhB8a7y3TRsFwfCvnbRWdNpKHg==}
 
   '@kikiutils/classes@5.0.1':
     resolution: {integrity: sha512-pO3dgR3KHIo0jBOCGaPYQarhRUBqRJzDSMHAprogmqJSNUylzsgwocEcPQwNj8T42thHdYnHOl2Omg9uQcUDtA==}
@@ -5715,13 +5715,14 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@kiki-core-stack/pack@0.53.1':
+  '@kiki-core-stack/pack@0.57.3':
     dependencies:
       '@kikiutils/classes': 5.0.1
       '@kikiutils/node': 6.0.1
       '@kikiutils/types': 4.0.0
       '@types/lodash-es': 4.17.12
       lodash-es: 4.17.21
+      type-fest: 4.38.0
 
   '@kikiutils/classes@5.0.1': {}
 
