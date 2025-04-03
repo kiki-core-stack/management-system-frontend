@@ -262,7 +262,7 @@ async function loadData() {
 
     if (response?.data.data) {
         tableData.length = 0;
-        tableData.push(...response.data.data.list || []);
+        tableData.push(...response.data.data.list);
         totalTableDataCount.value = response.data.data.count || 0;
     }
 

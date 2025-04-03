@@ -1,8 +1,6 @@
 function appendRedirectQueryFromCurrentPath(url: string) {
-    const [
-        path = '',
-        ...parts
-    ] = url.split('?');
+    // eslint-disable-next-line style/array-bracket-newline, style/array-element-newline
+    const [path = '', ...parts] = url.split('?');
     const urlSearchParams = new URLSearchParams(parts.join('?'));
     urlSearchParams.set('redirect', useRoute().fullPath);
     return `${path}?${urlSearchParams.toString()}`;
