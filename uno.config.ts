@@ -4,14 +4,6 @@ import { defineConfig } from 'unocss';
 export default defineConfig({
     rules: [
         [
-            /^bg-color-([a-z\d]+)$/,
-            (matches) => ({ 'background-color': `#${matches[1]}` }),
-        ],
-        [
-            /^color-([a-z\d]+)$/,
-            (matches) => ({ color: `#${matches[1]}` }),
-        ],
-        [
             /^fs-(\d+px)$/,
             (matches) => ({ 'font-size': matches[1] }),
         ],

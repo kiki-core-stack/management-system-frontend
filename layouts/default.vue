@@ -1,5 +1,5 @@
 <template>
-    <el-container class="bg-color-f5f5f5 color-mode-transition dark:bg-color-2c2c2c wh-full fixed p-0">
+    <el-container class="color-mode-transition wh-full fixed bg-[#f5f5f5] p-0 dark:bg-[#2c2c2c]">
         <el-drawer
             v-model="mainState.sidebar.isShow"
             body-class="p-0!"
@@ -33,7 +33,7 @@
             </el-header>
             <el-header
                 id="layout-header-tabs-container"
-                class="bg-color-e0e0e0 dark:bg-color-4a4a4a fs-14px flex overflow-auto"
+                class="fs-14px flex overflow-auto bg-[#e0e0e0] dark:bg-[#4a4a4a]"
                 height="unset"
             >
                 <layout-header-tabs />
