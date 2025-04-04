@@ -1,5 +1,5 @@
 <template>
-    <NuxtLink
+    <nuxt-link
         class="relative"
         active-class="active"
         to="/"
@@ -7,8 +7,8 @@
         @click.middle.prevent
     >
         <i class="fa-house fa-solid" />
-    </NuxtLink>
-    <NuxtLink
+    </nuxt-link>
+    <nuxt-link
         v-for="(tab, index) in tabsController.tabs"
         :key="index"
         class="relative flex items-center whitespace-nowrap"
@@ -24,7 +24,7 @@
         >
             <icon-xmark />
         </div>
-    </NuxtLink>
+    </nuxt-link>
 </template>
 
 <script lang="ts" setup>

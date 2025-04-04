@@ -1,10 +1,10 @@
 <template>
     <div>
-        <NuxtLoadingIndicator />
+        <nuxt-loading-indicator />
         <el-config-provider :locale="zhTw">
-            <NuxtLayout>
-                <NuxtPage />
-            </NuxtLayout>
+            <nuxt-layout>
+                <nuxt-page />
+            </nuxt-layout>
         </el-config-provider>
     </div>
 </template>
