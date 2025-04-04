@@ -67,7 +67,7 @@ import { adminLogApi } from '@/apis/admin/log';
 import type { GetAdminLogsFilterQueryFormData } from '@/types/data/admin';
 
 // Variables
-const dataTablePageRef = ref<ComponentRef<'DataTablePage'>>(null);
+const dataTablePageRef = ref<DataTablePageRef>(null);
 const filterQueryFormData = reactive<GetAdminLogsFilterQueryFormData>({
     adminIds: [],
     endAt: getMidnightDateFromToday(1),

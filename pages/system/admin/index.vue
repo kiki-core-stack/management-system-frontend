@@ -85,7 +85,7 @@ import { adminApi } from '@/apis/admin';
 // Variables
 // eslint-disable-next-line vue/max-len
 const booleanFieldToTextMap: ReadonlyRecord<FilteredKeyPath<AdminData, boolean>, string> = Object.freeze({ enabled: '啟用' });
-const dataTablePageRef = ref<ComponentRef<'DataTablePage'>>(null);
+const dataTablePageRef = ref<DataTablePageRef>(null);
 const formData = reactive<TablePageFormData<AdminData>>({
     account: '',
     email: '',
