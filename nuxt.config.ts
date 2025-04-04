@@ -15,6 +15,7 @@ export default defineNuxtConfig({
         port: Number(process.env.DEV_SERVER_PORT) || undefined,
     },
     googleFonts: { families: { 'Noto Sans TC': true } },
+    imports: { dirs: ['./globals/**/*.ts'] },
     kikiutilsNuxt: {
         enabledModules: {
             colorMode: true,
