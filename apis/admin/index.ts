@@ -7,19 +7,11 @@ export const adminApi = new class extends BaseCrudApi<AdminData> {
         super('/api/admin');
     }
 
-    #processRequestData(data: AdminData) {
+    override processCreateOrUpdateData(data: AdminData) {
         data = cloneDeep(data);
         if (!data.email?.trim()) delete data.email;
         if (data.password) data.password = sha3512(data.password);
         else delete data.password;
         return data;
-    }
-
-    override create(data: AdminData) {
-        return super.create(this.#processRequestData(data));
-    }
-
-    override update(id: string, data: AdminData) {
-        return super.update(id, this.#processRequestData(data));
     }
 }();
