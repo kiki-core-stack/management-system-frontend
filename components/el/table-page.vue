@@ -73,7 +73,7 @@
                 width="156"
             >
                 <template #default="{ row }">
-                    {{ formatDateOrTimestamp(row.createdAt) }}
+                    {{ formatDate(row.createdAt) }}
                 </template>
             </el-table-column>
             <el-table-column
@@ -83,7 +83,7 @@
                 width="156"
             >
                 <template #default="{ row }">
-                    {{ formatDateOrTimestamp(row.updatedAt) }}
+                    {{ formatDate(row.updatedAt) }}
                 </template>
             </el-table-column>
             <el-table-column

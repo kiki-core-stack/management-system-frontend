@@ -1,9 +1,9 @@
-export { flattenToSingleValue } from '@kikiutils/node';
 export {
     getEnumNumberValues,
     getEnumStringValues,
 } from '@kikiutils/node/enum';
-export { calculateToPercentageString } from '@kikiutils/node/math';
+export { extractFirstValue } from '@kikiutils/node/general';
+export { toPercentageString } from '@kikiutils/node/math';
 
 export function clearAndAssignObject(target: object, ...sources: any[]) {
     Object.keys(target).forEach((key) => delete target[key as keyof typeof target]);

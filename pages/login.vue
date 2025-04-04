@@ -113,7 +113,7 @@ async function login() {
             ElNotification.success('登入成功！');
             formRef.value?.resetFields();
             init();
-            navigateTo(flattenToSingleValue(useRoute().query.redirect, '/'), { replace: true });
+            navigateTo(extractFirstValue(useRoute().query.redirect, '/'), { replace: true });
             return;
         }
 

@@ -20,7 +20,7 @@
             />
             <el-table-column
                 label="最後活動時間"
-                :formatter="(row) => formatDateOrTimestamp(row.lastActiveAt)"
+                :formatter="(row) => formatDate(row.lastActiveAt)"
             />
             <el-table-column
                 label="登入IP"
@@ -30,7 +30,7 @@
                 align="center"
                 label="登入時間"
                 width="156"
-                :formatter="(row) => formatDateOrTimestamp(row.createdAt)"
+                :formatter="(row) => formatDate(row.createdAt)"
             />
         </template>
     </el-table-page>

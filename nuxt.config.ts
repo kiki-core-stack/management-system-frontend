@@ -14,12 +14,8 @@ export default defineNuxtConfig({
         host: process.env.DEV_SERVER_HOST,
         port: Number(process.env.DEV_SERVER_PORT) || undefined,
     },
+    googleFonts: { families: { 'Noto Sans TC': true } },
     kikiutilsNuxt: {
-        enabledComposables: {
-            clipboard: true,
-            datetime: true,
-            hash: true,
-        },
         enabledModules: {
             colorMode: true,
             elementPlus: true,
@@ -27,9 +23,10 @@ export default defineNuxtConfig({
             robots: true,
             security: true,
         },
-        enabledStyles: {
-            font: true,
-            scrollbar: true,
+        enabledUtils: {
+            clipboard: true,
+            datetime: true,
+            hash: true,
         },
     },
     modules: ['@kikiutils/nuxt'],
