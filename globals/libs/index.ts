@@ -7,7 +7,7 @@ export function askToggleBooleanFieldMessageBox<RD extends TableRowData, F exten
     entityLabel: string,
     toTextMap: M,
     entityName: string,
-    elTablePageRef: Ref<ComponentRef<'ElTablePage'>>,
+    dataTablePageRef: Ref<ComponentRef<'DataTablePage'>>,
     row: RD,
     field: F,
 ) {
@@ -28,7 +28,7 @@ export function askToggleBooleanFieldMessageBox<RD extends TableRowData, F exten
                 if (response?.data.success) {
                     done();
                     ElNotification.success(`已${actionText}${entityLabel} ${entityName} 的${fieldText}狀態！`);
-                    await elTablePageRef.value?.loadData();
+                    await dataTablePageRef.value?.loadData();
                 } else {
                     instance.confirmButtonLoading = false;
                     instance.confirmButtonText = '確定';

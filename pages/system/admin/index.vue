@@ -1,6 +1,6 @@
 <template>
-    <el-table-page
-        ref="elTablePageRef"
+    <data-table-page
+        ref="dataTablePageRef"
         add-data-btn-text="新增管理員"
         dialog-title-suffix="管理員"
         title="管理員管理"
@@ -74,7 +74,7 @@
                 :disabled="formData.id === profileState.id"
             />
         </template>
-    </el-table-page>
+    </data-table-page>
 </template>
 
 <script lang="ts" setup>
@@ -85,7 +85,7 @@ import { adminApi } from '@/apis/admin';
 // Variables
 // eslint-disable-next-line vue/max-len
 const booleanFieldToTextMap: ReadonlyRecord<FilteredKeyPath<AdminData, boolean>, string> = Object.freeze({ enabled: '啟用' });
-const elTablePageRef = ref<ComponentRef<'ElTablePage'>>(null);
+const dataTablePageRef = ref<ComponentRef<'DataTablePage'>>(null);
 const formData = reactive<TablePageFormData<AdminData>>({
     account: '',
     email: '',
@@ -108,7 +108,7 @@ function showAskToggleBooleanFieldMessageBox(row: AdminData, field: FilteredKeyP
         '管理員',
         booleanFieldToTextMap,
         row.account,
-        elTablePageRef,
+        dataTablePageRef,
         row,
         field,
     );

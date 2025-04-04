@@ -1,6 +1,6 @@
 <template>
-    <el-table-page
-        ref="elTablePageRef"
+    <data-table-page
+        ref="dataTablePageRef"
         title="管理員日誌"
         :crud-api-class="adminLogApi"
         :filter-query="filterQueryFormData"
@@ -14,7 +14,7 @@
                 class="pb-1 pl-1"
                 :model="filterQueryFormData"
                 enable-created-at-range-filter
-                @submit.prevent="elTablePageRef?.loadData()"
+                @submit.prevent="dataTablePageRef?.loadData()"
             >
                 <el-form-item label="管理員">
                     <selector-admin
@@ -56,7 +56,7 @@
                 prop="fingerprint"
             />
         </template>
-    </el-table-page>
+    </data-table-page>
 </template>
 
 <script lang="ts" setup>
@@ -67,7 +67,7 @@ import { adminLogApi } from '@/apis/admin/log';
 import type { GetAdminLogsFilterQueryFormData } from '@/types/data/admin';
 
 // Variables
-const elTablePageRef = ref<ComponentRef<'ElTablePage'>>(null);
+const dataTablePageRef = ref<ComponentRef<'DataTablePage'>>(null);
 const filterQueryFormData = reactive<GetAdminLogsFilterQueryFormData>({
     adminIds: [],
     endAt: getMidnightDateFromToday(1),

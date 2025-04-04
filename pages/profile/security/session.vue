@@ -1,5 +1,5 @@
 <template>
-    <el-table-page
+    <data-table-page
         title="目前登入的裝置"
         :ask-delete-row-message-render="(row) => `確定要刪除裝置：${parseDataToDeviceColumnText(row)} 嗎？`"
         :crud-api-class="profileSecuritySessionApi"
@@ -33,7 +33,7 @@
                 :formatter="(row) => formatDate(row.createdAt)"
             />
         </template>
-    </el-table-page>
+    </data-table-page>
 </template>
 
 <script lang="ts" setup>
