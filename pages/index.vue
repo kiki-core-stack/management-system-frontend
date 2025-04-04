@@ -5,7 +5,7 @@
     >
         <div class="h-full overflow-auto p-4">
             <el-filter-form
-                class="color-mode-transition dark:bg-dark rounded-10px bg-white p-4"
+                class="dark:bg-dark rounded-10px bg-white p-4"
                 :model="filterQueryFormData"
                 enable-created-at-range-filter
                 @submit.prevent="loadData"

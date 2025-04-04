@@ -1,5 +1,5 @@
 <template>
-    <el-container class="color-mode-transition wh-full fixed bg-[#f5f5f5] p-0 dark:bg-[#2c2c2c]">
+    <el-container class="wh-full fixed bg-[#f5f5f5] p-0 dark:bg-[#2c2c2c]">
         <el-drawer
             v-model="mainState.sidebar.isShow"
             body-class="p-0!"
@@ -18,7 +18,6 @@
         <el-container>
             <el-header
                 class="
-                    color-mode-transition
                     dark:bg-dark
                     py-2!
                     flex
