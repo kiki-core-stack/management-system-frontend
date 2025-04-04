@@ -17,7 +17,6 @@ export default defineNuxtConfig({
     googleFonts: {
         families: {
             'Noto Sans': '100..900',
-            'Noto Sans JP': '100..900',
             'Noto Sans TC': '100..900',
         },
     },
