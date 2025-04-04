@@ -3,7 +3,7 @@
         class="loading-spinner inline-block rounded-full"
         :style="{
             '--border-color': color,
-            '--border-size': borderSize,
+            '--border-width': borderWidth,
             'height': size,
             'width': size,
         }"
@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
 interface Props {
-    borderSize?: string;
+    borderWidth?: string;
     color?: string;
     size: string;
 }
@@ -21,7 +21,7 @@ interface Props {
 withDefaults(
     defineProps<Props>(),
     {
-        borderSize: '0.25rem',
+        borderWidth: '0.25rem',
         color: 'red',
     },
 );
@@ -40,8 +40,8 @@ withDefaults(
 
 .loading-spinner {
     animation: loading-spinner 0.75s linear infinite;
-    border: var(--border-size) solid var(--border-color);
-    border-right: var(--border-size) solid transparent;
-    vertical-align: -var(--border-size);
+    border: var(--border-width) solid var(--border-color);
+    border-right: var(--border-width) solid transparent;
+    vertical-align: -var(--border-width);
 }
 </style>
