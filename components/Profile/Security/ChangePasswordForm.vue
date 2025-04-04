@@ -42,11 +42,7 @@
                 變更
             </el-button>
         </div>
-        <state-absolute
-            loading-text="變更中..."
-            success-text="變更成功！"
-            :state="changePasswordState"
-        />
+        <status-overlay ref="changePasswordStatusOverlayRef" />
     </el-form>
 </template>
 
@@ -56,7 +52,6 @@ import type { ProfileSecurityChangePasswordFormData } from '@kiki-core-stack/pac
 import { profileSecurityApi } from '@/apis/profile/security';
 
 // Variables
-const { state: changePasswordState } = createLoadingState();
 const formData = reactive<ProfileSecurityChangePasswordFormData>({
     conformPassword: '',
     newPassword: '',
@@ -70,21 +65,23 @@ const formRules: ElFormRules<ProfileSecurityChangePasswordFormData> = {
     oldPassword: [createElFormItemRule('請輸入舊密碼')],
 };
 
+const changePasswordStatusOverlayRef = ref<ComponentRef<'StatusOverlay'>>(null);
+
 // Functions
 const clearChangePasswordForm = () => formRef.value?.resetFields();
 
 async function changePassword() {
-    if (changePasswordState.loading) return;
+    if (changePasswordStatusOverlayRef.value?.isVisible) return;
     await formRef.value?.validate(async (valid) => {
         if (!valid) return;
-        changePasswordState.loading = true;
+        changePasswordStatusOverlayRef.value?.showLoading();
         const response = await profileSecurityApi.changePassword(formData);
         if (!response?.data.success) {
-            changePasswordState.loading = false;
+            changePasswordStatusOverlayRef.value?.hide();
             return;
         }
 
-        changePasswordState.success = true;
+        changePasswordStatusOverlayRef.value?.showSuccess('變更成功！', -1);
         setTimeout(() => assignUrlWithOptionalRedirect('/login/', true), 1000);
     });
 }

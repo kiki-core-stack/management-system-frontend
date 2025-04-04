@@ -53,11 +53,7 @@
                 登入
             </el-button>
         </el-form>
-        <state-absolute
-            loading-text="登入中..."
-            success-text="登入成功！"
-            :state="loginState"
-        />
+        <status-overlay ref="loginStatusOverlayRef" />
     </div>
 </template>
 
@@ -74,7 +70,6 @@ definePageMeta({
 });
 
 // Variables
-const { state: loginState } = createLoadingState();
 const accountInputRef = ref<ElFormInputRef>(null);
 const formData = reactive<AdminLoginFormData>({
     account: '',
@@ -96,15 +91,16 @@ const formRules: ElFormRules<AdminLoginFormData> = {
     ],
 };
 
+const loginStatusOverlayRef = ref<ComponentRef<'StatusOverlay'>>(null);
 const verCodeInputRef = ref<ElFormInputRef>(null);
 const verCodeSrc = ref('/api/ver-code');
 
 // Functions
 async function login() {
-    if (loginState.loading) return;
+    if (!loginStatusOverlayRef.value || loginStatusOverlayRef.value.isVisible) return;
     await formRef.value?.validate(async (valid) => {
         if (!valid) return;
-        loginState.loading = true;
+        loginStatusOverlayRef.value!.showLoading('登入中...');
         const response = await authApi.login(formData);
         if (response?.status === 404) accountInputRef.value?.focus();
         else if (response?.data.errorCode === 'invalidVerificationCode') verCodeInputRef.value?.focus();
@@ -117,7 +113,7 @@ async function login() {
             return;
         }
 
-        loginState.loading = false;
+        loginStatusOverlayRef.value!.hide();
         reloadVerCode();
         formRef.value?.resetFields(['verCode']);
     });

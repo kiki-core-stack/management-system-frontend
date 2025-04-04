@@ -40,23 +40,6 @@ export function copyTextToClipboardAndShowMessage(text: string) {
     return true;
 }
 
-export function createLoadingState() {
-    let resetTimeout: Nullable<NodeJS.Timeout>;
-    return {
-        reset(timeout: number = 1000) {
-            if (resetTimeout) clearTimeout(resetTimeout);
-            resetTimeout = setTimeout(() => {
-                this.state.error = this.state.loading = this.state.success = false;
-            }, timeout);
-        },
-        state: reactive({
-            error: false,
-            loading: false,
-            success: false,
-        }),
-    };
-}
-
 export function objectToFormData(object: object) {
     const formData = new FormData();
     for (const kV of Object.entries(object)) formData.append(...kV);
