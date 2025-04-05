@@ -8,4 +8,9 @@ declare global {
         limit?: number;
         page?: number;
     }
+
+    interface QueryTimeRange {
+        endAt: Date;
+        startAt: Date;
+    }
 }

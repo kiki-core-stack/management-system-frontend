@@ -5,9 +5,4 @@ declare global {
         T extends object,
         O extends keyof T = never,
     > = Required<OmitMongooseTimestampAndOtherFields<T, O>>;
-
-    interface BaseFilterQueryFormData {
-        endAt: Date | number | string;
-        startAt: Date | number | string;
-    }
 }
