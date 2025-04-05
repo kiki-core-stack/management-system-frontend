@@ -30,7 +30,6 @@
                 <template #default="{ row }">
                     <el-switch
                         v-model="row.enabled"
-                        :before-change="() => showAskToggleBooleanFieldMessageBox(row, 'enabled')"
                         :disabled="row.id === profileState.id"
                     />
                 </template>
@@ -83,8 +82,6 @@ import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
 import { adminApi } from '@/apis/admin';
 
 // Variables
-// eslint-disable-next-line vue/max-len
-const booleanFieldToTextMap: ReadonlyRecord<FilteredKeyPath<AdminData, boolean>, string> = Object.freeze({ enabled: '啟用' });
 const dataTablePageRef = ref<DataTablePageRef>(null);
 const formData = reactive<TablePageFormData<AdminData>>({
     account: '',
@@ -100,19 +97,4 @@ const formRules: ElFormRules<AdminData> = {
     email: commonFormRules.email.nonRequired,
     name: commonFormRules.name,
 };
-
-// Functions
-function showAskToggleBooleanFieldMessageBox(row: AdminData, field: FilteredKeyPath<AdminData, boolean>) {
-    askToggleBooleanFieldMessageBox(
-        adminApi,
-        '管理員',
-        booleanFieldToTextMap,
-        row.account,
-        dataTablePageRef,
-        row,
-        field,
-    );
-
-    return false;
-}
 </script>
