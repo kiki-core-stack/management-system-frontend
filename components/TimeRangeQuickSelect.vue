@@ -24,18 +24,15 @@ import { getDateRangeFromDate } from '@kikiutils/node/datetime';
 import type { DateRangeType } from '@kikiutils/node/datetime';
 
 // Define props, models and emits
-const props = defineProps<{ filterQuery?: Dict<any> }>();
 const emit = defineEmits<{ (e: 'select'): void }>();
+const filters = defineModel<QueryTimeRange>({ required: true });
 
 // Functions
 function onSelect(type: DateRangeType) {
-    if (!props.filterQuery) return;
     // eslint-disable-next-line style/object-curly-newline
     const { endDate, startDate } = getDateRangeFromDate(new Date(), type, { setEndDateToNextDayStart: true });
-    // eslint-disable-next-line vue/no-mutating-props
-    props.filterQuery.endAt = endDate;
-    // eslint-disable-next-line vue/no-mutating-props
-    props.filterQuery.startAt = startDate;
+    filters.value.endAt = endDate;
+    filters.value.startAt = startDate;
     emit('select');
 }
 </script>
