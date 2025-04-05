@@ -1,22 +1,3 @@
-export const commonElDatePickerShortcuts = [
-    {
-        text: '明天',
-        value: getMidnightDateFromToday(1),
-    },
-    {
-        text: '今天',
-        value: getMidnightDateFromToday(),
-    },
-    {
-        text: '昨天',
-        value: getMidnightDateFromToday(-1),
-    },
-    {
-        text: '7天前',
-        value: getMidnightDateFromToday(-7),
-    },
-];
-
 export const commonFormRules = {
     account: [createElFormItemRule('請輸入帳號')],
     email: {
