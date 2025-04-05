@@ -37,7 +37,7 @@
             >
                 <layout-header-tabs />
             </el-header>
-            <el-main class="p-0!">
+            <el-main class="overflow-hidden! p-0!">
                 <slot />
             </el-main>
         </el-container>
