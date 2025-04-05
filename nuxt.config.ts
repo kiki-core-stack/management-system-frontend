@@ -36,6 +36,7 @@ export default defineNuxtConfig({
         },
     },
     modules: ['@kikiutils/nuxt'],
+    robots: { disallow: '/' },
     security: {
         headers: {
             contentSecurityPolicy: {
