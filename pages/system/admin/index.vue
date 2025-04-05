@@ -93,8 +93,16 @@ const formData = reactive<TablePageFormData<AdminData>>({
 });
 
 const formRules: ElFormRules<AdminData> = {
-    account: commonFormRules.account,
-    email: commonFormRules.email.nonRequired,
-    name: commonFormRules.name,
+    account: [createElFormItemRule('請輸入帳號')],
+    email: [
+        createElFormItemRule(
+            '請輸入正確的Email',
+            {
+                required: false,
+                type: 'email',
+            },
+        ),
+    ],
+    name: [createElFormItemRule('請輸入名稱')],
 };
 </script>
