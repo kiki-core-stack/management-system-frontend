@@ -21,12 +21,9 @@ export abstract class BaseCrudApi<T extends TableRowData = TableRowData> {
 
     getList(params?: GetListApiParams) {
         if (params) params = cloneDeep(params);
-        if (params?.filterQuery) params.filterQuery = JSON.stringify(params.filterQuery);
-        if (params?.selectFields) params.selectFields = JSON.stringify(params.selectFields);
-        return getApi<{ count: number; list: T[]; totals?: Dict<number | string> }>(
-            `${this.baseUrl}/list`,
-            params,
-        );
+        if (params?.fields) params.fields = JSON.stringify(params.fields);
+        if (params?.filter) params.filter = JSON.stringify(params.filter);
+        return getApi<{ count: number; list: T[]; totals?: Dict<number | string> }>(`${this.baseUrl}/list`, params);
     }
 
     processCreateOrUpdateData(data: OmitMongooseTimestampAndOtherFields<T>) {
