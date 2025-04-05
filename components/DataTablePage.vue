@@ -1,187 +1,133 @@
 <template>
-    <Head>
-        <Title>{{ title }}</Title>
-    </Head>
     <div
         v-loading="isLoadingData"
-        class="dark:bg-dark rounded-10px relative m-4 overflow-auto bg-white p-4"
+        class="h-full overflow-auto p-4"
     >
-        <slot name="before-table" />
-        <div class="p-1">
-            <slot name="table-header-start" />
-            <div class="gap-btns flex flex-wrap">
-                <slot name="before-table-header-btns" />
-                <el-button
-                    v-if="!hideAddDataBtn"
-                    @click="openDialog()"
-                >
-                    {{ addDataBtnText }}
-                </el-button>
-                <el-dropdown
-                    trigger="click"
-                    :disabled="isLoadingData"
-                    split-button
-                    @click="loadData"
-                >
-                    刷新{{ autoReloadDataIntervalSeconds === 0 ? '' : `(${autoReloadDataCountdownSeconds})` }}
-                    <template #dropdown>
-                        <el-dropdown-menu>
-                            <el-dropdown-item @click="setAutoReloadDataIntervalSeconds(0)">
-                                關閉
-                            </el-dropdown-item>
-                            <el-dropdown-item
-                                v-for="sec in [
-                                    5,
-                                    10,
-                                    20,
-                                    30,
-                                    40,
-                                    50,
-                                    60,
-                                ]"
-                                :key="sec"
-                                @click="setAutoReloadDataIntervalSeconds(sec)"
-                            >
-                                {{ sec }}s
-                            </el-dropdown-item>
-                        </el-dropdown-menu>
-                    </template>
-                </el-dropdown>
-                <el-filter-date-range-btn-group
-                    v-if="enableFilterDateRangeBtnGroup"
-                    :filter-query="filterQuery"
-                    @select="loadData"
-                />
-                <slot name="after-table-header-btns" />
-            </div>
-            <slot name="table-header-end" />
-        </div>
-        <el-table
-            row-key="id"
-            table-layout="auto"
-            :data="tableData"
-            border
-            flexible
-            highlight-current-row
-            stripe
-        >
-            <slot name="table" />
-            <el-table-column
-                v-if="!hideTimestampColumns && !hideCreatedAtColumn"
-                align="center"
-                label="建立時間"
-                width="156"
-            >
-                <template #default="{ row }">
-                    {{ formatDate(row.createdAt) }}
-                </template>
-            </el-table-column>
-            <el-table-column
-                v-if="!hideTimestampColumns && !hideUpdatedAtColumn"
-                align="center"
-                label="更新時間"
-                width="156"
-            >
-                <template #default="{ row }">
-                    {{ formatDate(row.updatedAt) }}
-                </template>
-            </el-table-column>
-            <el-table-column
-                v-if="!hideActionsColumn"
-                align="center"
-                label="操作"
-            >
-                <template #default="scope">
-                    <div class="flex-middle gap-btns">
-                        <slot
-                            :="scope"
-                            name="before-edit-btn"
-                        />
-                        <el-action-btn
-                            v-if="!hideEditBtn && !hideRowEditBtnRule?.(scope.row)"
-                            :disabled="disableRowEditBtnRule?.(scope.row)"
-                            @click="openDialog(scope.row)"
-                        >
-                            編輯
-                        </el-action-btn>
-                        <slot
-                            :="scope"
-                            name="after-edit-btn"
-                        />
-                        <el-action-btn
-                            v-if="!hideDeleteBtn && !hideRowDeleteBtnRule?.(scope.row)"
-                            type="danger"
-                            :disabled="disableRowDeleteBtnRule?.(scope.row)"
-                            @click="showAskDeleteRowMessageBox(scope.row)"
-                        >
-                            刪除
-                        </el-action-btn>
-                        <slot
-                            :="scope"
-                            name="after-delete-btn"
-                        />
-                    </div>
-                </template>
-            </el-table-column>
-        </el-table>
-        <div
-            v-if="!hideFooter"
-            class="p-1"
-        >
-            <el-pagination
-                v-if="!hidePaginator"
-                v-model:current-page="paginationParams.page"
-                v-model:page-size="paginationParams.limit"
-                layout="total, prev, pager, next, sizes"
-                :disabled="isLoadingData"
-                :page-sizes="[
-                    10,
-                    20,
-                    50,
-                    100,
-                    500,
-                    1000,
-                ]"
-                :pager-count="5"
-                :total="totalTableDataCount"
-                @change="loadData"
-            />
-        </div>
-        <el-dialog
-            v-model="isDialogOpen"
-            width="96vmin"
-            :close-on-click-modal="!saveDataState.loading"
-            :close-on-press-escape="!saveDataState.loading"
-            :title="`${isEditing ? '編輯' : '新增'}${dialogTitleSuffix}`"
-            align-center
-            append-to-body
-            center
-            draggable
-            @open="$emit('dialogOpen')"
-        >
-            <el-form
-                ref="formRef"
-                label-width="auto"
-                :model="formData"
-                :rules="formRules"
-                status-icon
-                @submit.prevent="saveData"
-            >
-                <slot name="form" />
-                <div class="text-center">
+        <Head>
+            <Title>{{ title }}</Title>
+        </Head>
+        <div class="dark:bg-dark rounded-10px relative bg-white p-4">
+            <slot name="before-toolbar" />
+            <div class="el-bg-and-border rounded-t-1 border border-b-0 p-1">
+                <slot name="toolbar-prepend" />
+                <div class="gap-btns flex flex-wrap">
                     <el-button
-                        native-type="submit"
-                        type="primary"
+                        v-if="!hideAddDataBtn"
+                        @click="openDialog()"
                     >
-                        儲存
+                        {{ addDataBtnText }}
                     </el-button>
+                    <el-button @click="loadData">
+                        刷新
+                    </el-button>
+                    <!-- @vue-expect-error -->
+                    <time-range-quick-select
+                        v-if="showTimeRangeQuickSelect"
+                        v-model="filters"
+                        @select="loadData"
+                    />
                 </div>
-            </el-form>
-            <state-absolute
-                :loading-text="formData.id ? '儲存中...' : '新增中...'"
-                :state="saveDataState"
-            />
-        </el-dialog>
+                <slot name="toolbar-append" />
+            </div>
+            <el-table
+                table-layout="auto"
+                :data="tableData"
+                :row-key="rowKey"
+                border
+                flexible
+                highlight-current-row
+                stripe
+            >
+                <slot name="table" />
+                <el-table-column
+                    v-if="!hideTimestampColumns && !hideCreatedAtColumn"
+                    align="center"
+                    label="建立時間"
+                    width="156"
+                    :formatter="(row) => formatDate(row.createdAt)"
+                />
+                <el-table-column
+                    v-if="!hideTimestampColumns && !hideUpdatedAtColumn"
+                    align="center"
+                    label="更新時間"
+                    width="156"
+                    :formatter="(row) => formatDate(row.updatedAt)"
+                />
+                <el-table-column
+                    v-if="!hideActionsColumn"
+                    align="center"
+                    label="操作"
+                >
+                    <template #default="scope">
+                        <div class="flex-middle gap-btns">
+                            <el-action-btn
+                                v-if="!hideEditBtn && !hideRowEditBtnRule?.(scope.row)"
+                                :disabled="disableRowEditBtnRule?.(scope.row)"
+                                @click="openDialog(scope.row)"
+                            >
+                                編輯
+                            </el-action-btn>
+                            <el-action-btn
+                                v-if="!hideDeleteBtn && !hideRowDeleteBtnRule?.(scope.row)"
+                                type="danger"
+                                :disabled="disableRowDeleteBtnRule?.(scope.row)"
+                            >
+                                刪除
+                            </el-action-btn>
+                        </div>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <div class="el-bg-and-border rounded-b-1 border border-t-0 p-1">
+                <el-pagination
+                    v-model:current-page="paginationParams.page"
+                    v-model:page-size="paginationParams.limit"
+                    layout="total, prev, pager, next, sizes"
+                    :page-sizes="[
+                        10,
+                        20,
+                        50,
+                        100,
+                        500,
+                        1000,
+                    ]"
+                    :pager-count="5"
+                    :total="totalTableDataCount"
+                    @change="loadData"
+                />
+            </div>
+            <el-dialog
+                v-model="isDialogOpen"
+                width="96vmin"
+                :close-on-click-modal="!saveDataStatusOverlayRef?.isVisible"
+                :close-on-press-escape="!saveDataStatusOverlayRef?.isVisible"
+                :title="`${isEditing ? '編輯' : '新增'}${dialogTitleSuffix}`"
+                align-center
+                append-to-body
+                center
+                draggable
+            >
+                <el-form
+                    ref="formRef"
+                    label-width="auto"
+                    :model="formData"
+                    :rules="formRules"
+                    status-icon
+                    @submit.prevent="saveData"
+                >
+                    <slot name="form" />
+                    <div class="text-center">
+                        <el-button
+                            native-type="submit"
+                            type="primary"
+                        >
+                            儲存
+                        </el-button>
+                    </div>
+                </el-form>
+                <status-overlay ref="saveDataStatusOverlayRef" />
+            </el-dialog>
+        </div>
     </div>
 </template>
 
@@ -190,35 +136,26 @@ import { isObjectLike } from 'lodash-es';
 
 import type { BaseCrudApi } from '@/apis/base';
 
-type ControlRowBtnFunction = (row: any) => boolean;
-
-interface Emits {
-    (e: 'dialogOpen'): void;
-}
+type ControlActionBtnFunction = (row: any) => boolean;
 
 interface Props {
     addDataBtnText?: string;
-    askDeleteRowMessageRender?: (row: any) => string;
-    beforeDialogOpen?: (data?: any) => void;
-    crudApiClass: BaseCrudApi;
+    crudApi: BaseCrudApi;
     dialogTitleSuffix?: string;
-    disableRowDeleteBtnRule?: ControlRowBtnFunction;
-    disableRowEditBtnRule?: ControlRowBtnFunction;
-    enableFilterDateRangeBtnGroup?: boolean;
-    filterQuery?: Dict<any>;
-    formData?: TableRowData;
-    formRules?: ElFormRules<TableRowData>;
+    disableRowDeleteBtnRule?: ControlActionBtnFunction;
+    disableRowEditBtnRule?: ControlActionBtnFunction;
+    formRules?: ElFormRules<Dict<any>>;
     hideActionsColumn?: boolean;
     hideAddDataBtn?: boolean;
     hideCreatedAtColumn?: boolean;
     hideDeleteBtn?: boolean;
     hideEditBtn?: boolean;
-    hideFooter?: boolean;
-    hidePaginator?: boolean;
-    hideRowDeleteBtnRule?: ControlRowBtnFunction;
-    hideRowEditBtnRule?: ControlRowBtnFunction;
+    hideRowDeleteBtnRule?: ControlActionBtnFunction;
+    hideRowEditBtnRule?: ControlActionBtnFunction;
     hideTimestampColumns?: boolean;
     hideUpdatedAtColumn?: boolean;
+    rowKey?: string;
+    showTimeRangeQuickSelect?: boolean;
     title: string;
 }
 
@@ -226,79 +163,68 @@ interface Props {
 const props = withDefaults(
     defineProps<Props>(),
     {
-        askDeleteRowMessageRender: (row: any) => `確定要刪除 ${row.name} 嗎？`,
-        formData: () => ({ id: '' }),
         formRules: () => ({}),
+        rowKey: 'id',
     },
 );
 
-defineEmits<Emits>();
+const filters = defineModel<Partial<QueryTimeRange>>('filters');
+const formData = defineModel<TableRowData>('formData', { default: { id: '' } });
 
 // Variables
-const {
-    autoReloadDataCountdownSeconds,
-    autoReloadDataInterval,
-    autoReloadDataIntervalSeconds,
-    isLoadingData,
-    paginationParams,
-    tableData,
-    totalTableDataCount,
-} = createPageBaseVariables();
-const { state: saveDataState } = createLoadingState();
-const defaultFormData = cloneDeep(props.formData);
+const defaultFormData = cloneDeep(formData.value);
 const formRef = ref<ElFormRef>(null);
-const isEditing = ref(false);
 const isDialogOpen = ref(false);
+const isEditing = ref(false);
+const isLoadingData = ref(false);
+const paginationParams = ref({
+    limit: 10,
+    page: 1,
+});
+
+const saveDataStatusOverlayRef = ref<ComponentRef<'StatusOverlay'>>(null);
+const tableData = ref<TableRowData[]>([]);
+const totalTableDataCount = ref(0);
 
 // Functions
 async function loadData() {
+    if (isLoadingData.value) return;
     isLoadingData.value = true;
-    clearIntervalRef(autoReloadDataInterval);
-    autoReloadDataCountdownSeconds.value = autoReloadDataIntervalSeconds.value;
-    const response = await props.crudApiClass.getList({
-        ...paginationParams,
-        filterQuery: props.filterQuery,
+    const response = await props.crudApi.getList({
+        ...paginationParams.value,
+        filter: filters.value,
     });
 
     if (response?.data.data) {
-        tableData.length = 0;
-        tableData.push(...response.data.data.list);
+        tableData.value.length = 0;
+        tableData.value.push(...response.data.data.list);
         totalTableDataCount.value = response.data.data.count || 0;
     }
 
     isLoadingData.value = false;
-    setupAutoReloadData();
 }
 
 function openDialog(row?: TableRowData) {
     formRef.value?.resetFields();
-    props.beforeDialogOpen?.(row);
-    isDialogOpen.value = true;
     isEditing.value = row !== undefined;
-    setTimeout(() => setFormDataValues(row || defaultFormData, props.formData));
+    setFormDataValues(row || defaultFormData, formData.value);
+    isDialogOpen.value = true;
 }
 
 async function saveData() {
-    if (saveDataState.loading) return;
+    if (!saveDataStatusOverlayRef.value || saveDataStatusOverlayRef.value.isVisible) return;
     await formRef.value?.validate(async (valid) => {
         if (!valid) return;
-        saveDataState.loading = true;
+        saveDataStatusOverlayRef.value!.showLoading();
         let response;
-        if (props.formData.id) response = await props.crudApiClass.update(props.formData.id, props.formData);
-        else response = await props.crudApiClass.create(props.formData);
-        saveDataState.loading = false;
+        if (formData.value.id) response = await props.crudApi.update(formData.value.id, formData.value);
+        else response = await props.crudApi.create(formData.value);
+        saveDataStatusOverlayRef.value!.hide();
         if (!response?.data.success) return;
-        formRef.value!.resetFields();
         isDialogOpen.value = false;
-        ElNotification.success(props.formData.id ? '儲存成功！' : '新增成功！');
+        ElNotification.success(formData.value.id ? '儲存成功！' : '新增成功！');
         await loadData();
     });
-}
-
-function setAutoReloadDataIntervalSeconds(seconds: number) {
-    autoReloadDataCountdownSeconds.value = autoReloadDataIntervalSeconds.value = seconds;
-    if (seconds <= 0) clearIntervalRef(autoReloadDataInterval);
-    else setupAutoReloadData();
 }
 
 function setFormDataValues(source: any, target: any) {
@@ -314,43 +240,6 @@ function setFormDataValues(source: any, target: any) {
     }
 }
 
-function setupAutoReloadData() {
-    if (autoReloadDataInterval.value || !autoReloadDataIntervalSeconds.value) return;
-    autoReloadDataInterval.value = setInterval(async () => {
-        autoReloadDataCountdownSeconds.value--;
-        if (autoReloadDataCountdownSeconds.value <= 0) await loadData();
-    }, 1000);
-}
-
-function showAskDeleteRowMessageBox(data: TableRowData) {
-    ElMessageBox.confirm(
-        props.askDeleteRowMessageRender(data),
-        {
-            autofocus: false,
-            async beforeClose(action, instance, done) {
-                if (instance.confirmButtonLoading) return;
-                else if (action !== 'confirm') return done();
-                instance.confirmButtonLoading = true;
-                instance.confirmButtonText = '刪除中...';
-                instance.showCancelButton = false;
-                const response = await props.crudApiClass.delete(data.id);
-                if (response?.data.success) {
-                    done();
-                    ElNotification.success('刪除成功！');
-                    await loadData();
-                } else {
-                    instance.confirmButtonLoading = false;
-                    instance.confirmButtonText = '確定';
-                    instance.showCancelButton = true;
-                }
-            },
-            confirmButtonClass: 'el-button--danger ml-1!',
-            draggable: true,
-            type: 'warning',
-        },
-    );
-}
-
 // Hooks
 onActivated(() => tabsController.ensure(props.title, window.location.pathname));
 onMounted(loadData);
@@ -360,9 +249,14 @@ defineExpose({ loadData });
 </script>
 
 <style lang="scss" scoped>
+.el-bg-and-border {
+    background-color: var(--el-bg-color);
+    border-color: var(--el-border-color-lighter);
+}
+
 :deep(.el-pagination) {
     .el-select {
-        width: 109px;
+        width: 115px;
     }
 
     @media (max-width: 768px) {

@@ -40,18 +40,3 @@ export function askToggleBooleanFieldMessageBox<RD extends TableRowData, F exten
         },
     );
 }
-
-export function createPageBaseVariables<T extends TableRowData = TableRowData>() {
-    return {
-        autoReloadDataCountdownSeconds: ref(60),
-        autoReloadDataInterval: ref<Nullable<NodeJS.Timeout>>(null),
-        autoReloadDataIntervalSeconds: ref(60),
-        isLoadingData: ref(true),
-        paginationParams: reactive({
-            limit: 10,
-            page: 1,
-        }),
-        tableData: shallowReactive<T[]>([]),
-        totalTableDataCount: ref(0),
-    };
-}
