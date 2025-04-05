@@ -61,6 +61,7 @@
 import type { AdminLoginFormData } from '@kiki-core-stack/pack/types/data/admin';
 
 import { authApi } from '@/apis/auth';
+import { updateProfileState } from '@/libs/profile';
 import { init } from '@/plugins/12.init.client';
 
 definePageMeta({

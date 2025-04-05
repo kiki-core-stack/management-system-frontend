@@ -14,13 +14,15 @@
     <i class="fa-moon fa-solid ml-2" />
     <el-button
         class="ml-2"
-        @click="() => logout()"
+        @click="logout()"
     >
         登出
     </el-button>
 </template>
 
 <script lang="ts" setup>
+import { logout } from '@/libs/auth';
+
 // Variables
 const colorMode = useColorMode();
 const colorModeCookie = useCookie('cm');
