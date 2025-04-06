@@ -1,38 +1,34 @@
 <template>
     <data-table-page
         ref="dataTablePageRef"
+        v-model:filters="filters"
         title="管理員日誌"
-        :crud-api-class="adminLogApi"
-        :filter-query="filterQueryFormData"
-        enable-filter-date-range-btn-group
+        :crud-api="adminLogApi"
         hide-actions-column
         hide-add-data-btn
         hide-updated-at-column
+        show-time-range-quick-select
     >
-        <template #before-table>
-            <el-filter-form
+        <template #toolbar-prepend>
+            <filter-form
+                v-model="filters"
                 class="pb-1 pl-1"
-                :model="filterQueryFormData"
-                enable-created-at-range-filter
+                show-time-range
                 @submit.prevent="dataTablePageRef?.loadData()"
             >
                 <el-form-item label="管理員">
                     <selector-admin
-                        v-model="filterQueryFormData.adminIds"
-                        collapse-tags
-                        collapse-tags-tooltip
+                        v-model="filters.admin"
                         multiple
                     />
                 </el-form-item>
                 <el-form-item label="類型">
                     <selector-admin-log-type
-                        v-model="filterQueryFormData.types"
-                        collapse-tags
-                        collapse-tags-tooltip
+                        v-model="filters.type"
                         multiple
                     />
                 </el-form-item>
-            </el-filter-form>
+            </filter-form>
         </template>
         <template #table>
             <el-table-column
@@ -64,14 +60,14 @@ import { adminLogTypeToTextMap } from '@kiki-core-stack/pack/constants/admin';
 import type { AdminLogData } from '@kiki-core-stack/pack/types/data/admin';
 
 import { adminLogApi } from '@/apis/admin/log';
-import type { GetAdminLogsFilterQueryFormData } from '@/types/data/admin';
+import type { GetAdminLogListFilters } from '@/types/admin';
 
 // Variables
 const dataTablePageRef = ref<DataTablePageRef>(null);
-const filterQueryFormData = reactive<GetAdminLogsFilterQueryFormData>({
-    adminIds: [],
+const filters = reactive<GetAdminLogListFilters>({
+    admin: [],
     endAt: getMidnightDateFromToday(1),
     startAt: getMidnightDateFromToday(),
-    types: [],
+    type: [],
 });
 </script>

@@ -4,7 +4,7 @@
         :model="filters"
     >
         <el-form-item
-            v-if="enableTimeRange"
+            v-if="showTimeRange"
             label="開始時間"
         >
             <el-date-picker
@@ -15,7 +15,7 @@
             />
         </el-form-item>
         <el-form-item
-            v-if="enableTimeRange"
+            v-if="showTimeRange"
             label="結束時間"
         >
             <el-date-picker
@@ -26,7 +26,7 @@
             />
         </el-form-item>
         <slot />
-        <div class="gap-btns flex flex-wrap">
+        <div class="gap-btns flex flex-wrap items-center">
             <slot name="before-submit-btn" />
             <el-button
                 native-type="submit"
@@ -41,17 +41,25 @@
 
 <script lang="ts" setup>
 interface Props {
-    enableTimeRange?: boolean;
+    showTimeRange?: boolean;
 }
 
 // Define props, models and emits
 defineProps<Props>();
-const filters = defineModel<Partial<QueryTimeRange>>({ required: true });
+const filters = defineModel<Partial<TimeRangeFilter>>({ required: true });
 </script>
 
 <style lang="scss" scoped>
 :deep(.el-form-item) {
     align-items: center;
     margin-bottom: 0;
+}
+
+:deep(.el-form-item__content > .el-input) {
+    --el-input-width: 220px;
+}
+
+:deep(.el-form-item__content > .el-select) {
+    --el-select-width: 220px;
 }
 </style>

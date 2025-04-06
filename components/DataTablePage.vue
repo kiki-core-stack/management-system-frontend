@@ -168,7 +168,7 @@ const props = withDefaults(
     },
 );
 
-const filters = defineModel<Partial<QueryTimeRange>>('filters');
+const filters = defineModel<Partial<TimeRangeFilter>>('filters');
 const formData = defineModel<TableRowData>('formData', { default: { id: '' } });
 
 // Variables

@@ -58,7 +58,7 @@ function show(stateType: Status, text: string, duration: false | number) {
     status.value = stateType;
     statusText.value = text;
     if (duration === false) return;
-    clearIntervalRef(hideTimer);
+    clearTimeoutRef(hideTimer);
     hideTimer.value = setTimeout(() => status.value = null, duration);
 }
 

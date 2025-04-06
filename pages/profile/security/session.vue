@@ -1,9 +1,8 @@
 <template>
     <data-table-page
         title="目前登入的裝置"
-        :ask-delete-row-message-render="(row) => `確定要刪除裝置：${parseDataToDeviceColumnText(row)} 嗎？`"
-        :crud-api-class="profileSecuritySessionApi"
-        :disable-row-delete-btn-rule="({ isCurrent }) => isCurrent"
+        :crud-api="profileSecuritySessionApi"
+        :disable-row-delete-btn-rule="(row) => row.isCurrent"
         hide-add-data-btn
         hide-created-at-column
         hide-edit-btn

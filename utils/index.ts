@@ -14,6 +14,11 @@ export function clearIntervalRef(intervalRef: Ref<Nullable<NodeJS.Timeout>>) {
     intervalRef.value = null;
 }
 
+export function clearTimeoutRef(timeoutRef: Ref<Nullable<NodeJS.Timeout>>) {
+    if (timeoutRef.value) clearTimeout(timeoutRef.value);
+    timeoutRef.value = null;
+}
+
 export function compareEventKey(
     event: KeyboardEvent,
     key: string,

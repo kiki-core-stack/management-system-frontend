@@ -1,22 +1,22 @@
 <template>
     <div
         v-loading="isLoadingData"
-        class="h-full overflow-hidden"
+        class="h-full"
     >
         <div class="h-full overflow-auto p-4">
-            <el-filter-form
+            <filter-form
+                v-model="filters"
                 class="dark:bg-dark rounded-10px bg-white p-4"
-                :model="filterQueryFormData"
-                enable-created-at-range-filter
+                show-time-range
                 @submit.prevent="loadData"
             >
                 <template #before-submit-btn>
-                    <el-filter-date-range-btn-group
-                        :filter-query="filterQueryFormData"
+                    <time-range-quick-select
+                        v-model="filters"
                         @select="loadData"
                     />
                 </template>
-            </el-filter-form>
+            </filter-form>
             <div class="cards-container mt-4 grid gap-1">
                 <el-card body-class="p-4!">
                     <p class="mb-3">
@@ -65,7 +65,7 @@ useHead({ title: '首頁' });
 // Variables
 const defaultHomeDashboardData = Object.freeze({});
 const dashboardData = reactive<typeof defaultHomeDashboardData>({ ...defaultHomeDashboardData });
-const filterQueryFormData = reactive<BaseFilterQueryFormData>({
+const filters = reactive<TimeRangeFilter>({
     endAt: getMidnightDateFromToday(1),
     startAt: getMidnightDateFromToday(),
 });
@@ -75,7 +75,7 @@ const isLoadingData = ref(true);
 // Functions
 async function loadData() {
     isLoadingData.value = true;
-    const response = await homeApi.getDashboardData(filterQueryFormData);
+    const response = await homeApi.getDashboardData(filters);
     Object.assign(dashboardData, defaultHomeDashboardData, response?.data.data);
     isLoadingData.value = false;
 }

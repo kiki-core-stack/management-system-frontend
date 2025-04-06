@@ -9,7 +9,7 @@ declare global {
         page?: number;
     }
 
-    interface QueryTimeRange {
+    interface TimeRangeFilter {
         endAt: Date;
         startAt: Date;
     }

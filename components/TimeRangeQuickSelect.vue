@@ -25,7 +25,7 @@ import type { DateRangeType } from '@kikiutils/node/datetime';
 
 // Define props, models and emits
 const emit = defineEmits<{ (e: 'select'): void }>();
-const filters = defineModel<QueryTimeRange>({ required: true });
+const filters = defineModel<TimeRangeFilter>({ required: true });
 
 // Functions
 function onSelect(type: DateRangeType) {
