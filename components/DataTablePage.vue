@@ -74,6 +74,7 @@
                                     v-if="!hideDeleteBtn && !hideRowDeleteBtnRule?.(scope.row)"
                                     type="danger"
                                     :disabled="disableRowDeleteBtnRule?.(scope.row)"
+                                    @click="confirmDelete(scope.row)"
                                 >
                                     刪除
                                 </el-action-btn>
@@ -144,6 +145,7 @@ type ControlActionBtnFunction = (row: any) => boolean;
 
 interface Props {
     addDataBtnText?: string;
+    confirmDeleteMessageRender?: (row: any) => string;
     crudApi: BaseCrudApi;
     dialogTitleSuffix?: string;
     disableRowDeleteBtnRule?: ControlActionBtnFunction;
@@ -177,6 +179,16 @@ const formData = defineModel<TableRowData>('formData', { default: { id: '' } });
 
 // Variables
 const autoReloadDataCountdownDropdownBtnRef = ref<ComponentRef<'CountdownDropdownBtn'>>(null);
+const confirmDelete = createElMessageBoxConfirmHandler<TableRowData>(
+    props.confirmDeleteMessageRender || ((data) => `確定要刪除 ${data.id} 嗎？`),
+    '刪除中...',
+    async (data) => (await props.crudApi.delete(data.id))?.data.success ?? false,
+    async () => {
+        ElNotification.success('刪除成功！');
+        await loadData();
+    },
+);
+
 const defaultFormData = cloneDeep(formData.value);
 const formRef = ref<ElFormRef>(null);
 const isDialogOpen = ref(false);
