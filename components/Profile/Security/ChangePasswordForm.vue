@@ -72,11 +72,13 @@ const clearChangePasswordForm = () => formRef.value?.resetFields();
 
 async function changePassword() {
     if (!changePasswordStatusOverlayRef.value || changePasswordStatusOverlayRef.value.isVisible) return;
-    if (!await formRef.value?.validate()) return;
-    changePasswordStatusOverlayRef.value?.showLoading();
-    const response = await profileSecurityApi.changePassword(formData.value);
-    if (!response?.data.success) return changePasswordStatusOverlayRef.value?.hide();
-    changePasswordStatusOverlayRef.value?.showSuccess('變更成功！', false);
-    setTimeout(() => assignUrlWithOptionalRedirect('/login/', true), 1000);
+    await formRef.value?.validate(async (valid) => {
+        if (!valid) return;
+        changePasswordStatusOverlayRef.value!.showLoading();
+        const response = await profileSecurityApi.changePassword(formData.value);
+        if (!response?.data.success) return changePasswordStatusOverlayRef.value!.hide();
+        changePasswordStatusOverlayRef.value!.showSuccess('變更成功！', false);
+        setTimeout(() => assignUrlWithOptionalRedirect('/login/', true), 1000);
+    });
 }
 </script>

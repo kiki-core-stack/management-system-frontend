@@ -99,22 +99,24 @@ const verCodeSrc = ref('/api/ver-code');
 // Functions
 async function login() {
     if (!loginStatusOverlayRef.value || loginStatusOverlayRef.value?.isVisible) return;
-    if (!await formRef.value?.validate()) return;
-    loginStatusOverlayRef.value.showLoading('登入中...');
-    const response = await authApi.login(formData.value);
-    if (response?.status === 404) accountInputRef.value?.focus();
-    else if (response?.data.errorCode === 'invalidVerificationCode') verCodeInputRef.value?.focus();
-    else if (response?.data.success) {
-        await updateProfileState();
-        ElNotification.success('登入成功！');
-        init();
-        navigateTo(extractFirstValue(useRoute().query.redirect, '/'), { replace: true });
-        return;
-    }
+    await formRef.value?.validate(async (valid) => {
+        if (!valid) return;
+        loginStatusOverlayRef.value!.showLoading('登入中...');
+        const response = await authApi.login(formData.value);
+        if (response?.status === 404) accountInputRef.value?.focus();
+        else if (response?.data.errorCode === 'invalidVerificationCode') verCodeInputRef.value?.focus();
+        else if (response?.data.success) {
+            await updateProfileState();
+            ElNotification.success('登入成功！');
+            init();
+            navigateTo(extractFirstValue(useRoute().query.redirect, '/'), { replace: true });
+            return;
+        }
 
-    loginStatusOverlayRef.value.hide();
-    reloadVerCode();
-    formRef.value?.resetFields(['verCode']);
+        loginStatusOverlayRef.value!.hide();
+        reloadVerCode();
+        formRef.value?.resetFields(['verCode']);
+    });
 }
 
 function reloadVerCode() {
