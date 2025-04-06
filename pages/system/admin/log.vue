@@ -18,13 +18,13 @@
             >
                 <el-form-item label="管理員">
                     <selector-admin
-                        v-model="filters.admin"
+                        v-model="filters.aIds"
                         multiple
                     />
                 </el-form-item>
                 <el-form-item label="類型">
                     <selector-admin-log-type
-                        v-model="filters.type"
+                        v-model="filters.types"
                         multiple
                     />
                 </el-form-item>
@@ -65,9 +65,9 @@ import type { GetAdminLogListFilters } from '@/types/admin';
 // Variables
 const dataTablePageRef = ref<DataTablePageRef>(null);
 const filters = ref<GetAdminLogListFilters>({
-    admin: [],
+    aIds: [],
     endAt: getMidnightDateFromToday(1),
     startAt: getMidnightDateFromToday(),
-    type: [],
+    types: [],
 });
 </script>
