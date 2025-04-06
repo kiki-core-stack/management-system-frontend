@@ -25,7 +25,7 @@ export function createElMessageBoxConfirmHandler<T = any>(
                         instance.showCancelButton = true;
                     }
                 },
-                confirmButtonClass: 'ml-1!',
+                confirmButtonClass: 'el-message-box-confirm-btn',
                 draggable: true,
             },
         );
