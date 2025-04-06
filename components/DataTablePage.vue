@@ -182,7 +182,7 @@ const autoReloadDataCountdownDropdownBtnRef = ref<ComponentRef<'CountdownDropdow
 const confirmDelete = createElMessageBoxConfirmHandler<TableRowData>(
     props.confirmDeleteMessageRender || ((data) => `確定要刪除 ${data.id} 嗎？`),
     '刪除中...',
-    async (data) => (await props.crudApi.delete(data.id))?.data.success ?? false,
+    async (data) => !!(await props.crudApi.delete(data.id))?.data.success,
     async () => {
         ElNotification.success('刪除成功！');
         await loadData();
