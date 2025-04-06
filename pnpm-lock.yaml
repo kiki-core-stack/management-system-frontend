@@ -18,8 +18,8 @@ importers:
         specifier: ^0.61.0
         version: 0.61.0
       '@kikiutils/nuxt':
-        specifier: ^5.0.0
-        version: 5.0.0(magicast@0.3.5)(nuxt@3.16.2(@parcel/watcher@2.5.1)(@types/node@22.14.0)(db0@0.3.1)(eslint@9.23.0(jiti@2.4.2))(ioredis@5.6.0)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.39.0)(sass@1.86.3)(terser@5.39.0)(typescript@5.8.2)(vite@6.2.5(@types/node@22.14.0)(jiti@2.4.2)(sass@1.86.3)(terser@5.39.0)(yaml@2.7.1))(vue-tsc@2.2.8(typescript@5.8.2))(yaml@2.7.1))(postcss@8.5.3)(typescript@5.8.2)(vite@6.2.5(@types/node@22.14.0)(jiti@2.4.2)(sass@1.86.3)(terser@5.39.0)(yaml@2.7.1))(vue@3.5.13(typescript@5.8.2))(webpack@5.98.0)
+        specifier: ^6.0.0
+        version: 6.0.0(magicast@0.3.5)(nuxt@3.16.2(@parcel/watcher@2.5.1)(@types/node@22.14.0)(db0@0.3.1)(eslint@9.23.0(jiti@2.4.2))(ioredis@5.6.0)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.39.0)(sass@1.86.3)(terser@5.39.0)(typescript@5.8.2)(vite@6.2.5(@types/node@22.14.0)(jiti@2.4.2)(sass@1.86.3)(terser@5.39.0)(yaml@2.7.1))(vue-tsc@2.2.8(typescript@5.8.2))(yaml@2.7.1))(postcss@8.5.3)(typescript@5.8.2)(vite@6.2.5(@types/node@22.14.0)(jiti@2.4.2)(sass@1.86.3)(terser@5.39.0)(yaml@2.7.1))(vue@3.5.13(typescript@5.8.2))(webpack@5.98.0)
       '@noble/hashes':
         specifier: ^1.7.1
         version: 1.7.1
@@ -617,8 +617,8 @@ packages:
     resolution: {integrity: sha512-+rTeYppFdQuRYN9JdfEA9uJ4zq77r+CJLBjXGM/fxaXXwmcP2DY/OqSoDHuRmEGbGdvOvjPGFN+84cXGqY/vrg==}
     engines: {node: '>=18.12.1'}
 
-  '@kikiutils/nuxt@5.0.0':
-    resolution: {integrity: sha512-P9N4wZ/n9HStd1phPGiJ9/JVlv7R7kFuxM3CiYrv8NAjEmrjY/LQkZaa04Cwmn0qlOMWMasxSpkTKO1wjx9Z1g==}
+  '@kikiutils/nuxt@6.0.0':
+    resolution: {integrity: sha512-idyXtF2+mmQQ9LSuapYNrL9nrQWSBGokN1WzFPDkih6ONDpd/KZcJQT3laTL7EA3TLNiEsBhTntdAwHZffkkiw==}
     engines: {node: '>=18.12.1'}
 
   '@kikiutils/types@4.0.0':
@@ -5435,7 +5435,7 @@ snapshots:
 
   '@kikiutils/node@7.0.0': {}
 
-  '@kikiutils/nuxt@5.0.0(magicast@0.3.5)(nuxt@3.16.2(@parcel/watcher@2.5.1)(@types/node@22.14.0)(db0@0.3.1)(eslint@9.23.0(jiti@2.4.2))(ioredis@5.6.0)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.39.0)(sass@1.86.3)(terser@5.39.0)(typescript@5.8.2)(vite@6.2.5(@types/node@22.14.0)(jiti@2.4.2)(sass@1.86.3)(terser@5.39.0)(yaml@2.7.1))(vue-tsc@2.2.8(typescript@5.8.2))(yaml@2.7.1))(postcss@8.5.3)(typescript@5.8.2)(vite@6.2.5(@types/node@22.14.0)(jiti@2.4.2)(sass@1.86.3)(terser@5.39.0)(yaml@2.7.1))(vue@3.5.13(typescript@5.8.2))(webpack@5.98.0)':
+  '@kikiutils/nuxt@6.0.0(magicast@0.3.5)(nuxt@3.16.2(@parcel/watcher@2.5.1)(@types/node@22.14.0)(db0@0.3.1)(eslint@9.23.0(jiti@2.4.2))(ioredis@5.6.0)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.39.0)(sass@1.86.3)(terser@5.39.0)(typescript@5.8.2)(vite@6.2.5(@types/node@22.14.0)(jiti@2.4.2)(sass@1.86.3)(terser@5.39.0)(yaml@2.7.1))(vue-tsc@2.2.8(typescript@5.8.2))(yaml@2.7.1))(postcss@8.5.3)(typescript@5.8.2)(vite@6.2.5(@types/node@22.14.0)(jiti@2.4.2)(sass@1.86.3)(terser@5.39.0)(yaml@2.7.1))(vue@3.5.13(typescript@5.8.2))(webpack@5.98.0)':
     dependencies:
       '@kikiutils/types': 4.0.0
       '@nuxt/kit': 3.16.2(magicast@0.3.5)
