@@ -1,30 +1,36 @@
 <template>
-    <nuxt-link
-        class="relative"
-        active-class="active"
-        to="/"
-        @auxclick.middle.prevent
-        @click.middle.prevent
+    <el-header
+        id="layout-header-tabs-container"
+        class="fs-14px flex overflow-auto bg-[#e0e0e0] dark:bg-[#4a4a4a]"
+        height="unset"
     >
-        <i class="fa-house fa-solid" />
-    </nuxt-link>
-    <nuxt-link
-        v-for="(tab, index) in tabsController.tabs"
-        :key="index"
-        class="relative flex items-center whitespace-nowrap"
-        active-class="active"
-        :to="tab.url"
-        @auxclick.middle.prevent="tabsController.close(index)"
-        @click.middle.prevent
-    >
-        {{ tab.title }}
-        <div
-            class="close-xmark flex-middle ml-2"
-            @click.prevent="tabsController.close(index)"
+        <nuxt-link
+            class="relative"
+            active-class="active"
+            to="/"
+            @auxclick.middle.prevent
+            @click.middle.prevent
         >
-            <icon-xmark />
-        </div>
-    </nuxt-link>
+            <i class="fa-house fa-solid" />
+        </nuxt-link>
+        <nuxt-link
+            v-for="(tab, index) in tabsController.tabs"
+            :key="index"
+            class="relative flex items-center whitespace-nowrap"
+            active-class="active"
+            :to="tab.url"
+            @auxclick.middle.prevent="tabsController.close(index)"
+            @click.middle.prevent
+        >
+            {{ tab.title }}
+            <div
+                class="close-xmark flex-middle ml-2"
+                @click.prevent="tabsController.close(index)"
+            >
+                <icon-xmark />
+            </div>
+        </nuxt-link>
+    </el-header>
 </template>
 
 <script lang="ts" setup>
@@ -36,7 +42,7 @@ watch(
     () => route.fullPath,
     () => {
         setTimeout(
-            () => document.querySelector('#header-tabs .active')?.scrollIntoView({
+            () => document.querySelector('#layout-header-tabs-container .active')?.scrollIntoView({
                 behavior: 'smooth',
                 inline: 'center',
             }),
@@ -53,6 +59,10 @@ $dark-hover-bg: #2b2b2b;
 $light-active-bg: #f5f5f5;
 $light-hover-bg: #ededed;
 $box-shadow-size: 30px;
+
+#layout-header-tabs-container {
+    padding: 5px 15px 0 !important;
+}
 
 a {
     background-color: transparent;
