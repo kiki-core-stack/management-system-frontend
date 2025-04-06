@@ -6,7 +6,10 @@
         <Head>
             <Title>{{ title }}</Title>
         </Head>
-        <div class="h-full overflow-auto p-4">
+        <div
+            ref="mainContainerRef"
+            class="h-full overflow-auto p-4"
+        >
             <div class="dark:bg-dark rounded-10px relative bg-white p-4">
                 <slot name="before-toolbar" />
                 <div class="el-bg-and-border rounded-t-1 border border-b-0 p-1">
@@ -194,6 +197,7 @@ const formRef = ref<ElFormRef>(null);
 const isDialogOpen = ref(false);
 const isEditing = ref(false);
 const isLoadingData = ref(false);
+const mainContainerRef = ref<Nullable<HTMLDivElement>>(null);
 const paginationParams = ref({
     limit: 10,
     page: 1,
@@ -271,6 +275,7 @@ function setFormDataValues(source: any, target: any) {
 // Hooks
 onActivated(() => tabsController.ensure(props.title, window.location.pathname));
 onMounted(loadData);
+useScrollMemory(mainContainerRef);
 
 // Exposes
 defineExpose({ loadData });
