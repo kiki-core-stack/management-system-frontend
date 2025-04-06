@@ -1,5 +1,8 @@
 <template>
     <div>
+        <Head>
+            <Title>登入</Title>
+        </Head>
         <h1 class="fs-32px">
             後台管理系統登入
         </h1>
@@ -67,7 +70,6 @@ import { initializeAppSession } from '@/libs/session';
 definePageMeta({
     keepalive: false,
     layout: 'middle-block',
-    title: '登入',
 });
 
 // Variables

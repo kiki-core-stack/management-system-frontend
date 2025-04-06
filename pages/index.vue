@@ -3,6 +3,9 @@
         v-loading="isLoadingData"
         class="h-full"
     >
+        <Head>
+            <Title>首頁</Title>
+        </Head>
         <div class="h-full overflow-auto p-4">
             <filter-form
                 v-model="filters"
@@ -59,8 +62,6 @@
 
 <script lang="ts" setup>
 import { homeApi } from '@/apis/home';
-
-useHead({ title: '首頁' });
 
 // Variables
 const defaultHomeDashboardData = Object.freeze({});

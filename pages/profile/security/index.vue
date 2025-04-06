@@ -1,12 +1,13 @@
 <template>
     <div class="h-full overflow-auto p-4">
+        <Head>
+            <Title>安全性</Title>
+        </Head>
         <profile-security-change-password-form />
     </div>
 </template>
 
 <script lang="ts" setup>
-useHead({ title: '安全性' });
-
 // Hooks
 onActivated(async () => tabsController.ensure('安全性', window.location.pathname));
 </script>
