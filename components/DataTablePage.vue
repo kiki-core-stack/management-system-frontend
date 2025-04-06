@@ -98,10 +98,10 @@
             </div>
             <el-dialog
                 v-model="isDialogOpen"
-                width="96vmin"
                 :close-on-click-modal="!saveDataStatusOverlayRef?.isVisible"
                 :close-on-press-escape="!saveDataStatusOverlayRef?.isVisible"
                 :title="`${isEditing ? '編輯' : '新增'}${dialogTitleSuffix}`"
+                :width="dialogWidth"
                 align-center
                 append-to-body
                 center
@@ -185,6 +185,15 @@ const paginationParams = ref({
 const saveDataStatusOverlayRef = ref<ComponentRef<'StatusOverlay'>>(null);
 const tableData = ref<TableRowData[]>([]);
 const totalTableDataCount = ref(0);
+const windowSize = useWindowSize();
+
+// Computed properties
+const dialogWidth = computed(() => {
+    if (windowSize.width.value > windowSize.height.value) {
+        if (windowSize.width.value * 0.5 < 700) return '75vw';
+        return '50vw';
+    } else return '95vw';
+});
 
 // Functions
 async function loadData() {
