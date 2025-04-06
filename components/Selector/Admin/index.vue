@@ -26,12 +26,12 @@ const admins = ref<AdminData[]>([]);
 const isLoadingData = ref(true);
 
 // Functions
-async function loadData(queryAccount: string) {
+async function loadData(accountQuery: string) {
     isLoadingData.value = true;
     const response = await adminApi.getList({
-        filterQuery: { account: { $regex: queryAccount } },
+        fields: ['account'],
+        filter: { account: { $regex: accountQuery } },
         limit: 100,
-        selectFields: ['account'],
     });
 
     admins.value.length = 0;
