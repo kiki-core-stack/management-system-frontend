@@ -64,8 +64,8 @@ useHead({ title: '首頁' });
 
 // Variables
 const defaultHomeDashboardData = Object.freeze({});
-const dashboardData = reactive<typeof defaultHomeDashboardData>({ ...defaultHomeDashboardData });
-const filters = reactive<TimeRangeFilter>({
+const dashboardData = ref<typeof defaultHomeDashboardData>({ ...defaultHomeDashboardData });
+const filters = ref<TimeRangeFilter>({
     endAt: getMidnightDateFromToday(1),
     startAt: getMidnightDateFromToday(),
 });
@@ -75,7 +75,7 @@ const isLoadingData = ref(true);
 // Functions
 async function loadData() {
     isLoadingData.value = true;
-    const response = await homeApi.getDashboardData(filters);
+    const response = await homeApi.getDashboardData(filters.value);
     Object.assign(dashboardData, defaultHomeDashboardData, response?.data.data);
     isLoadingData.value = false;
 }

@@ -64,7 +64,7 @@ import type { GetAdminLogListFilters } from '@/types/admin';
 
 // Variables
 const dataTablePageRef = ref<DataTablePageRef>(null);
-const filters = reactive<GetAdminLogListFilters>({
+const filters = ref<GetAdminLogListFilters>({
     admin: [],
     endAt: getMidnightDateFromToday(1),
     startAt: getMidnightDateFromToday(),

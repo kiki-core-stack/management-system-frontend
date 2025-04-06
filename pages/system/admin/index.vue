@@ -82,7 +82,7 @@ import { adminApi } from '@/apis/admin';
 
 // Variables
 const dataTablePageRef = ref<DataTablePageRef>(null);
-const formData = reactive<TablePageFormData<AdminData>>({
+const formData = ref<TablePageFormData<AdminData>>({
     account: '',
     email: '',
     enabled: false,

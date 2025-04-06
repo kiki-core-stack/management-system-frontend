@@ -1,5 +1,5 @@
 export function init() {
-    if (!profileState.id) return;
+    if (!profileState.value.id) return;
     tabsController.load();
 }
 

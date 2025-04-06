@@ -72,7 +72,7 @@ definePageMeta({
 
 // Variables
 const accountInputRef = ref<ElFormInputRef>(null);
-const formData = reactive<AdminLoginFormData>({
+const formData = ref<AdminLoginFormData>({
     account: '',
     password: '',
     verCode: '',
@@ -101,7 +101,7 @@ async function login() {
     if (!loginStatusOverlayRef.value || loginStatusOverlayRef.value?.isVisible) return;
     if (!await formRef.value?.validate()) return;
     loginStatusOverlayRef.value.showLoading('登入中...');
-    const response = await authApi.login(formData);
+    const response = await authApi.login(formData.value);
     if (response?.status === 404) accountInputRef.value?.focus();
     else if (response?.data.errorCode === 'invalidVerificationCode') verCodeInputRef.value?.focus();
     else if (response?.data.success) {
@@ -118,7 +118,7 @@ async function login() {
 }
 
 function reloadVerCode() {
-    formData.verCode = '';
+    formData.value.verCode = '';
     verCodeSrc.value = `/api/ver-code?${Date.now()}`;
 }
 </script>

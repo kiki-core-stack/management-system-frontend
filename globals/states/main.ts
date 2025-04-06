@@ -8,7 +8,7 @@ export interface MainState {
     };
 }
 
-export const mainState = reactive<MainState>({
+export const mainState = ref<MainState>({
     sidebar: {
         isShow: false,
         menuItemGroups: [

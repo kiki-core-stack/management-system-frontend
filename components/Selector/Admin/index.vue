@@ -22,7 +22,7 @@ import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
 import { adminApi } from '@/apis/admin';
 
 // Variables
-const admins = reactive<AdminData[]>([]);
+const admins = ref<AdminData[]>([]);
 const isLoadingData = ref(true);
 
 // Functions
@@ -34,8 +34,8 @@ async function loadData(queryAccount: string) {
         selectFields: ['account'],
     });
 
-    admins.length = 0;
-    admins.push(...response?.data.data?.list || []);
+    admins.value.length = 0;
+    admins.value.push(...response?.data.data?.list || []);
     isLoadingData.value = false;
 }
 </script>

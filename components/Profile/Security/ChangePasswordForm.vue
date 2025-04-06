@@ -52,7 +52,7 @@ import type { ProfileSecurityChangePasswordFormData } from '@kiki-core-stack/pac
 import { profileSecurityApi } from '@/apis/profile/security';
 
 // Variables
-const formData = reactive<ProfileSecurityChangePasswordFormData>({
+const formData = ref<ProfileSecurityChangePasswordFormData>({
     conformPassword: '',
     newPassword: '',
     oldPassword: '',
@@ -74,7 +74,7 @@ async function changePassword() {
     if (!changePasswordStatusOverlayRef.value || changePasswordStatusOverlayRef.value.isVisible) return;
     if (!await formRef.value?.validate()) return;
     changePasswordStatusOverlayRef.value?.showLoading();
-    const response = await profileSecurityApi.changePassword(formData);
+    const response = await profileSecurityApi.changePassword(formData.value);
     if (!response?.data.success) return changePasswordStatusOverlayRef.value?.hide();
     changePasswordStatusOverlayRef.value?.showSuccess('變更成功！', false);
     setTimeout(() => assignUrlWithOptionalRedirect('/login/', true), 1000);
