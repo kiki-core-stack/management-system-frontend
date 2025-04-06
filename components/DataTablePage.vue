@@ -18,9 +18,11 @@
                         >
                             {{ addDataBtnText }}
                         </el-button>
-                        <el-button @click="loadData">
-                            刷新
-                        </el-button>
+                        <countdown-dropdown-btn
+                            ref="autoReloadDataCountdownDropdownBtnRef"
+                            text="刷新"
+                            @trigger="loadData"
+                        />
                         <!-- @vue-expect-error -->
                         <time-range-quick-select
                             v-if="showTimeRangeQuickSelect"
@@ -174,6 +176,7 @@ const filters = defineModel<Partial<TimeRangeFilter>>('filters');
 const formData = defineModel<TableRowData>('formData', { default: { id: '' } });
 
 // Variables
+const autoReloadDataCountdownDropdownBtnRef = ref<ComponentRef<'CountdownDropdownBtn'>>(null);
 const defaultFormData = cloneDeep(formData.value);
 const formRef = ref<ElFormRef>(null);
 const isDialogOpen = ref(false);
@@ -201,6 +204,7 @@ const dialogWidth = computed(() => {
 async function loadData() {
     if (isLoadingData.value) return;
     isLoadingData.value = true;
+    autoReloadDataCountdownDropdownBtnRef.value?.stop();
     const response = await props.crudApi.getList({
         ...paginationParams.value,
         filter: filters.value,
@@ -213,6 +217,7 @@ async function loadData() {
     }
 
     isLoadingData.value = false;
+    autoReloadDataCountdownDropdownBtnRef.value?.start();
 }
 
 function openDialog(row?: TableRowData) {
