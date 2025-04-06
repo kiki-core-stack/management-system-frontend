@@ -81,4 +81,7 @@ async function changePassword() {
         setTimeout(() => assignUrlWithOptionalRedirect('/login/', true), 1000);
     });
 }
+
+// Hooks
+onDeactivated(clearChangePasswordForm);
 </script>
