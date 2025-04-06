@@ -62,7 +62,7 @@ import type { AdminLoginFormData } from '@kiki-core-stack/pack/types/data/admin'
 
 import { authApi } from '@/apis/auth';
 import { updateProfileState } from '@/libs/profile';
-import { init } from '@/plugins/12.init.client';
+import { initializeAppSession } from '@/libs/session';
 
 definePageMeta({
     keepalive: false,
@@ -108,7 +108,7 @@ async function login() {
         else if (response?.data.success) {
             await updateProfileState();
             ElNotification.success('登入成功！');
-            init();
+            initializeAppSession();
             navigateTo(extractFirstValue(useRoute().query.redirect, '/'), { replace: true });
             return;
         }

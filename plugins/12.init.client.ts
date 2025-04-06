@@ -1,6 +1,3 @@
-export function init() {
-    if (!profileState.value.id) return;
-    tabsController.load();
-}
+import { initializeAppSession } from '@/libs/session';
 
-export default defineNuxtPlugin(() => init());
+export default defineNuxtPlugin(() => initializeAppSession());
