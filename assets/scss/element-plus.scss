@@ -3,11 +3,11 @@
 }
 
 .el-table__cell:not(.wrap) > .cell {
-    white-space: nowrap !important;
+    @apply whitespace-nowrap!;
 }
 
 .el-table .cell .el-switch {
-    height: unset;
+    @apply h-unset;
 }
 
 .el-table .cell:has(> .el-switch) {
