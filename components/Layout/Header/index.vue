@@ -42,6 +42,6 @@ else colorMode.preference = colorModeCookie.value as string;
 
 <style lang="scss" scoped>
 :deep(.el-drawer__body) {
-    padding: 0 !important;
+    @apply p-0!;
 }
 </style>

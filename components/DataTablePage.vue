@@ -303,16 +303,16 @@ defineExpose({ loadData });
     }
 
     @media (max-width: 768px) {
-        justify-content: center;
+        @apply justify-center;
 
         .btn-prev,
         .el-pagination__sizes {
-            margin-left: 0;
+            @apply ml-0;
         }
 
         .el-pager :not(.is-active),
         .el-pagination__jump {
-            display: none;
+            @apply hidden;
         }
     }
 }

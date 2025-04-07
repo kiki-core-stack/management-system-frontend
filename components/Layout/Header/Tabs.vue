@@ -65,7 +65,7 @@ $box-shadow-size: 30px;
 }
 
 a {
-    background-color: transparent;
+    @apply bg-transparent;
     border-radius: 12px 12px 0 0;
     padding: 6px 15px;
     transition: 0.1s ease;
@@ -81,12 +81,11 @@ a {
 
     &::after,
     &::before {
+        @apply absolute b-0;
         border-radius: 100%;
-        bottom: 0;
         box-shadow: 0 0 0 40px transparent;
         content: '';
         height: 20px;
-        position: absolute;
         transition: 0.1s ease;
         width: 20px;
     }
@@ -102,8 +101,8 @@ a {
     }
 
     &.active {
+        @apply z-1000;
         background-color: $light-active-bg;
-        z-index: 1000;
 
         &::after,
         &::before {

@@ -51,8 +51,7 @@ const filters = defineModel<Partial<TimeRangeFilter>>({ required: true });
 
 <style lang="scss" scoped>
 :deep(.el-form-item) {
-    align-items: center;
-    margin-bottom: 0;
+    @apply items-center mb-0;
 }
 
 :deep(.el-form-item__content > .el-input) {
