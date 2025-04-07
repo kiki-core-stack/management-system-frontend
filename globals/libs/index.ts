@@ -1,3 +1,5 @@
+import type { ElMessageBoxOptions } from 'element-plus';
+
 export * from '@kiki-core-stack/pack/libs/api-requests';
 
 export function createElMessageBoxConfirmHandler<T = any>(
@@ -5,6 +7,7 @@ export function createElMessageBoxConfirmHandler<T = any>(
     loadingText: string,
     handleConfirm: (data: T) => Promise<boolean>,
     onSuccess?: (data: T) => Promisable<void>,
+    options?: Except<ElMessageBoxOptions, 'beforeClose'>,
 ) {
     return async (data: T) => {
         ElMessageBox.confirm(
@@ -27,6 +30,7 @@ export function createElMessageBoxConfirmHandler<T = any>(
                 },
                 confirmButtonClass: 'el-message-box-confirm-btn',
                 draggable: true,
+                ...options,
             },
         );
     };
