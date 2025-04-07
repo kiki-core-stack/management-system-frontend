@@ -7,8 +7,10 @@ export abstract class BaseCrudApi<T extends TableRowData = TableRowData> {
         this.baseUrl = baseUrl;
     }
 
-    create(data: OmitMongooseTimestampAndOtherFields<T>, config?: AxiosRequestConfig) {
-        return postApi(this.baseUrl, this.processCreateOrUpdateData(data), config);
+    async create(data: OmitMongooseTimestampAndOtherFields<T>, config?: AxiosRequestConfig) {
+        try {
+            return await postApi(this.baseUrl, await this.processCreateOrUpdateData(data), config);
+        } catch {}
     }
 
     delete(id: string) {
@@ -26,12 +28,14 @@ export abstract class BaseCrudApi<T extends TableRowData = TableRowData> {
         return getApi<{ count: number; list: T[]; totals?: Dict<number | string> }>(`${this.baseUrl}/list`, params);
     }
 
-    processCreateOrUpdateData(data: OmitMongooseTimestampAndOtherFields<T>) {
+    async processCreateOrUpdateData(data: OmitMongooseTimestampAndOtherFields<T>) {
         return data;
     }
 
-    update(id: string, data: OmitMongooseTimestampAndOtherFields<T>, config?: AxiosRequestConfig) {
-        return putApi(`${this.baseUrl}/${id}`, this.processCreateOrUpdateData(data), config);
+    async update(id: string, data: OmitMongooseTimestampAndOtherFields<T>, config?: AxiosRequestConfig) {
+        try {
+            return await putApi(`${this.baseUrl}/${id}`, await this.processCreateOrUpdateData(data), config);
+        } catch {}
     }
 
     updateBooleanField(id: string, field: FilteredKeyPath<TableRowData, boolean>, value: boolean) {
