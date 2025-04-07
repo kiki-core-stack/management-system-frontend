@@ -54,35 +54,39 @@ watch(
 </script>
 
 <style lang="scss" scoped>
-$dark-active-bg: #2c2c2c;
-$dark-hover-bg: #2b2b2b;
-$light-active-bg: #f5f5f5;
-$light-hover-bg: #ededed;
 $box-shadow-size: 30px;
 
 #layout-header-tabs-container {
+    --bg-close-xmark: #e0e0e0;
+    --bg-tab-active: #f5f5f5;
+    --bg-tab-hover: #ededed;
     padding: 5px 15px 0 !important;
+
+    html.dark & {
+        --bg-close-xmark: #4a4a4a;
+        --bg-tab-active: #2c2c2c;
+        --bg-tab-hover: #2b2b2b;
+    }
 }
 
 a {
-    @apply bg-transparent;
+    @apply bg-transparent outline-0;
     border-radius: 12px 12px 0 0;
     padding: 6px 15px;
     transition: 0.1s ease;
 
     &:hover {
-        background-color: $light-hover-bg;
+        background-color: var(--bg-tab-hover);
 
         &::after,
         &::before {
-            box-shadow: 0 0 0 $box-shadow-size $light-hover-bg;
+            box-shadow: 0 0 0 $box-shadow-size var(--bg-tab-hover);
         }
     }
 
     &::after,
     &::before {
-        @apply absolute b-0;
-        border-radius: 100%;
+        @apply absolute bottom-0 rounded-full;
         box-shadow: 0 0 0 40px transparent;
         content: '';
         height: 20px;
@@ -102,35 +106,11 @@ a {
 
     &.active {
         @apply z-1000;
-        background-color: $light-active-bg;
+        background-color: var(--bg-tab-active);
 
         &::after,
         &::before {
-            box-shadow: 0 0 0 $box-shadow-size $light-active-bg;
-        }
-    }
-
-    html.dark & {
-        &:hover {
-            background-color: $dark-hover-bg;
-
-            &::after,
-            &::before {
-                box-shadow: 0 0 0 $box-shadow-size $dark-hover-bg;
-            }
-        }
-
-        &.active {
-            background-color: $dark-active-bg;
-
-            &::after,
-            &::before {
-                box-shadow: 0 0 0 $box-shadow-size $dark-active-bg;
-            }
-        }
-
-        .close-xmark:hover {
-            background-color: #4a4a4a;
+            box-shadow: 0 0 0 $box-shadow-size var(--bg-tab-active);
         }
     }
 
@@ -141,7 +121,7 @@ a {
         width: 16px;
 
         &:hover {
-            background-color: #e0e0e0;
+            background-color: var(--bg-close-xmark);
         }
     }
 }
