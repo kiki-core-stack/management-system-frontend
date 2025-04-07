@@ -198,6 +198,7 @@ const confirmDelete = createElMessageBoxConfirmHandler<TableRowData>(
         ElNotification.success('刪除成功！');
         await loadData();
     },
+    { type: 'warning' },
 );
 
 const defaultFormData = cloneDeep(formData.value);
