@@ -13,6 +13,7 @@ export default defineNuxtConfig({
         host: process.env.DEV_SERVER_HOST,
         port: Number(process.env.DEV_SERVER_PORT) || undefined,
     },
+    imports: { dirs: ['./globals/**/*.ts'] },
     kikiutilsNuxt: {
         enabledModules: {
             robots: true,
