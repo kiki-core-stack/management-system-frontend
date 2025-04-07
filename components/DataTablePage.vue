@@ -85,8 +85,12 @@
                         </template>
                     </el-table-column>
                 </el-table>
-                <div class="el-bg-and-border rounded-b-1 border border-t-0 p-1">
+                <div
+                    v-if="!hideFooter"
+                    class="el-bg-and-border rounded-b-1 border border-t-0 p-1"
+                >
                     <el-pagination
+                        v-if="!disablePagination"
                         v-model:current-page="paginationParams.page"
                         v-model:page-size="paginationParams.limit"
                         layout="total, prev, pager, next, sizes"
@@ -152,6 +156,7 @@ interface Props {
     confirmDeleteMessageRender?: (row: any) => string;
     crudApi: BaseCrudApi;
     dialogTitleSuffix?: string;
+    disablePagination?: boolean;
     disableRowDeleteBtnRule?: ControlActionBtnFunction;
     disableRowEditBtnRule?: ControlActionBtnFunction;
     formRules?: ElFormRules<Dict<any>>;
@@ -160,6 +165,7 @@ interface Props {
     hideCreatedAtColumn?: boolean;
     hideDeleteBtn?: boolean;
     hideEditBtn?: boolean;
+    hideFooter?: boolean;
     hideRowDeleteBtnRule?: ControlActionBtnFunction;
     hideRowEditBtnRule?: ControlActionBtnFunction;
     hideTimestampColumns?: boolean;
@@ -224,7 +230,7 @@ async function loadData() {
     isLoadingData.value = true;
     autoReloadDataCountdownDropdownBtnRef.value?.stop();
     const response = await props.crudApi.getList({
-        ...paginationParams.value,
+        ...props.disablePagination || props.hideFooter ? {} : paginationParams.value,
         filter: filters.value,
     });
 
