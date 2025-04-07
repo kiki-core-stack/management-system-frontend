@@ -148,6 +148,7 @@ type ControlActionBtnFunction = (row: any) => boolean;
 
 interface Props {
     addDataBtnText?: string;
+    beforeDialogOpen?: (row: any) => void;
     confirmDeleteMessageRender?: (row: any) => string;
     crudApi: BaseCrudApi;
     dialogTitleSuffix?: string;
@@ -240,6 +241,7 @@ function openDialog(row?: TableRowData) {
     formRef.value?.resetFields();
     isEditing.value = row !== undefined;
     setFormDataValues(row || defaultFormData, formData.value);
+    props.beforeDialogOpen?.(row);
     isDialogOpen.value = true;
 }
 
