@@ -36,6 +36,7 @@ export default defineNuxtConfig({
         },
     },
     modules: ['@kikiutils/nuxt'],
+    postcss: { plugins: { 'postcss-pxtorem': {} } },
     robots: { disallow: '/' },
     security: {
         headers: {
