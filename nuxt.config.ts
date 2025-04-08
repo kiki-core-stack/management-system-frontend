@@ -14,12 +14,7 @@ export default defineNuxtConfig({
         host: process.env.DEV_SERVER_HOST,
         port: Number(process.env.DEV_SERVER_PORT) || undefined,
     },
-    googleFonts: {
-        families: {
-            'Noto Sans': '100..900',
-            'Noto Sans TC': '100..900',
-        },
-    },
+    googleFonts: { families: { 'Noto Sans TC': '100..900' } },
     imports: { dirs: ['./globals/**/*.ts'] },
     kikiutilsNuxt: {
         enabledModules: {
