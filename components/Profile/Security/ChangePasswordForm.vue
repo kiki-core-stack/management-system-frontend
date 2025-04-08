@@ -27,15 +27,15 @@
             type="password"
         />
         <el-form-input
-            v-model="formData.conformPassword"
+            v-model="formData.confirmPassword"
             autocomplete="new-password"
             label="確認密碼"
-            name="conform-password"
-            prop="conformPassword"
+            name="confirm-password"
+            prop="confirmPassword"
             type="password"
         />
         <div class="flex-middle gap-btns">
-            <el-button @click="clearChangePasswordForm">
+            <el-button @click="resetChangePasswordForm">
                 清空
             </el-button>
             <el-button native-type="submit">
@@ -47,20 +47,27 @@
 </template>
 
 <script lang="ts" setup>
-import type { ProfileSecurityChangePasswordFormData } from '@kiki-core-stack/pack/types/data/profile';
-
 import { profileSecurityApi } from '@/apis/profile/security';
+import type { ProfileSecurityChangePasswordFormData } from '@/types/data/profile';
 
 // Variables
 const formData = ref<ProfileSecurityChangePasswordFormData>({
-    conformPassword: '',
+    confirmPassword: '',
     newPassword: '',
     oldPassword: '',
 });
 
 const formRef = ref<ElFormRef>(null);
 const formRules: ElFormRules<ProfileSecurityChangePasswordFormData> = {
-    conformPassword: [createElFormItemRule('請輸入確認密碼')],
+    confirmPassword: [
+        createElFormItemRule('請輸入確認密碼'),
+        {
+            validator(_, value, callback) {
+                if (value !== formData.value.newPassword) return callback('確認密碼與新密碼不一致');
+                return callback();
+            },
+        },
+    ],
     newPassword: [
         createElFormItemRule('請輸入新密碼'),
         ...commonElFormItemRules.adminPassword,
@@ -71,7 +78,7 @@ const formRules: ElFormRules<ProfileSecurityChangePasswordFormData> = {
 const changePasswordStatusOverlayRef = ref<ComponentRef<'StatusOverlay'>>(null);
 
 // Functions
-const clearChangePasswordForm = () => formRef.value?.resetFields();
+const resetChangePasswordForm = () => formRef.value?.resetFields();
 
 async function changePassword() {
     if (!changePasswordStatusOverlayRef.value || changePasswordStatusOverlayRef.value.isVisible) return;
@@ -86,5 +93,5 @@ async function changePassword() {
 }
 
 // Hooks
-onDeactivated(clearChangePasswordForm);
+onDeactivated(resetChangePasswordForm);
 </script>
