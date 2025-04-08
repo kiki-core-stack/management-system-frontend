@@ -61,7 +61,10 @@ const formData = ref<ProfileSecurityChangePasswordFormData>({
 const formRef = ref<ElFormRef>(null);
 const formRules: ElFormRules<ProfileSecurityChangePasswordFormData> = {
     conformPassword: [createElFormItemRule('請輸入確認密碼')],
-    newPassword: [createElFormItemRule('請輸入新密碼')],
+    newPassword: [
+        createElFormItemRule('請輸入新密碼'),
+        ...commonElFormItemRules.adminPassword,
+    ],
     oldPassword: [createElFormItemRule('請輸入舊密碼')],
 };
 
