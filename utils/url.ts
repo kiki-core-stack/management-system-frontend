@@ -6,7 +6,7 @@ function appendRedirectQueryFromCurrentPath(url: string) {
     return `${path}?${urlSearchParams.toString()}`;
 }
 
-export function assignUrlWithOptionalRedirect(url: string, withRedirectBack?: boolean): void {
+export function assignUrlWithOptionalRedirect(url: string, withRedirectBack?: boolean) {
     if (withRedirectBack) url = appendRedirectQueryFromCurrentPath(url);
     window.location.assign(url);
 }
