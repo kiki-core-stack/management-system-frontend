@@ -1,5 +1,5 @@
 import type { FormRules } from 'element-plus';
 
 declare global {
-    type ElFormRules<T extends MaybeRef<Dict<any> | string>> = FormRules<T>;
+    type ElFormRules<T extends MaybeRef<Record<string, any> | string>> = FormRules<T>;
 }

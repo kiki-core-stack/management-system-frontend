@@ -159,7 +159,7 @@ interface Props {
     disablePagination?: boolean;
     disableRowDeleteBtnRule?: ControlActionBtnFunction;
     disableRowEditBtnRule?: ControlActionBtnFunction;
-    formRules?: ElFormRules<Dict<any>>;
+    formRules?: ElFormRules<Record<string, any>>;
     hideActionsColumn?: boolean;
     hideAddDataBtn?: boolean;
     hideCreatedAtColumn?: boolean;
