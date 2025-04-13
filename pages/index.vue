@@ -64,7 +64,7 @@
 import { homeApi } from '@/apis/home';
 
 // Variables
-const defaultHomeDashboardData = Object.freeze({});
+const defaultHomeDashboardData = {} as const;
 const dashboardData = ref<typeof defaultHomeDashboardData>({ ...defaultHomeDashboardData });
 const filters = ref<TimeRangeFilter>({
     endAt: getMidnightDateFromToday(1),

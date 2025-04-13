@@ -1,7 +1,7 @@
 import type { FormItemRule } from 'element-plus';
 
-export const commonElFormItemRules = Object.freeze<Record<'adminPassword', FormItemRule[]>>({
-    adminPassword: [
+export const commonElFormItemRules = {
+    adminPassword: <readonly FormItemRule[]>[
         {
             message: '密碼不能以空白開頭或結尾',
             pattern: /^\S(?:.*\S)?$/,
@@ -27,4 +27,4 @@ export const commonElFormItemRules = Object.freeze<Record<'adminPassword', FormI
             min: 12,
         },
     ],
-});
+} as const;
