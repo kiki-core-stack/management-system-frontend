@@ -31,6 +31,7 @@ export default defineNuxtConfig({
         },
     },
     modules: ['@kikiutils/nuxt'],
+    nitro: { preset: process.env.NITRO_PRESET || 'node-cluster' },
     postcss: { plugins: { 'postcss-pxtorem': {} } },
     robots: { disallow: '/' },
     security: {
