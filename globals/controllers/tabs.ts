@@ -10,7 +10,7 @@ export const tabsController = new class TabsController {
 
     #afterClose() {
         if (window.location.pathname !== '/' && !map(this.tabs, 'url').includes(window.location.pathname)) {
-            navigateTo(this.tabs.at(-1)?.url || '/');
+            navigateTo(this.tabs[this.tabs.length - 1]?.url || '/');
         }
 
         this.save();
