@@ -117,12 +117,12 @@ async function login() {
 
         loginStatusOverlayRef.value!.hide();
         reloadVerCode();
-        formRef.value?.resetFields(['verCode']);
     });
 }
 
 function reloadVerCode() {
     formData.value.verCode = '';
     verCodeSrc.value = `/api/ver-code?${Date.now()}`;
+    formRef.value?.resetFields(['verCode']);
 }
 </script>
