@@ -71,10 +71,11 @@ const filters = ref<TimeRangeFilter>({
     startAt: getMidnightDateFromToday(),
 });
 
-const isLoadingData = ref(true);
+const isLoadingData = ref(false);
 
 // Functions
 async function loadData() {
+    if (isLoadingData.value) return;
     isLoadingData.value = true;
     const response = await homeApi.getDashboardData(filters.value);
     Object.assign(dashboardData, defaultHomeDashboardData, response?.data.data);
