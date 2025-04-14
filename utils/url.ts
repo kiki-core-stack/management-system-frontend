@@ -11,12 +11,12 @@ export function assignUrlWithOptionalRedirect(url: string, withRedirectBack?: bo
     window.location.assign(url);
 }
 
-export function createObjectUrlFromInputElement(inputElement: HTMLInputElement) {
-    const files = inputElement.files;
-    if (!files?.[0]) return;
-    const url = URL.createObjectURL(files[0]);
-    inputElement.value = '';
-    return url;
+export function getFirstFileObjectUrlAndClearInput(fileInput: HTMLInputElement) {
+    const file = fileInput.files?.[0];
+    if (!file) return;
+    const objectUrl = URL.createObjectURL(file);
+    fileInput.value = '';
+    return objectUrl;
 }
 
 export function navigateUrlWithOptionalRedirect(
