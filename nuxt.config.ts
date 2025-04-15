@@ -1,3 +1,6 @@
+import IconsResolver from 'unplugin-icons/resolver';
+import ViteComponents from 'unplugin-vue-components/vite';
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     app: {
@@ -30,7 +33,10 @@ export default defineNuxtConfig({
             hash: true,
         },
     },
-    modules: ['@kikiutils/nuxt'],
+    modules: [
+        '@kikiutils/nuxt',
+        'unplugin-icons/nuxt',
+    ],
     postcss: { plugins: { 'postcss-pxtorem': {} } },
     robots: { disallow: '/' },
     security: {
@@ -48,7 +54,14 @@ export default defineNuxtConfig({
         },
     },
     ssr: false,
+    typescript: { tsConfig: { include: ['./vite-components.d.ts'] } },
     vite: {
+        plugins: [
+            ViteComponents({
+                dts: './.nuxt/vite-components.d.ts',
+                resolvers: [IconsResolver()],
+            }),
+        ],
         server: {
             allowedHosts: (process.env.DEV_VITE_SERVER_ALLOWED_HOSTS || '').split(','),
             hmr: { protocol: process.env.DEV_VITE_SERVER_HMR_PROTOCOL },
