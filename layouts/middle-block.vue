@@ -11,7 +11,7 @@
 
 <style lang="scss" scoped>
 #middle-block-container > :deep(:first-child) {
-    @apply dark:bg-dark rounded-10px relative my-auto flex flex-col items-center overflow-auto bg-white p-4 text-center;
+    @apply dark:bg-dark rounded-10px relative my-auto flex flex-col items-center overflow-hidden bg-white p-4 text-center;
     box-shadow: 1px 2px 12px 0px rgba(black, 0.25);
 }
 </style>
