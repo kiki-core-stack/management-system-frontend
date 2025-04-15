@@ -60,6 +60,9 @@ importers:
         specifier: ^2.0.3
         version: 2.0.3
     devDependencies:
+      '@iconify-json/fa6-solid':
+        specifier: ^1.2.3
+        version: 1.2.3
       '@iconify-json/line-md':
         specifier: ^1.2.7
         version: 1.2.7
@@ -563,6 +566,9 @@ packages:
   '@humanwhocodes/retry@0.4.2':
     resolution: {integrity: sha512-xeO57FpIu4p1Ri3Jq/EXq4ClRm86dVF2z/+kvFnyqVYRavTZmaFaUBbWCOuuTh0o/g7DSsk6kc2vrS4Vl5oPOQ==}
     engines: {node: '>=18.18'}
+
+  '@iconify-json/fa6-solid@1.2.3':
+    resolution: {integrity: sha512-C5o8YJF+ekrS4wRb/6/0SE2KjRyJlCg++IOVC/fineiRinITivsmzFRNW1MQX2xfDZ1T7bxeKxLN6lcaTG3jGA==}
 
   '@iconify-json/line-md@1.2.7':
     resolution: {integrity: sha512-ps7izJ+UwvFGWhbqNQ24JmbzRFIqTG3riesqfnwfPIwxa0TCIvngQdn0M6wv8EyidgWlko3CcBsPkGl49hqTdA==}
@@ -5465,6 +5471,10 @@ snapshots:
   '@humanwhocodes/retry@0.3.1': {}
 
   '@humanwhocodes/retry@0.4.2': {}
+
+  '@iconify-json/fa6-solid@1.2.3':
+    dependencies:
+      '@iconify/types': 2.0.0
 
   '@iconify-json/line-md@1.2.7':
     dependencies:

@@ -3,19 +3,19 @@
         class="dark:bg-dark py-2! flex flex-wrap items-center justify-between bg-white"
         height="unset"
     >
-        <i
-            class="fa-bars fa-solid mr-4 cursor-pointer pt-1 md:hidden"
+        <i-fa6-solid-bars
+            class="mr-4 mt-0.5 cursor-pointer md:hidden"
             @click="mainState.sidebar.isShow = true"
         />
         <span class="fs-20px">後台管理系統</span>
         <div class="grow" />
-        <i class="fa-solid fa-sun mr-2" />
+        <i-fa6-solid-sun class="mr-2" />
         <el-switch
             v-model="colorMode.preference"
             active-value="dark"
             inactive-value="light"
         />
-        <i class="fa-moon fa-solid ml-2" />
+        <i-fa6-solid-moon class="ml-2" />
         <el-button
             class="ml-2"
             @click="logout()"

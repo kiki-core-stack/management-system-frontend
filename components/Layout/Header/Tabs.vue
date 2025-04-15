@@ -11,7 +11,7 @@
             @auxclick.middle.prevent
             @click.middle.prevent
         >
-            <i class="fa-house fa-solid" />
+            <i-fa6-solid-house />
         </nuxt-link>
         <nuxt-link
             v-for="(tab, index) in tabsController.tabs"
@@ -27,7 +27,7 @@
                 class="close-xmark flex-middle ml-2"
                 @click.prevent="tabsController.close(index)"
             >
-                <icon-xmark />
+                <i-mdi-close />
             </div>
         </nuxt-link>
     </el-header>
