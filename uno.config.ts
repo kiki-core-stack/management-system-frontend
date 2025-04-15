@@ -3,7 +3,7 @@ import { defineConfig } from 'unocss';
 export default defineConfig({
     rules: [
         [
-            /^fs-(\d+px)$/,
+            /^fs-(\d+(\.\d+)?(px|rem))$/,
             (matches) => ({ 'font-size': matches[1] }),
         ],
     ],
