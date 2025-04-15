@@ -1,4 +1,4 @@
-import { authApi } from '@/apis/auth';
+import { authApi } from '@/libs/apis/auth';
 
 export async function logout(noAlert: boolean = false) {
     if (!noAlert) showLoadingAlert('登出中...');

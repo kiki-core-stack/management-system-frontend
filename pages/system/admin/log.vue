@@ -59,7 +59,7 @@
 import { adminLogTypeToTextMap } from '@kiki-core-stack/pack/constants/admin';
 import type { AdminLogData } from '@kiki-core-stack/pack/types/data/admin';
 
-import { adminLogApi } from '@/apis/admin/log';
+import { adminLogApi } from '@/libs/apis/admin/log';
 import type { GetAdminLogListFilters } from '@/types/admin';
 
 // Variables

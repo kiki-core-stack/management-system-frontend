@@ -61,7 +61,7 @@
 </template>
 
 <script lang="ts" setup>
-import { homeApi } from '@/apis/home';
+import { homeApi } from '@/libs/apis/home';
 
 // Variables
 const defaultHomeDashboardData = {} as const;

@@ -94,7 +94,7 @@
 import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
 import type { FormItemRule } from 'element-plus';
 
-import { adminApi } from '@/apis/admin';
+import { adminApi } from '@/libs/apis/admin';
 import type { AdminFormData } from '@/types/data/admin';
 
 // Variables

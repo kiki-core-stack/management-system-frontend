@@ -40,7 +40,7 @@
 import type { AdminSessionData } from '@kiki-core-stack/pack/types/data/admin';
 import { UAParser } from 'ua-parser-js';
 
-import { profileSecuritySessionApi } from '@/apis/profile/security/session';
+import { profileSecuritySessionApi } from '@/libs/apis/profile/security/session';
 
 // Functions
 function parseDataToDeviceColumnText(row: AdminSessionData) {

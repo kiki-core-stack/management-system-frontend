@@ -19,7 +19,7 @@
 <script lang="ts" setup>
 import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
 
-import { adminApi } from '@/apis/admin';
+import { adminApi } from '@/libs/apis/admin';
 
 // Variables
 const admins = ref<AdminData[]>([]);

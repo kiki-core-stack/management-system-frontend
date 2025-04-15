@@ -146,7 +146,7 @@
 <script lang="ts" setup>
 import { isObjectLike } from 'lodash-es';
 
-import type { BaseCrudApi } from '@/apis/base';
+import type { BaseCrudApi } from '@/libs/apis/_internals/base';
 
 type ControlActionBtnFunction = (row: any) => boolean;
 

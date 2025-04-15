@@ -1,4 +1,4 @@
-import { profileApi } from '@/apis/profile';
+import { profileApi } from '@/libs/apis/profile';
 
 export async function updateProfileState() {
     const response = await profileApi.get();

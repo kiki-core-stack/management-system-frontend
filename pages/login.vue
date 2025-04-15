@@ -63,7 +63,7 @@
 <script lang="ts" setup>
 import type { AdminLoginFormData } from '@kiki-core-stack/pack/types/data/admin';
 
-import { authApi } from '@/apis/auth';
+import { authApi } from '@/libs/apis/auth';
 import { updateProfileState } from '@/libs/profile';
 import { initializeAppSession } from '@/libs/session';
 

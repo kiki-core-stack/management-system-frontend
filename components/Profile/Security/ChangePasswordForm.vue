@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts" setup>
-import { profileSecurityApi } from '@/apis/profile/security';
+import { profileSecurityApi } from '@/libs/apis/profile/security';
 import type { ProfileSecurityChangePasswordFormData } from '@/types/data/profile';
 
 // Variables
