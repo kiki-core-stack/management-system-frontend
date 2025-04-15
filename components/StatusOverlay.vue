@@ -1,47 +1,54 @@
 <template>
-    <div>
-        <div
-            v-if="status"
-            class="dark:bg-dark flex-middle wh-full z-10000 absolute left-0 top-0 bg-white opacity-85"
+    <div
+        v-if="status"
+        class="flex-middle wh-full z-10000 left-0 top-0 flex-col"
+        :class="{
+            'bg-white:70': !withoutBackground,
+            'dark:bg-dark:80': !withoutBackground,
+            absolute,
+        }"
+    >
+        <i-mdi-error
+            v-if="status === 'error'"
+            class="fs-3rem text-#dc3545"
+        />
+        <i-mdi-success
+            v-else-if="status === 'success'"
+            class="fs-3rem text-#198754"
+        />
+        <i-line-md-loading-loop
+            v-else
+            class="fs-3rem text-[red]"
+        />
+        <p
+            v-if="!hideText"
+            class="fs-20px mt-4"
         >
-            <div class="text-center">
-                <icon-xmark
-                    v-if="status === 'error'"
-                    class="text-#dc3545 text-2.5rem"
-                />
-                <icon-check
-                    v-else-if="status === 'success'"
-                    class="text-#198754 text-2.5rem"
-                />
-                <loading-spinner
-                    v-else
-                    size="2rem"
-                />
-                <p
-                    v-if="!hideText"
-                    class="fs-20px mt-4"
-                >
-                    {{ statusText }}
-                </p>
-            </div>
-        </div>
+            {{ statusText }}
+        </p>
     </div>
+    <div v-else />
 </template>
 
 <script lang="ts" setup>
 type Status = Nullable<'error' | 'loading' | 'success'>;
 
 interface Props {
+    absolute?: boolean;
     errorText?: string;
     hideText?: boolean;
+    initialStatus?: Status;
+    initialStatusText?: string;
     loadingText?: string;
     successText?: string;
+    withoutBackground?: boolean;
 }
 
 // Define props, models and emits
 const props = withDefaults(
     defineProps<Props>(),
     {
+        absolute: true,
         errorText: '載入失敗！',
         loadingText: '載入中...',
         successText: '載入成功！',
@@ -50,8 +57,8 @@ const props = withDefaults(
 
 // Variables
 const hideTimer = ref<Nullable<NodeJS.Timeout>>(null);
-const status = ref<Status>(null);
-const statusText = ref('');
+const status = ref<Status>(props.initialStatus || null);
+const statusText = ref(props.initialStatusText);
 
 // Functions
 function show(stateType: Status, text: string, duration: false | number) {
