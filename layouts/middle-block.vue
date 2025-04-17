@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed left-0 top-0 size-full overflow-auto bg-[#f5f5f5] dark:bg-[#2c2c2c]">
+    <div class="fixed inset-0 size-full overflow-auto bg-[#f5f5f5] dark:bg-[#2c2c2c]">
         <div
             id="middle-block-container"
             class="min-h-100svh flex flex-col items-center p-4"
