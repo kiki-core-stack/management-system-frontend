@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@element-plus/nuxt": "^1.1.1",
-    "@kiki-core-stack/pack": "^0.65.0",
+    "@kiki-core-stack/pack": "^0.65.1",
     "@kikiutils/node": "^8.0.1",
     "@kikiutils/nuxt": "^6.0.4",
     "@noble/hashes": "^1.7.2",
