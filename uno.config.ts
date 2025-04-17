@@ -13,7 +13,6 @@ export default defineConfig({
         'gap-btns': 'gap-1 children:(m-0!)',
         'h-s-screen': 'h-100svh',
         'w-s-screen': 'w-100svw',
-        'wh-full': 'h-full w-full',
         'wh-s-screen': 'h-s-screen w-s-screen',
     },
     transformers: [transformerDirectives()],
