@@ -35,12 +35,9 @@ type Status = Nullable<'error' | 'loading' | 'success'>;
 
 interface Props {
     absolute?: boolean;
-    errorText?: string;
     hideText?: boolean;
     initialStatus?: Status;
     initialStatusText?: string;
-    loadingText?: string;
-    successText?: string;
     withoutBackground?: boolean;
 }
 
@@ -77,10 +74,8 @@ defineExpose({
     get isVisible() {
         return status.value !== null;
     },
-    showError: (text?: string, duration: false | number = 1000) => show('error', text || props.errorText, duration),
-    showLoading: (text?: string) => show('loading', text || props.loadingText, false),
-    showSuccess(text?: string, duration: false | number = 1000) {
-        show('success', text || props.successText, duration);
-    },
+    showError: (text: string, duration: false | number = 1000) => show('error', text, duration),
+    showLoading: (text: string) => show('loading', text, false),
+    showSuccess: (text: string, duration: false | number = 1000) => show('success', text, duration),
 });
 </script>

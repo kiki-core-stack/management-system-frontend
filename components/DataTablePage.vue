@@ -257,7 +257,7 @@ async function saveData() {
     if (!saveDataStatusOverlayRef.value || saveDataStatusOverlayRef.value.isVisible) return;
     await formRef.value?.validate(async (valid) => {
         if (!valid) return;
-        saveDataStatusOverlayRef.value!.showLoading();
+        saveDataStatusOverlayRef.value!.showLoading('儲存中...');
         let response;
         if (formData.value.id) response = await props.crudApi.update(formData.value.id, formData.value);
         else response = await props.crudApi.create(formData.value);

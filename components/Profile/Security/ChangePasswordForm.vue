@@ -84,7 +84,7 @@ async function changePassword() {
     if (!changePasswordStatusOverlayRef.value || changePasswordStatusOverlayRef.value.isVisible) return;
     await formRef.value?.validate(async (valid) => {
         if (!valid) return;
-        changePasswordStatusOverlayRef.value!.showLoading();
+        changePasswordStatusOverlayRef.value!.showLoading('變更中...');
         const response = await profileSecurityApi.changePassword(formData.value);
         if (!response?.data.success) return changePasswordStatusOverlayRef.value!.hide();
         changePasswordStatusOverlayRef.value!.showSuccess('變更成功！', false);
