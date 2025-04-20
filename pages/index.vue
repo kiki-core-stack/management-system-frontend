@@ -9,7 +9,7 @@
         <div class="h-full overflow-auto p-4">
             <filter-form
                 v-model="filters"
-                class="dark:bg-dark rounded-10px bg-white p-4"
+                class="dark:bg-dark rounded-[10px] bg-white p-4"
                 show-time-range
                 @submit.prevent="loadData"
             >

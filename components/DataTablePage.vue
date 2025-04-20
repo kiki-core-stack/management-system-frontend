@@ -10,7 +10,7 @@
             ref="mainContainerRef"
             class="h-full overflow-auto p-4"
         >
-            <div class="dark:bg-dark rounded-10px relative bg-white p-4">
+            <div class="dark:bg-dark relative rounded-[10px] bg-white p-4">
                 <slot name="before-toolbar" />
                 <div class="el-bg-and-border rounded-t-1 border border-b-0 p-1">
                     <slot name="toolbar-prepend" />

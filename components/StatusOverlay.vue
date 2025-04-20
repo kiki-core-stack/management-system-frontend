@@ -3,22 +3,22 @@
         v-if="status"
         class="flex-middle z-10000 inset-0 size-full flex-col"
         :class="{
-            'bg-white:70': !withoutBackground,
-            'dark:bg-dark:80': !withoutBackground,
+            'bg-white/70': !withoutBackground,
+            'dark:bg-dark/80': !withoutBackground,
             absolute,
         }"
     >
         <i-mdi-error
             v-if="status === 'error'"
-            class="fs-3rem text-#dc3545"
+            class="fs-3rem text-[#dc3545]"
         />
         <i-mdi-success
             v-else-if="status === 'success'"
-            class="fs-3rem text-#198754"
+            class="fs-3rem text-[#198754]"
         />
         <i-line-md-loading-loop
             v-else
-            class="fs-3rem text-[red]"
+            class="fs-3rem text-red"
         />
         <p
             v-if="!hideText"
