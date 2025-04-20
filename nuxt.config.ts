@@ -6,6 +6,18 @@ export default defineNuxtConfig({
     app: {
         head: {
             htmlAttrs: { lang: 'zh-Hant-TW' },
+            link: [
+                {
+                    as: 'style',
+                    href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap',
+                    rel: 'preload',
+                },
+                {
+                    crossorigin: '',
+                    href: 'https://fonts.googleapis.com',
+                    rel: 'preconnect',
+                },
+            ],
             title: '後台管理系統',
             titleTemplate: '%s｜後台管理系統',
         },
@@ -17,13 +29,11 @@ export default defineNuxtConfig({
         host: process.env.DEV_SERVER_HOST,
         port: Number(process.env.DEV_SERVER_PORT) || undefined,
     },
-    googleFonts: { families: { 'Noto Sans TC': '100..900' } },
     imports: { dirs: ['./globals/**/*.ts'] },
     kikiutilsNuxt: {
         enabledModules: {
             colorMode: true,
             elementPlus: true,
-            googleFonts: true,
             robots: true,
             security: true,
         },
@@ -35,6 +45,7 @@ export default defineNuxtConfig({
     },
     modules: [
         '@kikiutils/nuxt',
+        'unplugin-fonts/nuxt',
         'unplugin-icons/nuxt',
     ],
     postcss: { plugins: { 'postcss-pxtorem': {} } },
@@ -55,6 +66,17 @@ export default defineNuxtConfig({
     },
     ssr: false,
     typescript: { tsConfig: { include: ['./vite-components.d.ts'] } },
+    unfonts: {
+        google: {
+            families: [
+                {
+                    defer: false,
+                    name: 'Noto+Sans+TC',
+                    styles: 'wght@100..900',
+                },
+            ],
+        },
+    },
     vite: {
         plugins: [
             ViteComponents({
