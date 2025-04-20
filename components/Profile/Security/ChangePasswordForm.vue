@@ -75,7 +75,7 @@ const formRules: ElFormRules<ProfileSecurityChangePasswordFormData> = {
     oldPassword: [createElFormItemRule('請輸入舊密碼')],
 };
 
-const changePasswordStatusOverlayRef = ref<ComponentRef<'StatusOverlay'>>(null);
+const changePasswordStatusOverlayRef = ref<StatusOverlayRef>(null);
 
 // Functions
 const resetChangePasswordForm = () => formRef.value?.resetFields();

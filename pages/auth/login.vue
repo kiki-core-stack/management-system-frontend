@@ -94,7 +94,7 @@ const formRules: ElFormRules<AdminLoginFormData> = {
     ],
 };
 
-const loginStatusOverlayRef = ref<ComponentRef<'StatusOverlay'>>(null);
+const loginStatusOverlayRef = ref<StatusOverlayRef>(null);
 const verCodeInputRef = ref<ElFormInputRef>(null);
 const verCodeSrc = ref('/api/ver-code');
 

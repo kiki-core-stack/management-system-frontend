@@ -4,6 +4,7 @@ declare global {
     type ElFormRef = ComponentRef<'ElForm'>;
     type ElInputNumberRef = ComponentRef<'ElInputNumber'>;
     type ElInputRef = ComponentRef<'ElInput'>;
+    type StatusOverlayRef = ComponentRef<'StatusOverlay'>;
 }
 
 export {};

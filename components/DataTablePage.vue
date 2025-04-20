@@ -212,7 +212,7 @@ const paginationParams = ref({
     page: 1,
 });
 
-const saveDataStatusOverlayRef = ref<ComponentRef<'StatusOverlay'>>(null);
+const saveDataStatusOverlayRef = ref<StatusOverlayRef>(null);
 const tableData = ref<TableRowData[]>([]);
 const totalTableDataCount = ref(0);
 const windowSize = useWindowSize();
