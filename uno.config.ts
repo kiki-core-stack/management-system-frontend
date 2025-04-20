@@ -9,6 +9,7 @@ export default defineConfig({
         ],
     ],
     shortcuts: {
+        'bg-base': 'bg-center bg-cover bg-no-repeat',
         'flex-middle': 'flex items-center justify-center',
         'gap-btns': 'gap-1 children:(m-0!)',
         'h-s-screen': 'h-100svh',

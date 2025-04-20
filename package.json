@@ -9,7 +9,7 @@
     "lint:fix": "eslint --fix",
     "postinstall": "nuxt prepare",
     "preview": "nuxt preview",
-    "type-check": "vue-tsc"
+    "typecheck": "vue-tsc"
   },
   "dependencies": {
     "@element-plus/nuxt": "^1.1.1",
@@ -23,7 +23,7 @@
     "axios": "^1.8.4",
     "copy-to-clipboard": "^3.3.3",
     "date-fns": "^4.1.0",
-    "element-plus": "^2.9.7",
+    "element-plus": "^2.9.8",
     "lodash-es": "^4.17.21",
     "nuxt": "^3.16.2",
     "nuxt-security": "^2.2.0",
@@ -37,10 +37,10 @@
     "@kikiutils/eslint-config": "^0.12.2",
     "@kikiutils/mongoose": "3.1.0",
     "@types/lodash-es": "^4.17.12",
-    "@unocss/transformer-directives": "^66.0.0",
+    "@unocss/transformer-directives": "66.1.0-beta.12",
     "cross-env": "^7.0.3",
     "postcss-pxtorem": "^6.1.0",
-    "unocss": "^66.0.0",
+    "unocss": "66.1.0-beta.12",
     "unplugin-icons": "^22.1.0",
     "unplugin-vue-components": "^28.5.0"
   },
@@ -48,6 +48,7 @@
     "onlyBuiltDependencies": [
       "@parcel/watcher",
       "esbuild",
+      "unrs-resolver",
       "vue-demi"
     ]
   }
