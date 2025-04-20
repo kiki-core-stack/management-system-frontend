@@ -3,13 +3,14 @@ import {
     serialize,
 } from 'superjson';
 
-enum EnhancedLocalStorageValueEncodingType {
+enum StorageValueEncodingType {
     Json = '0',
     String = '1',
 }
 
 const customValueHeader = '​⁠';
 const customValueHeaderLength = customValueHeader.length + 1;
+const toCustomValue = (type: StorageValueEncodingType, payload: string) => `${customValueHeader}${type}${payload}`;
 
 export function createEnhancedLocalStorage() {
     return {
@@ -24,8 +25,8 @@ export function createEnhancedLocalStorage() {
 }
 
 function encodeToStorageValue(value: any) {
-    if (typeof value === 'string') return toCustomValue(EnhancedLocalStorageValueEncodingType.String, value);
-    return toCustomValue(EnhancedLocalStorageValueEncodingType.Json, JSON.stringify(serialize(value)));
+    if (typeof value === 'string') return toCustomValue(StorageValueEncodingType.String, value);
+    return toCustomValue(StorageValueEncodingType.Json, JSON.stringify(serialize(value)));
 }
 
 function decodeStorageValue(data: string) {
@@ -33,13 +34,13 @@ function decodeStorageValue(data: string) {
     const payload = data.substring(customValueHeaderLength);
     const type = data.charAt(customValueHeader.length);
     switch (type) {
-        case EnhancedLocalStorageValueEncodingType.Json:
+        case StorageValueEncodingType.Json:
             try {
                 return deserialize(JSON.parse(payload.toString()));
             } catch {
                 throw new Error('[EnhancedLocalStorage] Failed to parse JSON payload.');
             }
-        case EnhancedLocalStorageValueEncodingType.String: return payload;
+        case StorageValueEncodingType.String: return payload;
         default:
             throw new Error(`[EnhancedLocalStorage] Unknown encoding type: ${type}.`);
     }
@@ -51,8 +52,4 @@ function isCustomFormat(data: string) {
         && data[0] === customValueHeader[0]
         && data[1] === customValueHeader[1]
     );
-}
-
-function toCustomValue(type: EnhancedLocalStorageValueEncodingType, payload: string) {
-    return `${customValueHeader}${type}${payload}`;
 }
