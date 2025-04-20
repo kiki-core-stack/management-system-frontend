@@ -9,7 +9,7 @@
     "lint:fix": "eslint --fix",
     "postinstall": "nuxt prepare",
     "preview": "nuxt preview",
-    "type-check": "vue-tsc"
+    "typecheck": "vue-tsc"
   },
   "dependencies": {
     "@kikiutils/nuxt": "6.0.0",
