@@ -283,7 +283,7 @@ function setFormDataValues(source: any, target: any) {
 }
 
 // Hooks
-onActivated(() => tabsController.ensure(props.title, window.location.pathname));
+onActivated(() => headerTabsController.ensure(props.title, window.location.pathname));
 onMounted(loadData);
 useScrollMemory(mainContainerRef);
 

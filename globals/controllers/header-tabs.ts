@@ -1,12 +1,12 @@
 import { map } from 'lodash-es';
 
-interface TabData {
+export interface HeaderTabData {
     title: string;
     url: string;
 }
 
-export const tabsController = new class TabsController {
-    readonly tabs = reactive<TabData[]>([]);
+export const headerTabsController = new class HeaderTabsController {
+    readonly tabs = reactive<HeaderTabData[]>([]);
 
     #afterClose() {
         if (window.location.pathname !== '/' && !map(this.tabs, 'url').includes(window.location.pathname)) {
@@ -28,13 +28,9 @@ export const tabsController = new class TabsController {
 
     closeFromIndexTo(fromIndex: number, toIndex: number) {
         if (fromIndex > toIndex) {
-            [
-                fromIndex,
-                toIndex,
-            ] = [
-                toIndex,
-                fromIndex,
-            ];
+            const tempIndex = fromIndex;
+            fromIndex = toIndex;
+            toIndex = tempIndex;
         }
 
         if (fromIndex < 0) return;
@@ -66,7 +62,8 @@ export const tabsController = new class TabsController {
 
     load() {
         try {
-            const tabs = localStorageController.tabs.getJsonOrDefault<TabData[]>([]);
+            const tabs = enhancedLocalStore.headerTabs.getItem(profileState.value.id!);
+            if (!tabs) return;
             tabs.forEach((tabData) => {
                 if (tabData.title && tabData.url) this.tabs.push(tabData);
             });
@@ -77,6 +74,6 @@ export const tabsController = new class TabsController {
     }
 
     save() {
-        localStorageController.tabs.setJson(this.tabs);
+        enhancedLocalStore.headerTabs.setItem(this.tabs, profileState.value.id!);
     }
 }();

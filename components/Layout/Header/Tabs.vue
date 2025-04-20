@@ -14,18 +14,18 @@
             <i-fa6-solid-house />
         </nuxt-link>
         <nuxt-link
-            v-for="(tab, index) in tabsController.tabs"
+            v-for="(tab, index) in headerTabsController.tabs"
             :key="index"
             class="relative flex items-center whitespace-nowrap"
             active-class="active"
             :to="tab.url"
-            @auxclick.middle.prevent="tabsController.close(index)"
+            @auxclick.middle.prevent="headerTabsController.close(index)"
             @click.middle.prevent
         >
             {{ tab.title }}
             <div
                 class="close-xmark flex-middle ml-2"
-                @click.prevent="tabsController.close(index)"
+                @click.prevent="headerTabsController.close(index)"
             >
                 <i-mdi-close />
             </div>
