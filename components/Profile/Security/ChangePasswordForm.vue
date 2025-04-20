@@ -88,7 +88,7 @@ async function changePassword() {
         const response = await profileSecurityApi.changePassword(formData.value);
         if (!response?.data.success) return changePasswordStatusOverlayRef.value!.hide();
         changePasswordStatusOverlayRef.value!.showSuccess('變更成功！', false);
-        setTimeout(() => assignUrlWithOptionalRedirect('/login/', true), 1000);
+        setTimeout(() => assignUrlWithOptionalRedirect('/auth/login/', true), 1000);
     });
 }
 
