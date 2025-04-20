@@ -42,15 +42,7 @@ interface Props {
 }
 
 // Define props, models and emits
-const props = withDefaults(
-    defineProps<Props>(),
-    {
-        absolute: true,
-        errorText: '載入失敗！',
-        loadingText: '載入中...',
-        successText: '載入成功！',
-    },
-);
+const props = withDefaults(defineProps<Props>(), { absolute: true });
 
 // Variables
 const hideTimer = ref<Nullable<NodeJS.Timeout>>(null);
