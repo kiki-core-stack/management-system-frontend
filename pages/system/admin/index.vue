@@ -16,10 +16,6 @@
                 prop="account"
             />
             <el-table-column
-                label="名稱"
-                prop="name"
-            />
-            <el-table-column
                 label="Email"
                 prop="email"
             />
@@ -42,13 +38,6 @@
                 maxlength="16"
                 name="account"
                 prop="account"
-            />
-            <el-form-input
-                v-model="formData.name"
-                label="名稱"
-                maxlength="16"
-                name="name"
-                prop="name"
             />
             <el-form-input
                 v-model="formData.email"
@@ -105,7 +94,6 @@ const formData = ref<TablePageFormData<AdminFormData>>({
     email: '',
     enabled: false,
     id: '',
-    name: '',
     password: '',
 });
 
@@ -120,7 +108,6 @@ const formRules: ElFormRules<AdminFormData> = {
             },
         ),
     ],
-    name: [createElFormItemRule('請輸入名稱')],
 };
 
 // Computed properties
