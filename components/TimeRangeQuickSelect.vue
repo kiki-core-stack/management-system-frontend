@@ -29,7 +29,6 @@ const filters = defineModel<TimeRangeFilter>({ required: true });
 
 // Functions
 function onSelect(type: DateRangeType) {
-    // eslint-disable-next-line style/object-curly-newline
     const { endDate, startDate } = getDateRangeFromDate(new Date(), type, { setEndDateToNextDayStart: true });
     filters.value.endAt = endDate;
     filters.value.startAt = startDate;
