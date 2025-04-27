@@ -12,7 +12,7 @@
         >
             <div class="dark:bg-dark relative rounded-[10px] bg-white p-4">
                 <slot name="before-toolbar" />
-                <div class="el-bg-and-border rounded-t-1 border border-b-0 p-1">
+                <div class="b b-b-0 el-bg-and-border rounded-t-1 p-1">
                     <slot name="toolbar-prepend" />
                     <div class="gap-btns flex flex-wrap">
                         <el-button
@@ -87,7 +87,7 @@
                 </el-table>
                 <div
                     v-if="!hideFooter"
-                    class="el-bg-and-border rounded-b-1 border border-t-0 p-1"
+                    class="b b-t-0 el-bg-and-border rounded-b-1 p-1"
                 >
                     <el-pagination
                         v-if="!disablePagination"
@@ -299,7 +299,7 @@ defineExpose({ loadData });
 
 :deep(.el-pagination) {
     .el-select {
-        width: 115px;
+        @apply w-[115px];
     }
 
     @media (max-width: 768px) {

@@ -1,6 +1,6 @@
 <template>
     <el-menu
-        class="sidebar h-full"
+        class="sidebar h-full w-[200px] py-[48px] tracking-[2px]"
         background-color="#252828"
         text-color="#ffffff"
         :default-active="route.path"
@@ -60,11 +60,3 @@ import {
 // Variables
 const route = useRoute();
 </script>
-
-<style lang="scss" scoped>
-.sidebar {
-    letter-spacing: 2px;
-    padding: 48px 0;
-    width: 200px;
-}
-</style>

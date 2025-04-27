@@ -86,12 +86,10 @@ a {
 
     &::after,
     &::before {
-        @apply absolute bottom-0 rounded-full;
+        @apply absolute bottom-0 rounded-full size-[20px];
         box-shadow: 0 0 0 40px transparent;
         content: '';
-        height: 20px;
         transition: 0.1s ease;
-        width: 20px;
     }
 
     &::after {
@@ -115,10 +113,8 @@ a {
     }
 
     .close-xmark {
-        border-radius: 50%;
-        height: 16px;
+        @apply size-[16px] rounded-[50%];
         transition: background-color 0.2s;
-        width: 16px;
 
         &:hover {
             background-color: var(--bg-close-xmark);
