@@ -56,7 +56,7 @@
                 登入
             </el-button>
         </el-form>
-        <status-overlay ref="loginStatusOverlayRef" />
+        <status-overlay ref="statusOverlayRef" />
     </div>
 </template>
 
@@ -94,16 +94,16 @@ const formRules: ElFormRules<AdminLoginFormData> = {
     ],
 };
 
-const loginStatusOverlayRef = ref<StatusOverlayRef>(null);
+const statusOverlayRef = ref<StatusOverlayRef>(null);
 const verCodeInputRef = ref<ElFormInputRef>(null);
 const verCodeSrc = ref('/api/ver-code');
 
 // Functions
 async function login() {
-    if (!loginStatusOverlayRef.value || loginStatusOverlayRef.value?.isVisible) return;
+    if (!statusOverlayRef.value || statusOverlayRef.value?.isVisible) return;
     await formRef.value?.validate(async (valid) => {
         if (!valid) return;
-        loginStatusOverlayRef.value!.showLoading('登入中...');
+        statusOverlayRef.value!.showLoading('登入中...');
         const response = await authApi.login(formData.value);
         if (response?.status === 404) accountInputRef.value?.focus();
         else if (response?.data.errorCode === 'invalidVerificationCode') verCodeInputRef.value?.focus();
@@ -115,7 +115,7 @@ async function login() {
             return;
         }
 
-        loginStatusOverlayRef.value!.hide();
+        statusOverlayRef.value!.hide();
         reloadVerCode();
     });
 }

@@ -109,8 +109,8 @@
                 </div>
                 <el-dialog
                     v-model="isDialogOpen"
-                    :close-on-click-modal="!saveDataStatusOverlayRef?.isVisible"
-                    :close-on-press-escape="!saveDataStatusOverlayRef?.isVisible"
+                    :close-on-click-modal="!dialogStatusOverlayRef?.isVisible"
+                    :close-on-press-escape="!dialogStatusOverlayRef?.isVisible"
                     :title="`${isEditing ? '編輯' : '新增'}${dialogTitleSuffix}`"
                     :width="dialogWidth"
                     align-center
@@ -136,7 +136,7 @@
                             </el-button>
                         </div>
                     </el-form>
-                    <status-overlay ref="saveDataStatusOverlayRef" />
+                    <status-overlay ref="dialogStatusOverlayRef" />
                 </el-dialog>
             </div>
         </div>
@@ -202,6 +202,7 @@ const confirmDelete = createElMessageBoxConfirmHandler<TableRowData>(
 );
 
 const defaultFormData = cloneDeep(formData.value);
+const dialogStatusOverlayRef = ref<StatusOverlayRef>(null);
 const formRef = ref<ElFormRef>(null);
 const isDialogOpen = ref(false);
 const isEditing = ref(false);
@@ -212,7 +213,6 @@ const paginationParams = ref({
     page: 1,
 });
 
-const saveDataStatusOverlayRef = ref<StatusOverlayRef>(null);
 const tableData = ref<TableRowData[]>([]);
 const totalTableDataCount = ref(0);
 const windowSize = useWindowSize();
@@ -254,14 +254,14 @@ function openDialog(row?: TableRowData) {
 }
 
 async function saveData() {
-    if (!saveDataStatusOverlayRef.value || saveDataStatusOverlayRef.value.isVisible) return;
+    if (!dialogStatusOverlayRef.value || dialogStatusOverlayRef.value.isVisible) return;
     await formRef.value?.validate(async (valid) => {
         if (!valid) return;
-        saveDataStatusOverlayRef.value!.showLoading('儲存中...');
+        dialogStatusOverlayRef.value!.showLoading('儲存中...');
         let response;
         if (formData.value.id) response = await props.crudApi.update(formData.value.id, formData.value);
         else response = await props.crudApi.create(formData.value);
-        saveDataStatusOverlayRef.value!.hide();
+        dialogStatusOverlayRef.value!.hide();
         if (!response?.data.success) return;
         isDialogOpen.value = false;
         ElNotification.success(formData.value.id ? '儲存成功！' : '新增成功！');

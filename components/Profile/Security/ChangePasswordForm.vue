@@ -42,7 +42,7 @@
                 變更
             </el-button>
         </div>
-        <status-overlay ref="changePasswordStatusOverlayRef" />
+        <status-overlay ref="statusOverlayRef" />
     </el-form>
 </template>
 
@@ -75,19 +75,19 @@ const formRules: ElFormRules<ProfileSecurityChangePasswordFormData> = {
     oldPassword: [createElFormItemRule('請輸入舊密碼')],
 };
 
-const changePasswordStatusOverlayRef = ref<StatusOverlayRef>(null);
+const statusOverlayRef = ref<StatusOverlayRef>(null);
 
 // Functions
 const resetChangePasswordForm = () => formRef.value?.resetFields();
 
 async function changePassword() {
-    if (!changePasswordStatusOverlayRef.value || changePasswordStatusOverlayRef.value.isVisible) return;
+    if (!statusOverlayRef.value || statusOverlayRef.value.isVisible) return;
     await formRef.value?.validate(async (valid) => {
         if (!valid) return;
-        changePasswordStatusOverlayRef.value!.showLoading('變更中...');
+        statusOverlayRef.value!.showLoading('變更中...');
         const response = await profileSecurityApi.changePassword(formData.value);
-        if (!response?.data.success) return changePasswordStatusOverlayRef.value!.hide();
-        changePasswordStatusOverlayRef.value!.showSuccess('變更成功！', false);
+        if (!response?.data.success) return statusOverlayRef.value!.hide();
+        statusOverlayRef.value!.showSuccess('變更成功！', false);
         setTimeout(() => assignUrlWithOptionalRedirect('/auth/login/', true), 1000);
     });
 }
