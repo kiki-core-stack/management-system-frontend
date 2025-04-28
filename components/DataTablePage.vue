@@ -66,6 +66,7 @@
                     >
                         <template #default="scope">
                             <div class="flex-middle gap-btns">
+                                <slot name="action-btns-prepend" />
                                 <el-action-btn
                                     v-if="!hideEditBtn && !hideRowEditBtnRule?.(scope.row)"
                                     :disabled="disableRowEditBtnRule?.(scope.row)"
@@ -81,6 +82,7 @@
                                 >
                                     刪除
                                 </el-action-btn>
+                                <slot name="action-btns-append" />
                             </div>
                         </template>
                     </el-table-column>
