@@ -21,7 +21,7 @@
                 <slot name="append" />
                 <el-button
                     v-if="enableCopyBtn"
-                    @click="copyTextToClipboardAndShowMessage(modelValue)"
+                    @click="onCopyBtnClick"
                 >
                     <i-mdi-content-copy />
                 </el-button>
@@ -39,7 +39,7 @@ interface Props {
 
 // Define props, models and emits
 defineProps<Props>();
-const modelValue = defineModel<string>({ required: true });
+const modelValue = defineModel<string>();
 
 // Variables
 const attrs: Record<string, unknown> = useAttrs();
@@ -57,6 +57,11 @@ const inputAttrs = computed(() => {
     } = attrs;
     return otherAttrs;
 });
+
+// Functions
+function onCopyBtnClick() {
+    if (modelValue.value !== undefined) copyTextToClipboardAndShowMessage(modelValue.value);
+}
 
 // Exposes
 defineExpose({ focus: () => elInputRef.value?.focus() });
