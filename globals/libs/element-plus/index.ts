@@ -9,7 +9,7 @@ export function createElMessageBoxConfirmHandler<T = any>(
     onSuccess?: (data: T) => Promisable<void>,
     options?: Except<ElMessageBoxOptions, 'beforeClose'>,
 ) {
-    return async (data: T) => {
+    return (data: T) => {
         ElMessageBox.confirm(
             messageRender(data),
             {

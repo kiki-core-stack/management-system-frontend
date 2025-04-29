@@ -31,6 +31,7 @@ export abstract class BaseCrudApi<T extends TableRowData = TableRowData> {
         );
     }
 
+    // eslint-disable-next-line require-await
     async processCreateOrUpdateData(data: OmitMongooseTimestampAndOtherFields<T>) {
         return data;
     }

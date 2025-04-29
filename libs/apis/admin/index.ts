@@ -7,6 +7,7 @@ export const adminApi = new class extends BaseCrudApi<AdminData> {
         super('/api/admin');
     }
 
+    // eslint-disable-next-line require-await
     override async processCreateOrUpdateData(data: AdminData) {
         data = cloneDeep(data);
         if (!data.email?.trim()) delete data.email;
