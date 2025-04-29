@@ -44,6 +44,7 @@ export const headerTabsController = new class HeaderTabsController {
             if (tabData.url === url) {
                 navigateTo(url);
                 tabData.title = title;
+                this.save();
                 return;
             }
         }
