@@ -9,5 +9,5 @@
 
 <script lang="ts" setup>
 // Hooks
-onActivated(() => headerTabsController.ensure('安全性', window.location.pathname));
+onActivated(() => headerTabsController.ensure('安全性'));
 </script>
