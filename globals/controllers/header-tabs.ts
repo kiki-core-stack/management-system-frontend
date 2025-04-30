@@ -26,6 +26,12 @@ export const headerTabsController = new class HeaderTabsController {
         this.#afterClose();
     }
 
+    closeByUrl(url: string) {
+        const index = this.tabs.findIndex((tabData) => tabData.url === url);
+        if (index === -1) return;
+        this.close(index);
+    }
+
     closeFromIndexTo(fromIndex: number, toIndex: number) {
         if (fromIndex > toIndex) {
             const tempIndex = fromIndex;
