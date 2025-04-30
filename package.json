@@ -5,20 +5,21 @@
     "build": "cross-env NODE_ENV=production nuxt build --dotenv ./.env.production.local",
     "dev": "cross-env NODE_ENV=development nuxt dev --dotenv ./.env.development.local",
     "generate": "cross-env NODE_ENV=production nuxt generate --dotenv ./.env.production.local",
-    "lint": "eslint",
-    "lint:fix": "eslint --fix",
+    "lint": "eslint && stylelint './**/*.{css,scss,vue}' --ignore-path ./.gitignore",
+    "lint:fix": "eslint --fix && stylelint './**/*.{css,scss,vue}' --fix --ignore-path ./.gitignore",
     "postinstall": "nuxt prepare",
     "preview": "nuxt preview",
     "typecheck": "vue-tsc"
   },
   "dependencies": {
-    "@kikiutils/nuxt": "6.0.0",
-    "@nuxtjs/robots": "^5.2.9",
-    "nuxt": "^3.16.2",
+    "@kikiutils/nuxt": "6.0.4",
+    "@nuxtjs/robots": "^5.2.10",
+    "nuxt": "^3.17.1",
     "nuxt-security": "^2.2.0"
   },
   "devDependencies": {
-    "@kikiutils/eslint-config": "^0.12.0",
+    "@kikiutils/eslint-config": "^1.0.1",
+    "@kikiutils/stylelint-config": "^0.1.0",
     "@unocss/transformer-directives": "66.1.0-beta.12",
     "cross-env": "^7.0.3",
     "postcss-pxtorem": "^6.1.0",
@@ -27,7 +28,8 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "@parcel/watcher",
-      "esbuild"
+      "esbuild",
+      "unrs-resolver"
     ]
   }
 }
