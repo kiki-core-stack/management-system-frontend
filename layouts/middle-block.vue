@@ -1,6 +1,6 @@
 <template>
     <div class="fixed inset-0 grid overflow-auto bg-[#f5f5f5] dark:bg-[#2c2c2c]">
-        <div class="flex-middle page-container p-3">
+        <div class="flex-middle page-container p-4">
             <slot />
         </div>
     </div>
