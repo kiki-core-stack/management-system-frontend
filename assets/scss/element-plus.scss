@@ -2,6 +2,7 @@
     @apply ml-1!;
 }
 
+/* stylelint-disable-next-line selector-class-pattern */
 .el-table__cell:not(.wrap) > .cell {
     @apply whitespace-nowrap!;
 }

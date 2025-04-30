@@ -54,10 +54,12 @@ const filters = defineModel<Partial<TimeRangeFilter>>({ required: true });
     @apply items-center mb-0;
 }
 
+/* stylelint-disable-next-line selector-class-pattern */
 :deep(.el-form-item__content > .el-input) {
     --el-input-width: 220px;
 }
 
+/* stylelint-disable-next-line selector-class-pattern */
 :deep(.el-form-item__content > .el-select) {
     --el-select-width: 220px;
 }

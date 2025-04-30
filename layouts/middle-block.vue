@@ -9,6 +9,7 @@
 <style lang="scss" scoped>
 .page-container > :deep(:first-child) {
     @apply dark:bg-dark rounded-[10px] relative flex flex-col items-center overflow-hidden bg-white p-4 text-center;
-    box-shadow: 1px 2px 12px 0px rgba(black, 0.25);
+
+    box-shadow: 1px 2px 12px 0 rgb(0 0 0 / 25%);
 }
 </style>

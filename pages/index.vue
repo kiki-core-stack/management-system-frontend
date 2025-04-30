@@ -90,19 +90,19 @@ onMounted(loadData);
 .cards-container {
     grid-template-columns: repeat(6, 1fr);
 
-    @media (max-width: 1600px) {
+    @media (width <= 1600px) {
         grid-template-columns: repeat(4, 1fr);
     }
 
-    @media (max-width: 1200px) {
+    @media (width <= 1200px) {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    @media (max-width: 900px) {
+    @media (width <= 900px) {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    @media (max-width: 768px) {
+    @media (width <= 768px) {
         grid-template-columns: repeat(1, 1fr);
     }
 }

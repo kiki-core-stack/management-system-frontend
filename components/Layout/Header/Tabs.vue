@@ -54,12 +54,12 @@ watch(
 </script>
 
 <style lang="scss" scoped>
-$box-shadow-size: 30px;
-
 #layout-header-tabs-container {
     --bg-close-xmark: #e0e0e0;
     --bg-tab-active: #f5f5f5;
     --bg-tab-hover: #ededed;
+    --box-shadow-size: 30px;
+
     padding: 5px 15px 0 !important;
 
     html.dark & {
@@ -71,49 +71,53 @@ $box-shadow-size: 30px;
 
 a {
     @apply bg-transparent outline-0;
-    border-radius: 12px 12px 0 0;
+
     padding: 6px 15px;
+    border-radius: 12px 12px 0 0;
     transition: 0.1s ease;
+
+    &::after,
+    &::before {
+        @apply absolute bottom-0 rounded-full size-[20px];
+
+        content: '';
+        box-shadow: 0 0 0 40px transparent;
+        transition: 0.1s ease;
+    }
+
+    &::after {
+        right: -20px;
+        clip-path: inset(50% 50% 0 -10px);
+    }
+
+    &::before {
+        left: -20px;
+        clip-path: inset(50% -10px 0 50%);
+    }
 
     &:hover {
         background-color: var(--bg-tab-hover);
 
         &::after,
         &::before {
-            box-shadow: 0 0 0 $box-shadow-size var(--bg-tab-hover);
+            box-shadow: 0 0 0 var(--box-shadow-size) var(--bg-tab-hover);
         }
-    }
-
-    &::after,
-    &::before {
-        @apply absolute bottom-0 rounded-full size-[20px];
-        box-shadow: 0 0 0 40px transparent;
-        content: '';
-        transition: 0.1s ease;
-    }
-
-    &::after {
-        clip-path: inset(50% 50% 0 -10px);
-        right: -20px;
-    }
-
-    &::before {
-        clip-path: inset(50% -10px 0 50%);
-        left: -20px;
     }
 
     &.active {
         @apply z-1000;
+
         background-color: var(--bg-tab-active);
 
         &::after,
         &::before {
-            box-shadow: 0 0 0 $box-shadow-size var(--bg-tab-active);
+            box-shadow: 0 0 0 var(--box-shadow-size) var(--bg-tab-active);
         }
     }
 
     .close-xmark {
         @apply size-[16px] rounded-[50%];
+
         transition: background-color 0.2s;
 
         &:hover {

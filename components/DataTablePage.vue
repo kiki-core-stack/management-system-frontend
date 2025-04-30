@@ -301,8 +301,8 @@ defineExpose({ loadData });
 
 <style lang="scss" scoped>
 .el-bg-and-border {
-    background-color: var(--el-bg-color);
     border-color: var(--el-border-color-lighter);
+    background-color: var(--el-bg-color);
 }
 
 :deep(.el-pagination) {
@@ -310,15 +310,17 @@ defineExpose({ loadData });
         @apply w-[115px];
     }
 
-    @media (max-width: 768px) {
+    @media (width <= 768px) {
         @apply justify-center;
 
         .btn-prev,
+        /* stylelint-disable-next-line selector-class-pattern */
         .el-pagination__sizes {
             @apply ml-0;
         }
 
         .el-pager :not(.is-active),
+        /* stylelint-disable-next-line selector-class-pattern */
         .el-pagination__jump {
             @apply hidden;
         }

@@ -41,6 +41,7 @@ else colorMode.preference = colorModeCookie.value!;
 </script>
 
 <style lang="scss" scoped>
+/* stylelint-disable-next-line selector-class-pattern */
 :deep(.el-drawer__body) {
     @apply p-0!;
 }
