@@ -11,7 +11,7 @@
             @auxclick.middle.prevent
             @click.middle.prevent
         >
-            <i-fa6-solid-house />
+            <i-fa6-solid-house class="fs-17.5px" />
         </nuxt-link>
         <nuxt-link
             v-for="(tab, index) in headerTabsController.tabs"
