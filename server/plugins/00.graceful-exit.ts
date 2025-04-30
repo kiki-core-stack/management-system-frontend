@@ -1,4 +1,4 @@
-async function gracefulExit() {
+function gracefulExit() {
     process.exit(0);
 }
 
