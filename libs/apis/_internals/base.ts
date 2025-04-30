@@ -17,8 +17,8 @@ export abstract class BaseCrudApi<T extends TableRowData = TableRowData> {
         return deleteApi(`${this.baseUrl}/${id}`);
     }
 
-    get(id: string) {
-        return getApi<T>(`${this.baseUrl}/${id}`);
+    get(id: string, params?: Record<string, any>, config?: AxiosRequestConfig) {
+        return getApi<T>(`${this.baseUrl}/${id}`, params, config);
     }
 
     getList(params?: GetListApiParams) {
