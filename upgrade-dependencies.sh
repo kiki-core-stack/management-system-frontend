@@ -1,10 +1,9 @@
 #!/bin/bash
 
-set -e
+cd "$(realpath "$(dirname "$(readlink -f "$0")")")" || exit 1
+
 . ./.env.development.local
 export NPM_CONFIG_REGISTRY
-
-set -e
 
 rm -rf ./.nuxt
 [[ " $@ " =~ ' -c ' ]] && rm -rf ./node_modules ./pnpm-lock.yaml
