@@ -1,5 +1,5 @@
 <template>
-    <el-container class="fixed size-full bg-[#f5f5f5] p-0 dark:bg-[#2c2c2c]">
+    <el-container class="fixed inset-0 bg-[#f5f5f5] p-0 dark:bg-[#2c2c2c]">
         <el-drawer
             v-model="mainState.sidebar.isShow"
             body-class="p-0!"
