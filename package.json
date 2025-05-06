@@ -6,6 +6,7 @@
     "dev": "cross-env NODE_ENV=development nuxt dev --dotenv ./.env.development.local",
     "generate": "cross-env NODE_ENV=production nuxt generate --dotenv ./.env.production.local",
     "lint": "eslint && stylelint './**/*.{css,scss,vue}' -i ./.gitignore",
+    "lint:ci": "eslint --max-warnings 0 && stylelint './**/*.{css,scss,vue}' -i ./.gitignore --mw 0",
     "lint:fix": "eslint --fix && stylelint './**/*.{css,scss,vue}' -i ./.gitignore --fix",
     "postinstall": "nuxt prepare",
     "preview": "nuxt preview",
