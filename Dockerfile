@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:labs
 
 # Build stage
-FROM kikikanri/node:22-slim AS build-stage
+FROM kikikanri/node:24-slim AS build-stage
 
 ## Set args, envs and workdir
 ARG NPM_CONFIG_REGISTRY
@@ -24,7 +24,7 @@ RUN pnpm run lint && \
     pnpm run build
 
 # Runtime stage
-FROM node:22-slim
+FROM node:24-slim
 
 ## Set envs and workdir
 ENV NODE_ENV=production \

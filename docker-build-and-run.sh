@@ -8,8 +8,8 @@ cd "$(realpath "$(dirname "$(readlink -f "$0")")")"
 . ./.env.production.local
 
 # Pull images
-docker pull kikikanri/node:22-slim &
-docker pull node:22-slim &
+docker pull kikikanri/node:24-slim &
+docker pull node:24-slim &
 wait
 
 # Build and run
