@@ -7,38 +7,12 @@
             ref="elInputRef"
             v-model="modelValue"
             :="inputAttrs"
-        >
-            <template
-                v-if="enablePrependSlot"
-                #prepend
-            >
-                <slot name="prepend" />
-            </template>
-            <template
-                v-if="enableAppendSlot || enableCopyBtn"
-                #append
-            >
-                <slot name="append" />
-                <el-button
-                    v-if="enableCopyBtn"
-                    @click="onCopyBtnClick"
-                >
-                    <i-mdi-content-copy />
-                </el-button>
-            </template>
-        </el-input>
+        />
     </el-form-item>
 </template>
 
 <script lang="ts" setup>
-interface Props {
-    enableAppendSlot?: boolean;
-    enableCopyBtn?: boolean;
-    enablePrependSlot?: boolean;
-}
-
 // Define props, models and emits
-defineProps<Props>();
 const modelValue = defineModel<string>();
 
 // Variables
@@ -57,11 +31,6 @@ const inputAttrs = computed(() => {
     } = attrs;
     return otherAttrs;
 });
-
-// Functions
-function onCopyBtnClick() {
-    if (modelValue.value !== undefined) copyTextToClipboardAndShowMessage(modelValue.value);
-}
 
 // Exposes
 defineExpose({ focus: () => elInputRef.value?.focus() });

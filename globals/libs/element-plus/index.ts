@@ -1,7 +1,5 @@
 import type { ElMessageBoxOptions } from 'element-plus';
 
-export * from '@kiki-core-stack/pack/libs/api-requests';
-
 export function createElMessageBoxConfirmHandler<T = any>(
     messageRender: (data: T) => string,
     loadingText: string,

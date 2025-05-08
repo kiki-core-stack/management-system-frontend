@@ -20,8 +20,8 @@
 </template>
 
 <script lang="ts" setup>
-import { getDateRangeFromDate } from '@kikiutils/node/datetime';
-import type { DateRangeType } from '@kikiutils/node/datetime';
+import { getDateRangeFromDate } from '@kikiutils/shared/datetime';
+import type { DateRangeType } from '@kikiutils/shared/datetime';
 
 // Define props, models and emits
 const emit = defineEmits<{ (e: 'select'): void }>();

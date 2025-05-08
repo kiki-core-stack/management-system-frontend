@@ -1,8 +1,8 @@
 import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
 
-import { BaseCrudApi } from '../_internals/base';
+import { BaseCrudApi } from '../_internals/base/crud';
 
-export const adminApi = new class extends BaseCrudApi<AdminData> {
+export class AdminApi extends BaseCrudApi<AdminData> {
     constructor() {
         super('/api/admin');
     }
@@ -15,4 +15,4 @@ export const adminApi = new class extends BaseCrudApi<AdminData> {
         else delete data.password;
         return data;
     }
-}();
+}

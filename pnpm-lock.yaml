@@ -18,8 +18,8 @@ importers:
         specifier: 7.1.1
         version: 7.1.1(magicast@0.3.5)(typescript@5.8.3)
       '@kikiutils/shared':
-        specifier: ^10.0.0
-        version: 10.0.0
+        specifier: ^10.1.0
+        version: 10.1.0
       '@noble/hashes':
         specifier: ^1.8.0
         version: 1.8.0
@@ -838,8 +838,8 @@ packages:
     resolution: {integrity: sha512-vT/m1dv/tsFYZYS5/fAEOmevpfu02bn6t/B9bno/ypsK8GcVizx89yKEXmG9baUfzh2cgYlvQpXVml5M0V7fJQ==}
     engines: {node: '>=18.12.1'}
 
-  '@kikiutils/shared@10.0.0':
-    resolution: {integrity: sha512-0rKTNp1IWxa1ia65Nbjng04FRb/AxEBpcS52zTifThaQ4yFYMDdbqXMlwP7Fy34r/Lc+bAS5K12LEfTvG0tAQg==}
+  '@kikiutils/shared@10.1.0':
+    resolution: {integrity: sha512-qvub3lD59rhbfcBOB3iEtLbzODQVybD63FwmXo2AnwVR7rWxn1a90IqKZNg7waGZtPuavYShS0s+PSc2RSqobg==}
     engines: {node: '>=18.12.1'}
 
   '@kikiutils/stylelint-config@0.2.0':
@@ -7023,7 +7023,7 @@ snapshots:
       - magicast
       - typescript
 
-  '@kikiutils/shared@10.0.0': {}
+  '@kikiutils/shared@10.1.0': {}
 
   '@kikiutils/stylelint-config@0.2.0(postcss-html@1.8.0)(postcss@8.5.3)(typescript@5.8.3)':
     dependencies:

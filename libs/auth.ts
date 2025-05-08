@@ -1,10 +1,8 @@
-import { authApi } from '@/libs/apis/auth';
-
 export async function logout(noAlert: boolean = false) {
     if (!noAlert) showLoadingAlert('登出中...');
-    const response = await authApi.logout();
+    const response = await useAuthApi().logout();
     if (!response?.data.success) return !noAlert && showErrorAlert('登出失敗！');
-    setTimeout(() => assignUrlWithOptionalRedirect('/auth/login/', true), 1000);
+    assignUrlWithRedirectParamFromCurrentLocation('/auth/login/', 1000);
     if (noAlert) return;
     showSuccessAlert(
         '登出成功！',

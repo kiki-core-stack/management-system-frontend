@@ -6,18 +6,6 @@ export default defineNuxtConfig({
     app: {
         head: {
             htmlAttrs: { lang: 'zh-Hant-TW' },
-            link: [
-                {
-                    as: 'style',
-                    href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap',
-                    rel: 'preload',
-                },
-                {
-                    crossorigin: '',
-                    href: 'https://fonts.googleapis.com',
-                    rel: 'preconnect',
-                },
-            ],
             title: '後台管理系統',
             titleTemplate: '%s｜後台管理系統',
         },
@@ -30,21 +18,26 @@ export default defineNuxtConfig({
         port: Number(process.env.DEV_SERVER_PORT) || undefined,
     },
     kikiutilsNuxt: {
+        autoImportUtils: {
+            '@kikiutils/shared': {
+                clipboard: true,
+                datetime: true,
+                elementPlus: true,
+                enhancedLocalStorage: true,
+                enum: true,
+                general: true,
+                hash: true,
+            },
+        },
         enabledModules: {
             colorMode: true,
             elementPlus: true,
             robots: true,
             security: true,
         },
-        enabledUtils: {
-            clipboard: true,
-            datetime: true,
-            hash: true,
-        },
     },
     modules: [
         '@kikiutils/nuxt',
-        'unplugin-fonts/nuxt',
         'unplugin-icons/nuxt',
     ],
     postcss: { plugins: { 'postcss-pxtorem': {} } },
@@ -69,7 +62,6 @@ export default defineNuxtConfig({
         google: {
             families: [
                 {
-                    defer: false,
                     name: 'Noto+Sans+TC',
                     styles: 'wght@100..900',
                 },

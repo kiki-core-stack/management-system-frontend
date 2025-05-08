@@ -47,7 +47,6 @@
 </template>
 
 <script lang="ts" setup>
-import { profileSecurityApi } from '@/libs/apis/profile/security';
 import type { ProfileSecurityChangePasswordFormData } from '@/types/data/profile';
 
 // Variables
@@ -60,7 +59,7 @@ const formData = ref<ProfileSecurityChangePasswordFormData>({
 const formRef = ref<ElFormRef>(null);
 const formRules: ElFormRules<ProfileSecurityChangePasswordFormData> = {
     confirmPassword: [
-        createElFormItemRule('請輸入確認密碼'),
+        createElFormItemRuleWithDefaults('請輸入確認密碼'),
         {
             validator(_, value, callback) {
                 if (value !== formData.value.newPassword) return callback('確認密碼與新密碼不一致');
@@ -69,10 +68,10 @@ const formRules: ElFormRules<ProfileSecurityChangePasswordFormData> = {
         },
     ],
     newPassword: [
-        createElFormItemRule('請輸入新密碼'),
+        createElFormItemRuleWithDefaults('請輸入新密碼'),
         ...commonElFormItemRules.adminPassword,
     ],
-    oldPassword: [createElFormItemRule('請輸入舊密碼')],
+    oldPassword: [createElFormItemRuleWithDefaults('請輸入舊密碼')],
 };
 
 const statusOverlayRef = ref<StatusOverlayRef>(null);
@@ -85,10 +84,10 @@ async function changePassword() {
     await formRef.value?.validate(async (valid) => {
         if (!valid) return;
         statusOverlayRef.value!.showLoading('變更中...');
-        const response = await profileSecurityApi.changePassword(formData.value);
+        const response = await useProfileSecurityApi().changePassword(formData.value);
         if (!response?.data.success) return statusOverlayRef.value!.hide();
         statusOverlayRef.value!.showSuccess('變更成功！', false);
-        setTimeout(() => assignUrlWithOptionalRedirect('/auth/login/', true), 1000);
+        assignUrlWithRedirectParamFromCurrentLocation('/auth/login/', 1000);
     });
 }
 

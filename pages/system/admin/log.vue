@@ -3,7 +3,7 @@
         ref="dataTablePageRef"
         v-model:filters="filters"
         title="管理員日誌"
-        :crud-api="adminLogApi"
+        :crud-api="useAdminLogApi()"
         hide-actions-column
         hide-add-data-btn
         hide-updated-at-column
@@ -59,7 +59,6 @@
 import { adminLogTypeToTextMap } from '@kiki-core-stack/pack/constants/admin';
 import type { AdminLogData } from '@kiki-core-stack/pack/types/data/admin';
 
-import { adminLogApi } from '@/libs/apis/admin/log';
 import type { GetAdminLogListFilters } from '@/types/admin';
 
 // Variables

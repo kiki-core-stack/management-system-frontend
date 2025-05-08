@@ -154,7 +154,7 @@
 <script lang="ts" setup>
 import { isObjectLike } from 'lodash-es';
 
-import type { BaseCrudApi } from '@/libs/apis/_internals/base';
+import type { BaseCrudApi } from '@/libs/apis/_internals/base/crud';
 
 type ControlActionBtnFunction = (row: any) => boolean;
 
@@ -293,7 +293,7 @@ function setFormDataValues(source: any, target: any) {
 // Hooks
 onActivated(() => headerTabsController.ensure(props.title));
 onMounted(loadData);
-useScrollMemory(mainContainerRef);
+usePreserveScroll(mainContainerRef);
 
 // Exposes
 defineExpose({ loadData });

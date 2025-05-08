@@ -1,7 +1,11 @@
-export const homeApi = new class {
-    readonly #baseUrl = '/api/home';
+import { BaseApi } from './_internals/base';
+
+export class HomeApi extends BaseApi {
+    constructor() {
+        super('/api/home');
+    }
 
     getDashboardData(filters: TimeRangeFilter) {
-        return getApi<object>(`${this.#baseUrl}/dashboard`, { filter: JSON.stringify(filters) });
+        return this.getRequest<object>('/dashboard', { filter: JSON.stringify(filters) });
     }
-}();
+}

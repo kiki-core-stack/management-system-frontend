@@ -1,7 +1,11 @@
-export const profileApi = new class {
-    readonly #baseUrl = '/api/profile';
+import { BaseApi } from '../_internals/base';
+
+export class ProfileApi extends BaseApi {
+    constructor() {
+        super('/api/profile');
+    }
 
     get() {
-        return getApi<{ id: string }>(`${this.#baseUrl}`);
+        return this.getRequest<{ id: string }>();
     }
-}();
+}

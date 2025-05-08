@@ -63,7 +63,6 @@
 <script lang="ts" setup>
 import type { AdminLoginFormData } from '@kiki-core-stack/pack/types/data/admin';
 
-import { authApi } from '@/libs/apis/auth';
 import { updateProfileState } from '@/libs/profile';
 import { initializeAppSession } from '@/libs/session';
 
@@ -82,10 +81,10 @@ const formData = ref<AdminLoginFormData>({
 
 const formRef = ref<ElFormRef>(null);
 const formRules: ElFormRules<AdminLoginFormData> = {
-    account: [createElFormItemRule('請輸入帳號')],
-    password: [createElFormItemRule('請輸入密碼')],
+    account: [createElFormItemRuleWithDefaults('請輸入帳號')],
+    password: [createElFormItemRuleWithDefaults('請輸入密碼')],
     verCode: [
-        createElFormItemRule('請輸入驗證碼'),
+        createElFormItemRuleWithDefaults('請輸入驗證碼'),
         {
             max: 4,
             message: '驗證碼必須為四個字',
@@ -104,7 +103,7 @@ async function login() {
     await formRef.value?.validate(async (valid) => {
         if (!valid) return;
         statusOverlayRef.value!.showLoading('登入中...');
-        const response = await authApi.login(formData.value);
+        const response = await useAuthApi().login(formData.value);
         if (response?.status === 404) accountInputRef.value?.focus();
         else if (response?.data.errorCode === 'invalidVerificationCode') verCodeInputRef.value?.focus();
         else if (response?.data.success) {

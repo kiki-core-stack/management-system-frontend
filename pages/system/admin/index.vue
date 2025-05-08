@@ -6,7 +6,7 @@
         dialog-title-suffix="管理員"
         title="管理員管理"
         :confirm-delete-message-render="(row: AdminData) => `確定要刪除 ${row.account} 嗎？`"
-        :crud-api="adminApi"
+        :crud-api="useAdminApi()"
         :disable-row-delete-btn-rule="(row: AdminData) => row.id === profileState.id"
         :form-rules="formRules"
     >
@@ -83,7 +83,6 @@
 import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
 import type { FormItemRule } from 'element-plus';
 
-import { adminApi } from '@/libs/apis/admin';
 import type { AdminFormData } from '@/types/data/admin';
 
 // Variables
@@ -98,9 +97,9 @@ const formData = ref<TablePageFormData<AdminFormData>>({
 });
 
 const formRules: ElFormRules<AdminFormData> = {
-    account: [createElFormItemRule('請輸入帳號')],
+    account: [createElFormItemRuleWithDefaults('請輸入帳號')],
     email: [
-        createElFormItemRule(
+        createElFormItemRuleWithDefaults(
             '請輸入正確的Email',
             {
                 required: false,

@@ -2,7 +2,7 @@
     <data-table-page
         title="目前登入的裝置"
         :confirm-delete-message-render="(row) => `確定要刪除 ${parseDataToDeviceColumnText(row)} (${row.lastActiveIp}) 嗎？`"
-        :crud-api="profileSecuritySessionApi"
+        :crud-api="useProfileSecuritySessionApi()"
         :disable-row-delete-btn-rule="(row) => row.isCurrent"
         hide-add-data-btn
         hide-created-at-column
@@ -39,8 +39,6 @@
 <script lang="ts" setup>
 import type { AdminSessionData } from '@kiki-core-stack/pack/types/data/admin';
 import { UAParser } from 'ua-parser-js';
-
-import { profileSecuritySessionApi } from '@/libs/apis/profile/security/session';
 
 // Functions
 function parseDataToDeviceColumnText(row: AdminSessionData) {

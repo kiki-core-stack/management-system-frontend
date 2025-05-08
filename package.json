@@ -16,7 +16,7 @@
     "@element-plus/nuxt": "^1.1.1",
     "@kiki-core-stack/pack": "^0.68.0",
     "@kikiutils/nuxt": "7.1.1",
-    "@kikiutils/shared": "^10.0.0",
+    "@kikiutils/shared": "^10.1.0",
     "@noble/hashes": "^1.8.0",
     "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/robots": "^5.2.10",
