@@ -2,6 +2,7 @@ import type {
     AxiosInstance,
     AxiosRequestConfig,
     AxiosResponse,
+    CreateAxiosDefaults,
     Method,
 } from 'axios';
 
@@ -10,8 +11,11 @@ import { createApiAxiosInstance } from '../instance';
 export class BaseApi {
     protected readonly axiosInstance: AxiosInstance;
 
-    constructor(baseUrl?: string) {
-        this.axiosInstance = createApiAxiosInstance({ baseURL: baseUrl });
+    constructor(baseUrl?: string, createAxiosInstanceConfigs?: Except<CreateAxiosDefaults, 'baseURL'>) {
+        this.axiosInstance = createApiAxiosInstance({
+            ...createAxiosInstanceConfigs,
+            baseURL: baseUrl,
+        });
     }
 
     protected deleteRequest<T extends object | undefined = undefined, E extends string | undefined = undefined>(
