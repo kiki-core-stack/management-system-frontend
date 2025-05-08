@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:labs
 
 # Build stage
-FROM kikikanri/node:22-alpine AS build-stage
+FROM kikikanri/node:24-alpine AS build-stage
 
 ## Set args, envs and workdir
 ARG NPM_CONFIG_REGISTRY
