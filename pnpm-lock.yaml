@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@element-plus/nuxt':
         specifier: ^1.1.1
-        version: 1.1.1(@element-plus/icons-vue@2.3.1(vue@3.5.13(typescript@5.8.3)))(element-plus@2.9.9(vue@3.5.13(typescript@5.8.3)))(magicast@0.3.5)
+        version: 1.1.1(@element-plus/icons-vue@2.3.1(vue@3.5.13(typescript@5.8.3)))(element-plus@2.9.10(vue@3.5.13(typescript@5.8.3)))(magicast@0.3.5)
       '@kiki-core-stack/pack':
         specifier: ^0.68.0
         version: 0.68.0
@@ -39,8 +39,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
       element-plus:
-        specifier: ^2.9.9
-        version: 2.9.9(vue@3.5.13(typescript@5.8.3))
+        specifier: ^2.9.10
+        version: 2.9.10(vue@3.5.13(typescript@5.8.3))
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -762,8 +762,8 @@ packages:
     resolution: {integrity: sha512-AuTzLH4BlQxPViwdEP9WcW/9NjqmjzaPHxOd9fyaMZUOkAgF0iauio9PF9QylAtgyodhLd6mGuASESZZiJcXaw==}
     engines: {node: '>=18.0.0'}
 
-  '@netlify/serverless-functions-api@1.41.0':
-    resolution: {integrity: sha512-gez/2z8az4SFOitVID0j3GImXHs+1wsnthkpxMFoedeQ113uEE2wY0V492y7ABNfofR5VjMauWSdAK1S1JyNTQ==}
+  '@netlify/serverless-functions-api@1.41.1':
+    resolution: {integrity: sha512-swjyZEd8U1QVp01rZdHxpwWie7GkP1kS4+4n8kuNKA8+3G5tD0JXXf3a5d4tdwVvrU9k7a4GP1Bn792UPwecmw==}
     engines: {node: '>=18.0.0'}
 
   '@netlify/zip-it-and-ship-it@10.1.0':
@@ -2561,8 +2561,8 @@ packages:
   electron-to-chromium@1.5.151:
     resolution: {integrity: sha512-Rl6uugut2l9sLojjS4H4SAr3A4IgACMLgpuEMPYCVcKydzfyPrn5absNRju38IhQOf/NwjJY8OGWjlteqYeBCA==}
 
-  element-plus@2.9.9:
-    resolution: {integrity: sha512-gN553+xr7ETkhJhH26YG0fERmd2BSCcQKslbtR8fats0Mc0yCtZOXr00bmoPOt5xGzhuRN1TWc9+f1pCaiA0/Q==}
+  element-plus@2.9.10:
+    resolution: {integrity: sha512-W2v9jWnm1kl/zm4bSvCh8aFCVlxvhG3fmqiDZwyd6WQiWGE595J/mpjcCggEr+49QDgIymhXrpPMOPPSARUbng==}
     peerDependencies:
       vue: ^3.2.0
 
@@ -6458,11 +6458,11 @@ snapshots:
     dependencies:
       vue: 3.5.13(typescript@5.8.3)
 
-  '@element-plus/nuxt@1.1.1(@element-plus/icons-vue@2.3.1(vue@3.5.13(typescript@5.8.3)))(element-plus@2.9.9(vue@3.5.13(typescript@5.8.3)))(magicast@0.3.5)':
+  '@element-plus/nuxt@1.1.1(@element-plus/icons-vue@2.3.1(vue@3.5.13(typescript@5.8.3)))(element-plus@2.9.10(vue@3.5.13(typescript@5.8.3)))(magicast@0.3.5)':
     dependencies:
       '@element-plus/icons-vue': 2.3.1(vue@3.5.13(typescript@5.8.3))
       '@nuxt/kit': 3.17.2(magicast@0.3.5)
-      element-plus: 2.9.9(vue@3.5.13(typescript@5.8.3))
+      element-plus: 2.9.10(vue@3.5.13(typescript@5.8.3))
       magic-string: 0.27.0
       unplugin: 1.16.1
     transitivePeerDependencies:
@@ -6951,14 +6951,14 @@ snapshots:
 
   '@netlify/serverless-functions-api@1.38.0': {}
 
-  '@netlify/serverless-functions-api@1.41.0': {}
+  '@netlify/serverless-functions-api@1.41.1': {}
 
   '@netlify/zip-it-and-ship-it@10.1.0(rollup@4.40.2)':
     dependencies:
       '@babel/parser': 7.27.2
       '@babel/types': 7.27.1
       '@netlify/binary-info': 1.0.0
-      '@netlify/serverless-functions-api': 1.41.0
+      '@netlify/serverless-functions-api': 1.41.1
       '@vercel/nft': 0.27.7(rollup@4.40.2)
       archiver: 5.3.2
       common-path-prefix: 3.0.0
@@ -9079,7 +9079,7 @@ snapshots:
 
   electron-to-chromium@1.5.151: {}
 
-  element-plus@2.9.9(vue@3.5.13(typescript@5.8.3)):
+  element-plus@2.9.10(vue@3.5.13(typescript@5.8.3)):
     dependencies:
       '@ctrl/tinycolor': 3.6.1
       '@element-plus/icons-vue': 2.3.1(vue@3.5.13(typescript@5.8.3))
