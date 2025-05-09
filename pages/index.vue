@@ -10,12 +10,16 @@
             <filter-form
                 v-model="filters"
                 class="dark:bg-dark rounded-[10px] bg-white p-4"
-                show-time-range
                 @submit.prevent="loadData"
             >
+                <filter-time-range-fields
+                    v-model:end="filters.createdAt.$lt"
+                    v-model:start="filters.createdAt.$gte"
+                />
                 <template #before-submit-btn>
                     <time-range-quick-select
-                        v-model="filters"
+                        v-model:end="filters.createdAt.$lt"
+                        v-model:start="filters.createdAt.$gte"
                         @select="loadData"
                     />
                 </template>
@@ -61,12 +65,16 @@
 </template>
 
 <script lang="ts" setup>
+import type { GetHomeDashboardDataFilters } from '@/types/home';
+
 // Variables
 const defaultHomeDashboardData = {} as const;
 const dashboardData = ref<typeof defaultHomeDashboardData>({ ...defaultHomeDashboardData });
-const filters = ref<TimeRangeFilter>({
-    endAt: getMidnightDateFromToday(1),
-    startAt: getMidnightDateFromToday(),
+const filters = ref<GetHomeDashboardDataFilters>({
+    createdAt: {
+        $gte: getMidnightDateFromToday(),
+        $lt: getMidnightDateFromToday(1),
+    },
 });
 
 const isLoadingData = ref(false);

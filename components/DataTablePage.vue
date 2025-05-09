@@ -26,10 +26,10 @@
                             text="刷新"
                             @trigger="loadData"
                         />
-                        <!-- @vue-expect-error -->
                         <time-range-quick-select
                             v-if="showTimeRangeQuickSelect"
-                            v-model="filters"
+                            v-model:end="timeRangeEndAt"
+                            v-model:start="timeRangeStartAt"
                             @select="loadData"
                         />
                     </div>
@@ -167,7 +167,7 @@ interface Props {
     disablePagination?: boolean;
     disableRowDeleteBtnRule?: ControlActionBtnFunction;
     disableRowEditBtnRule?: ControlActionBtnFunction;
-    formRules?: ElFormRules<Record<string, any>>;
+    formRules?: ElFormRules<AnyRecord>;
     hideActionsColumn?: boolean;
     hideAddDataBtn?: boolean;
     hideCreatedAtColumn?: boolean;
@@ -192,8 +192,10 @@ const props = withDefaults(
     },
 );
 
-const filters = defineModel<Partial<TimeRangeFilter>>('filters');
+const filters = defineModel<AnyRecord>('filters');
 const formData = defineModel<TableRowData>('formData', { default: { id: '' } });
+const timeRangeEndAt = defineModel<Date>('timeRangeEnd', { default: () => new Date() });
+const timeRangeStartAt = defineModel<Date>('timeRangeStart', { default: () => new Date() });
 
 // Variables
 const autoReloadDataCountdownDropdownBtnRef = ref<ComponentRef<'CountdownDropdownBtn'>>(null);
@@ -240,7 +242,7 @@ async function loadData() {
     autoReloadDataCountdownDropdownBtnRef.value?.stop();
     const response = await props.crudApi.getList({
         ...props.disablePagination || props.hideFooter ? {} : paginationParams.value,
-        filter: filters.value,
+        filters: filters.value,
     });
 
     if (response?.data.data) {

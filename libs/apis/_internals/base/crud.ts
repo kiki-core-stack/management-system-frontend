@@ -18,10 +18,13 @@ export abstract class BaseCrudApi<T extends TableRowData = TableRowData> extends
     }
 
     getList(params?: GetListApiParams) {
-        if (params) params = cloneDeep(params);
-        if (params?.fields) params.fields = JSON.stringify(params.fields);
-        if (params?.filter) params.filter = JSON.stringify(params.filter);
-        return this.getRequest<{ count: number; list: T[]; totals?: Record<string, number | string> }>('/list', params);
+        return this.getRequest<{ count: number; list: T[]; totals?: Record<string, number | string> }>(
+            '/list',
+            {
+                ...params,
+                filters: params?.filters ? buildApiQueryFilters(params.filters) : undefined,
+            },
+        );
     }
 
     // eslint-disable-next-line require-await

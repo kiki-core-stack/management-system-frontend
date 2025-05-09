@@ -28,7 +28,7 @@ async function loadData(accountQuery: string) {
     isLoadingData.value = true;
     const response = await useAdminApi().getList({
         fields: ['account'],
-        filter: { account: { $regex: accountQuery } },
+        filters: { account: { $regex: accountQuery } },
         limit: 100,
     });
 

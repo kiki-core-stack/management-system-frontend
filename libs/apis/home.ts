@@ -1,3 +1,5 @@
+import type { GetHomeDashboardDataFilters } from '@/types/home';
+
 import { BaseApi } from './_internals/base';
 
 export class HomeApi extends BaseApi {
@@ -5,7 +7,7 @@ export class HomeApi extends BaseApi {
         super('/api/home');
     }
 
-    getDashboardData(filters: TimeRangeFilter) {
-        return this.getRequest<object>('/dashboard', { filter: JSON.stringify(filters) });
+    getDashboardData(filters: GetHomeDashboardDataFilters) {
+        return this.getRequest<object>('/dashboard', { filters: buildApiQueryFilters(filters) });
     }
 }

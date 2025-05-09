@@ -5,6 +5,7 @@ import type {
     CreateAxiosDefaults,
     Method,
 } from 'axios';
+import queryString from 'query-string';
 
 import { createApiAxiosInstance } from '../instance';
 
@@ -15,6 +16,7 @@ export class BaseApi {
         this.axiosInstance = createApiAxiosInstance({
             ...createAxiosInstanceConfigs,
             baseURL: baseUrl,
+            paramsSerializer: { serialize: (params) => queryString.stringify(params, { arrayFormat: 'none' }) },
         });
     }
 

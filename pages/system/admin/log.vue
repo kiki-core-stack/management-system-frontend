@@ -2,6 +2,8 @@
     <data-table-page
         ref="dataTablePageRef"
         v-model:filters="filters"
+        v-model:time-range-end="filters.createdAt.$lt"
+        v-model:time-range-start="filters.createdAt.$gte"
         title="管理員日誌"
         :crud-api="useAdminLogApi()"
         hide-actions-column
@@ -13,18 +15,21 @@
             <filter-form
                 v-model="filters"
                 class="pb-1 pl-1"
-                show-time-range
                 @submit.prevent="dataTablePageRef?.loadData()"
             >
+                <filter-time-range-fields
+                    v-model:end="filters.createdAt.$lt"
+                    v-model:start="filters.createdAt.$gte"
+                />
                 <el-form-item label="管理員">
                     <selector-admin
-                        v-model="filters.aIds"
+                        v-model="filters.aObjectId.$in"
                         multiple
                     />
                 </el-form-item>
                 <el-form-item label="類型">
                     <selector-admin-log-type
-                        v-model="filters.types"
+                        v-model="filters.type.$in"
                         multiple
                     />
                 </el-form-item>
@@ -64,9 +69,11 @@ import type { GetAdminLogListFilters } from '@/types/admin';
 // Variables
 const dataTablePageRef = ref<DataTablePageRef>(null);
 const filters = ref<GetAdminLogListFilters>({
-    aIds: [],
-    endAt: getMidnightDateFromToday(1),
-    startAt: getMidnightDateFromToday(),
-    types: [],
+    aObjectId: { $in: [] },
+    createdAt: {
+        $gte: getMidnightDateFromToday(),
+        $lt: getMidnightDateFromToday(1),
+    },
+    type: { $in: [] },
 });
 </script>

@@ -25,13 +25,14 @@ import type { DateRangeType } from '@kikiutils/shared/datetime';
 
 // Define props, models and emits
 const emit = defineEmits<{ (e: 'select'): void }>();
-const filters = defineModel<TimeRangeFilter>({ required: true });
+const endAt = defineModel<Date>('end', { required: true });
+const startAt = defineModel<Date>('start', { required: true });
 
 // Functions
 function onSelect(type: DateRangeType) {
     const { endDate, startDate } = getDateRangeFromDate(new Date(), type, { setEndDateToNextDayStart: true });
-    filters.value.endAt = endDate;
-    filters.value.startAt = startDate;
+    endAt.value = endDate;
+    startAt.value = startDate;
     emit('select');
 }
 </script>
