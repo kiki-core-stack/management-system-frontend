@@ -1,9 +1,9 @@
-export function buildApiQueryFilters(filters: AnyRecord) {
-    filters = cloneDeep(filters);
-    Object.entries(filters).forEach(([field, condition]) => {
+export function buildApiQueryFilter(filter: AnyRecord) {
+    filter = cloneDeep(filter);
+    Object.entries(filter).forEach(([field, condition]) => {
         if (condition === null) return;
         if (Array.isArray(condition)) {
-            if (!condition.length) delete filters[field];
+            if (!condition.length) delete filter[field];
             return;
         }
 
@@ -17,12 +17,12 @@ export function buildApiQueryFilters(filters: AnyRecord) {
                 if (operator === '$regex' && (typeof operand !== 'string' || !operand)) delete condition[operator];
             });
 
-            if (!Object.keys(condition).length) delete filters[field];
+            if (!Object.keys(condition).length) delete filter[field];
             return;
         }
 
-        if (typeof condition === 'string' && !condition) delete filters[field];
+        if (typeof condition === 'string' && !condition) delete filter[field];
     });
 
-    return JSON.stringify(filters);
+    return JSON.stringify(filter);
 }

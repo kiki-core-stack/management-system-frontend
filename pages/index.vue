@@ -8,18 +8,18 @@
         </Head>
         <div class="h-full overflow-auto p-4">
             <filter-form
-                v-model="filters"
+                v-model="filter"
                 class="dark:bg-dark rounded-[10px] bg-white p-4"
                 @submit.prevent="loadData"
             >
                 <filter-time-range-fields
-                    v-model:end="filters.createdAt.$lt"
-                    v-model:start="filters.createdAt.$gte"
+                    v-model:end="filter.createdAt.$lt"
+                    v-model:start="filter.createdAt.$gte"
                 />
                 <template #before-submit-btn>
                     <time-range-quick-select
-                        v-model:end="filters.createdAt.$lt"
-                        v-model:start="filters.createdAt.$gte"
+                        v-model:end="filter.createdAt.$lt"
+                        v-model:start="filter.createdAt.$gte"
                         @select="loadData"
                     />
                 </template>
@@ -65,12 +65,12 @@
 </template>
 
 <script lang="ts" setup>
-import type { GetHomeDashboardDataFilters } from '@/types/home';
+import type { GetHomeDashboardDataFilter } from '@/types/home';
 
 // Variables
 const defaultHomeDashboardData = {} as const;
 const dashboardData = ref<typeof defaultHomeDashboardData>({ ...defaultHomeDashboardData });
-const filters = ref<GetHomeDashboardDataFilters>({
+const filter = ref<GetHomeDashboardDataFilter>({
     createdAt: {
         $gte: getMidnightDateFromToday(),
         $lt: getMidnightDateFromToday(1),
@@ -83,7 +83,7 @@ const isLoadingData = ref(false);
 async function loadData() {
     if (isLoadingData.value) return;
     isLoadingData.value = true;
-    const response = await useHomeApi().getDashboardData(filters.value);
+    const response = await useHomeApi().getDashboardData(filter.value);
     Object.assign(dashboardData, defaultHomeDashboardData, response?.data.data);
     isLoadingData.value = false;
 }

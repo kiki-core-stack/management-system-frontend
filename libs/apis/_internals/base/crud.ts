@@ -22,7 +22,7 @@ export abstract class BaseCrudApi<T extends TableRowData = TableRowData> extends
             '/list',
             {
                 ...params,
-                filters: params?.filters ? buildApiQueryFilters(params.filters) : undefined,
+                filter: params?.filter ? buildApiQueryFilter(params.filter) : undefined,
             },
         );
     }

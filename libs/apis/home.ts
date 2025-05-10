@@ -1,4 +1,4 @@
-import type { GetHomeDashboardDataFilters } from '@/types/home';
+import type { GetHomeDashboardDataFilter } from '@/types/home';
 
 import { BaseApi } from './_internals/base';
 
@@ -7,7 +7,7 @@ export class HomeApi extends BaseApi {
         super('/api/home');
     }
 
-    getDashboardData(filters: GetHomeDashboardDataFilters) {
-        return this.getRequest<object>('/dashboard', { filters: buildApiQueryFilters(filters) });
+    getDashboardData(filter: GetHomeDashboardDataFilter) {
+        return this.getRequest<object>('/dashboard', { filter: buildApiQueryFilter(filter) });
     }
 }

@@ -192,7 +192,7 @@ const props = withDefaults(
     },
 );
 
-const filters = defineModel<AnyRecord>('filters');
+const filter = defineModel<AnyRecord>('filter');
 const formData = defineModel<TableRowData>('formData', { default: { id: '' } });
 const timeRangeEndAt = defineModel<Date>('timeRangeEnd', { default: () => new Date() });
 const timeRangeStartAt = defineModel<Date>('timeRangeStart', { default: () => new Date() });
@@ -242,7 +242,7 @@ async function loadData() {
     autoReloadDataCountdownDropdownBtnRef.value?.stop();
     const response = await props.crudApi.getList({
         ...props.disablePagination || props.hideFooter ? {} : paginationParams.value,
-        filters: filters.value,
+        filter: filter.value,
     });
 
     if (response?.data.data) {

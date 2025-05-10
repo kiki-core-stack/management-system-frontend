@@ -4,7 +4,7 @@ declare global {
     interface GetListApiParams {
         [key: string]: any;
         fields?: string[];
-        filters?: AnyRecord;
+        filter?: AnyRecord;
         limit?: number;
         page?: number;
     }
