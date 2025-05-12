@@ -152,8 +152,6 @@
 </template>
 
 <script lang="ts" setup>
-import { isObjectLike } from 'lodash-es';
-
 import type { BaseCrudApi } from '@/libs/apis/_internals/base/crud';
 
 type ControlActionBtnFunction = (row: any) => boolean;
@@ -229,10 +227,9 @@ const windowSize = useWindowSize();
 
 // Computed properties
 const dialogWidth = computed(() => {
-    if (windowSize.width.value > windowSize.height.value) {
-        if (windowSize.width.value * 0.5 < 700) return '75vw';
-        return '50vw';
-    } else return '95vw';
+    if (windowSize.width.value <= windowSize.height.value) return '95vw';
+    if (windowSize.width.value * 0.5 < 700) return '75vw';
+    return '50vw';
 });
 
 // Functions
@@ -246,8 +243,7 @@ async function loadData() {
     });
 
     if (response?.data.data) {
-        tableData.value.length = 0;
-        tableData.value.push(...response.data.data.list);
+        tableData.value = response.data.data.list;
         totalTableDataCount.value = response.data.data.count || 0;
     }
 
@@ -258,7 +254,7 @@ async function loadData() {
 function openDialog(row?: TableRowData) {
     formRef.value?.resetFields();
     isEditing.value = row !== undefined;
-    setFormDataValues(row || defaultFormData, formData.value);
+    formData.value = merge(cloneDeep(defaultFormData), row);
     props.beforeDialogOpen?.(row);
     isDialogOpen.value = true;
 }
@@ -277,19 +273,6 @@ async function saveData() {
         ElNotification.success(formData.value.id ? '儲存成功！' : '新增成功！');
         await loadData();
     });
-}
-
-function setFormDataValues(source: any, target: any) {
-    if (Array.isArray(source) && Array.isArray(target)) {
-        target.length = 0;
-        target.push(...cloneDeep(source));
-    } else if (isObjectLike(source) && isObjectLike(target)) {
-        for (const key in target) {
-            if (source[key] === undefined) continue;
-            if (isObjectLike(source[key]) && isObjectLike(target[key])) setFormDataValues(source[key], target[key]);
-            else target[key] = source[key];
-        }
-    }
 }
 
 // Hooks
