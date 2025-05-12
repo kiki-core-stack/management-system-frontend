@@ -165,6 +165,7 @@ interface Props {
     disablePagination?: boolean;
     disableRowDeleteBtnRule?: ControlActionBtnFunction;
     disableRowEditBtnRule?: ControlActionBtnFunction;
+    filter?: AnyRecord;
     formRules?: ElFormRules<AnyRecord>;
     hideActionsColumn?: boolean;
     hideAddDataBtn?: boolean;
@@ -190,7 +191,6 @@ const props = withDefaults(
     },
 );
 
-const filter = defineModel<AnyRecord>('filter');
 const formData = defineModel<TableRowData>('formData', { default: { id: '' } });
 const timeRangeEndAt = defineModel<Date>('timeRangeEnd', { default: () => new Date() });
 const timeRangeStartAt = defineModel<Date>('timeRangeStart', { default: () => new Date() });
@@ -239,7 +239,7 @@ async function loadData() {
     autoReloadDataCountdownDropdownBtnRef.value?.stop();
     const response = await props.crudApi.getList({
         ...props.disablePagination || props.hideFooter ? {} : paginationParams.value,
-        filter: filter.value,
+        filter: props.filter,
     });
 
     if (response?.data.data) {

@@ -1,11 +1,11 @@
 <template>
     <data-table-page
         ref="dataTablePageRef"
-        v-model:filter="filter"
         v-model:time-range-end="filter.createdAt.$lt"
         v-model:time-range-start="filter.createdAt.$gte"
         title="管理員日誌"
         :crud-api="useAdminLogApi()"
+        :filter="filter"
         hide-actions-column
         hide-add-data-btn
         hide-updated-at-column
