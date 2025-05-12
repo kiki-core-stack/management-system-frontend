@@ -6,31 +6,46 @@
         <el-input
             ref="elInputRef"
             v-model="modelValue"
-            :="inputAttrs"
+            :autocomplete="autocomplete"
+            :autofocus="autofocus"
+            :clearable="clearable"
+            :disabled="disabled"
+            :maxlength="maxlength"
+            :name="name"
+            :placeholder="placeholder"
+            :readonly="readonly"
+            :rows="rows"
+            :show-password="showPassword"
+            :show-word-limit="showWordLimit"
+            :type="type"
         />
     </el-form-item>
 </template>
 
 <script lang="ts" setup>
+import type { InputTypeHTMLAttribute } from 'vue';
+
+interface Props {
+    autocomplete?: string;
+    autofocus?: boolean;
+    clearable?: boolean;
+    disabled?: boolean;
+    maxlength?: Numberish;
+    name?: string;
+    placeholder?: string;
+    readonly?: boolean;
+    rows?: number;
+    showPassword?: boolean;
+    showWordLimit?: boolean;
+    type?: InputTypeHTMLAttribute;
+}
+
 // Define props, models and emits
+defineProps<Props>();
 const modelValue = defineModel<string>();
 
 // Variables
-const attrs: Record<string, unknown> = useAttrs();
 const elInputRef = ref<ElInputRef>(null);
-
-// Computed properties
-// eslint-disable-next-line unused-imports/no-unused-vars
-const inputAttrs = computed(() => {
-    const {
-        class: _class,
-        label,
-        prop,
-        rules,
-        ...otherAttrs
-    } = attrs;
-    return otherAttrs;
-});
 
 // Exposes
 defineExpose({ focus: () => elInputRef.value?.focus() });
