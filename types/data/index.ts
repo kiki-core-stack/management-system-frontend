@@ -1,4 +1,4 @@
-export type {} from '@kiki-core-stack/pack/types/data';
+import type {} from '@kiki-core-stack/pack/types/data';
 
 declare global {
     type TablePageFormData<
