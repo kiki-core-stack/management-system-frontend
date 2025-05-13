@@ -30,14 +30,6 @@ import { logout } from '@/libs/auth';
 
 // Variables
 const colorMode = useColorMode();
-const colorModeCookie = useCookie('cm');
-
-// Watchers
-watch(() => colorMode.preference, (nv) => colorModeCookie.value = nv);
-
-// ColorMode
-if (colorModeCookie.value === undefined) colorModeCookie.value = colorMode.preference;
-else colorMode.preference = colorModeCookie.value!;
 </script>
 
 <style lang="scss" scoped>
