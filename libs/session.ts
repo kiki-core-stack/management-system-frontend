@@ -1,4 +1,4 @@
 export function initializeAppSession() {
-    if (!profileState.value.id) return;
+    if (!useProfileState().value.id) return;
     headerTabsController.load();
 }

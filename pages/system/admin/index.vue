@@ -109,6 +109,8 @@ const formRules: ElFormRules<AdminFormData> = {
     ],
 };
 
+const profileState = useProfileState();
+
 // Computed properties
 const formConfirmPasswordFieldItemRules = computed<FormItemRule[]>(() => [
     {
