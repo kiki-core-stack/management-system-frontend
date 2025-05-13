@@ -9,10 +9,12 @@
         <el-scrollbar>
             <component
                 :is="menuItemGroup[2] ? ElSubMenu : ElMenuItem"
-                v-for="menuItemGroup, groupIndex in mainState.sidebar.menuItemGroups"
+                v-for="menuItemGroup, groupIndex in sidebarState.menuItemGroups"
                 :key="groupIndex"
                 :index="menuItemGroup[0]"
-                @click="!menuItemGroup[2] && (mainState.sidebar.isShow = false)"
+                @click="() => {
+                    if (!menuItemGroup[2]) sidebarState.isShow = false;
+                }"
             >
                 <template #title>
                     <span>{{ menuItemGroup[1] }}</span>
@@ -23,7 +25,7 @@
                         :key="itemIndex"
                         :index="item[0]"
                         :text="item[1]"
-                        @click="mainState.sidebar.isShow = false"
+                        @click="sidebarState.isShow = false"
                     />
                 </div>
             </component>
@@ -38,12 +40,12 @@
                     <layout-sidebar-menu-item
                         index="/profile/security/"
                         text="一般"
-                        @click="mainState.sidebar.isShow = false"
+                        @click="sidebarState.isShow = false"
                     />
                     <layout-sidebar-menu-item
                         index="/profile/security/session/"
                         text="登入裝置"
-                        @click="mainState.sidebar.isShow = false"
+                        @click="sidebarState.isShow = false"
                     />
                 </ElSubMenu>
             </ElSubMenu>
@@ -59,4 +61,5 @@ import {
 
 // Variables
 const route = useRoute();
+const sidebarState = useSidebarState();
 </script>

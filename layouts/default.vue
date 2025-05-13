@@ -1,7 +1,7 @@
 <template>
     <el-container class="fixed inset-0 bg-[#f5f5f5] p-0 dark:bg-[#2c2c2c]">
         <el-drawer
-            v-model="mainState.sidebar.isShow"
+            v-model="sidebarState.isShow"
             body-class="p-0!"
             direction="ltr"
             size="200"
@@ -24,3 +24,8 @@
         </el-container>
     </el-container>
 </template>
+
+<script lang="ts" setup>
+// Variables
+const sidebarState = useSidebarState();
+</script>

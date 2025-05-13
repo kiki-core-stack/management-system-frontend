@@ -5,7 +5,7 @@
     >
         <i-fa6-solid-bars
             class="mr-4 mt-0.5 cursor-pointer md:hidden"
-            @click="mainState.sidebar.isShow = true"
+            @click="sidebarState.isShow = true"
         />
         <span class="fs-20px">後台管理系統</span>
         <div class="grow" />
@@ -30,6 +30,7 @@ import { logout } from '@/libs/auth';
 
 // Variables
 const colorMode = useColorMode();
+const sidebarState = useSidebarState();
 </script>
 
 <style lang="scss" scoped>
