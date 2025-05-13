@@ -2,7 +2,7 @@
     <el-menu
         class="sidebar h-full w-[200px] py-[48px] tracking-[2px]"
         background-color="#252828"
-        text-color="#ffffff"
+        text-color="#fff"
         :default-active="route.path"
         router
     >
