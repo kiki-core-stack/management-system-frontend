@@ -18,20 +18,15 @@
                 label="最後活動IP"
                 prop="lastActiveIp"
             />
-            <el-table-column
+            <el-table-datetime-column
+                field="lastActiveAt"
                 label="最後活動時間"
-                :formatter="(row) => formatDate(row.lastActiveAt)"
             />
             <el-table-column
                 label="登入IP"
                 prop="loginIp"
             />
-            <el-table-column
-                align="center"
-                label="登入時間"
-                width="156"
-                :formatter="(row) => formatDate(row.createdAt)"
-            />
+            <el-table-datetime-column label="登入時間" />
         </template>
     </data-table-page>
 </template>

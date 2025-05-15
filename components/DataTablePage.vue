@@ -45,19 +45,14 @@
                     stripe
                 >
                     <slot name="table" />
-                    <el-table-column
+                    <el-table-datetime-column
                         v-if="!hideTimestampColumns && !hideCreatedAtColumn"
-                        align="center"
                         label="建立時間"
-                        width="156"
-                        :formatter="(row) => formatDate(row.createdAt)"
                     />
-                    <el-table-column
+                    <el-table-datetime-column
                         v-if="!hideTimestampColumns && !hideUpdatedAtColumn"
-                        align="center"
+                        field="updatedAt"
                         label="更新時間"
-                        width="156"
-                        :formatter="(row) => formatDate(row.updatedAt)"
                     />
                     <el-table-column
                         v-if="!hideActionsColumn"
