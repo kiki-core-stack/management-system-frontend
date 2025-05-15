@@ -1,5 +1,8 @@
-interface ProfileState {
-    id?: string;
-}
+import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
 
-export const useProfileState = () => useState<ProfileState>('profile', () => ({}));
+export function useProfileState() {
+    return useState<Pick<AdminData, 'id'>>(
+        'profile',
+        () => ({ id: '' }),
+    );
+}
