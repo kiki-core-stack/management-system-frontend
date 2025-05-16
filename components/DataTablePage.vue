@@ -43,6 +43,7 @@
                     flexible
                     highlight-current-row
                     stripe
+                    @sort-change="onSortChange"
                 >
                     <slot name="table" />
                     <el-table-datetime-column
@@ -151,11 +152,18 @@ import type { BaseCrudApi } from '@/libs/apis/_internals/base/crud';
 
 type ControlActionBtnFunction = (row: any) => boolean;
 
+interface OnSortChangeData {
+    column: any;
+    order: Nullable<'ascending' | 'descending'>;
+    prop: string;
+}
+
 interface Props {
     addDataBtnText?: string;
     beforeDialogOpen?: (row: any) => void;
     confirmDeleteMessageRender?: (row: any) => string;
     crudApi: BaseCrudApi;
+    defaultSort?: Except<OnSortChangeData, 'column'>;
     dialogTitleSuffix?: string;
     disablePagination?: boolean;
     disableRowDeleteBtnRule?: ControlActionBtnFunction;
@@ -216,6 +224,7 @@ const paginationParams = ref({
     page: 1,
 });
 
+const sortQueryParam = ref<string | undefined>(undefined);
 const tableData = ref<TableRowData[]>([]);
 const totalTableDataCount = ref(0);
 const windowSize = useWindowSize();
@@ -235,6 +244,7 @@ async function loadData() {
     const response = await props.crudApi.getList({
         ...props.disablePagination || props.hideFooter ? {} : paginationParams.value,
         filter: props.filter,
+        sort: sortQueryParam.value,
     });
 
     if (response?.data.data) {
@@ -244,6 +254,13 @@ async function loadData() {
 
     isLoadingData.value = false;
     autoReloadDataCountdownDropdownBtnRef.value?.start();
+}
+
+async function onSortChange(data: OnSortChangeData) {
+    if (data.order === 'ascending') sortQueryParam.value = data.prop;
+    else if (data.order === 'descending')sortQueryParam.value = `-${data.prop}`;
+    else sortQueryParam.value = undefined;
+    await loadData();
 }
 
 function openDialog(row?: TableRowData) {
@@ -277,6 +294,10 @@ usePreserveScroll(mainContainerRef);
 
 // Exposes
 defineExpose({ loadData });
+
+// Init
+if (props.defaultSort?.order === 'ascending') sortQueryParam.value = props.defaultSort.prop;
+else if (props.defaultSort?.order === 'descending') sortQueryParam.value = `-${props.defaultSort.prop}`;
 </script>
 
 <style lang="scss" scoped>
