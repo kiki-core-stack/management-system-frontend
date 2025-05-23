@@ -6,7 +6,7 @@ FROM kikikanri/node:24-alpine AS build-stage
 ## Set args, envs and workdir
 ARG NPM_CONFIG_REGISTRY
 ENV NODE_ENV=production \
-    NPM_CONFIG_REGISTRY=$NPM_CONFIG_REGISTRY
+    NPM_CONFIG_REGISTRY=${NPM_CONFIG_REGISTRY}
 
 WORKDIR /app
 
