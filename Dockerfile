@@ -6,7 +6,7 @@ FROM kikikanri/node:24-slim AS build-stage
 ## Set args, envs and workdir
 ARG NPM_CONFIG_REGISTRY
 ENV NODE_ENV=production \
-    NPM_CONFIG_REGISTRY=$NPM_CONFIG_REGISTRY
+    NPM_CONFIG_REGISTRY=${NPM_CONFIG_REGISTRY}
 
 WORKDIR /app
 
@@ -36,8 +36,8 @@ WORKDIR /app
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends tini tzdata && \
-    ln -snf "/usr/share/zoneinfo/$TZ" /etc/localtime && \
-    echo $TZ > /etc/timezone && \
+    ln -snf "/usr/share/zoneinfo/${TZ}" /etc/localtime && \
+    echo ${TZ} > /etc/timezone && \
     apt-get autoremove -y --purge && \
     apt-get clean && \
     rm -rf /var/cache/apt/* /var/lib/apt/lists/*
