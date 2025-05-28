@@ -26,7 +26,7 @@ const props = withDefaults(
 // Functions
 function formatDateCell(row: any) {
     const value = get(row, props.field);
-    if (value === undefined) return props.emptyText;
+    if (value === null || value === undefined) return props.emptyText;
     return formatDate(value);
 }
 </script>
