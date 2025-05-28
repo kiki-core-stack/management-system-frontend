@@ -8,6 +8,7 @@
             v-model="modelValue"
             :autocomplete="autocomplete"
             :autofocus="autofocus"
+            :autosize="autosize"
             :clearable="clearable"
             :disabled="disabled"
             :maxlength="maxlength"
@@ -23,11 +24,13 @@
 </template>
 
 <script lang="ts" setup>
+import type { InputAutoSize } from 'element-plus';
 import type { InputTypeHTMLAttribute } from 'vue';
 
 interface Props {
     autocomplete?: string;
     autofocus?: boolean;
+    autosize?: InputAutoSize;
     clearable?: boolean;
     disabled?: boolean;
     maxlength?: Numberish;
