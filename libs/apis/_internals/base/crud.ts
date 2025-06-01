@@ -37,4 +37,14 @@ export abstract class BaseCrudApi<T extends TableRowData = TableRowData> extends
             return await this.putRequest(`/${id}`, await this.processCreateOrUpdateData(data), config);
         } catch {}
     }
+
+    updateBooleanField(id: string, field: string, value: boolean) {
+        return this.patchRequest(
+            `/${id}/boolean-field`,
+            {
+                field,
+                value,
+            },
+        );
+    }
 }

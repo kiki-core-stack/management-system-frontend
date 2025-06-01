@@ -19,17 +19,14 @@
                 label="Email"
                 prop="email"
             />
-            <el-table-column
-                align="center"
+            <el-table-confirmable-status-switch-column
+                field="enabled"
                 label="啟用"
-            >
-                <template #default="{ row }">
-                    <el-switch
-                        v-model="row.enabled"
-                        :disabled="row.id === profileState.id"
-                    />
-                </template>
-            </el-table-column>
+                :confirm-message="(row: AdminData) => `是否切換管理員 ${row.account} 的啟用狀態？`"
+                :crud-api="useAdminApi()"
+                :disabled-condition="(row: AdminData) => row.id === profileState.id"
+                @status-change="dataTablePageRef?.loadData()"
+            />
         </template>
         <template #form>
             <el-form-input
