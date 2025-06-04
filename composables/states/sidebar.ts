@@ -1,9 +1,8 @@
-type SidebarMenuItem = readonly [url: string, title: string];
-type SidebarMenuItemGroup = readonly [baseUrl: string, title: string, items?: readonly SidebarMenuItem[]];
+import type { SidebarMenuItem } from '@/types/sidebar';
 
 interface SidebarState {
     isShow: boolean;
-    menuItemGroups: readonly SidebarMenuItemGroup[];
+    menuItems: SidebarMenuItem[];
 }
 
 export function useSidebarState() {
@@ -11,25 +10,45 @@ export function useSidebarState() {
         'sidebar',
         () => ({
             isShow: false,
-            menuItemGroups: [
-                [
-                    '/',
-                    '首頁',
-                ],
-                [
-                    '/system/',
-                    '系統',
-                    [
-                        [
-                            '/system/admin/',
-                            '管理員管理',
-                        ],
-                        [
-                            '/system/admin/log/',
-                            '管理員日誌',
-                        ],
+            menuItems: [
+                {
+                    path: '/',
+                    title: '首頁',
+                },
+                {
+                    basePath: '/system/',
+                    children: [
+                        {
+                            path: '/system/admin/',
+                            title: '管理員管理',
+                        },
+                        {
+                            path: '/system/admin/log/',
+                            title: '管理員日誌',
+                        },
                     ],
-                ],
+                    title: '系統',
+                },
+                {
+                    basePath: '/profile/',
+                    children: [
+                        {
+                            basePath: '/profile/security/',
+                            children: [
+                                {
+                                    path: '/profile/security/',
+                                    title: '一般',
+                                },
+                                {
+                                    path: '/profile/security/session/',
+                                    title: '登入裝置',
+                                },
+                            ],
+                            title: '安全性',
+                        },
+                    ],
+                    title: '個人',
+                },
             ],
         }),
     );
