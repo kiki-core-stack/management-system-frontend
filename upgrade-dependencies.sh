@@ -14,5 +14,5 @@ rm -rf ./.nuxt
 [[ " $@ " =~ ' -c ' ]] && rm -rf ./node_modules ./pnpm-lock.yaml
 
 pnpm upgrade -L
-pnpm run postinstall
+pnpm run prepare
 ./modify-files-permissions.sh
