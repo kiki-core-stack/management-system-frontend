@@ -8,6 +8,7 @@
     "lint": "eslint --max-warnings 0 && stylelint './**/*.{css,scss,vue}' -i ./.gitignore --mw 0",
     "lint:fix": "eslint --fix --max-warnings 0 && stylelint './**/*.{css,scss,vue}' -i ./.gitignore --fix --mw 0",
     "postinstall": "nuxt prepare",
+    "prepare": "nuxt prepare",
     "preview": "nuxt preview",
     "typecheck": "vue-tsc"
   },

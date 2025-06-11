@@ -11,4 +11,5 @@ set +e
 export NPM_CONFIG_REGISTRY
 
 pnpm i
+pnpm run prepare
 ./modify-files-permissions.sh
