@@ -72,7 +72,7 @@ export default defineNuxtConfig({
     vite: {
         plugins: [
             ViteComponents({
-                dts: './.nuxt/vite-components.d.ts',
+                dts: '../.nuxt/vite-components.d.ts',
                 resolvers: [IconsResolver()],
             }),
         ],
