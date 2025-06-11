@@ -17,6 +17,7 @@ export default defineNuxtConfig({
         host: process.env.DEV_SERVER_HOST,
         port: Number(process.env.DEV_SERVER_PORT) || undefined,
     },
+    future: { compatibilityVersion: 4 },
     kikiutilsNuxt: {
         autoImportUtils: {
             '@kikiutils/shared': {

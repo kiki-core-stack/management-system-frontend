@@ -15,8 +15,8 @@ importers:
         specifier: ^0.70.0
         version: 0.70.0
       '@kikiutils/nuxt':
-        specifier: 7.1.3
-        version: 7.1.3(magicast@0.3.5)(typescript@5.8.3)
+        specifier: 7.1.4
+        version: 7.1.4(magicast@0.3.5)(typescript@5.8.3)
       '@kikiutils/shared':
         specifier: ^10.1.2
         version: 10.1.2
@@ -695,8 +695,8 @@ packages:
     resolution: {integrity: sha512-cbKG+MxrdhAD3U2O/kHxLT5bt1vDBygXlrjvbcE2jhEuEvbPJadQ9CMmY1EBZtg7cAUzebucLE7fxP9u9jFDDA==}
     engines: {node: '>=18.12.1'}
 
-  '@kikiutils/nuxt@7.1.3':
-    resolution: {integrity: sha512-vVInHZtx6CaX6+t8bFG8Eo9X3FHZw2lPp+puua8ujGBd8krotQzhfj/E252G6nNbcVU0p8mh3XkO3FZbVAMUBA==}
+  '@kikiutils/nuxt@7.1.4':
+    resolution: {integrity: sha512-LYxoFz5RzArFur5LK8ErVmSESe0yPNQP6iVEWNb71ieodiTNCd/9p5OwGn5DpVnyg0k9P8Dxkd4SUn7DmmCxvg==}
     engines: {node: '>=18.12.1'}
 
   '@kikiutils/shared@10.1.2':
@@ -6529,7 +6529,7 @@ snapshots:
       - socks
       - supports-color
 
-  '@kikiutils/nuxt@7.1.3(magicast@0.3.5)(typescript@5.8.3)':
+  '@kikiutils/nuxt@7.1.4(magicast@0.3.5)(typescript@5.8.3)':
     dependencies:
       '@nuxt/kit': 3.17.5(magicast@0.3.5)
       defu: 6.1.4
