@@ -264,6 +264,7 @@ async function onSortChange(data: OnSortChangeData) {
 }
 
 function openDialog(row?: TableRowData) {
+    dialogStatusOverlayRef.value?.hide();
     formRef.value?.resetFields();
     isEditing.value = row !== undefined;
     formData.value = merge(cloneDeep(defaultFormData), row);
@@ -279,8 +280,7 @@ async function saveData() {
         let response;
         if (formData.value.id) response = await props.crudApi.update(formData.value.id, formData.value);
         else response = await props.crudApi.create(formData.value);
-        dialogStatusOverlayRef.value!.hide();
-        if (!response?.data.success) return;
+        if (!response?.data.success) return dialogStatusOverlayRef.value!.hide();
         isDialogOpen.value = false;
         ElNotification.success(formData.value.id ? '儲存成功！' : '新增成功！');
         await loadData();
