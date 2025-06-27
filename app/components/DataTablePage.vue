@@ -199,7 +199,7 @@ const timeRangeEndAt = defineModel<Date>('timeRangeEnd', { default: () => new Da
 const timeRangeStartAt = defineModel<Date>('timeRangeStart', { default: () => new Date() });
 
 // Variables
-const autoReloadDataCountdownDropdownBtnRef = ref<ComponentRef<'CountdownDropdownBtn'>>(null);
+const autoReloadDataCountdownDropdownBtnRef = useTemplateRef('autoReloadDataCountdownDropdownBtnRef');
 const confirmDelete = createElMessageBoxConfirmHandler<TableRowData>(
     // @ts-expect-error Ignore this error.
     props.confirmDeleteMessageRender || ((data) => `確定要刪除 ${data.name} 嗎？`),
@@ -213,12 +213,12 @@ const confirmDelete = createElMessageBoxConfirmHandler<TableRowData>(
 );
 
 const defaultFormData = cloneDeep(formData.value);
-const dialogStatusOverlayRef = ref<StatusOverlayRef>(null);
-const formRef = ref<ElFormRef>(null);
+const dialogStatusOverlayRef = useTemplateRef('dialogStatusOverlayRef');
+const formRef = useTemplateRef('formRef');
 const isDialogOpen = ref(false);
 const isEditing = ref(false);
 const isLoadingData = ref(false);
-const mainContainerRef = ref<Nullable<HTMLDivElement>>(null);
+const mainContainerRef = useTemplateRef('mainContainerRef');
 const paginationParams = ref({
     limit: 10,
     page: 1,

@@ -83,7 +83,7 @@ import type { FormItemRule } from 'element-plus';
 import type { AdminFormData } from '@/types/data/admin';
 
 // Variables
-const dataTablePageRef = ref<DataTablePageRef>(null);
+const dataTablePageRef = useTemplateRef('dataTablePageRef');
 const formData = ref<TablePageFormData<AdminFormData>>({
     account: '',
     confirmPassword: '',

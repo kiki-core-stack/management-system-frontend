@@ -72,14 +72,14 @@ definePageMeta({
 });
 
 // Variables
-const accountInputRef = ref<ElFormInputRef>(null);
+const accountInputRef = useTemplateRef('accountInputRef');
 const formData = ref<AdminLoginFormData>({
     account: '',
     password: '',
     verCode: '',
 });
 
-const formRef = ref<ElFormRef>(null);
+const formRef = useTemplateRef('formRef');
 const formRules: ElFormRules<AdminLoginFormData> = {
     account: [createElFormItemRuleWithDefaults('請輸入帳號')],
     password: [createElFormItemRuleWithDefaults('請輸入密碼')],
@@ -93,8 +93,8 @@ const formRules: ElFormRules<AdminLoginFormData> = {
     ],
 };
 
-const statusOverlayRef = ref<StatusOverlayRef>(null);
-const verCodeInputRef = ref<ElFormInputRef>(null);
+const statusOverlayRef = useTemplateRef('statusOverlayRef');
+const verCodeInputRef = useTemplateRef('verCodeInputRef');
 const verCodeSrc = ref('/api/ver-code');
 
 // Functions

@@ -48,7 +48,7 @@ defineProps<Props>();
 const modelValue = defineModel<string>();
 
 // Variables
-const elInputRef = ref<ElInputRef>(null);
+const elInputRef = useTemplateRef('elInputRef');
 
 // Exposes
 defineExpose({ focus: () => elInputRef.value?.focus() });

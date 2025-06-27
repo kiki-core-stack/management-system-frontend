@@ -67,7 +67,7 @@ import type { AdminLogData } from '@kiki-core-stack/pack/types/data/admin';
 import type { GetAdminLogListFilter } from '@/types/admin';
 
 // Variables
-const dataTablePageRef = ref<DataTablePageRef>(null);
+const dataTablePageRef = useTemplateRef('dataTablePageRef');
 const filter = ref<GetAdminLogListFilter>({
     adminObjectId: { $in: [] },
     createdAt: {
