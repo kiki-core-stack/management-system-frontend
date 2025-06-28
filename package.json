@@ -5,8 +5,8 @@
     "build": "cross-env NODE_ENV=production nuxt build --dotenv ./.env.production.local",
     "dev": "cross-env NODE_ENV=development nuxt dev --dotenv ./.env.development.local",
     "generate": "cross-env NODE_ENV=production nuxt generate --dotenv ./.env.production.local",
-    "lint": "eslint --max-warnings 0 && stylelint './**/*.{css,scss,vue}' -i ./.gitignore --mw 0",
-    "lint:fix": "eslint --fix --max-warnings 0 && stylelint './**/*.{css,scss,vue}' -i ./.gitignore --fix --mw 0",
+    "lint": "eslint --max-warnings 0 && stylelint './app/**/*.{css,scss,vue}' -i ./.gitignore --mw 0",
+    "lint:fix": "eslint --fix --max-warnings 0 && stylelint './app/**/*.{css,scss,vue}' -i ./.gitignore --fix --mw 0",
     "postinstall": "nuxt prepare",
     "preview": "nuxt preview",
     "typecheck": "vue-tsc"
