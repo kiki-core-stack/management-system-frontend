@@ -15,6 +15,7 @@
                 <div class="b b-b-0 el-bg-and-border rounded-t-1 p-1">
                     <slot name="toolbar-prepend" />
                     <div class="gap-btns flex flex-wrap">
+                        <slot name="toolbar-actions-prepend" />
                         <el-button
                             v-if="!hideAddDataBtn"
                             @click="openDialog()"
@@ -32,6 +33,7 @@
                             v-model:start="timeRangeStartAt"
                             @select="loadData"
                         />
+                        <slot name="toolbar-actions-append" />
                     </div>
                     <slot name="toolbar-append" />
                 </div>
