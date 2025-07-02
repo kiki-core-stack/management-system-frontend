@@ -5,7 +5,7 @@ import { BaseApi } from './';
 export abstract class BaseCrudApi<T extends TableRowData = TableRowData> extends BaseApi {
     async create(data: OmitMongooseTimestampAndOtherFields<T>, config?: AxiosRequestConfig) {
         try {
-            return await this.postRequest(undefined, await this.processCreateOrUpdateData(data), config);
+            return await this.postRequest<T>(undefined, await this.processCreateOrUpdateData(data), config);
         } catch {}
     }
 
