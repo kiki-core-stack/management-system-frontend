@@ -53,7 +53,7 @@ function toggleTheme(event: MouseEvent) {
         ];
 
         document.documentElement.animate(
-            { clipPath: isDark.value ? [...clipPath].reverse() : clipPath },
+            { clipPath: isDark.value ? clipPath.reverse() : clipPath },
             {
                 duration: 400,
                 easing: 'ease-in-out',
