@@ -28,6 +28,7 @@ export const headerTabsController = new class HeaderTabsController {
 
     closeByUrl(url?: string) {
         url ??= window.location.pathname;
+        if (!url.endsWith('/')) url += '/';
         const index = this.tabs.findIndex((tabData) => tabData.url === url);
         if (index === -1) return;
         this.close(index);
