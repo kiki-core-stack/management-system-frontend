@@ -26,12 +26,15 @@ export const headerTabsController = new class HeaderTabsController {
         this.#afterClose();
     }
 
-    closeByUrl(url?: string) {
-        url ??= window.location.pathname;
+    closeByUrl(url: string = window.location.pathname) {
         if (!url.endsWith('/')) url += '/';
         const index = this.tabs.findIndex((tabData) => tabData.url === url);
         if (index === -1) return;
         this.close(index);
+    }
+
+    closeByUrlAfter(delayMs: number, url: string = window.location.pathname) {
+        setTimeout(() => this.closeByUrl(url), delayMs);
     }
 
     closeFromIndexTo(fromIndex: number, toIndex: number) {
@@ -46,8 +49,7 @@ export const headerTabsController = new class HeaderTabsController {
         this.#afterClose();
     }
 
-    ensure(title: string, url?: string, insertIndex?: number) {
-        url ??= window.location.pathname;
+    ensure(title: string, url: string = window.location.pathname, insertIndex?: number) {
         if (!url.endsWith('/')) url += '/';
         for (const tabData of this.tabs) {
             if (tabData.url === url) {
