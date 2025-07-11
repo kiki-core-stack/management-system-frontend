@@ -3,31 +3,35 @@
   "private": true,
   "scripts": {
     "build": "cross-env NODE_ENV=production nuxt build --dotenv ./.env.production.local",
+    "depcheck": "depcheck",
     "dev": "cross-env NODE_ENV=development nuxt dev --dotenv ./.env.development.local",
     "generate": "cross-env NODE_ENV=production nuxt generate --dotenv ./.env.production.local",
     "lint": "eslint --max-warnings 0 && stylelint './app/**/*.{css,scss,vue}' -i ./.gitignore --mw 0",
     "lint:fix": "eslint --fix --max-warnings 0 && stylelint './app/**/*.{css,scss,vue}' -i ./.gitignore --fix --mw 0",
     "postinstall": "nuxt prepare",
     "preview": "nuxt preview",
-    "typecheck": "vue-tsc"
+    "typecheck": "vue-tsc",
+    "unused-exports": "ts-unused-exports ./tsconfig.json"
   },
   "dependencies": {
-    "@kikiutils/nuxt": "7.1.3",
-    "@kikiutils/shared": "^10.1.2",
-    "@nuxtjs/robots": "^5.2.10",
-    "@vueuse/nuxt": "^13.3.0",
-    "nuxt": "^3.17.5",
+    "@kikiutils/nuxt": "^7.1.5",
+    "@kikiutils/shared": "^10.2.1",
+    "@nuxtjs/robots": "^5.4.0",
+    "@vueuse/nuxt": "^13.5.0",
+    "nuxt": "^3.17.6",
     "nuxt-security": "^2.2.0"
   },
   "devDependencies": {
-    "@kikiutils/eslint-config": "^1.2.3",
+    "@kikiutils/eslint-config": "^1.2.7",
     "@kikiutils/stylelint-config": "^0.2.0",
     "@kikiutils/types": "^5.3.0",
-    "@unocss/nuxt": "^66.1.4",
-    "@unocss/transformer-directives": "^66.1.4",
+    "@unocss/nuxt": "^66.3.3",
+    "@unocss/transformer-directives": "^66.3.3",
     "cross-env": "^7.0.3",
+    "depcheck": "^1.4.7",
     "postcss-pxtorem": "^6.1.0",
-    "unocss": "^66.1.4",
+    "ts-unused-exports": "^11.0.1",
+    "unocss": "^66.3.3",
     "unplugin-fonts": "^1.3.1"
   },
   "pnpm": {
