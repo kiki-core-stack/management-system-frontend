@@ -24,7 +24,7 @@ const props = withDefaults(
 );
 
 // Functions
-function formatDateCell(row: any) {
+function formatDateCell(row: AnyRecord) {
     const value = get(row, props.field);
     if (value === null || value === undefined) return props.emptyText;
     return formatDate(value);

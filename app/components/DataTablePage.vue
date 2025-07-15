@@ -149,10 +149,17 @@
     </div>
 </template>
 
-<script lang="ts" setup>
+<script
+    lang="ts"
+    generic="
+        TR extends TableRowData = TableRowData,
+        FD extends TR | TablePageFormData<TR> = TablePageFormData<TR>
+    "
+    setup
+>
 import type { BaseCrudApi } from '@/libs/apis/_internals/base/crud';
 
-type ControlActionBtnFunction = (row: any) => boolean;
+type ControlActionBtnFunction = (row: TR) => boolean | undefined;
 
 interface OnSortChangeData {
     column: any;
@@ -162,9 +169,9 @@ interface OnSortChangeData {
 
 interface Props {
     addDataBtnText?: string;
-    beforeDialogOpen?: (row: any) => void;
-    confirmDeleteMessageRender?: (row: any) => string;
-    crudApi: BaseCrudApi;
+    beforeDialogOpen?: (row?: TR) => void;
+    confirmDeleteMessageRender?: (row: TR) => string;
+    crudApi: BaseCrudApi<TR>;
     defaultSort?: Except<OnSortChangeData, 'column'>;
     dialogTitleSuffix?: string;
     disablePagination?: boolean;
@@ -196,7 +203,7 @@ const props = withDefaults(
     },
 );
 
-const formData = defineModel<TableRowData>('formData', { default: { id: '' } });
+const formData = defineModel<FD>('formData', { default: { id: '' } });
 const timeRangeEndAt = defineModel<Date>('timeRangeEnd', { default: () => new Date() });
 const timeRangeStartAt = defineModel<Date>('timeRangeStart', { default: () => new Date() });
 
@@ -265,7 +272,7 @@ async function onSortChange(data: OnSortChangeData) {
     await loadData();
 }
 
-function openDialog(row?: TableRowData) {
+function openDialog(row?: TR) {
     dialogStatusOverlayRef.value?.hide();
     formRef.value?.resetFields();
     isEditing.value = row !== undefined;

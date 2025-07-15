@@ -10,15 +10,15 @@
     </el-table-column>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" generic="TR extends TableRowData = TableRowData" setup>
 import { get } from 'lodash-es';
 
 import type { BaseCrudApi } from '@/libs/apis/_internals/base/crud';
 
 interface Props {
-    confirmMessage: ((row: any) => string) | string;
-    crudApi: BaseCrudApi;
-    disabledCondition?: ((row: any) => boolean) | boolean;
+    confirmMessage: ((row: TR) => string) | string;
+    crudApi: BaseCrudApi<TR>;
+    disabledCondition?: ((row: TR) => boolean | undefined) | boolean;
     field: string;
 }
 
@@ -27,7 +27,7 @@ const props = defineProps<Props>();
 const emit = defineEmits<{ (e: 'statusChange'): void }>();
 
 // Variables
-const confirmChange = createElMessageBoxConfirmHandler<TableRowData>(
+const confirmChange = createElMessageBoxConfirmHandler<TR>(
     (data) => typeof props.confirmMessage === 'string' ? props.confirmMessage : props.confirmMessage(data),
     '切換中...',
     async (data) => {
@@ -41,7 +41,7 @@ const confirmChange = createElMessageBoxConfirmHandler<TableRowData>(
 );
 
 // Functions
-function beforeChange(row: TableRowData) {
+function beforeChange(row: TR) {
     confirmChange(row);
     return false;
 }

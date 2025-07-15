@@ -5,9 +5,9 @@
         add-data-btn-text="新增管理員"
         dialog-title-suffix="管理員"
         title="管理員管理"
-        :confirm-delete-message-render="(row: AdminData) => `確定要刪除 ${row.account} 嗎？`"
+        :confirm-delete-message-render="(row) => `確定要刪除 ${row.account} 嗎？`"
         :crud-api="useAdminApi()"
-        :disable-row-delete-btn-rule="(row: AdminData) => row.id === profileState.id"
+        :disable-row-delete-btn-rule="(row) => row.id === profileState.id"
         :form-rules="formRules"
     >
         <template #table>
@@ -22,9 +22,9 @@
             <el-table-confirmable-status-switch-column
                 field="enabled"
                 label="啟用"
-                :confirm-message="(row: AdminData) => `是否切換管理員 ${row.account} 的啟用狀態？`"
+                :confirm-message="(row) => `是否切換管理員 ${row.account} 的啟用狀態？`"
                 :crud-api="useAdminApi()"
-                :disabled-condition="(row: AdminData) => row.id === profileState.id"
+                :disabled-condition="(row) => row.id === profileState.id"
                 @status-change="dataTablePageRef?.loadData()"
             />
         </template>
@@ -77,7 +77,6 @@
 </template>
 
 <script lang="ts" setup>
-import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
 import type { FormItemRule } from 'element-plus';
 
 import type { AdminFormData } from '@/types/data/admin';

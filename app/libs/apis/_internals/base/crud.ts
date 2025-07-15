@@ -2,8 +2,11 @@ import type { AxiosRequestConfig } from 'axios';
 
 import { BaseApi } from './';
 
-export abstract class BaseCrudApi<T extends TableRowData = TableRowData> extends BaseApi {
-    async create(data: OmitMongooseTimestampAndOtherFields<T>, config?: AxiosRequestConfig) {
+export abstract class BaseCrudApi<
+    T extends TableRowData = TableRowData,
+    CreateOrUpdateData = T | TablePageFormData<T>,
+> extends BaseApi {
+    async create(data: CreateOrUpdateData, config?: AxiosRequestConfig) {
         try {
             return await this.postRequest<T>(undefined, await this.processCreateOrUpdateData(data), config);
         } catch {}
@@ -28,11 +31,11 @@ export abstract class BaseCrudApi<T extends TableRowData = TableRowData> extends
     }
 
     // eslint-disable-next-line require-await
-    async processCreateOrUpdateData(data: OmitMongooseTimestampAndOtherFields<T>) {
+    async processCreateOrUpdateData(data: CreateOrUpdateData) {
         return data;
     }
 
-    async update(id: string, data: OmitMongooseTimestampAndOtherFields<T>, config?: AxiosRequestConfig) {
+    async update(id: string, data: CreateOrUpdateData, config?: AxiosRequestConfig) {
         try {
             return await this.putRequest(`/${id}`, await this.processCreateOrUpdateData(data), config);
         } catch {}
