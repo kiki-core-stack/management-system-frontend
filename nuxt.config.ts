@@ -17,7 +17,6 @@ export default defineNuxtConfig({
         host: process.env.DEV_SERVER_HOST,
         port: Number(process.env.DEV_SERVER_PORT) || undefined,
     },
-    future: { compatibilityVersion: 4 },
     kikiutilsNuxt: {
         autoImportUtils: {
             '@kikiutils/shared': {
@@ -76,9 +75,6 @@ export default defineNuxtConfig({
                 resolvers: [IconsResolver()],
             }),
         ],
-        server: {
-            allowedHosts: (process.env.DEV_VITE_SERVER_ALLOWED_HOSTS || '').split(','),
-            hmr: { protocol: process.env.DEV_VITE_SERVER_HMR_PROTOCOL },
-        },
+        server: { allowedHosts: (process.env.DEV_VITE_SERVER_ALLOWED_HOSTS || '').split(',') },
     },
 });
