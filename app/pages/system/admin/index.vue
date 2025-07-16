@@ -83,7 +83,7 @@ import type { AdminFormData } from '@/types/data/admin';
 
 // Variables
 const dataTablePageRef = useTemplateRef('dataTablePageRef');
-const formData = ref<TablePageFormData<AdminFormData>>({
+const formData = ref<AdminFormData>({
     account: '',
     confirmPassword: '',
     email: '',
