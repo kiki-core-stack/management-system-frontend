@@ -1,10 +1,7 @@
 import type {} from '@kiki-core-stack/pack/types/data';
 
-type TablePageFormDataExcludeField = 'createdByAdmin' | 'editedByAdmin';
-
 declare global {
-    type TablePageFormData<
-        T extends object,
-        O extends Exclude<keyof T, TablePageFormDataExcludeField> = never,
-    > = Required<OmitMongooseTimestampAndOtherFields<T, O | TablePageFormDataExcludeField>>;
+    type TablePageFormData<T extends object, O extends Exclude<keyof T, keyof WithAdminAuditData> = never> = Required<
+        OmitMongooseTimestampAndOtherFields<T, keyof WithAdminAuditData | O>
+    >;
 }
