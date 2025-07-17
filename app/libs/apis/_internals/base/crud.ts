@@ -30,7 +30,7 @@ export abstract class BaseCrudApi<
         );
     }
 
-    processCreateOrUpdateData(data: CreateOrUpdateData): Promisable<MaybePartial<CreateOrUpdateData>> {
+    processCreateOrUpdateData(data: CreateOrUpdateData): Promisable<any> {
         return data;
     }
 
