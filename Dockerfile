@@ -21,7 +21,7 @@ RUN --mount=id=pnpm-store,target=/pnpm/store,type=cache pnpm i --frozen-lockfile
 ## Copy source files and build-related files, then build the app
 COPY --exclude=./docker-entrypoint.sh ./ ./
 RUN pnpm run lint && \
-    RUN pnpm run typecheck && \
+    pnpm run typecheck && \
     pnpm run generate
 
 # Runtime stage
