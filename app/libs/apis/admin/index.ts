@@ -10,7 +10,7 @@ export class AdminApi extends BaseCrudApi<AdminData, AdminFormData> {
     }
 
     override processCreateOrUpdateData(data: AdminFormData) {
-        const clonedData: Partial<AdminFormData> = cloneDeep(data);
+        const clonedData: Partial<typeof data> = cloneDeep(data);
 
         if (!clonedData.email?.trim()) delete clonedData.email;
 
