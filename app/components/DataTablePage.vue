@@ -170,7 +170,7 @@ interface OnSortChangeData {
 interface Props {
     addDataBtnText?: string;
     beforeDialogOpen?: (row?: TR) => void;
-    confirmDeleteMessageRender?: (row: TR) => string;
+    confirmDeleteMessage?: ((row: TR) => string) | string;
     crudApi: BaseCrudApi<TR>;
     defaultSort?: Except<OnSortChangeData, 'column'>;
     dialogTitleSuffix?: string;
@@ -209,9 +209,8 @@ const timeRangeStartAt = defineModel<Date>('timeRangeStart', { default: () => ne
 
 // Variables
 const autoReloadDataCountdownDropdownBtnRef = useTemplateRef('autoReloadDataCountdownDropdownBtnRef');
-const confirmDelete = createElMessageBoxConfirmHandler<TableRowData>(
-    // @ts-expect-error Ignore this error.
-    props.confirmDeleteMessageRender || ((data) => `確定要刪除 ${data.name} 嗎？`),
+const confirmDelete = createElMessageBoxConfirmHandler<TR>(
+    props.confirmDeleteMessage || ((data) => `確定要刪除 ${(data as any).name} 嗎？`),
     '刪除中...',
     async (data) => !!(await props.crudApi.delete(data.id))?.data.success,
     async () => {

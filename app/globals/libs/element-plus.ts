@@ -1,7 +1,7 @@
 import type { ElMessageBoxOptions } from 'element-plus';
 
 export function createElMessageBoxConfirmHandler<T = any>(
-    messageRender: (data: T) => string,
+    messageRender: ((data: T) => string) | string,
     loadingText: string,
     handleConfirm: (data: T) => Promise<boolean>,
     onSuccess?: (data: T) => Promisable<void>,
@@ -9,7 +9,7 @@ export function createElMessageBoxConfirmHandler<T = any>(
 ) {
     return (data: T) => {
         ElMessageBox.confirm(
-            messageRender(data),
+            typeof messageRender === 'function' ? messageRender(data) : messageRender,
             {
                 async beforeClose(action, instance, done) {
                     if (instance.confirmButtonLoading) return;
