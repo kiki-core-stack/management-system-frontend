@@ -30,8 +30,7 @@ export abstract class BaseCrudApi<
         );
     }
 
-    // eslint-disable-next-line require-await
-    async processCreateOrUpdateData(data: CreateOrUpdateData) {
+    processCreateOrUpdateData(data: CreateOrUpdateData): Promisable<MaybePartial<CreateOrUpdateData>> {
         return data;
     }
 
