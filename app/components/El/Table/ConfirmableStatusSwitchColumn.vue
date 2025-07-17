@@ -10,14 +10,21 @@
     </el-table-column>
 </template>
 
-<script lang="ts" generic="TR extends TableRowData = TableRowData" setup>
+<script
+    lang="ts"
+    generic="
+        CA extends BaseCrudApi<any, any>,
+        TR extends TableRowData = CA extends BaseCrudApi<infer T, any> ? T : never
+    "
+    setup
+>
 import { get } from 'lodash-es';
 
 import type { BaseCrudApi } from '@/libs/apis/_internals/base/crud';
 
 interface Props {
     confirmMessage: ((row: TR) => string) | string;
-    crudApi: BaseCrudApi<TR>;
+    crudApi: CA;
     disabledCondition?: ((row: TR) => boolean | undefined) | boolean;
     field: string;
 }

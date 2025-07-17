@@ -152,8 +152,9 @@
 <script
     lang="ts"
     generic="
-        TR extends TableRowData = TableRowData,
-        FD extends TR | TablePageFormData<TR> = TablePageFormData<TR>
+        CA extends BaseCrudApi<any, any>,
+        TR extends TableRowData = CA extends BaseCrudApi<infer T, any> ? T : never,
+        FD extends TableRowData = CA extends BaseCrudApi<any, infer F> ? F : never
     "
     setup
 >
@@ -171,7 +172,7 @@ interface Props {
     addDataBtnText?: string;
     beforeDialogOpen?: (row?: TR) => void;
     confirmDeleteMessage?: ((row: TR) => string) | string;
-    crudApi: BaseCrudApi<TR>;
+    crudApi: CA;
     defaultSort?: Except<OnSortChangeData, 'column'>;
     dialogTitleSuffix?: string;
     disablePagination?: boolean;
