@@ -1,7 +1,7 @@
 <template>
     <data-table-page
         title="目前登入的裝置"
-        :confirm-delete-message-render="(row) => `確定要刪除 ${parseDataToDeviceColumnText(row)} (${row.lastActiveIp}) 嗎？`"
+        :confirm-delete-message="(row) => `確定要刪除 ${parseDataToDeviceColumnText(row)} (${row.lastActiveIp}) 嗎？`"
         :crud-api="useProfileSecuritySessionApi()"
         :disable-row-delete-btn-rule="(row) => row.isCurrent"
         hide-add-data-btn

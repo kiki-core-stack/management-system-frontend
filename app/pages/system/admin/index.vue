@@ -5,7 +5,7 @@
         add-data-btn-text="新增管理員"
         dialog-title-suffix="管理員"
         title="管理員管理"
-        :confirm-delete-message-render="(row) => `確定要刪除 ${row.account} 嗎？`"
+        :confirm-delete-message="(row) => `確定要刪除 ${row.account} 嗎？`"
         :crud-api="useAdminApi()"
         :disable-row-delete-btn-rule="(row) => row.id === profileState.id"
         :form-rules="formRules"
