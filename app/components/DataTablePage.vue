@@ -199,6 +199,7 @@ interface Props {
 const props = withDefaults(
     defineProps<Props>(),
     {
+        addDataBtnText: '新增',
         formRules: () => ({}),
         rowKey: 'id',
     },
