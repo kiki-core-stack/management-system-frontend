@@ -267,7 +267,7 @@ async function loadData() {
 
 async function onSortChange(data: OnSortChangeData) {
     if (data.order === 'ascending') sortQueryParam.value = data.prop;
-    else if (data.order === 'descending')sortQueryParam.value = `-${data.prop}`;
+    else if (data.order === 'descending') sortQueryParam.value = `-${data.prop}`;
     else sortQueryParam.value = undefined;
     await loadData();
 }

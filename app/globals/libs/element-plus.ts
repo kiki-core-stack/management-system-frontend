@@ -13,10 +13,12 @@ export function createElMessageBoxConfirmHandler<T = any>(
             {
                 async beforeClose(action, instance, done) {
                     if (instance.confirmButtonLoading) return;
-                    else if (action !== 'confirm') return done();
+                    if (action !== 'confirm') return done();
+
                     instance.confirmButtonLoading = true;
                     instance.confirmButtonText = loadingText;
                     instance.showCancelButton = false;
+
                     if (await handleConfirm(data)) {
                         done();
                         await onSuccess?.(data);

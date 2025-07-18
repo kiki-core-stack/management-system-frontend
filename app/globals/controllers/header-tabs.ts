@@ -75,8 +75,7 @@ export const headerTabsController = new class HeaderTabsController {
     load() {
         try {
             const tabs = enhancedLocalStore.headerTabs.getItem(useProfileState().value.id!);
-            if (!tabs) return;
-            tabs.forEach((tabData) => {
+            tabs?.forEach((tabData) => {
                 if (tabData.title && tabData.url) this.tabs.push(tabData);
             });
         } catch {
