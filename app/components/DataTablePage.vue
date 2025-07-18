@@ -215,7 +215,7 @@ const confirmDelete = createElMessageBoxConfirmHandler<TR>(
     '刪除中...',
     async (data) => !!(await props.crudApi.delete(data.id))?.data.success,
     async () => {
-        ElNotification.success('刪除成功！');
+        ElNotification.success('刪除成功');
         await loadData();
     },
     { type: 'warning' },
@@ -291,7 +291,7 @@ async function saveData() {
         else response = await props.crudApi.create(formData.value);
         if (!response?.data.success) return dialogStatusOverlayRef.value!.hide();
         isDialogOpen.value = false;
-        ElNotification.success(formData.value.id ? '儲存成功！' : '新增成功！');
+        ElNotification.success(formData.value.id ? '儲存成功' : '新增成功');
         await loadData();
     });
 }

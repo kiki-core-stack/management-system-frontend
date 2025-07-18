@@ -9,7 +9,7 @@ const customSweetAlert = swal.mixin({
 
 export const closeAlert = customSweetAlert.close;
 
-export function showErrorAlert(title: string = '發生錯誤！請稍候再試。', options?: SweetAlertOptions) {
+export function showErrorAlert(title: string, options?: SweetAlertOptions) {
     customSweetAlert.fire({
         ...options,
         customClass: { confirmButton: 'el-button el-button--danger' },

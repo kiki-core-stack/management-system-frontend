@@ -42,7 +42,7 @@ const confirmChange = createElMessageBoxConfirmHandler<TR>(
         return !!response?.data.success;
     },
     () => {
-        ElNotification.success('切換成功！');
+        ElNotification.success('切換成功');
         emit('statusChange');
     },
 );

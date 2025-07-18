@@ -8,7 +8,7 @@ export function createApiAxiosInstance(config?: CreateAxiosDefaults) {
         (error) => {
             if (!(error instanceof AxiosError)) throw error;
             if (!error.response) {
-                if (!error.config?.skipShowErrorMessage) ElNotification.error('請檢查網路連線！');
+                if (!error.config?.skipShowErrorMessage) ElNotification.error('請檢查網路連線');
                 return;
             }
 
@@ -18,7 +18,7 @@ export function createApiAxiosInstance(config?: CreateAxiosDefaults) {
             }
 
             if (error.response.status === 502) {
-                if (!error.config?.skipShowErrorMessage) ElNotification.error('系統錯誤！');
+                if (!error.config?.skipShowErrorMessage) ElNotification.error('系統錯誤');
                 return;
             }
 

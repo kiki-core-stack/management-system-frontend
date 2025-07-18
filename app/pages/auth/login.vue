@@ -108,7 +108,7 @@ async function login() {
         else if (response?.data.errorCode === 'invalidVerificationCode') verCodeInputRef.value?.focus();
         else if (response?.data.success) {
             await updateProfileState();
-            ElNotification.success('登入成功！');
+            ElNotification.success('登入成功');
             initializeAppSession();
             navigateTo(extractFirstValue(useRoute().query.redirect, '/'), { replace: true });
             return;
