@@ -89,6 +89,7 @@ const formData = ref<AdminFormData>({
     enabled: false,
     id: '',
     password: '',
+    roles: [],
 });
 
 const formRules: ElFormRules<AdminFormData> = {

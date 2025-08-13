@@ -17,6 +17,9 @@ export class AdminApi extends BaseCrudApi<AdminData, AdminFormData> {
         if (clonedData.password) clonedData.password = sha3512(data.password);
         else delete clonedData.password;
 
-        return clonedData;
+        return {
+            ...clonedData,
+            roles: data.roles.map((role) => role.id),
+        };
     }
 }
