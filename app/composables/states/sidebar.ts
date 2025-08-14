@@ -23,6 +23,10 @@ export function useSidebarState() {
                             title: '管理員管理',
                         },
                         {
+                            path: '/system/admin/role/',
+                            title: '管理員身分組管理',
+                        },
+                        {
                             path: '/system/admin/log/',
                             title: '管理員日誌',
                         },
