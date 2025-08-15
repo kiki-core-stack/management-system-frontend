@@ -8,10 +8,10 @@
         remote
     >
         <el-option
-            v-for="admin in admins"
-            :key="admin.id"
-            :label="admin.account"
-            :value="admin.id"
+            v-for="item in items"
+            :key="item.id"
+            :label="item.account"
+            :value="item.id"
         />
     </el-select>
 </template>
@@ -20,8 +20,8 @@
 import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
 
 // Variables
-const admins = ref<AdminData[]>([]);
 const isLoadingData = ref(true);
+const items = ref<AdminData[]>([]);
 
 // Functions
 async function loadData(accountQuery: string) {
@@ -32,8 +32,8 @@ async function loadData(accountQuery: string) {
         limit: 100,
     });
 
-    admins.value.length = 0;
-    admins.value.push(...response?.data.data?.list || []);
+    items.value.length = 0;
+    items.value.push(...response?.data.data?.list || []);
     isLoadingData.value = false;
 }
 </script>
