@@ -65,6 +65,13 @@
                 type="password"
                 :rules="formConfirmPasswordFieldItemRules"
             />
+            <el-form-item label="身分組">
+                <selector-admin-role
+                    v-model="formData.roles"
+                    :selected-data="formData.roles"
+                    multiple
+                />
+            </el-form-item>
             <el-form-switch
                 v-model="formData.enabled"
                 label="啟用"
