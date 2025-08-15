@@ -22,7 +22,9 @@
             <el-form-item label="權限">
                 <el-tree-select
                     v-model="formData.permissions"
-                    :data="permissionsTree"
+                    size="large"
+                    :data="permissionTree"
+                    clearable
                     multiple
                     show-checkbox
                 />
@@ -42,9 +44,9 @@ const formData = ref<TablePageFormData<AdminRoleData>>({
 });
 
 const formRules: ElFormRules<TablePageFormData<AdminRoleData>> = { name: [createElFormItemRuleWithDefaults('請輸入名稱')] };
-const permissionsTree = ref<ElTreeNode[]>([]);
+const permissionTree = ref<ElTreeNode[]>([]);
 
 // Load data
 const response = await useAdminPermissionApi().getTree();
-permissionsTree.value = response?.data.data || [];
+permissionTree.value = response?.data.data || [];
 </script>

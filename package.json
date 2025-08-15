@@ -4,7 +4,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production nuxt build --dotenv ./.env.production.local",
     "depcheck": "depcheck",
-    "dev": "cross-env NODE_ENV=development nuxt dev --dotenv ./.env.development.local",
+    "dev": "cross-env NODE_ENV=development node generate-admin-permission-files.mjs && nuxt dev --dotenv ./.env.development.local",
     "generate": "cross-env NODE_ENV=production nuxt generate --dotenv ./.env.production.local",
     "lint": "eslint --max-warnings 0 && stylelint './app/**/*.{css,scss,vue}' -i ./.gitignore --mw 0",
     "lint:fix": "eslint --fix --max-warnings 0 && stylelint './app/**/*.{css,scss,vue}' -i ./.gitignore --fix --mw 0",
@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@element-plus/nuxt": "^1.1.4",
-    "@kiki-core-stack/pack": "^0.77.2",
+    "@kiki-core-stack/pack": "^0.78.0",
     "@kikiutils/nuxt": "^8.0.1",
     "@kikiutils/shared": "^11.0.0",
     "@noble/hashes": "^1.8.0",
@@ -31,7 +31,7 @@
     "nuxt-security": "^2.3.0",
     "query-string": "^9.2.2",
     "superjson": "^2.2.2",
-    "sweetalert2": "^11.22.3",
+    "sweetalert2": "^11.22.4",
     "ua-parser-js": "^2.0.4",
     "vue": "^3.5.18"
   },
@@ -48,6 +48,7 @@
     "@unocss/transformer-directives": "^66.4.2",
     "cross-env": "^10.0.0",
     "depcheck": "^1.4.7",
+    "dotenv": "^17.2.1",
     "postcss-pxtorem": "^6.1.0",
     "ts-unused-exports": "^11.0.1",
     "unocss": "^66.4.2",
