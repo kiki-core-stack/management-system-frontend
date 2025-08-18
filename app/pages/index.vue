@@ -6,7 +6,10 @@
         <Head>
             <Title>首頁</Title>
         </Head>
-        <div class="h-full overflow-auto p-4">
+        <div
+            v-if="hasViewDashboardPermission"
+            class="h-full overflow-auto p-4"
+        >
             <filter-form
                 v-model="filter"
                 class="dark:bg-dark rounded-[10px] bg-white p-4"
@@ -79,9 +82,12 @@ const filter = ref<GetHomeDashboardDataFilter>({
 
 const isLoadingData = ref(false);
 
+// Computed properties
+const hasViewDashboardPermission = computed(() => hasPermission('home.dashboard.view'));
+
 // Functions
 async function loadData() {
-    if (isLoadingData.value) return;
+    if (isLoadingData.value || !hasViewDashboardPermission.value) return;
     isLoadingData.value = true;
     const response = await useHomeApi().getDashboardData(filter.value);
     Object.assign(dashboardData.value, defaultHomeDashboardData, response?.data.data);

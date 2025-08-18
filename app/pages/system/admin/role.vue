@@ -5,6 +5,7 @@
         title="管理員身分組管理"
         :crud-api="useAdminRoleApi()"
         :form-rules="formRules"
+        :permissions="{ base: 'admin.role' }"
     >
         <template #table>
             <el-table-column

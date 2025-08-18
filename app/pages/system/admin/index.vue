@@ -8,6 +8,7 @@
         :crud-api="useAdminApi()"
         :disable-row-delete-btn-rule="(row) => row.id === profileState.id"
         :form-rules="formRules"
+        :permissions="{ base: 'admin' }"
     >
         <template #table>
             <el-table-column
@@ -23,7 +24,7 @@
                 label="啟用"
                 :confirm-message="(row) => `是否切換管理員 ${row.account} 的啟用狀態？`"
                 :crud-api="useAdminApi()"
-                :disabled-condition="(row) => row.id === profileState.id"
+                :disabled-condition="(row) => !hasPermission('admin.toggle') || row.id === profileState.id"
                 @status-change="dataTablePageRef?.loadData()"
             />
         </template>

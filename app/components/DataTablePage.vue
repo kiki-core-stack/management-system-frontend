@@ -17,18 +17,19 @@
                     <div class="gap-btns flex flex-wrap">
                         <slot name="toolbar-actions-prepend" />
                         <el-button
-                            v-if="!hideAddDataBtn"
+                            v-if="capabilities.create && !hideAddDataBtn"
                             @click="openDialog()"
                         >
                             {{ addDataBtnText }}
                         </el-button>
                         <countdown-dropdown-btn
+                            v-if="capabilities.list"
                             ref="autoReloadDataCountdownDropdownBtnRef"
                             text="刷新"
                             @trigger="loadData"
                         />
                         <time-range-quick-select
-                            v-if="showTimeRangeQuickSelect"
+                            v-if="capabilities.list && showTimeRangeQuickSelect"
                             v-model:end="timeRangeEndAt"
                             v-model:start="timeRangeStartAt"
                             @select="loadData"
@@ -38,6 +39,7 @@
                     <slot name="toolbar-append" />
                 </div>
                 <el-table
+                    v-if="capabilities.list"
                     table-layout="auto"
                     :data="tableData"
                     :row-key="rowKey"
@@ -69,14 +71,14 @@
                                     name="action-btns-prepend"
                                 />
                                 <el-action-btn
-                                    v-if="!hideEditBtn && !hideRowEditBtnRule?.(scope.row)"
+                                    v-if="capabilities.update && !hideEditBtn && !hideRowEditBtnRule?.(scope.row)"
                                     :disabled="disableRowEditBtnRule?.(scope.row)"
                                     @click="openDialog(scope.row)"
                                 >
                                     編輯
                                 </el-action-btn>
                                 <el-action-btn
-                                    v-if="!hideDeleteBtn && !hideRowDeleteBtnRule?.(scope.row)"
+                                    v-if="capabilities.delete && !hideDeleteBtn && !hideRowDeleteBtnRule?.(scope.row)"
                                     type="danger"
                                     :disabled="disableRowDeleteBtnRule?.(scope.row)"
                                     @click="confirmDelete(scope.row)"
@@ -96,7 +98,7 @@
                     class="b b-t-0 el-bg-and-border rounded-b-1 p-1"
                 >
                     <el-pagination
-                        v-if="!disablePagination"
+                        v-if="capabilities.list && !disablePagination"
                         v-model:current-page="paginationParams.page"
                         v-model:page-size="paginationParams.limit"
                         layout="total, prev, pager, next, sizes"
@@ -159,6 +161,7 @@
     setup
 >
 import type { BaseCrudApi } from '@/libs/apis/_internals/base/crud';
+import type { AdminPermissionPattern } from '@/types/admin';
 
 type ControlActionBtnFunction = (row: TR) => boolean | undefined;
 
@@ -190,6 +193,16 @@ interface Props {
     hideRowEditBtnRule?: ControlActionBtnFunction;
     hideTimestampColumns?: boolean;
     hideUpdatedAtColumn?: boolean;
+    permissions:
+      | 'ignore'
+      | {
+          base: AdminPermissionPattern;
+          create?: AdminPermissionPattern;
+          delete?: AdminPermissionPattern;
+          list?: AdminPermissionPattern;
+          update?: AdminPermissionPattern;
+      };
+
     rowKey?: string;
     showTimeRangeQuickSelect?: boolean;
     title: string;
@@ -240,6 +253,22 @@ const totalTableDataCount = ref(0);
 const windowSize = useWindowSize();
 
 // Computed properties
+const capabilities = computed(() => {
+    const obj = {
+        create: true,
+        delete: true,
+        list: true,
+        update: true,
+    };
+
+    if (props.permissions === 'ignore') return obj;
+    obj.create = hasPermission(props.permissions.create || `${props.permissions.base}.create`);
+    obj.delete = hasPermission(props.permissions.delete || `${props.permissions.base}.delete`);
+    obj.list = hasPermission(props.permissions.list || `${props.permissions.base}.list`);
+    obj.update = hasPermission(props.permissions.update || `${props.permissions.base}.update`);
+    return obj;
+});
+
 const dialogWidth = computed(() => {
     if (windowSize.width.value <= windowSize.height.value) return '95vw';
     if (windowSize.width.value * 0.5 < 700) return '75vw';
@@ -248,7 +277,7 @@ const dialogWidth = computed(() => {
 
 // Functions
 async function loadData() {
-    if (isLoadingData.value) return;
+    if (isLoadingData.value || !capabilities.value.list) return;
     isLoadingData.value = true;
     autoReloadDataCountdownDropdownBtnRef.value?.stop();
     const response = await props.crudApi.getList({
@@ -283,6 +312,7 @@ function openDialog(row?: TR) {
 }
 
 async function saveData() {
+    if (!capabilities.value.create && !capabilities.value.update) return;
     if (!dialogStatusOverlayRef.value || dialogStatusOverlayRef.value.isVisible) return;
     await formRef.value?.validate(async (valid) => {
         if (!valid) return;
@@ -303,7 +333,10 @@ onMounted(loadData);
 usePreserveScroll(mainContainerRef);
 
 // Exposes
-defineExpose({ loadData });
+defineExpose({
+    capabilities: readonly(capabilities),
+    loadData,
+});
 
 // Init
 if (props.defaultSort?.order === 'ascending') sortQueryParam.value = props.defaultSort.prop;

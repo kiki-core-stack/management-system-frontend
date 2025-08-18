@@ -6,6 +6,7 @@
         title="管理員日誌"
         :crud-api="useAdminLogApi()"
         :filter="filter"
+        :permissions="{ base: 'admin.log' }"
         hide-actions-column
         hide-add-data-btn
         hide-updated-at-column
