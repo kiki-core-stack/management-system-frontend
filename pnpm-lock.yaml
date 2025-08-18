@@ -14,6 +14,9 @@ importers:
       '@kiki-core-stack/pack':
         specifier: ^0.78.0
         version: 0.78.0
+      '@kikiutils/micromatch':
+        specifier: ^4.0.9
+        version: 4.0.9
       '@kikiutils/nuxt':
         specifier: ^8.0.1
         version: 8.0.1(magicast@0.3.5)(typescript@5.9.2)
@@ -44,9 +47,6 @@ importers:
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
-      micromatch:
-        specifier: ^4.0.8
-        version: 4.0.8
       nuxt:
         specifier: ^4.0.3
         version: 4.0.3(@netlify/blobs@9.1.2)(@parcel/watcher@2.5.1)(@types/node@24.3.0)(@vue/compiler-sfc@3.5.18)(db0@0.3.2)(eslint@9.33.0(jiti@2.5.1))(ioredis@5.7.0)(magicast@0.3.5)(meow@13.2.0)(optionator@0.9.4)(rollup@4.46.3)(sass-embedded@1.90.0)(sass@1.90.0)(stylelint@16.23.1(typescript@5.9.2))(terser@5.43.1)(typescript@5.9.2)(vite@7.1.2(@types/node@24.3.0)(jiti@2.5.1)(sass-embedded@1.90.0)(sass@1.90.0)(terser@5.43.1)(yaml@2.8.1))(vue-tsc@3.0.5(typescript@5.9.2))(yaml@2.8.1)
@@ -885,6 +885,10 @@ packages:
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
       vue-eslint-parser: ^10.0.0
+
+  '@kikiutils/micromatch@4.0.9':
+    resolution: {integrity: sha512-yS56laGkQx7Cz9RZjlRoDnSIkBdL6Y5ZtV8I9QbWIhi9+twikzG7ghK5Hyom2pYA3EsPgyphA0XJoUPzCgeoUQ==}
+    engines: {node: '>=8.6'}
 
   '@kikiutils/mongoose@4.0.0':
     resolution: {integrity: sha512-jH3V3B/j0acepLNJXW1GCQKCih5JDHMSJPiqwkgS9hmV9QVWuEss48sUnc8HomQdasH0F5Sh2rT+r4930YAo+g==}
@@ -7054,6 +7058,12 @@ snapshots:
       semver: 7.7.2
       vue-eslint-parser: 10.2.0(eslint@9.33.0(jiti@2.5.1))
       xml-name-validator: 4.0.0
+
+  '@kikiutils/micromatch@4.0.9':
+    dependencies:
+      braces: 3.0.3
+      object-inspect: 1.13.4
+      picomatch: 4.0.3
 
   '@kikiutils/mongoose@4.0.0':
     dependencies:
