@@ -8,7 +8,7 @@
     >
         <el-scrollbar>
             <layout-sidebar-menu-item
-                v-for="menuItem, index in sidebarState.menuItems"
+                v-for="menuItem, index in processedMenuItems"
                 :key="index"
                 :item="menuItem"
             />
@@ -17,7 +17,26 @@
 </template>
 
 <script lang="ts" setup>
+import type { SidebarMenuItem } from '@/types/sidebar';
+
 // Variables
 const route = useRoute();
 const sidebarState = useSidebarState();
+
+// Computed properties
+const processedMenuItems = computed(() => processAccessibleMenuItems(cloneDeep(sidebarState.value.menuItems)));
+
+// Functions
+function processAccessibleMenuItems(menuItems: SidebarMenuItem[]) {
+    for (let i = menuItems.length - 1; i >= 0; i--) {
+        const menuItem = menuItems[i]!;
+        if (!hasPermission(menuItem.requiredPermissions)) menuItems.splice(i, 1);
+        else if ('children' in menuItem) {
+            menuItem.children = processAccessibleMenuItems(menuItem.children);
+            if (!menuItem.children.length) menuItems.splice(i, 1);
+        }
+    }
+
+    return menuItems;
+}
 </script>
