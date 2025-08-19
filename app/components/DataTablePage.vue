@@ -200,6 +200,7 @@ interface Props {
           create?: AdminPermissionPattern;
           delete?: AdminPermissionPattern;
           list?: AdminPermissionPattern;
+          read?: AdminPermissionPattern;
           update?: AdminPermissionPattern;
       };
 
@@ -258,6 +259,7 @@ const capabilities = computed(() => {
         create: true,
         delete: true,
         list: true,
+        read: true,
         update: true,
     };
 
@@ -265,6 +267,7 @@ const capabilities = computed(() => {
     obj.create = hasPermission(props.permissions.create || `${props.permissions.base}.create`);
     obj.delete = hasPermission(props.permissions.delete || `${props.permissions.base}.delete`);
     obj.list = hasPermission(props.permissions.list || `${props.permissions.base}.list`);
+    obj.read = hasPermission(props.permissions.list || `${props.permissions.base}.read`);
     obj.update = hasPermission(props.permissions.update || `${props.permissions.base}.update`);
     return obj;
 });
