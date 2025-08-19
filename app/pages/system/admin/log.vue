@@ -14,6 +14,7 @@
     >
         <template #toolbar-prepend>
             <filter-form
+                v-if="dataTablePageRef?.capabilities.list"
                 v-model="filter"
                 class="pb-1 pl-1"
                 @submit.prevent="dataTablePageRef?.loadData()"
