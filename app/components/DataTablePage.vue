@@ -260,6 +260,7 @@ const capabilities = computed(() => {
         delete: true,
         list: true,
         read: true,
+        toggle: true,
         update: true,
     };
 
@@ -268,6 +269,7 @@ const capabilities = computed(() => {
     obj.delete = hasPermission(props.permissions.delete || `${props.permissions.base}.delete`);
     obj.list = hasPermission(props.permissions.list || `${props.permissions.base}.list`);
     obj.read = hasPermission(props.permissions.list || `${props.permissions.base}.read`);
+    obj.toggle = hasPermission(props.permissions.update || `${props.permissions.base}.toggle`);
     obj.update = hasPermission(props.permissions.update || `${props.permissions.base}.update`);
     return obj;
 });
