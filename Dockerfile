@@ -34,6 +34,5 @@ WORKDIR /app
 COPY --from=build-stage /app/.output ./
 
 ## Copy and set the entrypoint script
-COPY ./docker-entrypoint.sh ./
-RUN chmod 700 ./docker-entrypoint.sh
+ADD --chmod=700 ./docker-entrypoint.sh ./
 CMD ["./docker-entrypoint.sh"]
