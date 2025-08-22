@@ -23,9 +23,12 @@
             <el-form-item label="權限">
                 <el-tree-select
                     v-model="formData.permissions"
+                    max-collapse-tags="20"
                     size="large"
                     :data="permissionTree"
                     clearable
+                    collapse-tags
+                    collapse-tags-tooltip
                     multiple
                     show-checkbox
                 />
