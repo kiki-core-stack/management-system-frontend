@@ -20,6 +20,7 @@
             active-class="active"
             :to="tab.url"
             @auxclick.middle.prevent="headerTabsController.close(index)"
+            @contextmenu="showContextMenu($event, index)"
             @click.middle.prevent
         >
             {{ tab.title }}
@@ -30,12 +31,41 @@
                 <i-mdi-close />
             </div>
         </nuxt-link>
+        <context-menu
+            ref="contextMenuRef"
+            :items="contextMenuItems"
+        />
     </el-header>
 </template>
 
 <script lang="ts" setup>
 // Variables
+const contextMenuAtTabIndex = ref(0);
+const contextMenuItems = ref([
+    {
+        action: () => headerTabsController.closeAll(),
+        label: '關閉全部',
+    },
+    {
+        action: () => headerTabsController.closeFromIndexTo(contextMenuAtTabIndex.value - 1, 0),
+        label: '關閉左邊所有',
+    },
+    {
+        action: () => {
+            headerTabsController.closeFromIndexTo(contextMenuAtTabIndex.value + 1, headerTabsController.tabs.length);
+        },
+        label: '關閉右邊所有',
+    },
+]);
+
+const contextMenuRef = useTemplateRef('contextMenuRef');
 const route = useRoute();
+
+// Functions
+function showContextMenu(event: MouseEvent, tabIndex: number) {
+    contextMenuAtTabIndex.value = tabIndex;
+    contextMenuRef.value?.show(event);
+}
 
 // Watchers
 watch(
