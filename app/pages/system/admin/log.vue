@@ -47,8 +47,8 @@
                 :formatter="(row: AdminLogData) => adminLogTypeToTextMap[row.type]"
             />
             <el-table-column
-                label="內容"
-                prop="content"
+                label="備註"
+                prop="note"
             />
             <el-table-column
                 label="IP"
