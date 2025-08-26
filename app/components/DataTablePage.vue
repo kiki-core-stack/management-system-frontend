@@ -235,6 +235,8 @@ const confirmDelete = createElMessageBoxConfirmHandler<TR>(
         ElNotification.success('刪除成功');
         await loadData();
     },
+    undefined,
+    undefined,
     { type: 'warning' },
 );
 

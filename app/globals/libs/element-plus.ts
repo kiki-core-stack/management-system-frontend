@@ -3,8 +3,10 @@ import type { ElMessageBoxOptions } from 'element-plus';
 export function createElMessageBoxConfirmHandler<T = any>(
     messageRender: ((data: T) => string) | string,
     loadingText: string,
-    handleConfirm: (data: T) => Promise<boolean>,
-    onSuccess?: (data: T) => Promisable<void>,
+    handleConfirm: (data: T) => Promise<boolean | string>,
+    onSuccess?: (data: T) => Promisable<any>,
+    onFailed?: (data: T, reason?: false | string) => Promisable<any>,
+    onCancel?: (data: T) => Promisable<any>,
     options?: Except<ElMessageBoxOptions, 'beforeClose'>,
 ) {
     return (data: T) => {
@@ -13,16 +15,21 @@ export function createElMessageBoxConfirmHandler<T = any>(
             {
                 async beforeClose(action, instance, done) {
                     if (instance.confirmButtonLoading) return;
-                    if (action !== 'confirm') return done();
+                    if (action !== 'confirm') {
+                        onCancel?.(data);
+                        return done();
+                    }
 
                     instance.confirmButtonLoading = true;
                     instance.confirmButtonText = loadingText;
                     instance.showCancelButton = false;
 
-                    if (await handleConfirm(data)) {
+                    const confirmResult = await handleConfirm(data);
+                    if (typeof confirmResult === 'boolean' && confirmResult) {
                         done();
                         await onSuccess?.(data);
                     } else {
+                        await onFailed?.(data, confirmResult);
                         instance.confirmButtonLoading = false;
                         instance.confirmButtonText = '確定';
                         instance.showCancelButton = true;
