@@ -83,7 +83,7 @@
                                     :disabled="disableRowDeleteBtnRule?.(scope.row)"
                                     @click="confirmDelete(scope.row)"
                                 >
-                                    刪除
+                                    {{ deleteBtnText ?? '刪除' }}
                                 </el-action-btn>
                                 <slot
                                     :="scope"
@@ -148,6 +148,7 @@
                 </el-dialog>
             </div>
         </div>
+        <slot />
     </div>
 </template>
 
@@ -177,6 +178,7 @@ interface Props {
     confirmDeleteMessage?: ((row: TR) => string) | string;
     crudApi: CA;
     defaultSort?: Except<OnSortChangeData, 'column'>;
+    deleteBtnText?: string;
     dialogTitleSuffix?: string;
     disablePagination?: boolean;
     disableRowDeleteBtnRule?: ControlActionBtnFunction;
