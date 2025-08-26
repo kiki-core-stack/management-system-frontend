@@ -25,7 +25,15 @@ export class BaseApi {
         params?: any,
         config?: AxiosRequestConfig,
     ) {
-        return this.request<T, E>('delete', url, params, config);
+        return this.request<T, E>(
+            'delete',
+            url,
+            undefined,
+            {
+                ...config,
+                params,
+            },
+        );
     }
 
     protected getRequest<T extends object | undefined = undefined, E extends string | undefined = undefined>(
@@ -33,7 +41,15 @@ export class BaseApi {
         params?: any,
         config?: AxiosRequestConfig,
     ) {
-        return this.request<T, E>('get', url, params, config);
+        return this.request<T, E>(
+            'get',
+            url,
+            undefined,
+            {
+                ...config,
+                params,
+            },
+        );
     }
 
     protected patchRequest<T extends object | undefined = undefined, E extends string | undefined = undefined>(
@@ -41,7 +57,7 @@ export class BaseApi {
         data?: any,
         config?: AxiosRequestConfig,
     ) {
-        return this.request<T, E>('patch', url, {}, data, config);
+        return this.request<T, E>('patch', url, data, config);
     }
 
     protected postRequest<T extends object | undefined = undefined, E extends string | undefined = undefined>(
@@ -49,7 +65,7 @@ export class BaseApi {
         data?: any,
         config?: AxiosRequestConfig,
     ) {
-        return this.request<T, E>('post', url, {}, data, config);
+        return this.request<T, E>('post', url, data, config);
     }
 
     protected putRequest<T extends object | undefined = undefined, E extends string | undefined = undefined>(
@@ -57,7 +73,7 @@ export class BaseApi {
         data?: any,
         config?: AxiosRequestConfig,
     ) {
-        return this.request<T, E>('put', url, {}, data, config);
+        return this.request<T, E>('put', url, data, config);
     }
 
     protected request<
@@ -68,7 +84,6 @@ export class BaseApi {
     >(
         method: Method,
         url?: string,
-        params?: any,
         data?: D,
         config?: AxiosRequestConfig<D>,
     ) {
@@ -76,7 +91,6 @@ export class BaseApi {
             ...config,
             data,
             method,
-            params,
             url,
         });
     }
