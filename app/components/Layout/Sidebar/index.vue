@@ -19,7 +19,7 @@
 <script lang="ts" setup>
 import type { SidebarMenuItem } from '@/types/sidebar';
 
-// Variables
+// Constants/Refs/Variables
 const route = useRoute();
 const sidebarState = useSidebarState();
 

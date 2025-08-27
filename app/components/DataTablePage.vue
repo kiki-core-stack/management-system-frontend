@@ -225,21 +225,8 @@ const formData = defineModel<FD>('formData', { default: { id: '' } });
 const timeRangeEndAt = defineModel<Date>('timeRangeEnd', { default: () => new Date() });
 const timeRangeStartAt = defineModel<Date>('timeRangeStart', { default: () => new Date() });
 
-// Variables
+// Constants/Refs/Variables
 const autoReloadDataCountdownDropdownBtnRef = useTemplateRef('autoReloadDataCountdownDropdownBtnRef');
-const confirmDelete = createElMessageBoxConfirmHandler<TR>(
-    props.confirmDeleteMessage || ((data) => `確定要刪除 ${(data as any).name} 嗎？`),
-    '刪除中...',
-    async (data) => !!(await props.crudApi.delete(data.id))?.data?.success,
-    async () => {
-        ElNotification.success('刪除成功');
-        await loadData();
-    },
-    undefined,
-    undefined,
-    { type: 'warning' },
-);
-
 const defaultFormData = cloneDeep(formData.value);
 const dialogStatusOverlayRef = useTemplateRef('dialogStatusOverlayRef');
 const formRef = useTemplateRef('formRef');
@@ -285,6 +272,19 @@ const dialogWidth = computed(() => {
 });
 
 // Functions
+const confirmDelete = createElMessageBoxConfirmHandler<TR>(
+    props.confirmDeleteMessage || ((data) => `確定要刪除 ${(data as any).name} 嗎？`),
+    '刪除中...',
+    async (data) => !!(await props.crudApi.delete(data.id))?.data?.success,
+    async () => {
+        ElNotification.success('刪除成功');
+        await loadData();
+    },
+    undefined,
+    undefined,
+    { type: 'warning' },
+);
+
 async function loadData() {
     if (isLoadingData.value || !capabilities.value.list) return;
     isLoadingData.value = true;

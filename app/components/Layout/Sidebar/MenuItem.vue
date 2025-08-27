@@ -31,6 +31,6 @@ interface Props {
 // Define props, models and emits
 defineProps<Props>();
 
-// Variables
+// Constants/Refs/Variables
 const sidebarState = useSidebarState();
 </script>

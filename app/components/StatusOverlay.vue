@@ -44,7 +44,7 @@ interface Props {
 // Define props, models and emits
 const props = withDefaults(defineProps<Props>(), { absolute: true });
 
-// Variables
+// Constants/Refs/Variables
 const hideTimer = ref<Nullable<NodeJS.Timeout>>(null);
 const status = ref<Status>(props.initialStatus || null);
 const statusText = ref(props.initialStatusText);

@@ -40,7 +40,7 @@
 <script lang="ts" setup>
 import type { AdminRoleData } from '@kiki-core-stack/pack/types/data/admin';
 
-// Variables
+// Constants/Refs/Variables
 const formData = ref<TablePageFormData<AdminRoleData>>({
     id: '',
     name: '',

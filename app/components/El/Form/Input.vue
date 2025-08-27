@@ -47,7 +47,7 @@ interface Props {
 defineProps<Props>();
 const modelValue = defineModel<string>();
 
-// Variables
+// Constants/Refs/Variables
 const elInputRef = useTemplateRef('elInputRef');
 
 // Exposes

@@ -28,7 +28,7 @@
 <script lang="ts" setup>
 import { logout } from '@/libs/auth';
 
-// Variables
+// Constants/Refs/Variables
 const colorMode = useColorMode();
 const sidebarState = useSidebarState();
 

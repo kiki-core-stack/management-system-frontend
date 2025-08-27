@@ -33,7 +33,7 @@ interface Props {
 const props = defineProps<Props>();
 const emit = defineEmits<{ (e: 'statusChange'): void }>();
 
-// Variables
+// Functions
 const confirmChange = createElMessageBoxConfirmHandler<TR>(
     (data) => typeof props.confirmMessage === 'string' ? props.confirmMessage : props.confirmMessage(data),
     '切換中...',
@@ -46,7 +46,6 @@ const confirmChange = createElMessageBoxConfirmHandler<TR>(
     },
 );
 
-// Functions
 function beforeChange(row: TR) {
     confirmChange(row);
     return false;

@@ -26,6 +26,6 @@
 </template>
 
 <script lang="ts" setup>
-// Variables
+// Constants/Refs/Variables
 const sidebarState = useSidebarState();
 </script>

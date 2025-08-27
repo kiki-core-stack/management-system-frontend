@@ -28,7 +28,7 @@ interface Props {
 // Define props, models and emits
 const props = defineProps<Props>();
 
-// Variables
+// Constants/Refs/Variables
 const isLoadingData = ref(true);
 const items = ref<AdminRoleData[]>([]);
 

@@ -70,9 +70,9 @@
 <script lang="ts" setup>
 import type { GetHomeDashboardDataFilter } from '@/types/home';
 
-// Variables
+// Constants/Refs/Variables
 const defaultHomeDashboardData = {} as const;
-const dashboardData = ref<typeof defaultHomeDashboardData>({ ...defaultHomeDashboardData });
+const dashboardData = ref<typeof defaultHomeDashboardData>(cloneDeep(defaultHomeDashboardData));
 const filter = ref<GetHomeDashboardDataFilter>({
     createdAt: {
         $gte: getMidnightDateFromToday(),

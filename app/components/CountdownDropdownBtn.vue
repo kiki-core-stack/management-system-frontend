@@ -49,7 +49,7 @@ const props = withDefaults(
 
 const emit = defineEmits<{ (e: 'trigger'): void }>();
 
-// Variables
+// Constants/Refs/Variables
 const currentInterval = ref<Nullable<number>>(props.defaultSeconds);
 const countdown = ref<Nullable<number>>(currentInterval.value);
 const timer = ref<Nullable<NodeJS.Timeout>>(null);

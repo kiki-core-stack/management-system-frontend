@@ -19,7 +19,7 @@
 <script lang="ts" setup>
 import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
 
-// Variables
+// Constants/Refs/Variables
 const isLoadingData = ref(true);
 const items = ref<AdminData[]>([]);
 

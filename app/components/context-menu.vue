@@ -34,7 +34,7 @@ interface Props {
 // Define props, models and emits
 defineProps<Props>();
 
-// Variables
+// Constants/Refs/Variables
 const menuRef = useTemplateRef('menuRef');
 const menuX = ref(0);
 const menuY = ref(0);

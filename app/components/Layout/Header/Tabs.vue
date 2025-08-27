@@ -39,9 +39,9 @@
 </template>
 
 <script lang="ts" setup>
-// Variables
+// Constants/Refs/Variables
 const contextMenuAtTabIndex = ref(0);
-const contextMenuItems = ref([
+const contextMenuItems = shallowRef([
     {
         action: () => headerTabsController.closeAll(),
         label: '關閉全部',
