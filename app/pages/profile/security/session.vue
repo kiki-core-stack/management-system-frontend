@@ -172,7 +172,7 @@ async function startScanLoginQrCode() {
         if (loginQrCodeScannerSelectedCameraId.value) {
             const cameraIds = map(loginQrCodeScannerCameras.value, 'id');
             if (!cameraIds.includes(loginQrCodeScannerSelectedCameraId.value)) {
-                loginQrCodeScannerSelectedCameraId.value = loginQrCodeScannerCameras.value[0]?.id;
+                loginQrCodeScannerSelectedCameraId.value = cameraIds[0];
             }
         } else loginQrCodeScannerSelectedCameraId.value = loginQrCodeScannerCameras.value[0]?.id;
 
