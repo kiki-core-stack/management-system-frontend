@@ -3,7 +3,7 @@
         <Head>
             <Title>登入</Title>
         </Head>
-        <h1 class="fs-32px text-center">
+        <h1 class="fs-32px">
             後台管理系統登入
         </h1>
         <div class="mt-4 flex w-full items-center gap-8 md:px-8">
