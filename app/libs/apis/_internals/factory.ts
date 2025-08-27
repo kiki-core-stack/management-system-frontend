@@ -1,12 +1,15 @@
 import type { BaseApi } from './base';
 
-const apiInstances = new Map<string, BaseApi>();
+const apiInstances = new WeakMap<new (...args: any[]) => any, Map<string, BaseApi>>();
 
 export function createUseApiFunction<T extends BaseApi, C extends new (...args: any[]) => T>(apiClass: C) {
     return (...args: ConstructorParameters<C>) => {
-        const key = `${apiClass.name}:${JSON.stringify(args)}`;
+        let cache = apiInstances.get(apiClass);
+        if (!cache) apiInstances.set(apiClass, cache = new Map());
+        const key = JSON.stringify(args);
+        let instance = cache.get(key);
         // eslint-disable-next-line new-cap
-        if (!apiInstances.has(key)) apiInstances.set(key, new apiClass(...args));
-        return apiInstances.get(key) as InstanceType<C>;
+        if (!instance) cache.set(key, instance = new apiClass(...args));
+        return instance as InstanceType<C>;
     };
 }
