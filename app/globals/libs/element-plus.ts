@@ -5,7 +5,7 @@ export function createElMessageBoxConfirmHandler<T = any>(
     loadingText: string,
     handleConfirm: (data: T) => Promise<boolean | string>,
     onSuccess?: (data: T) => Promisable<any>,
-    onFailed?: (data: T, reason?: false | string) => Promisable<any>,
+    onFailed?: (data: T, done: () => void, reason?: false | string) => Promisable<any>,
     onCancel?: (data: T) => Promisable<any>,
     options?: Except<ElMessageBoxOptions, 'beforeClose'>,
 ) {
@@ -29,7 +29,7 @@ export function createElMessageBoxConfirmHandler<T = any>(
                         done();
                         await onSuccess?.(data);
                     } else {
-                        await onFailed?.(data, confirmResult);
+                        await onFailed?.(data, done, confirmResult);
                         instance.confirmButtonLoading = false;
                         instance.confirmButtonText = '確定';
                         instance.showCancelButton = true;
