@@ -3,7 +3,10 @@
         <Head>
             <Title>登入</Title>
         </Head>
-        <div class="flex items-center">
+        <h1 class="fs-32px text-center">
+            後台管理系統登入
+        </h1>
+        <div class="mt-4 flex w-full items-center gap-8 md:px-8">
             <el-form
                 ref="formRef"
                 label-width="auto"
@@ -12,13 +15,9 @@
                 hide-required-asterisk
                 @submit.prevent="login"
             >
-                <h1 class="fs-32px text-center">
-                    後台管理系統登入
-                </h1>
                 <el-form-input
                     ref="accountInputRef"
                     v-model="formData.account"
-                    class="mt-4"
                     label="帳號"
                     name="account"
                     prop="account"
@@ -66,7 +65,7 @@
                 </div>
             </el-form>
             <qr-code-login-block
-                class="hidden! md:flex! ml-8"
+                class="hidden! md:flex!"
                 :qr-code-image-src="qrCodeLoginImageSrc"
                 @reload="reloadLoginQrCodeAndStartPolling"
             />
@@ -164,6 +163,7 @@ async function login() {
 }
 
 async function reloadLoginQrCodeAndStartPolling() {
+    currentQrCodeLoginPollingAbortController?.abort();
     const response = await authApi.getQrCodeLoginToken(qrCodeLoginToken.value || undefined);
     if (response?.data?.success) {
         qrCodeLoginToken.value = response.data.data!.token;

@@ -6,7 +6,7 @@
         <p class="fs-24px mt-4">
             使用QR Code登入
         </p>
-        <p class="text-gray">
+        <p class="text-gray md:whitespace-nowrap">
             使用已登入的裝置對此掃描就能立即登入。
         </p>
         <el-button
