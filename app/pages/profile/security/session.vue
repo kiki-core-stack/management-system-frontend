@@ -90,6 +90,7 @@ import type {
 } from '@kiki-core-stack/pack/types/data/admin';
 import { Html5Qrcode } from 'html5-qrcode';
 import type { CameraDevice } from 'html5-qrcode';
+import { map } from 'lodash-es';
 import { UAParser } from 'ua-parser-js';
 
 // Constants/Refs/Variables
@@ -169,7 +170,7 @@ async function startScanLoginQrCode() {
     try {
         loginQrCodeScannerCameras.value = await Html5Qrcode.getCameras();
         if (loginQrCodeScannerSelectedCameraId.value) {
-            const cameraIds = loginQrCodeScannerCameras.value.map((camera) => camera.id);
+            const cameraIds = map(loginQrCodeScannerCameras.value, 'id');
             if (!cameraIds.includes(loginQrCodeScannerSelectedCameraId.value)) {
                 loginQrCodeScannerSelectedCameraId.value = loginQrCodeScannerCameras.value[0]?.id;
             }

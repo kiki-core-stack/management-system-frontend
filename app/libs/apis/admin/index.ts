@@ -1,4 +1,5 @@
 import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
+import { map } from 'lodash-es';
 
 import type { AdminFormData } from '@/types/data/admin';
 
@@ -19,7 +20,7 @@ export class AdminApi extends BaseCrudApi<AdminData, AdminFormData> {
 
         return {
             ...clonedData,
-            roles: data.roles.map((role) => role.id),
+            roles: map(data.roles, 'id'),
         };
     }
 }
