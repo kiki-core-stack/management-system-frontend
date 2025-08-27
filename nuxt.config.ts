@@ -49,12 +49,14 @@ export default defineNuxtConfig({
                 'img-src': [
                     `'self'`,
                     'blob:',
+                    'data:',
                 ],
                 'media-src': [
                     `'self'`,
                     'blob:',
                 ],
             },
+            permissionsPolicy: { camera: ['self'] },
         },
     },
     ssr: false,
