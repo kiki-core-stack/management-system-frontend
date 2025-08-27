@@ -120,7 +120,7 @@
                     :close-on-click-modal="!dialogStatusOverlayRef?.isVisible"
                     :close-on-press-escape="!dialogStatusOverlayRef?.isVisible"
                     :title="`${isEditing ? '編輯' : '新增'}${dialogTitleSuffix}`"
-                    :width="dialogWidth"
+                    :width="elDialogWidthByWindowSize"
                     align-center
                     append-to-body
                     center
@@ -242,7 +242,6 @@ const paginationParams = ref({
 const sortQueryParam = ref<string | undefined>(undefined);
 const tableData = ref<TableRowData[]>([]);
 const totalTableDataCount = ref(0);
-const windowSize = useWindowSize();
 
 // Computed properties
 const capabilities = computed(() => {
@@ -263,12 +262,6 @@ const capabilities = computed(() => {
     obj.toggle = hasPermission(props.permissions.update || `${props.permissions.base}.toggle`);
     obj.update = hasPermission(props.permissions.update || `${props.permissions.base}.update`);
     return obj;
-});
-
-const dialogWidth = computed(() => {
-    if (windowSize.width.value <= windowSize.height.value) return '95vw';
-    if (windowSize.width.value * 0.5 < 700) return '75vw';
-    return '50vw';
 });
 
 // Functions
