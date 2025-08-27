@@ -33,7 +33,7 @@ async function loadData(accountQuery: string) {
     });
 
     items.value.length = 0;
-    items.value.push(...response?.data.data?.list || []);
+    items.value.push(...response?.data?.data?.list || []);
     isLoadingData.value = false;
 }
 </script>

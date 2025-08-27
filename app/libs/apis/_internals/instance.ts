@@ -9,24 +9,13 @@ export function createApiAxiosInstance(config?: CreateAxiosDefaults) {
             if (!(error instanceof AxiosError)) throw error;
             if (!error.response) {
                 if (!error.config?.skipShowErrorMessage) ElNotification.error('請檢查網路連線');
-                return;
+                return { error };
             }
 
-            if (error.response.status === 401) {
-                assignUrlWithRedirectParamFromCurrentLocation('/auth/login/');
-                return;
-            }
+            if (error.response.status === 401) assignUrlWithRedirectParamFromCurrentLocation('/auth/login/');
+            else if (!error.config?.skipShowErrorMessage) ElNotification.error(error.response.data.message || '系統錯誤');
 
-            if (error.response.status === 502) {
-                if (!error.config?.skipShowErrorMessage) ElNotification.error('系統錯誤');
-                return;
-            }
-
-            if (!error.config?.skipShowErrorMessage && error.response?.data.message) {
-                ElNotification.error(error.response.data.message);
-            }
-
-            return error.response;
+            return Object.assign(error.response, { error });
         },
     );
 

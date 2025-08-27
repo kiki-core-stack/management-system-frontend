@@ -79,7 +79,8 @@ export class BaseApi {
     protected request<
         T extends object | undefined = undefined,
         E extends string | undefined = undefined,
-        R extends AxiosResponse<ApiResponseData<T, E>> | undefined = AxiosResponse<ApiResponseData<T, E>> | undefined,
+        // eslint-disable-next-line style/max-len
+        R extends Partial<AxiosResponse<ApiResponseData<T, E>>> | undefined = Partial<AxiosResponse<ApiResponseData<T, E>>> | undefined,
         D = any,
     >(
         method: Method,

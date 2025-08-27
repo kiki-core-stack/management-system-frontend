@@ -52,5 +52,5 @@ const permissionTree = ref<ElTreeNode[]>([]);
 
 // Load data
 const response = await useAdminPermissionApi().getTree();
-permissionTree.value = response?.data.data || [];
+permissionTree.value = response?.data?.data || [];
 </script>

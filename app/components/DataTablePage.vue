@@ -230,7 +230,7 @@ const autoReloadDataCountdownDropdownBtnRef = useTemplateRef('autoReloadDataCoun
 const confirmDelete = createElMessageBoxConfirmHandler<TR>(
     props.confirmDeleteMessage || ((data) => `確定要刪除 ${(data as any).name} 嗎？`),
     '刪除中...',
-    async (data) => !!(await props.crudApi.delete(data.id))?.data.success,
+    async (data) => !!(await props.crudApi.delete(data.id))?.data?.success,
     async () => {
         ElNotification.success('刪除成功');
         await loadData();
@@ -295,7 +295,7 @@ async function loadData() {
         sort: sortQueryParam.value,
     });
 
-    if (response?.data.data) {
+    if (response?.data?.data) {
         tableData.value = response.data.data.list;
         totalTableDataCount.value = response.data.data.count || 0;
     }
@@ -329,7 +329,7 @@ async function saveData() {
         let response;
         if (formData.value.id) response = await props.crudApi.update(formData.value.id, formData.value);
         else response = await props.crudApi.create(formData.value);
-        if (!response?.data.success) return dialogStatusOverlayRef.value!.hide();
+        if (!response?.data?.success) return dialogStatusOverlayRef.value!.hide();
         isDialogOpen.value = false;
         ElNotification.success(formData.value.id ? '儲存成功' : '新增成功');
         await loadData();
