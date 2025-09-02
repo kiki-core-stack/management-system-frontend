@@ -18,7 +18,7 @@ const props = defineProps<Props>();
 // Computed properties
 const divStyle = computed(() => {
     if (typeof props.ratio === 'number') return { aspectRatio: `1 / ${props.ratio}` };
-    else return { aspectRatio: `${props.ratio.height} / ${props.ratio.width}` };
+    else return { aspectRatio: `1 / ${props.ratio.height / props.ratio.width}` };
 });
 </script>
 
