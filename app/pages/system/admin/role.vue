@@ -47,7 +47,7 @@ const formData = ref<TablePageFormData<AdminRoleData>>({
     permissions: [],
 });
 
-const formRules: ElFormRules<TablePageFormData<AdminRoleData>> = { name: [createElFormItemRuleWithDefaults('請輸入名稱')] };
+const formRules: TablePageElFormRules<AdminRoleData> = { name: [createElFormItemRuleWithDefaults('請輸入名稱')] };
 const permissionTree = ref<ElTreeNode[]>([]);
 
 // Load data
