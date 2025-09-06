@@ -45,7 +45,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), { absolute: true });
 
 // Constants/Refs/Variables
-const hideTimer = ref<Nullable<NodeJS.Timeout>>(null);
+let hideTimer: Nullable<NodeJS.Timeout> = null;
 const status = ref<Status>(props.initialStatus || null);
 const statusText = ref(props.initialStatusText);
 
@@ -54,8 +54,8 @@ function show(stateType: Status, text: string, duration: false | number) {
     status.value = stateType;
     statusText.value = text;
     if (duration === false) return;
-    clearTimeoutRef(hideTimer);
-    hideTimer.value = setTimeout(() => status.value = null, duration);
+    if (hideTimer) clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => status.value = null, duration);
 }
 
 // Exposes

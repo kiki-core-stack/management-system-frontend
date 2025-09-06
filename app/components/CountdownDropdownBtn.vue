@@ -52,7 +52,7 @@ const emit = defineEmits<{ (e: 'trigger'): void }>();
 // Constants/Refs/Variables
 const currentInterval = ref<Nullable<number>>(props.defaultSeconds);
 const countdown = ref<Nullable<number>>(currentInterval.value);
-const timer = ref<Nullable<NodeJS.Timeout>>(null);
+let timer: Nullable<NodeJS.Timeout> = null;
 
 // Computed properties
 const buttonText = computed(() => {
@@ -68,9 +68,9 @@ function setIntervalSeconds(seconds: Nullable<number>) {
 }
 
 function start() {
-    if (currentInterval.value === null || timer.value) return;
+    if (currentInterval.value === null || timer) return;
     countdown.value = currentInterval.value;
-    timer.value = setInterval(
+    timer = setInterval(
         () => {
             if (countdown.value !== null) {
                 countdown.value--;
@@ -85,7 +85,8 @@ function start() {
 }
 
 function stop() {
-    clearIntervalRef(timer);
+    if (timer) clearInterval(timer);
+    timer = null;
     countdown.value = currentInterval.value;
 }
 
