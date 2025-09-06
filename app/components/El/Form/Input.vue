@@ -28,7 +28,7 @@ import type { InputAutoSize } from 'element-plus';
 import type { InputTypeHTMLAttribute } from 'vue';
 
 interface Props {
-    autocomplete?: string;
+    autocomplete?: AutoFill;
     autofocus?: boolean;
     autosize?: InputAutoSize;
     clearable?: boolean;
