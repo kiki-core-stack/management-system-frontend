@@ -1,7 +1,7 @@
 <template>
     <div
         v-if="status"
-        class="flex-middle z-10000 inset-0 size-full flex-col"
+        class="flex-middle inset-0 z-10000 size-full flex-col"
         :class="{
             'bg-white/70': !withoutBackground,
             'dark:bg-dark/80': !withoutBackground,
@@ -45,7 +45,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), { absolute: true });
 
 // Constants/Refs/Variables
-let hideTimer: Nullable<NodeJS.Timeout> = null;
+let hideTimeout: Nullable<NodeJS.Timeout> = null;
 const status = ref<Status>(props.initialStatus || null);
 const statusText = ref(props.initialStatusText);
 
@@ -54,8 +54,12 @@ function show(stateType: Status, text: string, duration: false | number) {
     status.value = stateType;
     statusText.value = text;
     if (duration === false) return;
-    if (hideTimer) clearTimeout(hideTimer);
-    hideTimer = setTimeout(() => status.value = null, duration);
+    if (hideTimeout) {
+        clearTimeout(hideTimeout);
+        hideTimeout = null;
+    }
+
+    hideTimeout = setTimeout(() => status.value = null, duration);
 }
 
 // Exposes
