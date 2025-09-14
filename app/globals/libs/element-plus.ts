@@ -1,4 +1,5 @@
 import type { ElMessageBoxOptions } from 'element-plus';
+import type { Except } from 'type-fest';
 
 export function createElMessageBoxConfirmHandler<T = any>(
     messageRender: ((data: T) => string) | string,

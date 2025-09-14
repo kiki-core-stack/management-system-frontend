@@ -54,6 +54,7 @@
     "dotenv": "^17.2.2",
     "postcss-pxtorem": "^6.1.0",
     "ts-unused-exports": "^11.0.1",
+    "type-fest": "^5.0.0",
     "unocss": "^66.5.1",
     "unplugin-fonts": "^1.4.0",
     "unplugin-icons": "^22.3.0",

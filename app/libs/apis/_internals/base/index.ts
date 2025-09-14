@@ -6,6 +6,7 @@ import type {
     Method,
 } from 'axios';
 import queryString from 'query-string';
+import type { Except } from 'type-fest';
 
 import { createApiAxiosInstance } from '../instance';
 

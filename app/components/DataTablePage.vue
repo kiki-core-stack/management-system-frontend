@@ -161,6 +161,8 @@
     "
     setup
 >
+import type { Except } from 'type-fest';
+
 import type { BaseCrudApi } from '@/libs/apis/_internals/base/crud';
 import type { AdminPermissionPattern } from '@/types/admin';
 
@@ -308,7 +310,7 @@ function openDialog(row?: TR) {
     dialogStatusOverlayRef.value?.hide();
     formRef.value?.resetFields();
     isEditing.value = row !== undefined;
-    formData.value = merge(cloneDeep(defaultFormData), row);
+    formData.value = merge(cloneDeep(defaultFormData), row || {});
     props.beforeDialogOpen?.(row);
     isDialogOpen.value = true;
 }
