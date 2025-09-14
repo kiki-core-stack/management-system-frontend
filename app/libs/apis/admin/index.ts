@@ -1,5 +1,5 @@
 import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
-import { map } from 'lodash-es';
+import { map } from 'es-toolkit/compat';
 
 import type { AdminFormData } from '@/types/data/admin';
 

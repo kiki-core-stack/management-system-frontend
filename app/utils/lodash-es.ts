@@ -3,4 +3,4 @@ export {
     merge,
     omit,
     pick,
-} from 'lodash-es';
+} from 'es-toolkit';

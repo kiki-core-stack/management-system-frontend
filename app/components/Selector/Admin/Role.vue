@@ -19,7 +19,7 @@
 
 <script lang="ts" setup>
 import type { AdminRoleData } from '@kiki-core-stack/pack/types/data/admin';
-import { map } from 'lodash-es';
+import { map } from 'es-toolkit/compat';
 
 interface Props {
     selectedData?: Partial<AdminRoleData>[];

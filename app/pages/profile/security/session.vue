@@ -88,9 +88,9 @@ import type {
     AdminQrCodeLoginData,
     AdminSessionData,
 } from '@kiki-core-stack/pack/types/data/admin';
+import { map } from 'es-toolkit/compat';
 import { Html5Qrcode } from 'html5-qrcode';
 import type { CameraDevice } from 'html5-qrcode';
-import { map } from 'lodash-es';
 import { UAParser } from 'ua-parser-js';
 
 // Constants/Refs/Variables

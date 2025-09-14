@@ -18,7 +18,7 @@
     "
     setup
 >
-import { get } from 'lodash-es';
+import { get } from 'es-toolkit/compat';
 
 import type { BaseCrudApi } from '@/libs/apis/_internals/base/crud';
 

@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-import { get } from 'lodash-es';
+import { get } from 'es-toolkit/compat';
 
 interface Props {
     emptyText?: string;
