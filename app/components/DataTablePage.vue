@@ -116,7 +116,7 @@
                     />
                 </div>
                 <el-dialog
-                    v-model="isDialogOpen"
+                    v-model="isDialogVisible"
                     :close-on-click-modal="!dialogStatusOverlayRef?.isVisible"
                     :close-on-press-escape="!dialogStatusOverlayRef?.isVisible"
                     :title="`${isEditing ? '編輯' : '新增'}${dialogTitleSuffix}`"
@@ -232,7 +232,7 @@ const autoReloadDataCountdownDropdownBtnRef = useTemplateRef('autoReloadDataCoun
 const defaultFormData = cloneDeep(formData.value);
 const dialogStatusOverlayRef = useTemplateRef('dialogStatusOverlayRef');
 const formRef = useTemplateRef('formRef');
-const isDialogOpen = ref(false);
+const isDialogVisible = ref(false);
 const isEditing = ref(false);
 const isLoadingData = ref(false);
 const mainContainerRef = useTemplateRef('mainContainerRef');
@@ -312,7 +312,7 @@ function openDialog(row?: TR) {
     isEditing.value = row !== undefined;
     formData.value = merge(cloneDeep(defaultFormData), row || {});
     props.beforeDialogOpen?.(row);
-    isDialogOpen.value = true;
+    isDialogVisible.value = true;
 }
 
 async function saveData() {
@@ -325,7 +325,7 @@ async function saveData() {
         if (formData.value.id) response = await props.crudApi.update(formData.value.id, formData.value);
         else response = await props.crudApi.create(formData.value);
         if (!response?.data?.success) return dialogStatusOverlayRef.value!.hide();
-        isDialogOpen.value = false;
+        isDialogVisible.value = false;
         ElNotification.success(formData.value.id ? '儲存成功' : '新增成功');
         await loadData();
     });

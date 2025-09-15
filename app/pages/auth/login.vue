@@ -52,7 +52,7 @@
                 <div class="mt-4 flex justify-center gap-1">
                     <el-button
                         class="md:hidden!"
-                        @click="isLoginQrCodeDialogOpen = true"
+                        @click="isLoginQrCodeDialogVisible = true"
                     >
                         QR Code登入
                     </el-button>
@@ -71,7 +71,7 @@
             />
         </div>
         <el-dialog
-            v-model="isLoginQrCodeDialogOpen"
+            v-model="isLoginQrCodeDialogVisible"
             :width="elDialogWidthByWindowSize"
             align-center
             append-to-body
@@ -124,7 +124,7 @@ const formRules: ElFormRules<AdminLoginFormData> = {
     ],
 };
 
-const isLoginQrCodeDialogOpen = ref(false);
+const isLoginQrCodeDialogVisible = ref(false);
 const qrCodeLoginToken = shallowRef('');
 const qrCodeLoginImageSrc = useQRCode(
     qrCodeLoginToken,

@@ -12,7 +12,7 @@
         hide-footer
     >
         <template #toolbar-actions-append>
-            <el-button @click="isScanLoginQrCodeDialogOpen = true">
+            <el-button @click="isScanLoginQrCodeDialogVisible = true">
                 掃描登入QR Code
             </el-button>
         </template>
@@ -36,7 +36,7 @@
             <el-table-datetime-column label="登入時間" />
         </template>
         <el-dialog
-            v-model="isScanLoginQrCodeDialogOpen"
+            v-model="isScanLoginQrCodeDialogVisible"
             :width="elDialogWidthByWindowSize"
             align-center
             append-to-body
@@ -97,7 +97,7 @@ import { UAParser } from 'ua-parser-js';
 const authApi = useAuthApi();
 const dataTablePageRef = useTemplateRef('dataTablePageRef');
 let html5QrCode: Html5Qrcode | undefined;
-const isScanLoginQrCodeDialogOpen = ref(false);
+const isScanLoginQrCodeDialogVisible = ref(false);
 const loginQrCodeScannerCameras = useLocalStorage<CameraDevice[]>('loginQrCodeScannerCameras', () => []);
 const loginQrCodeScannerSelectedCameraId = useLocalStorage<Nullable<string>>(
     'loginQrCodeScannerSelectedCameraId',
@@ -120,7 +120,7 @@ const confirmQrCodeLogin = createElMessageBoxConfirmHandler<
     },
     () => {
         ElNotification.success('已允許登入');
-        isScanLoginQrCodeDialogOpen.value = false;
+        isScanLoginQrCodeDialogVisible.value = false;
         setTimeout(() => dataTablePageRef.value?.loadData(), 1000);
     },
     (_, done, reason) => {
