@@ -47,17 +47,17 @@
 </template>
 
 <script lang="ts" setup>
-import type { ProfileSecurityChangePasswordFormData } from '@/types/data/profile';
+import type { AdminTypes } from '@/types/admin';
 
 // Constants/Refs/Variables
-const formData = ref<ProfileSecurityChangePasswordFormData>({
+const formData = ref<AdminTypes.ProfileSecurityChangePasswordFormData>({
     confirmPassword: '',
     newPassword: '',
     oldPassword: '',
 });
 
 const formRef = useTemplateRef('formRef');
-const formRules: ElFormRules<ProfileSecurityChangePasswordFormData> = {
+const formRules: ElFormRules<AdminTypes.ProfileSecurityChangePasswordFormData> = {
     confirmPassword: [
         createElFormItemRuleWithDefaults('請輸入確認密碼'),
         {
@@ -84,10 +84,10 @@ async function changePassword() {
     await formRef.value?.validate(async (valid) => {
         if (!valid) return;
         statusOverlayRef.value!.showLoading('變更中...');
-        const response = await useProfileSecurityApi().changePassword(formData.value);
+        const response = await AdminApis.ProfileSecurity.use().changePassword(formData.value);
         if (!response?.data?.success) return statusOverlayRef.value!.hide();
         statusOverlayRef.value!.showSuccess('變更成功', false);
-        assignUrlWithRedirectParamFromCurrentLocation('/auth/login/', 1000);
+        assignUrlWithRedirectParamFromCurrentLocation(buildSystemRoute('/auth/login/'), 1000);
     });
 }
 

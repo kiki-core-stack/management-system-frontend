@@ -35,7 +35,7 @@ const items = ref<AdminRoleData[]>([]);
 // Functions
 async function loadData(nameQuery: string) {
     isLoadingData.value = true;
-    const response = await useAdminRoleApi().getList({
+    const response = await AdminApis.AdminRole.use().getList({
         fields: ['name'],
         filter: { name: { $regex: nameQuery } },
         limit: 100,

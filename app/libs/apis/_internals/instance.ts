@@ -12,8 +12,9 @@ export function createApiAxiosInstance(config?: CreateAxiosDefaults) {
                 return { error };
             }
 
-            if (error.response.status === 401) assignUrlWithRedirectParamFromCurrentLocation('/auth/login/');
-            else if (!error.config?.skipShowErrorMessage) ElNotification.error(error.response.data.message || '系統錯誤');
+            if (error.response.status === 401) {
+                assignUrlWithRedirectParamFromCurrentLocation(buildSystemRoute('/auth/login/'));
+            } else if (!error.config?.skipShowErrorMessage) ElNotification.error(error.response.data.message || '系統錯誤');
 
             return Object.assign(error.response, { error });
         },

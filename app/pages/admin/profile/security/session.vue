@@ -4,7 +4,7 @@
         permissions="ignore"
         title="目前登入的裝置"
         :confirm-delete-message="(row) => `確定要刪除 ${parseDataToDeviceColumnText(row)} (${row.lastActiveIp}) 嗎？`"
-        :crud-api="useProfileSecuritySessionApi()"
+        :crud-api="AdminApis.ProfileSecuritySession.use()"
         :disable-row-delete-btn-rule="(row) => row.isCurrent"
         hide-add-data-btn
         hide-created-at-column
@@ -94,7 +94,7 @@ import type { CameraDevice } from 'html5-qrcode';
 import { UAParser } from 'ua-parser-js';
 
 // Constants/Refs/Variables
-const authApi = useAuthApi();
+const authApi = AdminApis.Auth.use();
 const dataTablePageRef = useTemplateRef('dataTablePageRef');
 let html5QrCode: Html5Qrcode | undefined;
 const isScanLoginQrCodeDialogVisible = ref(false);
@@ -113,7 +113,12 @@ const confirmQrCodeLogin = createElMessageBoxConfirmHandler<
     (data) => `確定要允許 ${parseUserAgentToDeviceInfo(data.userAgent)} (${data.ip}) 的登入嗎？`,
     '登入中...',
     async (data) => {
-        const response = await useAuthApi().confirmQrCodeLogin(data.token, undefined, { skipShowErrorMessage: true });
+        const response = await authApi.confirmQrCodeLogin(
+            data.token,
+            undefined,
+            { skipShowErrorMessage: true },
+        );
+
         if (response?.data?.success) return true;
         if (response?.status === 410) return 'gone';
         return response?.data?.message || '系統錯誤';

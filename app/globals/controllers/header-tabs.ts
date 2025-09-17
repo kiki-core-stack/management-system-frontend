@@ -8,14 +8,17 @@ export interface HeaderTabData {
 export const headerTabsController = new class HeaderTabsController {
     readonly tabs = reactive<HeaderTabData[]>([]);
 
+    // Private methods
     #afterClose() {
-        if (window.location.pathname !== '/' && !map(this.tabs, 'url').includes(window.location.pathname)) {
-            navigateTo(this.tabs[this.tabs.length - 1]?.url || '/');
-        }
+        if (
+            window.location.pathname !== buildSystemRoute()
+            && !map(this.tabs, 'url').includes(window.location.pathname)
+        ) navigateTo(this.tabs[this.tabs.length - 1]?.url || buildSystemRoute());
 
         this.save();
     }
 
+    // Public methods
     close(index: number) {
         this.tabs.splice(index, 1);
         this.#afterClose();
@@ -74,7 +77,7 @@ export const headerTabsController = new class HeaderTabsController {
 
     load() {
         try {
-            const tabs = enhancedLocalStore.headerTabs.getItem(useProfileState().value.id);
+            const tabs = enhancedLocalStore.headerTabs.getItem(getCurrentSystemUserId());
             tabs?.forEach((tabData) => {
                 if (tabData.title && tabData.url) this.tabs.push(tabData);
             });
@@ -85,6 +88,6 @@ export const headerTabsController = new class HeaderTabsController {
     }
 
     save() {
-        enhancedLocalStore.headerTabs.setItem(this.tabs, useProfileState().value.id);
+        enhancedLocalStore.headerTabs.setItem(this.tabs, getCurrentSystemUserId());
     }
 }();

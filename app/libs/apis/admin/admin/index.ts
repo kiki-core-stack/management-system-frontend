@@ -1,0 +1,26 @@
+import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
+import { map } from 'es-toolkit/compat';
+
+import type { AdminTypes } from '@/types/admin';
+
+import { BaseCrudApi } from '../../_internals/base/crud';
+
+export class Admin extends BaseCrudApi<AdminData, AdminTypes.AdminFormData> {
+    constructor() {
+        super('/api/admin/admin');
+    }
+
+    override processCreateOrUpdateData(data: AdminTypes.AdminFormData) {
+        const clonedData: Partial<typeof data> = cloneDeep(data);
+
+        if (!clonedData.email?.trim()) delete clonedData.email;
+
+        if (clonedData.password) clonedData.password = sha3512(data.password);
+        else delete clonedData.password;
+
+        return {
+            ...clonedData,
+            roles: map(data.roles, 'id'),
+        };
+    }
+}

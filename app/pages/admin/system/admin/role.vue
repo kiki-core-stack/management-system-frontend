@@ -2,8 +2,9 @@
     <data-table-page
         v-model:form-data="formData"
         dialog-title-suffix="管理員身分組"
+        system-type="admin"
         title="管理員身分組管理"
-        :crud-api="useAdminRoleApi()"
+        :crud-api="AdminApis.AdminRole.use()"
         :form-rules="formRules"
         :permissions="{ base: 'admin.role' }"
     >
@@ -51,6 +52,6 @@ const formRules: TablePageElFormRules<AdminRoleData> = { name: [createElFormItem
 const permissionTree = ref<ElTreeNode[]>([]);
 
 // Load data
-const response = await useAdminPermissionApi().getTree();
+const response = await AdminApis.AdminPermission.use().getTree();
 permissionTree.value = response?.data?.data || [];
 </script>

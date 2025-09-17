@@ -1,10 +1,10 @@
 import type { AdminChangePasswordData } from '@kiki-core-stack/pack/types/data/admin';
 
-import { BaseApi } from '../../_internals/base';
+import { BaseApi } from '../../../_internals/base';
 
-export class ProfileSecurityApi extends BaseApi {
+export class ProfileSecurity extends BaseApi {
     constructor() {
-        super('/api/profile/security');
+        super('/api/admin/profile/security');
     }
 
     changePassword(data: AdminChangePasswordData) {

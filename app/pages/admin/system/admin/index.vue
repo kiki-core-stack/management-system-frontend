@@ -3,9 +3,10 @@
         ref="dataTablePageRef"
         v-model:form-data="formData"
         dialog-title-suffix="管理員"
+        system-type="admin"
         title="管理員管理"
         :confirm-delete-message="(row) => `確定要刪除 ${row.account} 嗎？`"
-        :crud-api="useAdminApi()"
+        :crud-api="AdminApis.Admin.use()"
         :disable-row-delete-btn-rule="(row) => row.id === profileState.id"
         :form-rules="formRules"
         :permissions="{ base: 'admin' }"
@@ -23,7 +24,7 @@
                 field="enabled"
                 label="啟用"
                 :confirm-message="(row) => `是否切換管理員 ${row.account} 的啟用狀態？`"
-                :crud-api="useAdminApi()"
+                :crud-api="AdminApis.Admin.use()"
                 :disabled-condition="(row) => !dataTablePageRef?.capabilities.toggle || row.id === profileState.id"
                 @status-change="dataTablePageRef?.loadData()"
             />
@@ -86,11 +87,11 @@
 <script lang="ts" setup>
 import type { FormItemRule } from 'element-plus';
 
-import type { AdminFormData } from '@/types/data/admin';
+import type { AdminTypes } from '@/types/admin';
 
 // Constants/Refs/Variables
 const dataTablePageRef = useTemplateRef('dataTablePageRef');
-const formData = ref<AdminFormData>({
+const formData = ref<AdminTypes.AdminFormData>({
     account: '',
     confirmPassword: '',
     email: '',
@@ -100,7 +101,7 @@ const formData = ref<AdminFormData>({
     roles: [],
 });
 
-const formRules: ElFormRules<AdminFormData> = {
+const formRules: ElFormRules<AdminTypes.AdminFormData> = {
     account: [createElFormItemRuleWithDefaults('請輸入帳號')],
     email: [
         createElFormItemRuleWithDefaults(
@@ -113,7 +114,7 @@ const formRules: ElFormRules<AdminFormData> = {
     ],
 };
 
-const profileState = useProfileState();
+const profileState = useAdminProfileState();
 
 // Computed properties
 const formConfirmPasswordFieldItemRules = computed<FormItemRule[]>(() => [

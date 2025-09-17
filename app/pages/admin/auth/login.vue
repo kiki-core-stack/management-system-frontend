@@ -92,7 +92,7 @@ import type { AdminLoginFormData } from '@kiki-core-stack/pack/types/data/admin'
 import { useQRCode } from '@vueuse/integrations/useQRCode';
 import { CanceledError } from 'axios';
 
-import { updateProfileState } from '@/libs/profile';
+import { updateAdminProfileState } from '@/libs/admin';
 import { initializeAppSession } from '@/libs/session';
 
 definePageMeta({
@@ -102,7 +102,7 @@ definePageMeta({
 
 // Constants/Refs/Variables
 const accountInputRef = useTemplateRef('accountInputRef');
-const authApi = useAuthApi();
+const authApi = AdminApis.Auth.use();
 let currentQrCodeLoginPollingAbortController: AbortController | undefined;
 const formData = ref<AdminLoginFormData>({
     account: '',
@@ -142,10 +142,10 @@ const verCodeSrc = ref('/api/ver-code');
 // Functions
 async function handleLoginSuccess() {
     currentQrCodeLoginPollingAbortController?.abort();
-    await updateProfileState();
+    await updateAdminProfileState();
     ElNotification.success('登入成功');
     initializeAppSession();
-    navigateTo(extractFirstValue(useRoute().query.redirect, '/'), { replace: true });
+    navigateTo(extractFirstValue(useRoute().query.redirect, buildSystemRoute()), { replace: true });
 }
 
 async function login() {

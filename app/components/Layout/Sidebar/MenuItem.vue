@@ -25,7 +25,7 @@
 import type { SidebarMenuItem } from '@/types/sidebar';
 
 interface Props {
-    item: SidebarMenuItem;
+    item: SidebarMenuItem<ManagementSystemType>;
 }
 
 // Define props, models and emits

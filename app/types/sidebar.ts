@@ -1,13 +1,17 @@
-import type { AdminPermissionPattern } from './admin';
+import type { ManagementSystemTypeToPermissionPatternMap } from './permission';
 
-export type SidebarMenuItem =
+export type SidebarMenuItem<T extends ManagementSystemType | undefined = undefined> =
   ({
       basePath: `${string}/`;
-      children: SidebarMenuItem[];
+      children: SidebarMenuItem<T>[];
       title: string;
   }
   | {
       path: `${string}/`;
       title: string;
   })
-  & { requiredPermissions: Arrayable<AdminPermissionPattern> };
+  & {
+      requiredPermissions: Arrayable<
+          T extends undefined ? never : ManagementSystemTypeToPermissionPatternMap[NonNullable<T>]
+      >;
+  };

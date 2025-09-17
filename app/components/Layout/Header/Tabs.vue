@@ -7,7 +7,7 @@
         <nuxt-link
             class="relative"
             active-class="active"
-            to="/"
+            :to="buildSystemRoute()"
             @auxclick.middle.prevent
             @click.middle.prevent
         >

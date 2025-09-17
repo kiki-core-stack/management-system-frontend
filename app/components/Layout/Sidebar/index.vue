@@ -27,7 +27,7 @@ const sidebarState = useSidebarState();
 const processedMenuItems = computed(() => processAccessibleMenuItems(cloneDeep(sidebarState.value.menuItems)));
 
 // Functions
-function processAccessibleMenuItems(menuItems: SidebarMenuItem[]) {
+function processAccessibleMenuItems(menuItems: SidebarMenuItem<ManagementSystemType>[]) {
     for (let i = menuItems.length - 1; i >= 0; i--) {
         const menuItem = menuItems[i]!;
         if (!hasPermission(menuItem.requiredPermissions)) menuItems.splice(i, 1);

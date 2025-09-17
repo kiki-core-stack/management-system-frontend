@@ -3,8 +3,9 @@
         ref="dataTablePageRef"
         v-model:time-range-end="filter.createdAt.$lt"
         v-model:time-range-start="filter.createdAt.$gte"
+        system-type="admin"
         title="管理員日誌"
-        :crud-api="useAdminLogApi()"
+        :crud-api="AdminApis.AdminLog.use()"
         :filter="filter"
         :permissions="{ base: 'admin.log' }"
         hide-actions-column
@@ -66,11 +67,11 @@
 import { adminLogTypeToTextMap } from '@kiki-core-stack/pack/constants/admin';
 import type { AdminLogData } from '@kiki-core-stack/pack/types/data/admin';
 
-import type { GetAdminLogListFilter } from '@/types/admin';
+import type { AdminTypes } from '@/types/admin';
 
 // Constants/Refs/Variables
 const dataTablePageRef = useTemplateRef('dataTablePageRef');
-const filter = ref<GetAdminLogListFilter>({
+const filter = ref<AdminTypes.GetAdminLogListFilter>({
     adminObjectId: { $in: [] },
     createdAt: {
         $gte: getMidnightDateFromToday(),

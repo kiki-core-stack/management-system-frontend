@@ -68,12 +68,12 @@
 </template>
 
 <script lang="ts" setup>
-import type { GetHomeDashboardDataFilter } from '@/types/home';
+import type { AdminTypes } from '@/types/admin';
 
 // Constants/Refs/Variables
 const defaultHomeDashboardData = {} as const;
 const dashboardData = ref<typeof defaultHomeDashboardData>(cloneDeep(defaultHomeDashboardData));
-const filter = ref<GetHomeDashboardDataFilter>({
+const filter = ref<AdminTypes.GetHomeDashboardDataFilter>({
     createdAt: {
         $gte: getMidnightDateFromToday(),
         $lt: getMidnightDateFromToday(1),
@@ -89,7 +89,7 @@ const hasViewDashboardPermission = computed(() => hasPermission('home.dashboard.
 async function loadData() {
     if (isLoadingData.value || !hasViewDashboardPermission.value) return;
     isLoadingData.value = true;
-    const response = await useHomeApi().getDashboardData(filter.value);
+    const response = await AdminApis.Home.use().getDashboardData(filter.value);
     Object.assign(dashboardData.value, defaultHomeDashboardData, response?.data?.data);
     isLoadingData.value = false;
 }

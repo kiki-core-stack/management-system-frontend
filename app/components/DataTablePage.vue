@@ -157,14 +157,15 @@
     generic="
         CA extends BaseCrudApi<any, any>,
         TR extends TableRowData = CA extends BaseCrudApi<infer T, any> ? T : never,
-        FD extends TableRowData = CA extends BaseCrudApi<any, infer F> ? F : never
+        FD extends TableRowData = CA extends BaseCrudApi<any, infer F> ? F : never,
+        MST extends ManagementSystemType | undefined = undefined,
     "
     setup
 >
 import type { Except } from 'type-fest';
 
 import type { BaseCrudApi } from '@/libs/apis/_internals/base/crud';
-import type { AdminPermissionPattern } from '@/types/admin';
+import type { PermissionPattern } from '@/types/permission';
 
 type ControlActionBtnFunction = (row: TR) => boolean | undefined;
 
@@ -197,19 +198,21 @@ interface Props {
     hideRowEditBtnRule?: ControlActionBtnFunction;
     hideTimestampColumns?: boolean;
     hideUpdatedAtColumn?: boolean;
-    permissions:
-      | 'ignore'
-      | {
-          base: AdminPermissionPattern;
-          create?: AdminPermissionPattern;
-          delete?: AdminPermissionPattern;
-          list?: AdminPermissionPattern;
-          read?: AdminPermissionPattern;
-          update?: AdminPermissionPattern;
-      };
+    permissions: MST extends undefined
+        ? 'ignore'
+        : | 'ignore'
+          | {
+              base: PermissionPattern<MST>;
+              create?: PermissionPattern<MST>;
+              delete?: PermissionPattern<MST>;
+              list?: PermissionPattern<MST>;
+              read?: PermissionPattern<MST>;
+              update?: PermissionPattern<MST>;
+          };
 
     rowKey?: string;
     showTimeRangeQuickSelect?: boolean;
+    systemType?: MST;
     title: string;
 }
 
