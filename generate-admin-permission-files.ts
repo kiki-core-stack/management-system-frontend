@@ -7,14 +7,7 @@ import { config } from 'dotenv';
 const { parsed: env } = config({ path: './.env.development.local' });
 if (!env) throw new Error('No env file found');
 
-const baseGeneratedStaticTypesDirPath = join(
-    import.meta.dirname,
-    'app',
-    'generated',
-    'static',
-    'types',
-);
-
+const baseGeneratedStaticTypesDirPath = join(import.meta.dirname, 'app/generated/static/types');
 const managementSystemTypes: ManagementSystemType[] = ['admin'];
 await Promise.all(
     managementSystemTypes.map(async (managementSystemType) => {
