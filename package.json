@@ -4,7 +4,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production nuxt build --dotenv ./.env.production.local",
     "depcheck": "depcheck",
-    "dev": "cross-env NODE_ENV=development node generate-admin-permission-files.ts && nuxt dev --dotenv ./.env.development.local",
+    "dev": "cross-env NODE_ENV=development node generate-permission-files.ts && nuxt dev --dotenv ./.env.development.local",
     "generate": "cross-env NODE_ENV=production nuxt generate --dotenv ./.env.production.local",
     "lint": "eslint --max-warnings 0 && stylelint './app/**/*.{css,scss,vue}' -i ./.gitignore --mw 0",
     "lint:fix": "eslint --fix --max-warnings 0 && stylelint './app/**/*.{css,scss,vue}' -i ./.gitignore --fix --mw 0",
