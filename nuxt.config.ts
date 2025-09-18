@@ -28,6 +28,7 @@ export default defineNuxtConfig({
                 enum: true,
                 general: true,
                 hash: true,
+                random: true,
             },
         },
         enabledModules: {

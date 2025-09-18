@@ -29,6 +29,7 @@
     "element-plus": "^2.11.2",
     "es-toolkit": "^1.39.10",
     "html5-qrcode": "^2.3.8",
+    "nanoid": "^5.1.5",
     "nuxt": "^4.1.2",
     "nuxt-security": "^2.4.0",
     "qrcode": "^1.5.4",
