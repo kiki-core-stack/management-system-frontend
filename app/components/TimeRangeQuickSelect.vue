@@ -20,7 +20,6 @@
 </template>
 
 <script lang="ts" setup>
-import { getDateRangeFromDate } from '@kikiutils/shared/datetime';
 import type { DateRangeType } from '@kikiutils/shared/datetime';
 
 // Define props, models and emits
