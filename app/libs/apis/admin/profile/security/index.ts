@@ -8,12 +8,6 @@ export class ProfileSecurity extends BaseApi {
     }
 
     changePassword(data: AdminChangePasswordData) {
-        return this.patchRequest(
-            '/password',
-            {
-                newPassword: sha3512(data.newPassword),
-                oldPassword: sha3512(data.oldPassword),
-            },
-        );
+        return this.patchRequest('/password', data);
     }
 }

@@ -27,7 +27,6 @@ export default defineNuxtConfig({
                 enhancedLocalStorage: true,
                 enum: true,
                 general: true,
-                hash: true,
                 random: true,
             },
         },

@@ -15,8 +15,7 @@ export class Admin extends BaseCrudApi<AdminData, AdminTypes.AdminFormData> {
 
         if (!clonedData.email?.trim()) delete clonedData.email;
 
-        if (clonedData.password) clonedData.password = sha3512(data.password);
-        else delete clonedData.password;
+        if (!clonedData.password) delete clonedData.password;
 
         return {
             ...clonedData,

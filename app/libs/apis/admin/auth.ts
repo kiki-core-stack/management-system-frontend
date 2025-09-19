@@ -39,13 +39,7 @@ export class Auth extends BaseApi {
     }
 
     login(data: AdminLoginFormData) {
-        return this.postRequest<undefined, 'invalidVerificationCode'>(
-            '/login',
-            {
-                ...data,
-                password: sha3512(data.password),
-            },
-        );
+        return this.postRequest<undefined, 'invalidVerificationCode'>('/login', data);
     }
 
     logout() {
