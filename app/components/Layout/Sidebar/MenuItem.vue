@@ -22,6 +22,8 @@
 </template>
 
 <script lang="ts" setup>
+import type { ManagementSystemType } from '@kiki-core-stack/pack/types';
+
 import type { SidebarMenuItem } from '@/types/sidebar';
 
 interface Props {

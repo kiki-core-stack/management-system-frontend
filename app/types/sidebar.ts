@@ -1,3 +1,6 @@
+import type { ManagementSystemType } from '@kiki-core-stack/pack/types';
+import type { Arrayable } from 'type-fest';
+
 import type { ManagementSystemTypeToPermissionPatternMap } from './permission';
 
 export type SidebarMenuItem<T extends ManagementSystemType | undefined = undefined> =

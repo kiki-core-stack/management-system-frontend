@@ -24,6 +24,7 @@
 </template>
 
 <script lang="ts" setup>
+import type { Numberish } from '@kikiutils/types';
 import type { InputAutoSize } from 'element-plus';
 import type { InputTypeHTMLAttribute } from 'vue';
 

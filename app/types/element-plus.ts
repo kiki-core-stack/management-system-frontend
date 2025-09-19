@@ -1,3 +1,7 @@
+import type {
+    AnyRecord,
+    Nullable,
+} from '@kikiutils/types';
 import type { FormRules } from 'element-plus';
 
 declare global {

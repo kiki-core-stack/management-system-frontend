@@ -7,6 +7,7 @@
 </template>
 
 <script lang="ts" setup>
+import type { AnyRecord } from '@kikiutils/types';
 import { get } from 'es-toolkit/compat';
 
 interface Props {

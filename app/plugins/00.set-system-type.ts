@@ -1,3 +1,5 @@
+import type { ManagementSystemType } from '@kiki-core-stack/pack/types';
+
 export default defineNuxtPlugin((nuxtApp) => {
     let systemType: ManagementSystemType | undefined;
     const urlPath = useRoute().fullPath;

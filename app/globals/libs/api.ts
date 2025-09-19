@@ -1,3 +1,5 @@
+import type { AnyRecord } from '@kikiutils/types';
+
 export function buildApiQueryFilter(filter: AnyRecord) {
     filter = cloneDeep(filter);
     Object.entries(filter).forEach(([field, condition]) => {

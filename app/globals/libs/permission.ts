@@ -1,3 +1,6 @@
+import type { ManagementSystemType } from '@kiki-core-stack/pack/types';
+import type { Arrayable } from 'type-fest';
+
 import type { AdminTypes } from '@/types/admin';
 import type { PermissionPattern } from '@/types/permission';
 

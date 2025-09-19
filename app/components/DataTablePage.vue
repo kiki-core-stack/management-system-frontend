@@ -162,6 +162,12 @@
     "
     setup
 >
+import type { ManagementSystemType } from '@kiki-core-stack/pack/types';
+import type { TableRowData } from '@kiki-core-stack/pack/types/data';
+import type {
+    AnyRecord,
+    Nullable,
+} from '@kikiutils/types';
 import type { Except } from 'type-fest';
 
 import type { BaseCrudApi } from '@/libs/apis/_internals/base/crud';

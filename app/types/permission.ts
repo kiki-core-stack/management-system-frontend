@@ -1,3 +1,5 @@
+import type { ManagementSystemType } from '@kiki-core-stack/pack/types';
+
 import type { AdminTypes } from './admin';
 
 export type PermissionPattern<T extends ManagementSystemType | undefined = undefined> =

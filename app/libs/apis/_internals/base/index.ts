@@ -1,3 +1,4 @@
+import type { ApiResponseData } from '@kiki-core-stack/pack/types/data';
 import type {
     AxiosInstance,
     AxiosRequestConfig,
