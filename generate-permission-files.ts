@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 
 import { writeManagementSystemPermissionTypesFile } from '@kiki-core-stack/pack/libs/management-system';
-import type {} from '@kiki-core-stack/pack/types';
+import type { ManagementSystemType } from '@kiki-core-stack/pack/types';
 import { config } from 'dotenv';
 
 const { parsed: env } = config({ path: './.env.development.local' });

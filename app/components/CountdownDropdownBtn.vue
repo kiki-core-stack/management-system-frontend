@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { Nullable } from '@kikiutils/types';
+import type { Nullable } from '@kikiutils/shared/types';
 
 interface Props {
     autostart?: boolean;

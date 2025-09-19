@@ -1,6 +1,5 @@
-import type {} from '@kiki-core-stack/pack/types';
 import type { WithAdminAuditData } from '@kiki-core-stack/pack/types/data';
-import type { AnyRecord } from '@kikiutils/types';
+import type { AnyRecord } from '@kikiutils/shared/types';
 
 declare global {
     type TablePageElFormRules<

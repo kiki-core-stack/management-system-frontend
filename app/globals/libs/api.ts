@@ -1,4 +1,4 @@
-import type { AnyRecord } from '@kikiutils/types';
+import type { AnyRecord } from '@kikiutils/shared/types';
 
 export function buildApiQueryFilter(filter: AnyRecord) {
     filter = cloneDeep(filter);

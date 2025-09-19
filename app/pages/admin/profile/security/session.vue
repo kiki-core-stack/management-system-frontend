@@ -88,7 +88,7 @@ import type {
     AdminQrCodeLoginData,
     AdminSessionData,
 } from '@kiki-core-stack/pack/types/data/admin';
-import type { Nullable } from '@kikiutils/types';
+import type { Nullable } from '@kikiutils/shared/types';
 import { map } from 'es-toolkit/compat';
 import { Html5Qrcode } from 'html5-qrcode';
 import type { CameraDevice } from 'html5-qrcode';

@@ -1,5 +1,5 @@
 import type { ManagementSystemType } from '@kiki-core-stack/pack/types';
-import type { ReadonlyRecord } from '@kikiutils/types';
+import type { ReadonlyRecord } from '@kikiutils/shared/types';
 
 // Constants
 const systemTypeToHomePathMap: ReadonlyRecord<ManagementSystemType, string> = { admin: '/admin' };
