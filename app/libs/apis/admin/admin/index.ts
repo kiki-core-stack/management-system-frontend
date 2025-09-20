@@ -11,14 +11,10 @@ export class Admin extends BaseCrudApi<AdminData, AdminTypes.AdminFormData> {
     }
 
     override processCreateOrUpdateData(data: AdminTypes.AdminFormData) {
-        const clonedData: Partial<typeof data> = cloneDeep(data);
-
-        if (!clonedData.email?.trim()) delete clonedData.email;
-
-        if (!clonedData.password) delete clonedData.password;
-
         return {
-            ...clonedData,
+            ...data,
+            email: data.email?.trim() || undefined,
+            password: data.password?.trim() || undefined,
             roles: map(data.roles, 'id'),
         };
     }
