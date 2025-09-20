@@ -68,8 +68,9 @@
                 :rules="formConfirmPasswordFieldItemRules"
             />
             <el-form-item label="身分組">
-                <selector-admin-role
+                <admin-selector-admin-role
                     v-model="formData.roles"
+                    value-key="id"
                     :selected-data="formData.roles"
                     multiple
                 />

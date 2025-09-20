@@ -4,10 +4,10 @@
         clearable
     >
         <el-option
-            v-for="adminLogType in getEnumNumberValues(AdminLogType)"
-            :key="adminLogType"
-            :label="adminLogTypeToTextMap[adminLogType as AdminLogType]"
-            :value="adminLogType"
+            v-for="item in getEnumNumberValues(AdminLogType)"
+            :key="item"
+            :label="adminLogTypeToTextMap[item]"
+            :value="item"
         />
     </el-select>
 </template>

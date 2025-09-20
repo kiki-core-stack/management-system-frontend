@@ -25,13 +25,13 @@
                     v-model:start="filter.createdAt.$gte"
                 />
                 <el-form-item label="管理員">
-                    <selector-admin
+                    <admin-selector-admin
                         v-model="filter.adminObjectId.$in"
                         multiple
                     />
                 </el-form-item>
                 <el-form-item label="類型">
-                    <selector-admin-log-type
+                    <admin-selector-admin-log-type
                         v-model="filter.type.$in"
                         multiple
                     />

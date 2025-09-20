@@ -1,6 +1,5 @@
 <template>
     <el-select
-        value-key="id"
         :loading="isLoadingData"
         :remote-method="loadData"
         :teleported="false"
@@ -19,7 +18,6 @@
 
 <script lang="ts" setup>
 import type { AdminRoleData } from '@kiki-core-stack/pack/types/data/admin';
-import { map } from 'es-toolkit/compat';
 
 interface Props {
     selectedData?: Partial<AdminRoleData>[];
@@ -33,22 +31,21 @@ const isLoadingData = ref(true);
 const items = ref<AdminRoleData[]>([]);
 
 // Functions
-async function loadData(nameQuery: string) {
+async function loadData(query: string) {
     isLoadingData.value = true;
     const response = await AdminApis.AdminRole.use().getList({
         fields: ['name'],
-        filter: { name: { $regex: nameQuery } },
+        filter: { name: { $regex: query } },
         limit: 100,
     });
 
-    items.value.length = 0;
-    items.value.push(...response?.data?.data?.list || []);
+    items.value = response?.data?.data?.list || [];
     isLoadingData.value = false;
 }
 
 function processSelectedData() {
     if (!props.selectedData?.length) return;
-    const existingIds = map(items.value, 'id');
+    const existingIds = items.value.map(({ id }) => id);
     const incomingData = props.selectedData as Required<NonNullable<Props['selectedData']>[number]>[];
     items.value.push(...incomingData.filter(({ id }) => !existingIds.includes(id)));
 }

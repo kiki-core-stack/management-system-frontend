@@ -24,16 +24,15 @@ const isLoadingData = ref(true);
 const items = ref<AdminData[]>([]);
 
 // Functions
-async function loadData(accountQuery: string) {
+async function loadData(query: string) {
     isLoadingData.value = true;
     const response = await AdminApis.Admin.use().getList({
         fields: ['account'],
-        filter: { account: { $regex: accountQuery } },
+        filter: { account: { $regex: query } },
         limit: 100,
     });
 
-    items.value.length = 0;
-    items.value.push(...response?.data?.data?.list || []);
+    items.value = response?.data?.data?.list || [];
     isLoadingData.value = false;
 }
 </script>
