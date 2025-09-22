@@ -47,6 +47,6 @@ RUN apt-get update && \
 COPY --from=build-stage /app/.output ./
 
 ## Copy and set the entrypoint script
-ADD --chmod=700 ./docker-entrypoint.sh ./
+COPY --chmod=700 ./docker-entrypoint.sh ./
 ENTRYPOINT ["tini", "--"]
 CMD ["./docker-entrypoint.sh"]
