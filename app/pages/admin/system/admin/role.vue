@@ -13,6 +13,14 @@
                 label="名稱"
                 prop="name"
             />
+            <el-table-column
+                label="建立管理員帳號"
+                prop="createdByAdmin.account"
+            />
+            <el-table-column
+                label="編輯管理員帳號"
+                prop="editedByAdmin.account"
+            />
         </template>
         <template #form>
             <el-form-input
