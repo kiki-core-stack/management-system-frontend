@@ -41,6 +41,11 @@ export default defineNuxtConfig({
         '@kikiutils/nuxt',
         'unplugin-icons/nuxt',
     ],
+    plugins: [
+        '@/plugins/init-system-type',
+        '@/plugins/auth-redirect',
+        '@/plugins/init-session',
+    ],
     postcss: { plugins: { 'postcss-pxtorem': {} } },
     robots: { disallow: '/' },
     security: {
