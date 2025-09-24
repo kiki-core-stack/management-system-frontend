@@ -89,7 +89,6 @@ import type {
     AdminSessionData,
 } from '@kiki-core-stack/pack/types/data/admin';
 import type { Nullable } from '@kikiutils/shared/types';
-import { map } from 'es-toolkit/compat';
 import { Html5Qrcode } from 'html5-qrcode';
 import type { CameraDevice } from 'html5-qrcode';
 import { UAParser } from 'ua-parser-js';
@@ -176,7 +175,7 @@ async function startScanLoginQrCode() {
     try {
         loginQrCodeScannerCameras.value = await Html5Qrcode.getCameras();
         if (loginQrCodeScannerSelectedCameraId.value) {
-            const cameraIds = map(loginQrCodeScannerCameras.value, 'id');
+            const cameraIds = loginQrCodeScannerCameras.value.map((camera) => camera.id);
             if (!cameraIds.includes(loginQrCodeScannerSelectedCameraId.value)) {
                 loginQrCodeScannerSelectedCameraId.value = cameraIds[0];
             }

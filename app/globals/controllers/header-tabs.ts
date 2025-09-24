@@ -1,5 +1,3 @@
-import { map } from 'es-toolkit/compat';
-
 export interface HeaderTabData {
     title: string;
     url: string;
@@ -12,7 +10,7 @@ export const headerTabsController = new class HeaderTabsController {
     #afterClose() {
         if (
             window.location.pathname !== buildSystemRoute()
-            && !map(this.tabs, 'url').includes(window.location.pathname)
+            && !this.tabs.map((tab) => tab.url).includes(window.location.pathname)
         ) navigateTo(this.tabs[this.tabs.length - 1]?.url || buildSystemRoute());
 
         this.save();

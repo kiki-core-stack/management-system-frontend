@@ -1,5 +1,4 @@
 import type { AdminData } from '@kiki-core-stack/pack/types/data/admin';
-import { map } from 'es-toolkit/compat';
 
 import type { AdminTypes } from '@/types/admin';
 
@@ -15,7 +14,7 @@ export class Admin extends BaseCrudApi<AdminData, AdminTypes.AdminFormData> {
             ...data,
             email: data.email?.trim() || undefined,
             password: data.password?.trim() || undefined,
-            roles: map(data.roles, 'id'),
+            roles: data.roles.map((role) => role.id),
         };
     }
 }
