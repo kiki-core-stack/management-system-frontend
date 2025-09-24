@@ -1,5 +1,5 @@
 export function initializeAppSession() {
-    switch (useSystemType()) {
+    switch (getSystemType()) {
         case 'admin':
             if (!useAdminProfileState().value.id) return;
     }

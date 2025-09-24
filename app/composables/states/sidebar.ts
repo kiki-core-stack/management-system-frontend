@@ -1,5 +1,5 @@
 export function useSidebarState() {
-    switch (useSystemType()) {
+    switch (getSystemType()) {
         case 'admin': return useAdminSidebarState();
     }
 }

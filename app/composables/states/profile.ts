@@ -1,5 +1,5 @@
 export function useProfileState() {
-    switch (useSystemType()) {
+    switch (getSystemType()) {
         case 'admin': return useAdminProfileState();
     }
 }

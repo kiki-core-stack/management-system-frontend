@@ -1,7 +1,7 @@
 export async function logout(noAlert: boolean = false) {
     if (!noAlert) showLoadingAlert('登出中...');
     let response;
-    switch (useSystemType()) {
+    switch (getSystemType()) {
         case 'admin': response = await AdminApis.Auth.use().logout();
     }
 

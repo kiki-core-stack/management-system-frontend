@@ -5,12 +5,14 @@ import type { ReadonlyRecord } from '@kikiutils/shared/types';
 const systemTypeToHomePathMap: ReadonlyRecord<ManagementSystemType, string> = { admin: '/admin' };
 
 // Functions
+export const getSystemType = () => useNuxtApp().$systemType as ManagementSystemType;
+
 export function buildSystemRoute(subPath: string = '') {
-    return `${systemTypeToHomePathMap[useSystemType()]}/${subPath.replace(/^\/+/, '')}`;
+    return `${systemTypeToHomePathMap[getSystemType()]}/${subPath.replace(/^\/+/, '')}`;
 }
 
 export function getCurrentSystemUserId() {
-    switch (useSystemType()) {
+    switch (getSystemType()) {
         case 'admin': return useAdminProfileState().value.id;
     }
 }
