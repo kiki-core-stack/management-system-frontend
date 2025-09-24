@@ -26,10 +26,7 @@ export class BaseApi {
     }
 
     // Static methods
-    static use<T extends typeof BaseApi>(
-        this: T,
-        ...args: ConstructorParameters<T>
-    ) {
+    static use<T extends typeof BaseApi>(this: T, ...args: ConstructorParameters<T>) {
         let cache = apiInstances.get(this);
         if (!cache) apiInstances.set(this, cache = new Map());
         const key = JSON.stringify(args);
