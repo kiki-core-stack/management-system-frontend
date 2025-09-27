@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:labs
 
 # Build stage
-FROM kikikanri/node:24-alpine AS build-stage
+FROM node:24-alpine AS build-stage
 
 ## Set args, envs and workdir
 ARG NPM_CONFIG_REGISTRY
@@ -16,7 +16,10 @@ RUN apk update && \
 
 ## Copy package-related files and install dependencies
 COPY ./.npmrc ./package.json ./pnpm-lock.yaml ./
-RUN --mount=id=pnpm-store,target=/pnpm/store,type=cache pnpm i --frozen-lockfile --prod=false
+RUN --mount=id=pnpm-cache,target=/root/.cache/pnpm,type=cache \
+    --mount=id=pnpm-store,target=/root/.local/share/pnpm/store,type=cache \
+    corepack enable pnpm && \
+    pnpm i --frozen-lockfile --prod=false
 
 ## Copy source files and build-related files, then build the app
 COPY --exclude=./docker-entrypoint.sh ./ ./
