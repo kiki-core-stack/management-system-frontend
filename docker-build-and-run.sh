@@ -9,9 +9,7 @@ cd "${SCRIPTS_DIR}"
 . ./.env.production.local
 
 # Pull images
-docker pull kikikanri/node:24-slim &
-docker pull node:24-slim &
-wait
+docker pull node:24-slim
 
 # Build and run
 DOCKER_IMAGE_REF="${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG:-latest}"
