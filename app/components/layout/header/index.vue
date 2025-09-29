@@ -57,6 +57,7 @@ function toggleTheme(event: MouseEvent) {
             {
                 duration: 400,
                 easing: 'ease-in-out',
+                fill: 'both',
                 pseudoElement: isDark.value
                     ? '::view-transition-old(root)'
                     : '::view-transition-new(root)',
