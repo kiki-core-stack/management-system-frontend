@@ -158,7 +158,7 @@
         CA extends BaseCrudApi<any, any>,
         TR extends TableRowData = CA extends BaseCrudApi<infer T, any> ? T : never,
         FD extends TableRowData = CA extends BaseCrudApi<any, infer F> ? F : never,
-        MST extends ManagementSystemType | undefined = undefined,
+        MST extends ManagementSystemType | undefined = undefined
     "
     setup
 >

@@ -14,7 +14,7 @@
             :maxlength="maxlength"
             :name="name"
             :placeholder="placeholder"
-            :readonly="readonly"
+            :readonly="!!readonly"
             :rows="rows"
             :show-password="showPassword"
             :show-word-limit="showWordLimit"
