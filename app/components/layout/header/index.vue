@@ -1,16 +1,16 @@
 <template>
     <el-header
-        class="dark:bg-dark flex flex-wrap items-center justify-between bg-white py-2!"
+        class="dark:bg-dark py-2! flex flex-wrap items-center justify-between bg-white"
         height="unset"
     >
         <i-fa6-solid-bars
-            class="mt-0.5 mr-4 cursor-pointer md:hidden"
+            class="mr-4 mt-0.5 cursor-pointer md:hidden"
             @click="sidebarState.isShow = true"
         />
         <span class="fs-20px">後台管理系統</span>
         <div class="grow" />
         <el-button
-            class="w-1 rounded-full!"
+            class="rounded-full! w-1"
             @click="toggleTheme"
         >
             <i-fa6-solid-moon v-if="isDark" />
