@@ -45,9 +45,9 @@ async function loadData(query: string) {
 
 function processSelectedData() {
     if (!props.selectedData?.length) return;
-    const existingIds = items.value.map(({ id }) => id);
+    const existingIds = items.value.map((item) => item.id);
     const incomingData = props.selectedData as Required<NonNullable<Props['selectedData']>[number]>[];
-    items.value.push(...incomingData.filter(({ id }) => !existingIds.includes(id)));
+    items.value.push(...incomingData.filter((item) => !existingIds.includes(item.id)));
 }
 
 // Watchers
