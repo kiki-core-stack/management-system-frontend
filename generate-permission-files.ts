@@ -1,6 +1,7 @@
 import { join } from 'node:path';
 
-import { writeManagementSystemPermissionTypesFile } from '@kiki-core-stack/pack/libs/management-system';
+// eslint-disable-next-line style/max-len
+import { writeManagementSystemPermissionTypesFile } from '@kiki-core-stack/pack/libs/management-system/permission-types-file';
 import type { ManagementSystemType } from '@kiki-core-stack/pack/types';
 import { config } from 'dotenv';
 
