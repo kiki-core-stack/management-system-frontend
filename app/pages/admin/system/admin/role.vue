@@ -59,7 +59,9 @@ const formData = ref<TablePageFormData<AdminRoleData>>({
 const formRules: TablePageElFormRules<AdminRoleData> = { name: [createElFormItemRuleWithDefaults('請輸入名稱')] };
 const permissionTree = ref<ElTreeNode[]>([]);
 
-// Load data
-const response = await AdminApis.AdminPermission.use().getTree();
-permissionTree.value = response?.data?.data || [];
+// Hooks
+onMounted(async () => {
+    const response = await AdminApis.AdminPermission.use().getTree();
+    permissionTree.value = response?.data?.data || [];
+});
 </script>
