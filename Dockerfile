@@ -36,20 +36,28 @@ ENV NODE_ENV='production' \
 
 WORKDIR /app
 
-## Upgrade, install packages and set timezone
-RUN apt-get update && \
+## Setups
+RUN \
+    ### Upgrade and install packages
+    apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y --no-install-recommends tini tzdata && \
+    ### Set timezone
     ln -snf "/usr/share/zoneinfo/${TZ}" /etc/localtime && \
     echo "${TZ}" >/etc/timezone && \
+    ### Cleanup
     apt-get autoremove -y --purge && \
     apt-get clean && \
-    rm -rf /var/cache/apt/* /var/lib/apt/lists/*
+    rm -rf /var/cache/apt/* /var/lib/apt/lists/* && \
+    ### Add user
+    useradd -mr -g nogroup -s /usr/sbin/nologin -u 10001 user
 
 ## Copy files and libraries
 COPY --from=build-stage /app/.output ./
 
 ## Copy and set the entrypoint script
 COPY --chmod=700 ./docker-entrypoint.sh ./
+RUN chown -R user:nogroup /app
+USER user
 ENTRYPOINT ["tini", "--"]
 CMD ["./docker-entrypoint.sh"]
