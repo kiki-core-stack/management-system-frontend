@@ -4,7 +4,8 @@
   "scripts": {
     "build": "dotenv -e ./.env.production.local -v NODE_ENV=production -- nuxt build",
     "depcheck": "depcheck",
-    "dev": "dotenv -e ./.env.development.local -v NODE_ENV=development -- node generate-permission-files.ts && nuxt dev",
+    "dev": "dotenv -e ./.env.development.local -v NODE_ENV=development -- pnpm run dev:internal",
+    "dev:internal": "node generate-permission-files.ts && nuxt dev",
     "generate": "dotenv -e ./.env.production.local -v NODE_ENV=production -- nuxt generate",
     "lint": "eslint --max-warnings 0 && stylelint './app/**/*.{css,scss,vue}' -i ./.gitignore --mw 0",
     "lint:fix": "eslint --fix --max-warnings 0 && stylelint './app/**/*.{css,scss,vue}' -i ./.gitignore --fix --mw 0",
