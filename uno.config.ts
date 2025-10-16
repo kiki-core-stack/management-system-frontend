@@ -1,5 +1,7 @@
-import transformerDirectives from '@unocss/transformer-directives';
-import { defineConfig } from 'unocss';
+import {
+    defineConfig,
+    transformerDirectives,
+} from 'unocss';
 
 export default defineConfig({
     rules: [
